@@ -20,7 +20,7 @@ public class LoadActivity extends AppCompatActivity {
     }
 
     public void nextFlow() {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_layout);
         Log.d(logMsg, "nextFlow()");
     }
 

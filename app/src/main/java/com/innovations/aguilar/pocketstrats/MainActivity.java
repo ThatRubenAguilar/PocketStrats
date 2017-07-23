@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 /**
@@ -18,14 +19,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.main_layout);
         modes=(Button)findViewById(R.id.button_modes);
         modes.setOnClickListener(this);
         Log.d(logMsg, "onCreate()");
     }
 
     public void nextFlow() {
-        setContentView(R.layout.acitivity_modes);
+        setContentView(R.layout.mode_selection_layout);
         Log.d(logMsg, "nextFlow()");
     }
 
