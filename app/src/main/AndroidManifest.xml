@@ -9,14 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoTitle">
-        <activity android:name="com.innovations.aguilar.pocketstrats.LoadActivity">
+        <activity android:name="com.innovations.aguilar.pocketstrats.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="com.innovations.aguilar.pocketstrats.MainActivity">
         </activity>
     </application>
 
