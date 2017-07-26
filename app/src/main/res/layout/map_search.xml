@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.innovations.aguilar.pocketstrats.MapSearchView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_map_search">
+
+    <AutoCompleteTextView
+        android:id="@+id/text_map_search_autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineProvider="bounds"
+        android:hint="Search Maps..." />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:outlineProvider="bounds"
+        >
+        <ToggleButton
+            android:id="@+id/button_filter_assault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/button_padding"
+            android:paddingRight="@dimen/button_padding"
+            android:background="@drawable/filter_toggle"
+            android:checked="true"
+            android:textOn="Assault"
+            android:textOff="Assault" />
+        <ToggleButton
+            android:id="@+id/button_filter_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/button_padding"
+            android:paddingRight="@dimen/button_padding"
+            android:background="@drawable/filter_toggle"
+            android:checked="true"
+            android:textOn="Control"
+            android:textOff="Control" />
+        <ToggleButton
+            android:id="@+id/button_filter_escort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/button_padding"
+            android:paddingRight="@dimen/button_padding"
+            android:background="@drawable/filter_toggle"
+            android:checked="true"
+            android:textOn="Escort"
+            android:textOff="Escort" />
+        <ToggleButton
+            android:id="@+id/button_filter_hybrid_ae"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/button_padding"
+            android:paddingRight="@dimen/button_padding"
+            android:background="@drawable/filter_toggle"
+            android:checked="true"
+            android:textOn="Hybrid"
+            android:textOff="Hybrid" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_maps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@color/colorAccent"
+        android:scrollbars="vertical"
+        />
+
+</com.innovations.aguilar.pocketstrats.MapSearchView>

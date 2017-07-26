@@ -26,22 +26,25 @@ public class LoadScreenView extends RelativeLayout {
         mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
             @Override
             public MainPaneContainer get() {
-                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.main_container);
+                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.layout_main_container);
             }
         });
 
-        progBar = (ProgressBar)findViewById(R.id.progressBar);
+        progBar = (ProgressBar)findViewById(R.id.progress_bar_loading);
         progBar.postDelayed(new Runnable() {
             @Override
             public void run() {
+                removeLoadScreen();
                 showMainScreen();
             }
         }, 3000);
     }
 
-    void showMainScreen() {
+    void removeLoadScreen() {
         mainContainer.get().removeView(this);
-        View mainScreen = mainContainer.get().findViewById(R.id.main_screen_view);
+    }
+    void showMainScreen() {
+        View mainScreen = mainContainer.get().findViewById(R.id.layout_main_screen_view);
         mainScreen.setVisibility(VISIBLE);
     }
 }

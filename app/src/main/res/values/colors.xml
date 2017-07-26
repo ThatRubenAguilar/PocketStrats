@@ -5,4 +5,7 @@
     <color name="colorPrimaryContrast">#484848</color>
     <color name="colorPrimaryDark">#0e0e0e</color>
     <color name="colorAccent">#f39d08</color>
+
+    <color name="toggleOn">#1a40ff</color>
+    <color name="toggleOff">#a41a40ff</color>
 </resources>

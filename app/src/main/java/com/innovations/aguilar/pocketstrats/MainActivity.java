@@ -3,9 +3,7 @@ package com.innovations.aguilar.pocketstrats;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.main_pane_container);
-            container = (Container) findViewById(R.id.main_container);
+            container = (Container) findViewById(R.id.layout_main_container);
             Log.d(logMsg, "onCreate()");
         }
     }

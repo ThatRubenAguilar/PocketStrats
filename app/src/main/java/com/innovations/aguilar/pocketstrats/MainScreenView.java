@@ -3,12 +3,9 @@ package com.innovations.aguilar.pocketstrats;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -34,7 +31,7 @@ public class MainScreenView extends LinearLayout {
         mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
             @Override
             public MainPaneContainer get() {
-                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.main_container);
+                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.layout_main_container);
             }
         });
 
@@ -47,15 +44,15 @@ public class MainScreenView extends LinearLayout {
         });
     }
 
-    protected void showModeSelectionView() {
-        mainContainer.get().removeView(this);
-        View.inflate(getContext(), R.layout.mode_selection_layout, mainContainer.get());
+    protected void showMapSearchView() {
+        mainContainer.get().removeViewToBackStack(this);
+        View.inflate(getContext(), R.layout.map_search, mainContainer.get());
     }
 
 
     class MainPanePresenter {
         public void modesClicked() {
-            showModeSelectionView();
+            showMapSearchView();
         }
     }
 }

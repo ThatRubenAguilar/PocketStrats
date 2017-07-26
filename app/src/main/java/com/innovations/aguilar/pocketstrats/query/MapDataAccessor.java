@@ -3,6 +3,7 @@ package com.innovations.aguilar.pocketstrats.query;
 import android.database.Cursor;
 import android.database.sqlite.*;
 
+import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,13 +20,14 @@ import com.innovations.aguilar.pocketstrats.dto.MapType;
 import com.innovations.aguilar.pocketstrats.dto.MapTypeSpawnTime;
 import com.innovations.aguilar.pocketstrats.dto.MapTypeSpawnTimeDTO;
 
-public class MapDataAccessor {
+public class MapDataAccessor implements AutoCloseable {
     private SQLiteDatabase db;
 
     public MapDataAccessor(SQLiteDatabase db) {
-
         this.db = db;
     }
+
+    // TODO: Add MapTypeTips, MapTips, MapSegmentTips, MapLocationTips to database and accessors
 
     <T> List<T> MakeListFromCursor(Cursor c, DTOFromCursorFactory<T> objectFactory) {
         List<T> list = new ArrayList<>();
@@ -167,6 +169,11 @@ public class MapDataAccessor {
         try (Cursor c = GetMapTypeSpawnTimesCursorByType(mapType)) {
             return MakeListFromCursor(c, MapTypeSpawnTimeDTOFactory.Instance).get(0);
         }
+    }
+
+    @Override
+    public void close() {
+        if (db != null) db.close();
     }
 
     // TODO: Common query cache mechanisms

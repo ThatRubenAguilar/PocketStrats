@@ -1,0 +1,114 @@
+package com.innovations.aguilar.pocketstrats;
+
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
+import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.dto.MapType;
+import com.innovations.aguilar.pocketstrats.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.query.MapDatabaseOpenHelper;
+
+import java.util.List;
+
+public class MapSearchView extends LinearLayout {
+
+    Button buttonAssault;
+    Button buttonControl;
+    Button buttonEscort;
+    Button buttonHybrid_AE;
+    AutoCompleteTextView textMapSearch;
+    ListView viewMapsList;
+    ModeSelectionPresenter presenter;
+
+    public MapSearchView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        presenter = new ModeSelectionPresenter();
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        List<MapDataDTO> maps;
+        MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
+        try (MapDataAccessor accessor = new MapDataAccessor(openHelper.getReadableDatabase())) {
+            maps = accessor.GetAllMaps();
+        }
+
+        final MapSearchItemAdapter mapAdapter = new MapSearchItemAdapter(getContext(), maps);
+        viewMapsList = (ListView) findViewById(R.id.list_maps);
+        viewMapsList.setAdapter(mapAdapter);
+        viewMapsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ListViewItem<MapDataDTO> listItem = (ListViewItem<MapDataDTO>)view;
+                // TODO: presenter to next view
+                Log.d("View List", String.format("Clicked '%s'", listItem.getItemData().getMapName()));
+                showTipsView(listItem.getItemData());
+            }
+        });
+
+
+        buttonAssault = (Button)findViewById(R.id.button_filter_assault);
+        buttonAssault.setOnClickListener(
+                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
+                        MapType.Assault, mapAdapter.getMapFilter()));
+
+        buttonControl = (Button)findViewById(R.id.button_filter_control);
+        buttonControl.setOnClickListener(
+                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
+                        MapType.Control, mapAdapter.getMapFilter()));
+
+        buttonEscort = (Button)findViewById(R.id.button_filter_escort);
+        buttonEscort.setOnClickListener(
+                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
+                        MapType.Escort, mapAdapter.getMapFilter()));
+
+        buttonHybrid_AE = (Button)findViewById(R.id.button_filter_hybrid_ae);
+        buttonHybrid_AE.setOnClickListener(
+                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
+                        MapType.Hybrid_Assault_Escort, mapAdapter.getMapFilter()));
+
+        textMapSearch = (AutoCompleteTextView)findViewById(R.id.text_map_search_autocomplete);
+        textMapSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mapAdapter.getFilter().filter(editable);
+                Log.d("Filter List", String.format("Filtering '%s'", editable));
+            }
+        });
+
+    }
+
+    void showTipsView(MapDataDTO map) {
+
+    }
+
+    class ModeSelectionPresenter {
+
+        public ModeSelectionPresenter() {
+
+        }
+    }
+
+}
