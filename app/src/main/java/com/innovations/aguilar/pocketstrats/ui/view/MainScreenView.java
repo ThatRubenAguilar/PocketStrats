@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.innovations.aguilar.pocketstrats.ui.MainActivity;
+import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
+import com.innovations.aguilar.pocketstrats.R;
 
 /**
  * Created by Ruben on 7/3/2017.

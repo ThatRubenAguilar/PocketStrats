@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

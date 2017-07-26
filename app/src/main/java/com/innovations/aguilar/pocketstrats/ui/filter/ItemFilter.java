@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.filter;
 
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * Created by Ruben on 7/26/2017.
  */
-public abstract class ItemFilter<TItem, TFilterData> extends Filter {
+public abstract class ItemFilter<TItem, TFilterData> extends Filter
+        implements ItemSetFilterDataProvider<TFilterData>, ItemSetFilter<TFilterData> {
     private List<TItem> originalList;
     private List<TItem> filteredList;
     private TFilterData filterData;
@@ -37,6 +38,10 @@ public abstract class ItemFilter<TItem, TFilterData> extends Filter {
 
     public List<TItem> getOriginalList() {
         return Collections.unmodifiableList(originalList);
+    }
+
+    public void filter(TFilterData filterData) {
+        filter("");
     }
 
     @SuppressWarnings("unchecked")

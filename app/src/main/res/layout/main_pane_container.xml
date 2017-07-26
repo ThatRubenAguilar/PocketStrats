@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.innovations.aguilar.pocketstrats.MainPaneContainer
+<com.innovations.aguilar.pocketstrats.ui.MainPaneContainer
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_main_container"
@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimaryContrast"
-    tools:context="com.innovations.aguilar.pocketstrats.MainActivity">
+    tools:context="com.innovations.aguilar.pocketstrats.ui.MainActivity">
 
-    <com.innovations.aguilar.pocketstrats.MainScreenView
+    <com.innovations.aguilar.pocketstrats.ui.view.MainScreenView
         android:id="@+id/layout_main_screen_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,9 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Map Strategy" />
-    </com.innovations.aguilar.pocketstrats.MainScreenView>
+    </com.innovations.aguilar.pocketstrats.ui.view.MainScreenView>
 
-    <com.innovations.aguilar.pocketstrats.LoadScreenView
+    <com.innovations.aguilar.pocketstrats.ui.view.LoadScreenView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_load_screen_view"
         android:layout_width="match_parent"
@@ -61,8 +61,8 @@
             android:layout_toEndOf="@+id/progress_bar_loading" />
 
 
-    </com.innovations.aguilar.pocketstrats.LoadScreenView>
+    </com.innovations.aguilar.pocketstrats.ui.view.LoadScreenView>
 
 
-</com.innovations.aguilar.pocketstrats.MainPaneContainer>
+</com.innovations.aguilar.pocketstrats.ui.MainPaneContainer>
 

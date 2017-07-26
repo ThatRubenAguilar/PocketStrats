@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,6 +8,9 @@ import android.widget.RelativeLayout;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.innovations.aguilar.pocketstrats.ui.MainActivity;
+import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
+import com.innovations.aguilar.pocketstrats.R;
 
 public class LoadScreenView extends RelativeLayout {
     // TODO: Spruce up loading screen with switching images ala: https://stackoverflow.com/a/41343275/986215

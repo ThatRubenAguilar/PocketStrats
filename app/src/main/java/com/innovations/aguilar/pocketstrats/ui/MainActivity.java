@@ -1,9 +1,12 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
+
+import com.innovations.aguilar.pocketstrats.R;
+import com.innovations.aguilar.pocketstrats.ui.Container;
 
 public class MainActivity extends AppCompatActivity {
 

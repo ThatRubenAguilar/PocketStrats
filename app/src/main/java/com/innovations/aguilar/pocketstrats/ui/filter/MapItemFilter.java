@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.filter;
 
 import android.widget.ArrayAdapter;
 

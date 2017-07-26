@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
+import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
+import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
+import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.dto.MapType;
 import com.innovations.aguilar.pocketstrats.query.MapDataAccessor;
@@ -62,22 +66,22 @@ public class MapSearchView extends LinearLayout {
         buttonAssault = (Button)findViewById(R.id.button_filter_assault);
         buttonAssault.setOnClickListener(
                 new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Assault, mapAdapter.getMapFilter()));
+                        MapType.Assault, mapAdapter.getMapFilter(),  mapAdapter.getMapFilter()));
 
         buttonControl = (Button)findViewById(R.id.button_filter_control);
         buttonControl.setOnClickListener(
                 new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Control, mapAdapter.getMapFilter()));
+                        MapType.Control, mapAdapter.getMapFilter(),  mapAdapter.getMapFilter()));
 
         buttonEscort = (Button)findViewById(R.id.button_filter_escort);
         buttonEscort.setOnClickListener(
                 new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Escort, mapAdapter.getMapFilter()));
+                        MapType.Escort, mapAdapter.getMapFilter(),  mapAdapter.getMapFilter()));
 
         buttonHybrid_AE = (Button)findViewById(R.id.button_filter_hybrid_ae);
         buttonHybrid_AE.setOnClickListener(
                 new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Hybrid_Assault_Escort, mapAdapter.getMapFilter()));
+                        MapType.Hybrid_Assault_Escort, mapAdapter.getMapFilter(),  mapAdapter.getMapFilter()));
 
         textMapSearch = (AutoCompleteTextView)findViewById(R.id.text_map_search_autocomplete);
         textMapSearch.addTextChangedListener(new TextWatcher() {

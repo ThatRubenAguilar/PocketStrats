@@ -1,10 +1,14 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import com.innovations.aguilar.pocketstrats.R;
+import com.innovations.aguilar.pocketstrats.ui.Container;
+import com.innovations.aguilar.pocketstrats.ui.view.MainScreenView;
 
 import java.util.Stack;
 

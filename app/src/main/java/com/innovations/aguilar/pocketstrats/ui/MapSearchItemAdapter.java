@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,9 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
+import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 
 import java.util.List;
 

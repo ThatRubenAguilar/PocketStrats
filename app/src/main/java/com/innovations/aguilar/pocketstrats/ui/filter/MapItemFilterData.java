@@ -1,6 +1,7 @@
-package com.innovations.aguilar.pocketstrats;
+package com.innovations.aguilar.pocketstrats.ui.filter;
 
 import com.innovations.aguilar.pocketstrats.dto.MapType;
+import com.innovations.aguilar.pocketstrats.ui.filter.ItemSetToggle;
 
 import java.util.EnumSet;
 import java.util.Set;
