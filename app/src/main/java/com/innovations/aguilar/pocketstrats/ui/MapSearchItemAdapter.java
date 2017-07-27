@@ -67,15 +67,22 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
                 String.format("Position '%s' overflows the filtered results size of '%s'",
                         position, filteredList.size()));
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        TextView rowView = (TextView) inflater.inflate(R.layout.map_list_item, parent, false);
+        View rowView;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = inflater.inflate(R.layout.map_list_item, parent, false);
+        }
+        else {
+            rowView = convertView;
+        }
+
         TextView textView = (TextView) rowView.findViewById(R.id.text_list_map_item);
 
         final MapDataDTO map = filteredList.get(position);
         textView.setText(map.getMapName());
-
         return rowView;
+
     }
 
 }
