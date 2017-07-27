@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
@@ -15,17 +17,20 @@ import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 
+import java.lang.reflect.Array;
 import java.util.List;
+
+import static android.view.View.GONE;
 
 /**
  * Created by Ruben on 7/26/2017.
  */
-public class MapSearchItemAdapter extends ArrayAdapter<MapDataDTO> implements Filterable {
+public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
     private final Context context;
     private final MapItemFilter filter;
 
     public MapSearchItemAdapter(Context context, List<MapDataDTO> maps) {
-        super(context, R.layout.map_list_item, maps);
+        super();
         this.context = context;
         this.filter = new MapItemFilter(maps, this);
     }
@@ -38,6 +43,21 @@ public class MapSearchItemAdapter extends ArrayAdapter<MapDataDTO> implements Fi
 
     public MapItemFilter getMapFilter() {
         return filter;
+    }
+
+    @Override
+    public int getCount() {
+        return filter.getFilteredList().size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return filter.getFilteredList().get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override

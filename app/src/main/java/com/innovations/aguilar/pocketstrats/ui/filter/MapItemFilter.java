@@ -1,6 +1,7 @@
 package com.innovations.aguilar.pocketstrats.ui.filter;
 
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.dto.MapType;
@@ -13,7 +14,7 @@ import java.util.Set;
  * Created by Ruben on 7/26/2017.
  */
 public class MapItemFilter extends ItemFilter<MapDataDTO, MapItemFilterData> {
-    public MapItemFilter(List<MapDataDTO> originalList, ArrayAdapter<MapDataDTO> notifyAdapter) {
+    public MapItemFilter(List<MapDataDTO> originalList, BaseAdapter notifyAdapter) {
         super(originalList, new MapItemFilterData(), notifyAdapter);
     }
 
