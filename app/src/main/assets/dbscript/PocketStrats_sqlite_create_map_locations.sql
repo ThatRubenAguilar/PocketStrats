@@ -17,6 +17,8 @@ CREATE TABLE MapLocations (
     MapId               INTEGER REFERENCES Maps (MapId) 
 );
 
+-- TODO: store requisite images for tips page in SQL
+
 INSERT INTO MapLocations (LocationId, LocationDescription, LocationImageName, SegmentId, MapId) VALUES (1, 'Forward Choke', 'Anubis_First_Choke_1', 1, 1);
 INSERT INTO MapLocations (LocationId, LocationDescription, LocationImageName, SegmentId, MapId) VALUES (2, 'Point', 'Anubis_First_Point_1', 1, 1);
 INSERT INTO MapLocations (LocationId, LocationDescription, LocationImageName, SegmentId, MapId) VALUES (3, 'Forward Choke', 'Anubis_Last_Choke_1', 2, 1);

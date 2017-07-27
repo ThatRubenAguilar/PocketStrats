@@ -16,6 +16,7 @@ import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
+import com.innovations.aguilar.pocketstrats.ui.view.ListViewItem;
 
 import java.lang.reflect.Array;
 import java.util.List;
@@ -77,9 +78,10 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
             rowView = convertView;
         }
 
-        TextView textView = (TextView) rowView.findViewById(R.id.text_list_map_item);
+        ListViewItem<MapDataDTO> textView = (ListViewItem<MapDataDTO>) rowView.findViewById(R.id.text_list_map_item);
 
         final MapDataDTO map = filteredList.get(position);
+        textView.setItemData(map);
         textView.setText(map.getMapName());
         return rowView;
 

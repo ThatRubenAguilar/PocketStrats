@@ -13,8 +13,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
+import com.innovations.aguilar.pocketstrats.ui.MainActivity;
+import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
 import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.R;
@@ -35,6 +39,8 @@ public class MapSearchView extends LinearLayout {
     ListView viewMapsList;
     ModeSelectionPresenter presenter;
 
+    Supplier<MainPaneContainer> mainContainer;
+
     public MapSearchView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         presenter = new ModeSelectionPresenter();
@@ -43,6 +49,13 @@ public class MapSearchView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+
+        mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
+            @Override
+            public MainPaneContainer get() {
+                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.layout_main_container);
+            }
+        });
 
         List<MapDataDTO> maps;
         MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
@@ -57,7 +70,6 @@ public class MapSearchView extends LinearLayout {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ListViewItem<MapDataDTO> listItem = (ListViewItem<MapDataDTO>)view;
-                // TODO: presenter to next view
                 Log.d("View List", String.format("Clicked '%s'", listItem.getItemData().getMapName()));
                 showTipsView(listItem.getItemData());
             }
@@ -109,7 +121,10 @@ public class MapSearchView extends LinearLayout {
     }
 
     void showTipsView(MapDataDTO map) {
-
+        mainContainer.get().removeViewToBackStack(this);
+        View rootView = View.inflate(getContext(), R.layout.map_tips, mainContainer.get());
+        MapTipsView tipsView = (MapTipsView) rootView.findViewById(R.id.layout_map_tips);
+        tipsView.loadTipsForMap(map);
     }
 
     class ModeSelectionPresenter {
