@@ -49,49 +49,7 @@ public class MapDatabaseTestFixture extends LoggingTestFixture {
         staticLog.get().debug("Before All Begin {}", MapDatabaseTestFixture.class.toString());
         Context targetContext = InstrumentationRegistry.getTargetContext();
         openHelper = new MapDatabaseOpenHelper(targetContext);
-        try (SQLiteDatabase setupDatabase = openHelper.getWritableDatabase()) {
-            CreateMapDatabase(setupDatabase, targetContext.getAssets());
-        }
         staticLog.get().debug("Before All End {}", MapDatabaseTestFixture.class.toString());
-    }
-
-    static void CreateMapDatabase(SQLiteDatabase writableDatabase, AssetManager assets)
-            throws IOException {
-        ReadAndExecuteQueries(writableDatabase, assets,
-                "dbscript/PocketStrats_sqlite_create_maps.sql");
-        ReadAndExecuteQueries(writableDatabase, assets,
-                "dbscript/PocketStrats_sqlite_create_map_segments.sql");
-        ReadAndExecuteQueries(writableDatabase, assets,
-                "dbscript/PocketStrats_sqlite_create_map_locations.sql");
-        ReadAndExecuteQueries(writableDatabase, assets,
-                "dbscript/PocketStrats_sqlite_create_map_spawn_statistics.sql");
-        ReadAndExecuteQueries(writableDatabase, assets,
-                "dbscript/PocketStrats_sqlite_create_map_type_spawntimes.sql");
-
-    }
-
-    protected static void ReadAndExecuteQueries(SQLiteDatabase writableDatabase, AssetManager assets, String scriptAssetPath)
-            throws IOException {
-        try (InputStream scriptTextStream = assets.open(scriptAssetPath)) {
-            String scriptText = CharStreams.toString(new InputStreamReader(
-                    scriptTextStream, Charsets.UTF_8));
-            String[] queries = scriptText.split("(?m);$");
-            for (String query : queries) {
-                FilterOrExecuteQuery(writableDatabase, query);
-            }
-        }
-    }
-
-    static Pattern AllWhitespaceRegex = Pattern.compile("\\s*");
-    static void FilterOrExecuteQuery(SQLiteDatabase writableDatabase, String query) {
-        Matcher matches = AllWhitespaceRegex.matcher(query);
-        if (matches.matches() && matches.group().contentEquals(query)){
-            staticLog.get().debug("Filtered Empty SQL '{}'", query);
-        }
-        else {
-            staticLog.get().debug("Running SQL '{}'", query);
-            writableDatabase.execSQL(query);
-        }
     }
 
     @AfterClass
