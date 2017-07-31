@@ -14,55 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/colorPrimaryContrast"
-        android:visibility="gone" >
+        android:background="@color/colorPrimaryContrast" >
         <Button
             android:id="@+id/button_modes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Map Strategy" />
     </com.innovations.aguilar.pocketstrats.ui.view.MainScreenView>
-
-    <com.innovations.aguilar.pocketstrats.ui.view.LoadScreenView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/layout_load_screen_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="@color/colorPrimaryContrast">
-
-        <ProgressBar
-            android:id="@+id/progress_bar_loading"
-            style="?android:attr/progressBarStyleInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            />
-        <!--android:background ="@anim/progress_spinner"-->
-
-        <TextView
-            android:id="@+id/text_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Disclaimer: Do not flame teammates who do not adhere to this guide."
-            android:textColor="@color/colorPrimaryLight"
-            android:layout_alignBottom="@+id/progress_bar_loading"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@+id/progress_bar_loading"
-            android:layout_toEndOf="@+id/progress_bar_loading" />
-
-
-    </com.innovations.aguilar.pocketstrats.ui.view.LoadScreenView>
-
 
 </com.innovations.aguilar.pocketstrats.ui.MainPaneContainer>
 
