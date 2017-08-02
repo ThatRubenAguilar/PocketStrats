@@ -10,6 +10,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.io.CharStreams;
+import com.innovations.aguilar.pocketstrats.dto.MapData;
 import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
 
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     static final Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(MapDatabaseOpenHelper.class));
-    public static final int MapDatabaseVersion = 1;
+    public static final int MapDatabaseVersion = 2;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
 
@@ -43,7 +44,7 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        onCreate(sqLiteDatabase);
     }
 
 
