@@ -33,14 +33,14 @@ public class LoadScreenView extends RelativeLayout {
             }
         });
 
-        progBar = (ProgressBar)findViewById(R.id.progress_bar_loading);
-        progBar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                removeLoadScreen();
-                showMainScreen();
-            }
-        }, 3000);
+//        progBar = (ProgressBar)findViewById(R.id.progress_bar_loading);
+//        progBar.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                removeLoadScreen();
+//                showMainScreen();
+//            }
+//        }, 3000);
     }
 
     void removeLoadScreen() {

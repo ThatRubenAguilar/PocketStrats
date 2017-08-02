@@ -1,6 +1,7 @@
 package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -45,6 +46,9 @@ public class MainScreenView extends LinearLayout {
                 presenter.modesClicked();
             }
         });
+
+        Typeface bigNoodleFont = Typeface.createFromAsset(getContext().getAssets(),  "fonts/big-noodle-titling-oblique.ttf");
+        buttonMode.setTypeface(bigNoodleFont);
     }
 
     protected void showMapSearchView() {

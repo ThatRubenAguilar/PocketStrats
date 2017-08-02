@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,7 +14,6 @@ import android.widget.ListView;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
-import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
@@ -29,7 +27,7 @@ import com.innovations.aguilar.pocketstrats.query.MapDatabaseOpenHelper;
 
 import java.util.List;
 
-public class MapSearchView extends LinearLayout {
+public class MapSearchView extends LinearLayout implements ViewDisplayer<MapDataDTO> {
 
     Button buttonAssault;
     Button buttonControl;
@@ -63,17 +61,9 @@ public class MapSearchView extends LinearLayout {
             maps = accessor.GetAllMaps();
         }
 
-        final MapSearchItemAdapter mapAdapter = new MapSearchItemAdapter(getContext(), maps);
+        final MapSearchItemAdapter mapAdapter = new MapSearchItemAdapter(getContext(), maps, this);
         viewMapsList = (ListView) findViewById(R.id.list_maps);
         viewMapsList.setAdapter(mapAdapter);
-        viewMapsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ListViewItem<MapDataDTO> listItem = (ListViewItem<MapDataDTO>)view;
-                Log.d("View List", String.format("Clicked '%s'", listItem.getItemData().getMapName()));
-                showTipsView(listItem.getItemData());
-            }
-        });
 
 
         buttonAssault = (Button)findViewById(R.id.button_filter_assault);
@@ -120,6 +110,9 @@ public class MapSearchView extends LinearLayout {
 
     }
 
+    public void showView(MapDataDTO map) {
+        showTipsView(map);
+    }
     void showTipsView(MapDataDTO map) {
         mainContainer.get().removeViewToBackStack(this);
         View rootView = View.inflate(getContext(), R.layout.map_tips, mainContainer.get());

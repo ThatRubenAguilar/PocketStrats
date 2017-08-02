@@ -5,23 +5,18 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 import com.innovations.aguilar.pocketstrats.ui.view.ListViewItem;
+import com.innovations.aguilar.pocketstrats.ui.view.ViewDisplayer;
 
-import java.lang.reflect.Array;
 import java.util.List;
-
-import static android.view.View.GONE;
 
 /**
  * Created by Ruben on 7/26/2017.
@@ -29,11 +24,13 @@ import static android.view.View.GONE;
 public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
     private final Context context;
     private final MapItemFilter filter;
+    private final ViewDisplayer viewDisplay;
 
-    public MapSearchItemAdapter(Context context, List<MapDataDTO> maps) {
+    public MapSearchItemAdapter(Context context, List<MapDataDTO> maps, ViewDisplayer<MapDataDTO> viewDisplay) {
         super();
         this.context = context;
         this.filter = new MapItemFilter(maps, this);
+        this.viewDisplay = viewDisplay;
     }
 
     @NonNull
@@ -83,6 +80,14 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         final MapDataDTO map = filteredList.get(position);
         textView.setItemData(map);
         textView.setText(map.getMapName());
+        // Using the OnItemClickListener had an odd delay on hitting back and reselecting,
+        // So doing this manually here has proper UI reaction.
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewDisplay.showView(map);
+            }
+        });
         return rowView;
 
     }

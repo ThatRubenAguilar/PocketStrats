@@ -4,5 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_elevation_on">5dp</dimen>
     <dimen name="button_elevation_off">20dp</dimen>
+    <dimen name="button_text_size">35dp</dimen>
     <dimen name="button_padding">5dp</dimen>
 </resources>

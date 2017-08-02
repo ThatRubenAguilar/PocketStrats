@@ -14,16 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/main_screen_background" >
+        android:background="@drawable/main_screen_background"
+        android:weightSum="1">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/main_screen_title"/>
+            android:src="@drawable/main_screen_title"
+            android:layout_weight="0.3" />
         <Button
             android:id="@+id/button_modes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Map Strategy" />
+            android:background="@color/colorAccent"
+            android:text="Map Strategy"
+            android:textSize="@dimen/button_text_size" />
     </com.innovations.aguilar.pocketstrats.ui.view.MainScreenView>
 
 </com.innovations.aguilar.pocketstrats.ui.MainPaneContainer>
