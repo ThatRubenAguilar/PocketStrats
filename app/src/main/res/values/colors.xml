@@ -9,6 +9,9 @@
     <color name="colorAccentToggle">#7af39d08</color>
     <color name="colorClear">#00000000</color>
 
+    <color name="colorLightText">#fdfdfe</color>
+    <color name="colorDarkText">#000000</color>
+
     <color name="toggleOn">#1a40ff</color>
     <color name="toggleOff">#a41a40ff</color>
 </resources>
