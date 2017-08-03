@@ -1,10 +1,14 @@
 package com.innovations.aguilar.pocketstrats.ui;
 
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.ui.Container;
 

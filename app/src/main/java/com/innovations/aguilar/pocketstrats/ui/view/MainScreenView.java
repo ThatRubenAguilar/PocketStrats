@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.R;
@@ -47,8 +48,7 @@ public class MainScreenView extends LinearLayout {
             }
         });
 
-        Typeface bigNoodleFont = Typeface.createFromAsset(getContext().getAssets(),  "fonts/big-noodle-titling-oblique.ttf");
-        buttonMode.setTypeface(bigNoodleFont);
+        buttonMode.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(getContext().getAssets()));
     }
 
     protected void showMapSearchView() {
