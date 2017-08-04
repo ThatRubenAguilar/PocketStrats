@@ -13,6 +13,7 @@
     <dimen name="padding_medium">10dp</dimen>
     <dimen name="padding_large">20dp</dimen>
 
-    <dimen name="button_outline">1dp</dimen>
+    <dimen name="button_outline_thin">1dp</dimen>
+    <dimen name="button_outline_thick">5dp</dimen>
 
 </resources>

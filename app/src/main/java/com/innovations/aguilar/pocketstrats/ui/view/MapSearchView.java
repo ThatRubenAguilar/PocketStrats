@@ -81,6 +81,7 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
 
         // TODO: Add all autocomplete functionality, currently only filters
         textMapSearch = (AutoCompleteTextView)findViewById(R.id.text_map_search_autocomplete);
+        textMapSearch.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(getContext().getAssets()));
         textMapSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

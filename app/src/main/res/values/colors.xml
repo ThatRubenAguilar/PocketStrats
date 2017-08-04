@@ -2,7 +2,8 @@
 <resources>
     <color name="primaryLight">#fdfdfe</color>
     <color name="primary">#2756b8</color>
-    <color name="primaryContrast">#484848</color>
+    <color name="primaryDarkContrast">#484848</color>
+    <color name="primaryLightContrast">#b6b6b6</color>
     <color name="primaryDark">#0e0e0e</color>
     <color name="accent">#f39d08</color>
 

@@ -16,7 +16,7 @@
         android:bottom="0dp"
         />
     <stroke
-        android:width="@dimen/button_outline"
+        android:width="@dimen/button_outline_thin"
         android:color="@color/primaryDark"
         />
 </shape>
