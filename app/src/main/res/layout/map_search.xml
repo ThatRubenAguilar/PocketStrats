@@ -23,50 +23,76 @@
             android:id="@+id/button_filter_assault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/button_padding"
-            android:paddingRight="@dimen/button_padding"
-            android:background="@drawable/filter_toggle"
+            android:background="@drawable/filter_toggle_left"
             android:checked="true"
             android:textOn="Assault"
-            android:textOff="Assault" />
+            android:textOff="Assault"
+            android:textColor="@color/textLight"
+            android:textSize="@dimen/button_text_size_medium"
+
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
         <ToggleButton
             android:id="@+id/button_filter_control"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/button_padding"
-            android:paddingRight="@dimen/button_padding"
-            android:background="@drawable/filter_toggle"
+            android:background="@drawable/filter_toggle_middle"
             android:checked="true"
             android:textOn="Control"
-            android:textOff="Control" />
+            android:textOff="Control"
+            android:textColor="@color/textLight"
+            android:textSize="@dimen/button_text_size_medium"
+
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
         <ToggleButton
             android:id="@+id/button_filter_escort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/button_padding"
-            android:paddingRight="@dimen/button_padding"
-            android:background="@drawable/filter_toggle"
+            android:background="@drawable/filter_toggle_middle"
             android:checked="true"
             android:textOn="Escort"
-            android:textOff="Escort" />
+            android:textOff="Escort"
+            android:textColor="@color/textLight"
+            android:textSize="@dimen/button_text_size_medium"
+
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
         <ToggleButton
             android:id="@+id/button_filter_hybrid_ae"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/button_padding"
-            android:paddingRight="@dimen/button_padding"
-            android:background="@drawable/filter_toggle"
+            android:background="@drawable/filter_toggle_right"
             android:checked="true"
             android:textOn="Hybrid"
-            android:textOff="Hybrid" />
+            android:textOff="Hybrid"
+            android:textColor="@color/textLight"
+            android:textSize="@dimen/button_text_size_medium"
+
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
     </LinearLayout>
 
     <ListView
         android:id="@+id/list_maps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:listSelector="@color/colorAccent"
+        android:listSelector="@color/accent"
         android:scrollbars="vertical"
+        android:paddingTop="@dimen/padding_medium"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
         />
 
 </com.innovations.aguilar.pocketstrats.ui.view.MapSearchView>

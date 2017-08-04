@@ -1,11 +1,7 @@
 package com.innovations.aguilar.pocketstrats.ui;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -88,6 +84,12 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         final ListViewItem<MapDataDTO> textView = (ListViewItem<MapDataDTO>) rowView.findViewById(R.id.text_list_map_item);
 
         final MapDataDTO map = filteredList.get(position);
+        configureListItemView(textView, map);
+        return rowView;
+
+    }
+
+    private void configureListItemView(final ListViewItem<MapDataDTO> textView, final MapDataDTO map) {
         textView.setItemData(map);
         textView.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         textView.setText(map.getMapName());
@@ -106,7 +108,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
                 Log.d("OnTouch", String.format("Touch Event: %s", event.getAction()));
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
-                        int highlightColor = ContextCompat.getColor(context, R.color.colorAccentToggle);
+                        int highlightColor = ContextCompat.getColor(context, R.color.accentToggleOff);
                         Drawable wrappedDrawable = DrawableCompat.wrap(textView.getBackground());
                         DrawableCompat.setTint(wrappedDrawable, highlightColor);
                         DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SCREEN);
@@ -126,8 +128,6 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
                 return false;
             }
         });
-        return rowView;
-
     }
 
     Drawable getItemBackground(MapDataDTO map) {

@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
+import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
@@ -67,24 +68,16 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
 
 
         buttonAssault = (Button)findViewById(R.id.button_filter_assault);
-        buttonAssault.setOnClickListener(
-                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Assault, mapAdapter.getMapFilter()));
+        configureFilterButton(buttonAssault, MapType.Assault, mapAdapter);
 
         buttonControl = (Button)findViewById(R.id.button_filter_control);
-        buttonControl.setOnClickListener(
-                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Control, mapAdapter.getMapFilter()));
+        configureFilterButton(buttonControl, MapType.Control, mapAdapter);
 
         buttonEscort = (Button)findViewById(R.id.button_filter_escort);
-        buttonEscort.setOnClickListener(
-                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Escort, mapAdapter.getMapFilter()));
+        configureFilterButton(buttonEscort, MapType.Escort, mapAdapter);
 
         buttonHybrid_AE = (Button)findViewById(R.id.button_filter_hybrid_ae);
-        buttonHybrid_AE.setOnClickListener(
-                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
-                        MapType.Hybrid_Assault_Escort, mapAdapter.getMapFilter()));
+        configureFilterButton(buttonHybrid_AE, MapType.Hybrid_Assault_Escort, mapAdapter);
 
         // TODO: Add all autocomplete functionality, currently only filters
         textMapSearch = (AutoCompleteTextView)findViewById(R.id.text_map_search_autocomplete);
@@ -108,6 +101,13 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
             }
         });
 
+    }
+
+    private void configureFilterButton(Button button, MapType mapType, MapSearchItemAdapter mapAdapter) {
+        button.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(getContext().getAssets()));
+        button.setOnClickListener(
+                new EnumSetToggleFilterClickListener<MapType, MapItemFilterData>(
+                        mapType, mapAdapter.getMapFilter()));
     }
 
     public void showView(MapDataDTO map) {
