@@ -17,6 +17,7 @@ public interface MapLocationDTO {
 
     int getLocationId();
     String getLocationDescription();
+    MapLocationType getLocationTypeId();
     String getLocationImageName();
     int getSegmentId();
     int getMapId();

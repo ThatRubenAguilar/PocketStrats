@@ -5,13 +5,16 @@ import android.database.Cursor;
 public class MapLocation implements MapLocationDTO {
     private final int locationId;
     private final String locationDescription;
+    private final MapLocationType locationTypeId;
     private final String locationImageName;
     private final int segmentId;
     private final int mapId;
 
-    public MapLocation(int locationId, String locationDescription, String locationImageName, int segmentId, int mapId) {
+    public MapLocation(int locationId, String locationDescription, MapLocationType locationTypeId,
+                       String locationImageName, int segmentId, int mapId) {
         this.locationId = locationId;
         this.locationDescription = locationDescription;
+        this.locationTypeId = locationTypeId;
         this.locationImageName = locationImageName;
         this.segmentId = segmentId;
         this.mapId = mapId;
@@ -20,6 +23,7 @@ public class MapLocation implements MapLocationDTO {
     public MapLocation(Cursor c) {
         this.locationId = c.getInt(c.getColumnIndex(LocationIdColumn));
         this.locationDescription = c.getString(c.getColumnIndex(LocationDescriptionColumn));
+        this.locationTypeId = MapLocationType.FromInt(c.getInt(c.getColumnIndex(LocationTypeIdColumn)));
         this.locationImageName = c.getString(c.getColumnIndex(LocationImageNameColumn));
         this.segmentId = c.getInt(c.getColumnIndex(SegmentIdColumn));
         this.mapId = c.getInt(c.getColumnIndex(MapIdColumn));
@@ -34,6 +38,9 @@ public class MapLocation implements MapLocationDTO {
     public String getLocationDescription() {
         return locationDescription;
     }
+
+    @Override
+    public MapLocationType getLocationTypeId() { return locationTypeId; }
 
     @Override
     public String getLocationImageName() {
@@ -53,6 +60,7 @@ public class MapLocation implements MapLocationDTO {
 
     public static final String LocationIdColumn = "LocationId";
     public static final String LocationDescriptionColumn = "LocationDescription";
+    public static final String LocationTypeIdColumn = "LocationTypeId";
     public static final String LocationImageNameColumn = "LocationImageName";
     public static final String SegmentIdColumn = "SegmentId";
     public static final String MapIdColumn = "MapId";
@@ -62,6 +70,7 @@ public class MapLocation implements MapLocationDTO {
     public static final String[] ColumnNames = {
             String.format("%s.%s", TableName, LocationIdColumn),
             String.format("%s.%s", TableName, LocationDescriptionColumn),
+            String.format("%s.%s", TableName, LocationTypeIdColumn),
             String.format("%s.%s", TableName, LocationImageNameColumn),
             String.format("%s.%s", TableName, SegmentIdColumn),
             String.format("%s.%s", TableName, MapIdColumn)

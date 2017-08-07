@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     static final Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(MapDatabaseOpenHelper.class));
-    public static final int MapDatabaseVersion = 2;
+    public static final int MapDatabaseVersion = 3;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
 
