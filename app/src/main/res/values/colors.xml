@@ -11,6 +11,7 @@
     <color name="clear">#00000000</color>
 
     <color name="textLight">#fdfdfe</color>
+    <color name="textTeal">#3ad0d9</color>
     <color name="textDark">#000000</color>
 
 </resources>

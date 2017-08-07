@@ -5,18 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/tips_expandable_group"
-        android:visibility="invisible"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/tips_expandable_group"-->
+        <!--android:visibility="invisible"/>-->
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_group"
         android:textSize="@dimen/button_text_size_large"
+        android:textColor="@color/textTeal"
+
+        android:shadowColor="@color/textDark"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="20"
         android:gravity="center"
         android:textAlignment="gravity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </TextView>
+
 </LinearLayout>

@@ -9,6 +9,12 @@
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_item"
         android:paddingLeft="@dimen/button_padding"
+        android:textSize="@dimen/button_text_size_small"
+        android:shadowColor="@color/textDark"
+        android:textColor="@color/textTeal"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="20"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
