@@ -102,7 +102,7 @@ public class MapTipItemAdapter extends BaseExpandableListAdapter {
 
         TextView lblListHeader = (TextView) rowView
                 .findViewById(R.id.text_list_map_tip_group);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         lblListHeader.setText(headerTitle);
 
         return rowView;

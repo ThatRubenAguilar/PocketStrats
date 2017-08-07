@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_map_tip_group"
+    android:background="@drawable/btn_dropdown_blank"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/tips_expandable_group"
+        android:visibility="invisible"/>
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_group"
+        android:textSize="@dimen/button_text_size_large"
+        android:gravity="center"
+        android:textAlignment="gravity"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

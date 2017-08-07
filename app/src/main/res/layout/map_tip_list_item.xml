@@ -3,10 +3,12 @@
     android:id="@+id/layout_map_tip_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_item_dropdown"
     android:orientation="vertical">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_item"
+        android:paddingLeft="@dimen/button_padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
