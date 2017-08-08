@@ -5,6 +5,7 @@
     <color name="primaryDarkContrast">#484848</color>
     <color name="primaryLightContrast">#b6b6b6</color>
     <color name="primaryDark">#0e0e0e</color>
+    <color name="primaryDarkBlue">#044671</color>
     <color name="accent">#f39d08</color>
 
     <color name="accentToggleOff">#7af39d08</color>

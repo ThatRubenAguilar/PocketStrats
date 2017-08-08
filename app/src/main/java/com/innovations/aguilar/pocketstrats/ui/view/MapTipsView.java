@@ -75,6 +75,7 @@ public class MapTipsView extends LinearLayout {
         }
         tipsList.setAdapter(new MapTipItemAdapter(getContext(), groupHeaders, childDataMap));
     }
+    // TODO: Show floating button if one section is open and scrolling down has occurred
 
     List<String> getMapTypeTips(MapDataDTO map) {
         return Collections.unmodifiableList(Lists.newArrayList(new String[] {
