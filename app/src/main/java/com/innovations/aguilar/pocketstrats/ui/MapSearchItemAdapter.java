@@ -28,9 +28,9 @@ import java.util.List;
  * Created by Ruben on 7/26/2017.
  */
 public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
-    private final Context context;
-    private final MapItemFilter filter;
-    private final ViewDisplayer viewDisplay;
+    final Context context;
+    final MapItemFilter filter;
+    final ViewDisplayer viewDisplay;
 
     public MapSearchItemAdapter(Context context, List<MapDataDTO> maps, ViewDisplayer<MapDataDTO> viewDisplay) {
         super();

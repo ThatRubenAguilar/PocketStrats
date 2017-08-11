@@ -21,7 +21,7 @@ import com.innovations.aguilar.pocketstrats.R;
 
 public class MainScreenView extends LinearLayout {
     Button buttonMode;
-    MainPanePresenter presenter;
+    final MainPanePresenter presenter;
     Supplier<MainPaneContainer> mainContainer;
 
     public MainScreenView(Context context, @Nullable AttributeSet attrs) {

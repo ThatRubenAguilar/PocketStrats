@@ -2,7 +2,12 @@ package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
@@ -19,14 +24,19 @@ import com.innovations.aguilar.pocketstrats.dto.MapSegmentDTO;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.MapTipItemAdapter;
+import com.innovations.aguilar.pocketstrats.ui.MapTipsChild;
+import com.innovations.aguilar.pocketstrats.ui.MapTipsHeader;
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class MapTipsView extends LinearLayout {
+// TODO: Add tests for these views and how they act on deletion/restore
+public class MapTipsView extends CoordinatorLayout {
 
-    ExpandableListView tipsList;
+    RecyclerView tipsList;
+    FloatingActionButton returnToTop;
 
     Supplier<MainPaneContainer> mainContainer;
 
@@ -45,58 +55,132 @@ public class MapTipsView extends LinearLayout {
             }
         });
 
-        tipsList = (ExpandableListView)findViewById(R.id.list_tips);
+        returnToTop = (FloatingActionButton)findViewById(R.id.button_return_to_top);
+
+        tipsList = (RecyclerView)findViewById(R.id.list_tips);
+        tipsList.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+                if (dy > 0 ||dy<0 && returnToTop.isShown())
+                    returnToTop.hide();
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE){
+                    returnToTop.show();
+                }
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+        });
+
+
+        returnToTop.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MapTipItemAdapter)tipsList.getAdapter()).collapseAll();
+                returnToTop.hide();
+            }
+        });
     }
 
     public void loadTipsForMap(MapDataDTO map) {
-        List<String> groupHeaders = Lists.newArrayList();
-        Map<String, List<String>> childDataMap = Maps.newHashMapWithExpectedSize(10);
-        List<String> mapTypeTips = getMapTypeTips(map);
+        List<MapTipsHeader> groupHeaders = Lists.newArrayList();
+        List<MapTipsChild> mapTypeTips = getMapTypeTips(map);
         if (mapTypeTips.size() > 0) {
-            groupHeaders.add("Mode");
-            childDataMap.put("Mode", mapTypeTips);
+            groupHeaders.add(new MapTipsHeader("Mode", mapTypeTips));
         }
-        List<String> mapTips = getMapTips(map);
+        List<MapTipsChild> mapTips = getMapTips(map);
         if (mapTips.size() > 0) {
-            groupHeaders.add("Map");
-            childDataMap.put("Map", mapTips);
+            groupHeaders.add(new MapTipsHeader("Map", mapTips));
         }
-        List<String> mapSegmentTips = getMapSegmentTipsForMap(map);
+        List<MapTipsChild> mapSegmentTips = getMapSegmentTipsForMap(map);
         if (mapSegmentTips.size() > 0) {
             // TODO: Query segments by Id to get names
-            groupHeaders.add("Segment");
-            childDataMap.put("Segment", mapSegmentTips);
+            groupHeaders.add(new MapTipsHeader("Segment", mapSegmentTips));
         }
-        List<String> mapLocationTips = getMapLocationTipsForMap(map);
+        List<MapTipsChild> mapLocationTips = getMapLocationTipsForMap(map);
         if (mapLocationTips.size() > 0) {
             // TODO: Query locations by Id to get names
-            groupHeaders.add("Location");
-            childDataMap.put("Location", mapLocationTips);
+            groupHeaders.add(new MapTipsHeader("Location", mapLocationTips));
         }
-        tipsList.setAdapter(new MapTipItemAdapter(getContext(), groupHeaders, childDataMap));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        tipsList.setLayoutManager(manager);
+        tipsList.setAdapter(new MapTipItemAdapter(getContext(), groupHeaders));
     }
     // TODO: Show floating button if one section is open and scrolling down has occurred
 
-    List<String> getMapTypeTips(MapDataDTO map) {
-        return Collections.unmodifiableList(Lists.newArrayList(new String[] {
-           "Don't Stagger",
-           "Don't Die",
-           "Kill them all"
+    List<MapTipsChild> getMapTypeTips(MapDataDTO map) {
+        return Collections.unmodifiableList(Lists.newArrayList(new MapTipsChild[] {
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+           new MapTipsChild("Don't Stagger"),
+            new MapTipsChild("Don't Die"),
+            new MapTipsChild("Kill them all")
         }));
     }
-    List<String> getMapTips(MapDataDTO map) {
-        return Collections.unmodifiableList(Lists.newArrayList(new String[] {
-                "Don't Stagger",
-                "Don't Die",
-                "Kill them all"
+    List<MapTipsChild> getMapTips(MapDataDTO map) {
+        return Collections.unmodifiableList(Lists.newArrayList(new MapTipsChild[] {
+                new MapTipsChild("Don't Stagger"),
+                new MapTipsChild("Don't Die"),
+                new MapTipsChild("Kill them all")
         }));
     }
-    List<String> getMapSegmentTipsForMap(MapDataDTO map) {
-        return Collections.unmodifiableList(Lists.newArrayList(new String[] {
+    List<MapTipsChild> getMapSegmentTipsForMap(MapDataDTO map) {
+        return Collections.unmodifiableList(Lists.newArrayList(new MapTipsChild[] {
         }));
     }
-    List<String> getMapLocationTipsForMap(MapDataDTO map) {
-        return Collections.unmodifiableList(Lists.newArrayList(new String[] {
+    List<MapTipsChild> getMapLocationTipsForMap(MapDataDTO map) {
+        return Collections.unmodifiableList(Lists.newArrayList(new MapTipsChild[] {
         }));
     }
 }

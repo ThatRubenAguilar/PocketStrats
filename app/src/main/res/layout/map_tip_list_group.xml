@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@drawable/tips_expandable_group"-->
-        <!--android:visibility="invisible"/>-->
+    <ImageView
+        android:id="@+id/arrow_map_tip_group"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:background="@drawable/ic_down_arrow" />
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_group"
         android:textSize="@dimen/button_text_size_large"

@@ -7,22 +7,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--android:divider="@null"-->
+    <!--android:dividerHeight="0dp"-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_tips"
+        android:groupIndicator="@drawable/tips_expandable_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/button_return_to_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back_to_top"
         android:backgroundTint="@color/primaryDarkBlue"
         android:layout_gravity="bottom|end"
+        android:clickable="true"
         android:visibility="invisible"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"/>
-
-    <ExpandableListView
-        android:id="@+id/list_tips"
-        android:groupIndicator="@drawable/tips_expandable_group"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </com.innovations.aguilar.pocketstrats.ui.view.MapTipsView>
