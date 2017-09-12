@@ -21,10 +21,10 @@ import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
 import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.R;
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapType;
-import com.innovations.aguilar.pocketstrats.query.MapDataAccessor;
-import com.innovations.aguilar.pocketstrats.query.MapDatabaseOpenHelper;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 
 import java.util.List;
 

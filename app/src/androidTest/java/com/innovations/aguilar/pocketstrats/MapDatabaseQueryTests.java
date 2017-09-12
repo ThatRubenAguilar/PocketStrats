@@ -3,12 +3,12 @@ package com.innovations.aguilar.pocketstrats;
 import android.support.test.espresso.core.deps.guava.collect.ImmutableMap;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapLocationDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSegmentDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSpawnStatisticDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapType;
-import com.innovations.aguilar.pocketstrats.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSegmentDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
 
 import org.junit.After;
 import org.junit.Before;

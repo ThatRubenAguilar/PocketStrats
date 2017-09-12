@@ -2,7 +2,7 @@ package com.innovations.aguilar.pocketstrats.parser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.innovations.aguilar.pocketstrats.dto.SpawnSide;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats.dto;
+package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import com.google.common.base.Preconditions;
 

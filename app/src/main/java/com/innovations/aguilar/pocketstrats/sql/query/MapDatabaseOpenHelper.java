@@ -1,16 +1,14 @@
-package com.innovations.aguilar.pocketstrats.query;
+package com.innovations.aguilar.pocketstrats.sql.query;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.io.CharStreams;
-import com.innovations.aguilar.pocketstrats.dto.MapData;
 import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
 
 import org.slf4j.Logger;

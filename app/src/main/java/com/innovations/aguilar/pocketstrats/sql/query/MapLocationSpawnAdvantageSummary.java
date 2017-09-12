@@ -1,10 +1,10 @@
-package com.innovations.aguilar.pocketstrats.query;
+package com.innovations.aguilar.pocketstrats.sql.query;
 
-import com.innovations.aguilar.pocketstrats.dto.MapLocationDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSpawnStatistic;
-import com.innovations.aguilar.pocketstrats.dto.MapSpawnStatisticDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapTypeSpawnTimeDTO;
-import com.innovations.aguilar.pocketstrats.dto.SpawnSide;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatistic;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTimeDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 
 import java.util.ArrayList;
 import java.util.List;

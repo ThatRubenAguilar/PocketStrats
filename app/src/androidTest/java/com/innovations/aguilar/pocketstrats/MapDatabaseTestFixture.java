@@ -1,14 +1,11 @@
 package com.innovations.aguilar.pocketstrats;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.test.InstrumentationRegistry;
 
-import com.innovations.aguilar.pocketstrats.query.MapDatabaseOpenHelper;
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
+import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,10 +13,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MapDatabaseTestFixture extends LoggingTestFixture {
     protected static SQLiteOpenHelper openHelper;

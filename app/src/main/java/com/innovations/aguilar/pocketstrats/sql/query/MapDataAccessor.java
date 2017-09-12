@@ -1,24 +1,23 @@
-package com.innovations.aguilar.pocketstrats.query;
+package com.innovations.aguilar.pocketstrats.sql.query;
 
 import android.database.Cursor;
 import android.database.sqlite.*;
 
-import java.io.Closeable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.innovations.aguilar.pocketstrats.dto.MapData;
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapLocation;
-import com.innovations.aguilar.pocketstrats.dto.MapLocationDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSegment;
-import com.innovations.aguilar.pocketstrats.dto.MapSegmentDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSpawnStatistic;
-import com.innovations.aguilar.pocketstrats.dto.MapSpawnStatisticDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapType;
-import com.innovations.aguilar.pocketstrats.dto.MapTypeSpawnTime;
-import com.innovations.aguilar.pocketstrats.dto.MapTypeSpawnTimeDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapData;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapLocation;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSegment;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSegmentDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatistic;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTime;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTimeDTO;
 
 public class MapDataAccessor implements AutoCloseable {
     private SQLiteDatabase db;

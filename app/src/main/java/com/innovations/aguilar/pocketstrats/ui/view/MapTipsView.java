@@ -8,29 +8,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 
-import com.google.common.base.Strings;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.innovations.aguilar.pocketstrats.R;
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapLocation;
-import com.innovations.aguilar.pocketstrats.dto.MapLocationDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapSegmentDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.MapTipItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsChild;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsHeader;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 // TODO: Add tests for these views and how they act on deletion/restore
 public class MapTipsView extends CoordinatorLayout {

@@ -2,13 +2,13 @@ package com.innovations.aguilar.pocketstrats;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapLocationDTO;
-import com.innovations.aguilar.pocketstrats.dto.SpawnSide;
-import com.innovations.aguilar.pocketstrats.query.MapDataAccessor;
-import com.innovations.aguilar.pocketstrats.query.MapLocationSpawnAdvantageSummary;
-import com.innovations.aguilar.pocketstrats.query.MapSpawnStatisticsSummaryGenerator;
-import com.innovations.aguilar.pocketstrats.query.SpawnSummaryQuery;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
+import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.query.MapLocationSpawnAdvantageSummary;
+import com.innovations.aguilar.pocketstrats.sql.query.MapSpawnStatisticsSummaryGenerator;
+import com.innovations.aguilar.pocketstrats.sql.query.SpawnSummaryQuery;
 
 import org.junit.After;
 import org.junit.Assert;

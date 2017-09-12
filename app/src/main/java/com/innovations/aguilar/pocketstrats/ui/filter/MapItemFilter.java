@@ -1,10 +1,9 @@
 package com.innovations.aguilar.pocketstrats.ui.filter;
 
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
-import com.innovations.aguilar.pocketstrats.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 
 import java.util.ArrayList;
 import java.util.List;

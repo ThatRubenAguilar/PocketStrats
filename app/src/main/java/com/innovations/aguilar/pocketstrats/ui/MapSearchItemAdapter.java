@@ -17,7 +17,7 @@ import android.widget.Filterable;
 
 import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
-import com.innovations.aguilar.pocketstrats.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 import com.innovations.aguilar.pocketstrats.ui.view.ListViewItem;
 import com.innovations.aguilar.pocketstrats.ui.view.ViewDisplayer;
