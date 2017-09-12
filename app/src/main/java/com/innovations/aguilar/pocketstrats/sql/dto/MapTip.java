@@ -2,60 +2,72 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+/**
+ * Created by Ruben on 9/12/2017.
+ */
 public class MapTip implements MapTipDTO {
-    private final int subjectId;
-    private final int tipId;
-    private final String tipDescription;
-    private final Integer parentTipId;
+    private final int mapSubjectId;
+    private final int mapTipId;
+    private final int orderPrecedence;
+    private final String mapTipDescription;
+    private final Integer parentMapTipId;
 
-    public MapTip(int tipId, int subjectId,
-                  String tipDescription, Integer parentTipId) {
-        this.subjectId = subjectId;
-        this.tipId = tipId;
-        this.tipDescription = tipDescription;
-        this.parentTipId = parentTipId;
+    public MapTip(int mapTipId, int mapSubjectId, int orderPrecedence,
+                  String mapTipDescription, Integer parentMapTipId) {
+        this.mapSubjectId = mapSubjectId;
+        this.mapTipId = mapTipId;
+        this.orderPrecedence = orderPrecedence;
+        this.mapTipDescription = mapTipDescription;
+        this.parentMapTipId = parentMapTipId;
     }
 
     public MapTip(Cursor c) {
-        this.subjectId = c.getInt(c.getColumnIndex(SubjectIdColumn));
-        this.tipId = c.getInt(c.getColumnIndex(TipIdColumn));
-        this.tipDescription = c.getString(c.getColumnIndex(TipDescriptionColumn));
-        if (!c.isNull(c.getColumnIndex(ParentTipIdColumn)))
-            this.parentTipId = c.getInt(c.getColumnIndex(ParentTipIdColumn));
+        this.mapSubjectId = c.getInt(c.getColumnIndex(MapSubjectIdColumn));
+        this.mapTipId = c.getInt(c.getColumnIndex(MapTipIdColumn));
+        this.orderPrecedence = c.getInt(c.getColumnIndex(OrderPrecedenceColumn));;
+        this.mapTipDescription = c.getString(c.getColumnIndex(MapTipDescriptionColumn));
+        if (!c.isNull(c.getColumnIndex(ParentMapTipIdColumn)))
+            this.parentMapTipId = c.getInt(c.getColumnIndex(ParentMapTipIdColumn));
         else
-            this.parentTipId = null;
+            this.parentMapTipId = null;
     }
 
     @Override
-    public int getSubjectId() {
-        return subjectId;
+    public int getMapSubjectId() {
+        return mapSubjectId;
     }
     @Override
-    public int getTipId() {
-        return tipId;
+    public int getMapTipId() {
+        return mapTipId;
     }
     @Override
-    public Integer getParentTipId() {
-        return parentTipId;
+    public int getOrderPrecedence() {
+        return orderPrecedence;
     }
     @Override
-    public String getTipDescription() {
-        return tipDescription;
+    public Integer getParentMapTipId() {
+        return parentMapTipId;
+    }
+    @Override
+    public String getMapTipDescription() {
+        return mapTipDescription;
     }
 
 
-    public static final String SubjectIdColumn = "SubjectId";
-    public static final String TipIdColumn = "TipId";
-    public static final String TipDescriptionColumn = "TipDescription";
-    public static final String ParentTipIdColumn = "ParentTipId";
+    public static final String MapSubjectIdColumn = "MapSubjectId";
+    public static final String MapTipIdColumn = "MapTipId";
+    public static final String OrderPrecedenceColumn = "OrderPrecedence";
+    public static final String MapTipDescriptionColumn = "MapTipDescription";
+    public static final String ParentMapTipIdColumn = "ParentMapTipId";
 
     public static final String TableName = "MapTips";
 
     public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, SubjectIdColumn),
-            String.format("%s.%s", TableName, TipIdColumn),
-            String.format("%s.%s", TableName, TipDescriptionColumn),
-            String.format("%s.%s", TableName, ParentTipIdColumn)
+            String.format("%s.%s", TableName, MapSubjectIdColumn),
+            String.format("%s.%s", TableName, MapTipIdColumn),
+            String.format("%s.%s", TableName, OrderPrecedenceColumn),
+            String.format("%s.%s", TableName, MapTipDescriptionColumn),
+            String.format("%s.%s", TableName, ParentMapTipIdColumn)
     };
 
 

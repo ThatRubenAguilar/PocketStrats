@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.1.1 on Mon Sep 11 12:12:57 2017
+-- File generated with SQLiteStudio v3.1.1 on Tue Sep 12 07:41:27 2017
 --
 -- Text encoding used: System
 --
@@ -10,10 +10,12 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS MapTips;
 
 CREATE TABLE MapTips (
-    TipId          INTEGER PRIMARY KEY,
-    SubjectId      INTEGER REFERENCES MapSubjects (SubjectId),
-    TipDescription TEXT    NOT NULL,
-    ParentTipId    INTEGER REFERENCES MapTips (TipId) 
+    MapTipId          INTEGER PRIMARY KEY,
+    MapTipDescription TEXT,
+    ParentMapTipId    INTEGER REFERENCES MapTips (MapTipId),
+    MapSubjectId      INTEGER REFERENCES MapSubjects (MapSubjectId),
+    OrderPrecedence   INTEGER NOT NULL
+                              DEFAULT (1) 
 );
 
 

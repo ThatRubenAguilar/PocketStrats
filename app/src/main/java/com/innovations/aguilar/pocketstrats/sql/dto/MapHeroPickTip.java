@@ -7,69 +7,45 @@ import android.database.Cursor;
  */
 
 
-public class MapHeroPickTip implements MapHeroPickTipDTO {
-    private final int subjectId;
-    private final int pickTipId;
-    private final int heroId;
-    private final String pickTipDescription;
-    private final Integer parentTipId;
+public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
 
-    public MapHeroPickTip(int pickTipId, int subjectId, int heroId,
-                          String pickTipDescription, Integer parentTipId) {
-        this.subjectId = subjectId;
-        this.pickTipId = pickTipId;
+    private final int mapPickTipId;
+    private final int heroId;
+
+    public MapHeroPickTip(int mapTipId, int mapSubjectId, int orderPrecedence,
+                          String mapTipDescription, Integer parentMapTipId,
+                            int mapPickTipId, int heroId) {
+        super(mapTipId, mapSubjectId, orderPrecedence, mapTipDescription, parentMapTipId);
+        this.mapPickTipId = mapPickTipId;
         this.heroId = heroId;
-        this.pickTipDescription = pickTipDescription;
-        this.parentTipId = parentTipId;
     }
 
     public MapHeroPickTip(Cursor c) {
-        this.subjectId = c.getInt(c.getColumnIndex(SubjectIdColumn));
-        this.pickTipId = c.getInt(c.getColumnIndex(PickTipIdColumn));
+        super(c);
+        this.mapPickTipId = c.getInt(c.getColumnIndex(MapPickTipIdColumn));
         this.heroId = c.getInt(c.getColumnIndex(HeroIdColumn));
-        this.pickTipDescription = c.getString(c.getColumnIndex(PickTipDescriptionColumn));
-        if (!c.isNull(c.getColumnIndex(ParentTipIdColumn)))
-            this.parentTipId = c.getInt(c.getColumnIndex(ParentTipIdColumn));
-        else
-            this.parentTipId = null;
     }
 
     @Override
-    public int getSubjectId() {
-        return subjectId;
-    }
-    @Override
-    public int getPickTipId() {
-        return pickTipId;
+    public int getMapPickTipId() {
+        return mapPickTipId;
     }
     @Override
     public int getHeroId() {
         return heroId;
     }
-    @Override
-    public Integer getParentTipId() {
-        return parentTipId;
-    }
-    @Override
-    public String getPickTipDescription() {
-        return pickTipDescription;
-    }
 
 
-    public static final String SubjectIdColumn = "SubjectId";
-    public static final String PickTipIdColumn = "PickTipId";
+    public static final String MapTipIdColumn = "MapTipId";
+    public static final String MapPickTipIdColumn = "MapPickTipId";
     public static final String HeroIdColumn = "HeroId";
-    public static final String PickTipDescriptionColumn = "PickTipDescription";
-    public static final String ParentTipIdColumn = "ParentTipId";
 
-    public static final String TableName = "MapTips";
+    public static final String TableName = "MapHeroPickTips";
 
     public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, SubjectIdColumn),
-            String.format("%s.%s", TableName, PickTipIdColumn),
-            String.format("%s.%s", TableName, HeroIdColumn),
-            String.format("%s.%s", TableName, PickTipDescriptionColumn),
-            String.format("%s.%s", TableName, ParentTipIdColumn)
+            String.format("%s.%s", TableName, MapTipIdColumn),
+            String.format("%s.%s", TableName, MapPickTipIdColumn),
+            String.format("%s.%s", TableName, HeroIdColumn)
     };
 
 
