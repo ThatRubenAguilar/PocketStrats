@@ -6,3 +6,5 @@ public interface MapSegmentDTO {
     int getMapId();
     String getSegmentName();
 }
+
+

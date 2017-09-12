@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.dto;
 
 import android.database.Cursor;
 
+
 public class MapSegment implements MapSegmentDTO {
     private final int segmentId;
     private final int mapId;

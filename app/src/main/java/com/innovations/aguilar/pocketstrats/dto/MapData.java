@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.dto;
 
 import android.database.Cursor;
 
+
 public class MapData implements MapDataDTO {
     private final int mapId;
     private final String mapName;
