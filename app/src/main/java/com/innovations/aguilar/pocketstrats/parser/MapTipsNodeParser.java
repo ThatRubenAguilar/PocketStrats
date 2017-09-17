@@ -5,9 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
-import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 
 import org.slf4j.Logger;
 
@@ -18,6 +18,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -35,16 +36,16 @@ public class MapTipsNodeParser implements Closeable {
     }
 
     static final Set<String> TokenWords = Sets.newHashSet(
-            "tip",
-            "pick",
-            "section",
-            "strategy",
-            "subject",
-            "side",
-            "tags",
-            "map",
-            "type",
-            "category"
+            Tokens.Tip,
+            Tokens.Pick,
+            Tokens.Section,
+            Tokens.Strategy,
+            Tokens.Subject,
+            Tokens.Side,
+            Tokens.Tags,
+            Tokens.Map,
+            Tokens.Type,
+            Tokens.Category
     );
 
     static final String Seperator = "|";
@@ -158,7 +159,99 @@ public class MapTipsWriter {
     ParsedNode subjectNode;
     ParsedNode tagNode;
 
-    Stack<Integer> precedenceStack = new Stack<>();
+
+    class PrecedenceStateMachine {
+        Stack<Integer> precedenceStack;
+        ParsedNode currentNode;
+        ParsedNode lastDifferentNode;
+
+        final Set<String> descendTransitions = Sets.newHashSet(
+                Tokens.Tip,
+                Tokens.Section,
+                Tokens.Pick
+        );
+        final Set<String> incrementTransitions = Sets.newHashSet(
+                Tokens.Tip,
+                Tokens.Section,
+                Tokens.Pick,
+                Tokens.Strategy,
+                Tokens.Subject
+        );
+
+        final Map<String, Integer> typeLevelMap = Maps.newHashMap();
+
+        public PrecedenceStateMachine() {
+            Reset();
+            typeLevelMap.put(Tokens.Strategy, new Integer(1));
+            typeLevelMap.put(Tokens.Subject, new Integer(1));
+            typeLevelMap.put(Tokens.Section, new Integer(2));
+            typeLevelMap.put(Tokens.Pick, new Integer(3));
+        }
+
+        public void Reset() {
+            precedenceStack = new Stack<>();
+            precedenceStack.push(new Integer(0));
+            currentNode = null;
+        }
+
+        public void Transition(ParsedNode nextNode) {
+            // Strategy/Subject => Section/Pick => Tip -> Precedence Stack Push
+            // Tip => Section/Pick => Strategy/Subject -> Precedence Stack Pop
+            switch(nextNode.nodeType) {
+                case Tokens.Subject:
+                    if (currentNode != null && )
+                    break;
+                case Tokens.Strategy:
+                    break;
+                case Tokens.Section:
+                    break;
+                case Tokens.Pick:
+                    break;
+                case Tokens.Tip:
+                    break;
+                default:
+                    break;
+            }
+            if (descendTransitions.contains(nextNode.nodeType)) {
+                if (currentNode != null && currentNode.nodeType != nextNode.nodeType) {
+                    DescendPrecendenceLevel();
+                }
+            }
+            if (incrementTransitions.contains(nextNode.nodeType)) {
+                IncrementPrecedence();
+            }
+            currentNode = nextNode;
+        }
+
+        void JumpToPrecedenceLevel(int depth) {
+            if (depth < 0)
+                throw new IllegalArgumentException("Precedence depth cannot be less than zero");
+
+            while (precedenceStack.size() < depth)
+                AscendPrecendenceLevel();
+        }
+
+        void IncrementPrecedence() {
+            Integer precedence = precedenceStack.pop();
+            precedenceStack.push(new Integer(precedence.intValue() + 1));
+        }
+
+        void DescendPrecendenceLevel() {
+            precedenceStack.push(new Integer(0));
+        }
+        void AscendPrecendenceLevel() {
+            precedenceStack.pop();
+            if (precedenceStack.isEmpty())
+                DescendPrecendenceLevel();
+        }
+
+        public int GetPrecedence() {
+            return precedenceStack.peek();
+        }
+        public int GetPrecedenceLevel() {return precedenceStack.size();}
+
+
+    }
 
     public MapTipsWriter(Reader mapTipsReader) {
         this.mapTipsReader = mapTipsReader;
@@ -177,36 +270,28 @@ public class MapTipsWriter {
             // Strategy => Section -> MapSpecificTip w/o parent tip
             // Category => Subject -> MapTypeTip
 
-            // Strategy/Subject => Section/Pick => Tip -> Precedence Stack Push
-            // Tip => Section/Pick => Strategy/Subject -> Precedence Stack Pop
             while (nodeParser.nextNode()) {
                 ParsedNode currNode = nodeParser.getCurrentNode();
                 switch(currNode.nodeType) {
-                    case "tip":
+                    case Tokens.Subject:
                         break;
-                    case "pick":
+                    case Tokens.Strategy:
                         break;
-                    case "map":
+                    case Tokens.Section:
                         break;
-                    case "tip":
+                    case Tokens.Pick:
                         break;
-                    case "tip":
+                    case Tokens.Tip:
                         break;
-                    case "tip":
+                    case Tokens.Map:
                         break;
-                    case "tip":
+                    case Tokens.Tags:
                         break;
-                    case "tip":
+                    case Tokens.Category:
                         break;
-                    case "tip":
+                    case Tokens.Type:
                         break;
-                    case "tip":
-                        break;
-                    case "tip":
-                        break;
-                    case "tip":
-                        break;
-                    case "tip":
+                    case Tokens.Side:
                         break;
                     default:
                         log.get().warn("Node type not found for Node %s", currNode);
