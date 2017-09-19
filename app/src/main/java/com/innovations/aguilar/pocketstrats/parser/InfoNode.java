@@ -39,6 +39,16 @@ public class InfoNode {
         return Objects.hash(MapTypes, Side, MapName);
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("InfoNode{");
+        sb.append("MapTypes=").append(MapTypes);
+        sb.append(", Side=").append(Side);
+        sb.append(", MapName='").append(MapName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
     public InfoNode Copy() {
         return new InfoNode(MapTypes, Side, MapName);
     }

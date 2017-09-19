@@ -30,4 +30,14 @@ public class SectionNode extends TipNode {
     public int hashCode() {
         return Objects.hash(super.hashCode(), TipNodes, PickNodes);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SectionNode{");
+        sb.append("TipNodes=").append(TipNodes);
+        sb.append(", PickNodes=").append(PickNodes);
+        sb.append(", TipNode=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

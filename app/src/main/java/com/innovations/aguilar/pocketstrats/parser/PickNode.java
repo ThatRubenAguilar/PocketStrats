@@ -27,4 +27,13 @@ public class PickNode extends TipNode {
     public int hashCode() {
         return Objects.hash(super.hashCode(), TipNodes);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("PickNode{");
+        sb.append("TipNodes=").append(TipNodes);
+        sb.append(", TipNode=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

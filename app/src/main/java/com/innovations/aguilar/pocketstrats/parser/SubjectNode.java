@@ -27,4 +27,13 @@ public class SubjectNode extends TipNode {
     public int hashCode() {
         return Objects.hash(super.hashCode(), SectionNodes);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("SubjectNode{");
+        sb.append("SectionNodes=").append(SectionNodes);
+        sb.append(", TipNode=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

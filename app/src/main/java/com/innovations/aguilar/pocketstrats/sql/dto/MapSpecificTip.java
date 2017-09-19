@@ -46,7 +46,7 @@ public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapSpecificTip{");
         sb.append("mapSpecificTipId=").append(mapSpecificTipId);
-        sb.append("MapTip=").append(super.toString());
+        sb.append(", MapTip=").append(super.toString());
         sb.append('}');
         return sb.toString();
     }

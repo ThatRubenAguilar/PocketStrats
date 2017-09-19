@@ -30,4 +30,14 @@ public class TipNode {
     public int hashCode() {
         return Objects.hash(Message, Precedence, INode);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("TipNode{");
+        sb.append("Message='").append(Message).append('\'');
+        sb.append(", Precedence=").append(Precedence);
+        sb.append(", INode=").append(INode);
+        sb.append('}');
+        return sb.toString();
+    }
 }
