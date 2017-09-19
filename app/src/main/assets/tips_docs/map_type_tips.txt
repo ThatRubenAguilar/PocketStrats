@@ -1,5 +1,5 @@
 Category|Assault|Control|Escort|Hybrid_Assault_Escort
-Side|Attack|Defense
+Side|Attack|Defend
 Subject|General
 
 
@@ -37,7 +37,7 @@ Section|Composition strategies:
 
 Category|Assault
 
-Side|Defense
+Side|Defend
 Subject|Mode Tips
 
 Section|Don't stagger deaths to contest first point above 2/3rd captured. This can easily snowball for last point.

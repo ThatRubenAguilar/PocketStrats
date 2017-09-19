@@ -24,7 +24,7 @@ Section|Execution of Balcony Approach
 Tip| Push through [stairs] to [balcony] for positioning for your Support/Range dps.
 Tip| Look to engage in [courtyard].
 
-Side|Defense
+Side|Defend
 
 Segment|Ruins
 Strategy|Ruins, Forward Hold
@@ -79,7 +79,7 @@ Section|Execution of Main Approach
 Tip| Rush [main] to [stables] to create positioning for Support/Range dps.
 Tip| Tanks threaten [point].
 
-Defense:
+Side|Defend
 
 Segment|Sanctum
 Strategy|Sanctum, Forward Hold
@@ -142,7 +142,7 @@ Tip| Push [cliff] to [ledge] as a team to secure positioning for your Support/Ra
 Tip| Tanks threaten [point].
 Tip| A flanker through [dark room] after initiation can harass the backline in [server].
 
-Side|Defense
+Side|Defend
 
 Segment|Night Market
 Strategy|Lijiang, Night Market Hold
@@ -224,7 +224,7 @@ Pick|Pharah
 Tip|Pharah has a lot of good vertical cover such as [coast] or [main] on this map to abuse. She can also displace the backline off of [top point].
 
 
-Side|Defense
+Side|Defend
 
 Segment|University
 Strategy|Oasis, University Hold

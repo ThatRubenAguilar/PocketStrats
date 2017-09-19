@@ -155,7 +155,11 @@ public class TipsDocument {
             case Tokens.Type:
                 break;
             case Tokens.Side:
-                currentInfo.Side = SpawnSide.valueOf(node.nodeContents.get(0));
+                currentInfo.Sides.clear();
+                for (String spawnSide :
+                        node.nodeContents) {
+                    currentInfo.Sides.add(SpawnSide.valueOf(spawnSide));
+                }
                 break;
             case Tokens.MapSegment:
                 currentInfo.SegmentName = node.nodeContents.get(0);

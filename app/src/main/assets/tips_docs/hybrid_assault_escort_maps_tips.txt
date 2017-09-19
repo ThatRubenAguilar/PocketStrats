@@ -75,7 +75,7 @@ Tip| Push through [halls] to [perch] to secure positioning for Support/Ranged dp
 Tip| Support/Ranged dps can position at [stairway], [perch] or [main].
 Tip| A flanker through [pit] can harass the enemy backline.
 
-Side|Defense
+Side|Defend
 
 
 Segment|First
@@ -194,7 +194,7 @@ Tip| Push through [storage] to [perch] to [balcony] as a group to secure positio
 Tip| Tanks drop and initiate.
 Tip| A flanker can drop from [perch] to [long] to harass the enemy backline.
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Point A, Arch Hold
@@ -293,7 +293,7 @@ Tip| Look to control upper [horseshoe].
 Section|Noteworthy Picks
 Tip| Some vertical mobility will make controlling upper [horseshoe] easier.
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Point A, Main Choke Hold
@@ -397,7 +397,7 @@ Tip| Beware of flanks at each [halls] door.
 Tip| Look to clear off [overlook] to secure positioning for Support/Ranged dps.
 Tip| Tanks drop and initiate.
 
-Side|Defense
+Side|Defend
 
 
 Segment|First

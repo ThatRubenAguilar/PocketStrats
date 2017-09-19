@@ -9,20 +9,20 @@ import java.util.Objects;
 
 public class InfoNode {
     public List<MapType> MapTypes;
-    public SpawnSide Side;
+    public List<SpawnSide> Sides;
     public String MapName;
     public String SegmentName;
 
     public InfoNode() {
         MapTypes = Lists.newArrayList();
-        Side = SpawnSide.Attack;
+        Sides = Lists.newArrayList();
         MapName = null;
         SegmentName = null;
     }
 
-    public InfoNode(List<MapType> mapTypes, SpawnSide side, String mapName, String segmentName) {
+    public InfoNode(List<MapType> mapTypes, List<SpawnSide> sides, String mapName, String segmentName) {
         MapTypes = Lists.newArrayList(mapTypes);
-        Side = side;
+        Sides = sides;
         MapName = mapName;
         SegmentName = segmentName;
     }
@@ -33,21 +33,21 @@ public class InfoNode {
         if (o == null || getClass() != o.getClass()) return false;
         InfoNode infoNode = (InfoNode) o;
         return Objects.equals(MapTypes, infoNode.MapTypes) &&
-                Side == infoNode.Side &&
+                Objects.equals(Sides, infoNode.Sides) &&
                 Objects.equals(MapName, infoNode.MapName) &&
                 Objects.equals(SegmentName, infoNode.SegmentName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(MapTypes, Side, MapName, SegmentName);
+        return Objects.hash(MapTypes, Sides, MapName, SegmentName);
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("InfoNode{");
         sb.append("MapTypes=").append(MapTypes);
-        sb.append(", Side=").append(Side);
+        sb.append(", Sides=").append(Sides);
         sb.append(", MapName='").append(MapName).append('\'');
         sb.append(", SegmentName='").append(SegmentName).append('\'');
         sb.append('}');
@@ -55,6 +55,6 @@ public class InfoNode {
     }
 
     public InfoNode Copy() {
-        return new InfoNode(MapTypes, Side, MapName, SegmentName);
+        return new InfoNode(MapTypes, Sides, MapName, SegmentName);
     }
 }

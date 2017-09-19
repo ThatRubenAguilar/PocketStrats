@@ -63,7 +63,7 @@ Tip| Vertical mobility compositions make engaging Ledge hold much easier.
 Pick|Orisa
 Tip|Orisa pull can break up a clustered high ground advantage.
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Market Section, Arch Hold
@@ -198,7 +198,7 @@ Tip| Vertical mobility makes engaging on top [corner] easier.
 Pick|Orisa
 Tip|Orisa pull can break up a clustered high ground advantage.
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Comms Section, Ledge Hold
@@ -304,7 +304,7 @@ Section|Execution of Connector Approach
 Tip| Push through bottom [office] as a group to ensure safety.
 Tip| Split push through [dock] and [connector] to control [semi].
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Train Section, Gas Hold

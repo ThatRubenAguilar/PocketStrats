@@ -12,6 +12,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubject;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTip;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.write.SqlDataWriter;
 
@@ -78,15 +79,19 @@ public class MapTipsWriter implements AutoCloseable {
                 if (mapIdAndSegmentNames.containsKey(segmentNameKey))
                     segmentId = mapIdAndSegmentNames.get(segmentNameKey).getSegmentId();
             }
-            MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
-                    mapId, subjNode.INode.Side, subjNode.INode.Side.toString(), segmentId);
-            // Strategy -> MapSubject
-            int subjectId = (int)writer.WriteMapSubject(subj);
-            if (subjectId < 0) {
-                throw new SQLDataException(String.format("Failed to write DTO '%s'", subj));
+            if (subjNode.INode.Sides != null && !subjNode.INode.Sides.isEmpty()) {
+                for (SpawnSide spawnSide :
+                        subjNode.INode.Sides) {
+                    MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
+                            mapId, spawnSide, spawnSide.toString(), segmentId);
+                    // Strategy -> MapSubject
+                    int subjectId = (int) writer.WriteMapSubject(subj);
+                    if (subjectId < 0) {
+                        throw new SQLDataException(String.format("Failed to write DTO '%s'", subj));
+                    }
+                    writeSections(subjectId, subjNode.SectionNodes);
+                }
             }
-            writeSections(subjectId, subjNode.SectionNodes);
-
         }
     }
 

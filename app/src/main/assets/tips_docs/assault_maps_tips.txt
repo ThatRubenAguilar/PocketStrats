@@ -71,7 +71,7 @@ Pick|Widowmaker
 Tip|Widow is strong on top [arch] because of the space Point Hold gives up. 
 
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Point A, Plateau Hold
@@ -178,7 +178,7 @@ Pick|D.Va
 Tip|D.Va displacement from booster is good for pushing Supports/Range dps off [catwalk].
 
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Point A, Server Hold
@@ -249,7 +249,7 @@ Tip|Supports/Range dps can position at [porch].
 Tip| Tanks initiate on [point B].
 Tip| Range dps can flank to [walkway] door to threaten enemy dps on [walkway].
 
-Side|Defense
+Side|Defend
 
 Segment|First
 Strategy|Point A, Balcony Hold
@@ -325,7 +325,7 @@ Section|Noteworthy Picks
 Pick|Lucio
 Tip|Lucio speed boost lets you make the jump from [turbine] to [closet] as a team.
 
-Side|Defense
+Side|Defend
 
 
 Segment|First
