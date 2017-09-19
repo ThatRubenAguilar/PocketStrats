@@ -1,0 +1,103 @@
+Category|Assault|Control|Escort|Hybrid_Assault_Escort
+Side|Attack|Defense
+Subject|General
+
+
+Section|When you die, relay important information to your team
+ Tip|Enemy ults "their Rein has ult."
+ Tip|Enemy positions "their Soldier behind."
+ Tip|Player advantage status "We're up 3v2, winnable."
+Section|After each teamfight, review and plan for next fight.
+ Tip|Enemy ults used "They used Grav, Rez, and Barrage."
+ Tip|Enemy ults may still be up "Tracer did a lot that fight, she may have bomb up again."
+ Tip|Friendly ults to use next fight "We have nano, blade, and grav. Let’s try to just use nano and blade."
+Section|When focus firing, 
+ Tip|Call out initiation so team commits “Going on this Zen.”
+ Tip|Focus people who have important cooldowns down "Tracer no recall."
+ Tip|Focus people with important ults up "focus Zen, he has ult."
+ Tip|Call out low health targets “Ana low in the back.”
+Section|Use grouping to force isolated targets off of strong positions. This can force awkward engages for the enemy team that minimize their positional advantage.
+Section|When safe and missing health, let supports heal you for ult charge instead of using health packs.
+Section|Good hold positioning has several aspects:
+ Tip|Vision on most entrances to the area.
+ Tip|Opportunities for to set up crossfire.
+ Tip|Good cover and sightlines for support/range dps.
+ Tip|Limited cover for the enemy team.
+Section|Composition strategies:
+ Tip|Look to create synergies with teammates with your picks.
+ Tip|Look to counter an enemy’s strategy or player with your picks.
+ Tip|6 Grouped, bullies positioning for supports/range dps as a group, then looks to initiate.
+ Tip|3/3 Split, one support with each group, looks to find 2 good approaches and pincer the enemy.
+ Tip|1/5 or 2/4 Flanks, 1 or 2 flankers look for positioning to go in on the backline when the enemy team initiates.
+ Tip|2/4 Dive, 2 supports look to peel for each other and live, other 4 look to focus one target.
+ Tip|3 dps, looks to set up crossfire where if one dps is pressured, the other 2 can kill the enemy.
+ Tip|3 tanks, looks to outlive the enemy team and manage ults to win fights.
+ Tip|1 Support, looks to use extra dps to outfrag the enemy. Prefers brawling fights over attrition fights.
+ Tip|1 Support/Sombra, like 1 Support, but punishes poke damage in attrition fights by using health packs to quickly build EMP for every fight. 
+
+Category|Assault
+
+Side|Defense
+Subject|Mode Tips
+
+Section|Don't stagger deaths to contest first point above 2/3rd captured. This can easily snowball for last point.
+Section|Winning the first fight is important to avoid snowball with ultimate advantage going into the last point.
+Section|Keep fight off the point when possible to avoid defensive spawn timer ramp up.
+Section|When staggering on the last point,
+ Tip|1 or 2 kills can end the Attacker's push. 
+ Tip|Use everything you have to trade kills. 
+ Tip|Call focus targets.
+Section|Try to forward hold last point when possible. This has strong positional advantages on most Assault maps and delays the start time for defensive spawn timer ramp up.
+
+Side|Attack
+Subject|Mode Tips
+Section|1st Point spawn advantage is pretty weak, the spawn run is long for both sides so try not to rely on it to win points.
+Section|Do not get picked. Every death on Attack loses 30 to 40 seconds.
+Section|Tanks/Dive take the fight on last point to begin the defensive spawn timer ramp up.
+Section|Use team rotations to clear off defensive high ground.
+Section|When under 50 seconds are left, it is worth it to wait until overtime before making a proper push. The overtime push is the strongest push Attack has.
+Section|Team wipe ultimates are one way to capture the last point. 
+ Tip|Try to do dry pushes to bait out any counter defensive ultimates first.
+Section|Team focus fire is another way to capture the last point. 
+ Tip|Attacker's focus fire must kill faster than the stagger and avoid getting picked as you will need at least 4 up to deal with the stagger. 
+
+Category|Control
+
+Side|Defending Point
+Subject|Mode Tips
+
+Section|After a clean fight, forward hold chokes near the Attacker's spawn.
+Section|When holding Control chokes, call enemy numbers so you can know how much you need to watch other entrances.
+Section|Do not give up positional advantages to contest the point until the Attacker's actually contest the point.
+Section|Stagger kills after a won fight. One good stagger can lower the total number of fights during a 0 to 99 possession from 4 to 3.
+
+Side|Attacking Point
+Subject|Mode Tips
+
+Section|If a fight is called lost, avoid prolonging the fight and reset quickly. You only get 3-4 fights total during a 0 to 99 round.
+Section|If you believe you are at an ult disadvantage, do a dry push to even it out.
+Section|If above 75% possession, it is worth it to wait until overtime before making a proper push. The overtime push is the strongest push Attack has.
+
+Category|Escort
+
+Side|Defend
+Subject|Mode Tips
+
+Section|If you don't control the cart, 
+Tip|Take fights on the cart.
+Tip|Die on the cart during a lost fight.
+Section|If you control the cart,
+Tip|Forward hold to give space for it to roll backwards.
+
+Side|Attack
+Subject|Mode Tips
+
+Section|Once a fight is seen as won, 
+Tip|Prioritize clearing enemies off the cart before going for other staggers.
+Tip|Leave 1-2 on cart and the rest should push up to gain positional advantage.
+Section|Save ults for checkpoint pushes.
+Section|When defense is staggering near checkpoint, one dps should push up to intercept supports running back from spawn.
+Section|When under 30 seconds are left, it is worth it to wait until overtime before making a proper push. The overtime push is the strongest push Attack has.
+Section|Use a dry push to gain ult advantage on the last section unless already snowballing.
+
+Category|Hybrid_Assault_Escort

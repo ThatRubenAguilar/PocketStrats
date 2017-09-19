@@ -13,10 +13,8 @@ import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import org.slf4j.Logger;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class TipsDocument {
     protected Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(this.getClass()));
@@ -27,7 +25,7 @@ public class TipsDocument {
         Subjects = parseRawNodes(rawNodes);
     }
 
-    final Set<String> infoLevelTokens = Sets.newHashSet(Tokens.Map, Tokens.Side, Tokens.Tags, Tokens.Category, Tokens.Type);
+    final Set<String> infoLevelTokens = Sets.newHashSet(Tokens.Map, Tokens.Side, Tokens.Tags, Tokens.Category, Tokens.Type, Tokens.MapSegment);
     final Set<String> subjectLevelTokens = Sets.newHashSet(Tokens.Subject, Tokens.Strategy);
     final Set<String> sectionLevelTokens = Sets.newHashSet(Tokens.Section);
     final Set<String> pickLevelTokens = Sets.newHashSet(Tokens.Pick);
@@ -158,6 +156,9 @@ public class TipsDocument {
                 break;
             case Tokens.Side:
                 currentInfo.Side = SpawnSide.valueOf(node.nodeContents.get(0));
+                break;
+            case Tokens.MapSegment:
+                currentInfo.SegmentName = node.nodeContents.get(0);
                 break;
         }
         return currentInfo;

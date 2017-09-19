@@ -1,0 +1,363 @@
+Type|2CP
+
+Map|Anubis
+Tags|High Ground|Verticality|Chokes
+
+Side|Attack|
+
+Segment|First
+Strategy|Point A, Countering Plateau Hold
+Section|Execution of Market Alley Approach
+Tip|Push through [market alley] as a group to ensure safety.
+Tip|A Range dps should cross fire from [arch choke] when pushing [plateau].
+Tip|Use [plateau] mega health to help get tanks through choke spam.
+Section|Noteworthy Picks
+Pick|Soldier: 76
+Tip|Soldier: 76 has the self sustain, range, and mobility to properly crossfire from [arch] choke.
+Pick|Widowmaker
+Tip|Widow can set up difficult to reach crossfire from top [arch].
+Section|Execution of Open Ivy Approach
+Tip|Push through [open ivy] as a group to ensure safety.
+Tip|Push to [ivy stairwell] to [ivy roof] and [carpet roof] to secure high ground for Supports/Range dps.
+Tip|Tanks push onto [point A].
+Tip|Beware of engages from behind when crossing to [open ivy].
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing to [open ivy] much less dangerous.
+
+
+Strategy|Point A, Countering Point Hold
+Section|Execution of Open Ivy Approach
+Tip|Push through [open ivy] as a group to ensure safety.
+Tip|Push to [ivy stairwell] to [ivy roof] and [carpet roof] to secure high ground for Supports/Range dps.
+Tip|Tanks push onto [point A].
+Tip|Pressure the enemy team into retreating off [point A] or engaging.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing to [open ivy] much less dangerous.
+
+Strategy|Point A, Countering Ivy Roof Hold
+Section|Execution of Lower Ivy Approach
+Tip|Push to [lower ivy room] as a group to ensure safety.
+Tip|Supports/Range dps can use [lower ivy room] as cover from [ivy roof] angles. 
+Tip|Tanks push [point A].
+Tip|Deny [ivy roof] cover by crossfire.
+Tip|Contest [point A] to force them to engage.
+Section|Noteworthy Picks
+Pick|Soldier: 76
+Tip|Soldier: 76 has the self sustain, range, and mobility to properly crossfire from [plateau].
+Pick|Widowmaker
+Tip|Widow can set up difficult to reach crossfire from [tower roof] or [plateau].
+
+Segment|Last
+Strategy|Point B, Countering Arch Hold
+Section|Execution of Cave Approach
+Tip|Push [cave alley] to [cave] as a group for safety.
+Tip|Punish any isolated enemies chasing into [cave].
+Tip|If the enemy falls back to Point Hold, double back to control [forward box].
+Tip|If the enemy does not fall back to Point Hold, push to [point cave] and hold [point B].
+Tip|A flanker from [steps] can harass the backline after initiation.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing to [cave] much less dangerous. 
+
+Strategy|Point B, Countering Point Hold
+Section|Execution of Step Alley Approach
+Tip|Rush [step alley] and look to overrun [box].
+Tip|Supports/Range dps can position on [step] or rotate to [arch].
+Tip|Control of [under bridge] mega is important for staying power.
+Section|Noteworthy Picks
+Pick|Widowmaker
+Tip|Widow is strong on top [arch] because of the space Point Hold gives up. 
+
+
+Side|Defense
+
+Segment|First
+Strategy|Point A, Plateau Hold
+Section|Execution
+Tip|Holds on [plateau]. 
+Tip|Support/range dps can position on [plateau], in [lower ivy room] door, or on [tower bridge].  
+Tip|Use [plateau] walls as cover.
+Tip|Deny entry to [arch] choke. 
+Tip|Deny enemy [open ivy] rush to high ground by engaging from behind when they run by.
+Tip|Deny enemy [plateau] mega health push by holding [plateau] choke and flanking [market alley] to harass backline or stragglers.
+Tip|Can fall back to Point Hold.
+
+Strategy|Point A, Point Hold
+Section|Execution
+Tip|Holds on [point A].
+Tip|Support/range dps can position in [tower room] mini health or [back stairs].
+Tip|Use [tower room] walls as cover.
+Tip|Bait enemies into cramped quarters and collapse on them.
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|Sombra can make the best use of the [tower room] mini health.
+
+Strategy|Point A, Ivy Roof Hold
+Section|Execution
+Tip|Holds on [ivy roof].
+Tip|Support/range dps can position on [carpet roof].
+Tip|Can fall back to Point Hold.
+Tip|Deny pushes through [ivy stairwell] by rotating into [upper ivy room] when you see them head that way.
+Tip|Deny pushes to [point A] with high ground advantage.
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|Sombra can make the best use of the [upper ivy room] mega health.
+Pick|Junkrat
+Tip|Junkrat can deny pushes through [ivy stairwell] and enemies hiding in [tower room].
+
+Segment|Last
+Strategy|Point B, Arch Hold
+Section|Execution
+Tip| Holds at [arch] choke.
+Tip| Supports/Range dps can position at [box] or [point wall].
+Tip|Deny entry via [step alley], [arch] choke, or [cave alley].
+Tip|Relies on rotation calls to not get surrounded.
+Tip|Avoids fights on [point B] to delay respawn ramp up timer.
+Tip|Control of [under bridge] mega is important for staying power.
+Tip|Can fall back to Point Hold.
+Section|Noteworthy Picks
+Pick|Mei
+Tip|Mei has many opportunities to isolate targets with walls as well as stall potential on lost fights.
+Pick|Sombra
+Tip|Sombra can make the best use of the [under bridge] mega.
+
+Strategy|Point B, Point Hold
+Section|Execution
+Tip|Holds at [bridge].
+Tip|Supports/Range dps can position near [box] or [point cave].
+Tip|Tanks can position near [point wall] or [forward box].
+Tip|Avoids fights on [point B] to delay respawn ramp up timer.
+Tip|Control of [under bridge] mega is important for staying power.
+Tip|Punish isolated enemies chasing kills in [point cave] or [box].
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|Sombra can make the best use of the [under bridge] mega.
+
+
+
+
+Map|Horizon
+Tags|High Ground|Verticality|Open
+
+Side|Attack
+ 
+Segment|First
+Strategy|Point A, Countering Server Hold
+Section|Execution of Space Approach
+Tip|Push through [cushion room] to [space].
+Tip|A flanker can crossfire from [cushion room].
+Section|Execution of Laboratory Approach
+Tip|Push through [classroom] to [laboratory] to [point A] as a group for safety.
+Tip|Supports/Range dps can position in [laboratory] or [garden].
+Tip|Tanks can push [point A].
+Tip|Use walls on point as cover from [server room].
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes cross to [classroom] much less dangerous.
+
+
+Strategy|Point A, Countering Point Hold
+Section|Execution of Server Approach
+Tip|Push through [server room] to [point A].
+Tip|Supports/Range dps can position on [point stairwell].
+Tip|A flanker can harass the enemy backline from [laboratory].
+
+Segment|Last
+Strategy|Point B, Countering Green Room Hold
+Section|Execution of Bayside Approach
+Tip|Use cover to cross over to [bayside].
+Tip|Push to [gate] to position to siege via [green room] to [catwalk].
+Tip|A flanker can harass [catwalk] from [gate] or threaten [point B].
+Tip|Control of [catwalk] is very important for Support/Range dps positioning.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing to [bayside] much less dangerous.
+Pick|D.Va
+Tip|D.Va displacement from booster is good for pushing Supports/Range dps off [catwalk].
+
+
+Side|Defense
+
+Segment|First
+Strategy|Point A, Server Hold
+Section|Execution
+Tip|Supports can position in [point stairwell].
+Tip|Range dps can position in [server room] or [rafters].
+Tip|Deny rushes to [point A] by rotating to [point stairwell].
+Tip|Deny pushes to [server room] with crossfire from [rafters] into the enemy backline.
+Tip|Can fall back to Point Hold.
+
+Strategy|Point A, Point Hold
+Section|Execution
+Tip|Holds on [point A].
+Tip|Use cover on [point A] to deny line of sight from [server room] or [rafters].
+Tip|Support/Range dps can position behind [point A] walls near [Last attacker’s spawn].
+Tip|Beware of pushes through [laboratory]/[server room] and rotate accordingly.
+
+Segment|Last
+Strategy|Point B, Green Room Hold
+Section|Execution
+Tip|Holds at [green room].
+Tip|Supports/Range dps can position at [catwalk] choke.
+Tip|Deny passage through [green room] with suppressive fire.
+Tip|Beware of flankers rushing [point B] for free ticks during engagements.
+Tip|Control of [catwalk] is very important for Support/Range dps positioning.
+
+
+
+Map|Hanamura
+Tags|Verticality|Chokes
+
+Side|Attack
+
+Segment|First
+Strategy|Point A, Countering Balcony Hold
+Section|Execution of Pagoda Approach
+Tip|Push through [DD] choke and into [Pagoda] as a group to ensure safety.
+Tip|Push through [bridge] and into [apartment].
+Tip|Support/Range dps can position in upper and lower [apartment].
+Tip|Tanks can drop and threaten [point A]. 
+Tip| Beware of engagement from behind when pushing through [DD] choke.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes pushing through [DD] choke much less dangerous.
+
+Strategy|Point A, Countering Courtyard Hold
+Section|Execution of Terrace Approach
+Tip| Clear off [Balcony] from [DD] choke.
+Tip| Push to [Terrace] as a group to ensure safety.
+Tip| Tanks initiate on [point A].
+Tip| Range dps can position at [terrace] or [balcony] for better angles.
+Tip| A flanker through [perch] to [terrace] to harass the backline can pick off isolated targets.
+
+Segment|Last
+Strategy|Point B, Countering Balcony Hold With Patio Approach
+Section|Execution of Patio Approach
+Tip| Push into [walkway] connector and look to bully isolated targets on [walkway].
+Tip| Split attack [balcony] by pushing directly and attacking from [walkway].
+Tip| This approach is difficult to take without ultimates.
+Tip| Look to send flankers from [porch] or through [walkway] windows to isolate targets on [walkway].
+Section|Noteworthy Picks
+Tip|Compositions with vertical mobility open up more options for attack on [point B].
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+Section|Execution of Porch Approach
+Tip|Push [mid] and drop into [pit] to head to [porch] as a group to ensure safety.
+Tip|Supports/Range dps can position at [porch].
+Tip| Tanks initiate on [point B].
+Tip| Range dps can flank to [walkway] door to threaten enemy dps on [walkway].
+
+Side|Defense
+
+Segment|First
+Strategy|Point A, Balcony Hold
+Section|Execution
+Tip|Support/Range dps can position on [Balcony] or [Point A].
+Tip|Tanks stay grouped on [Balcony].
+Tip| Tanks look to initiate when the enemy passes through [DD] choke.
+Tip| If you fail to initiate or get a pick when they pass through [DD] choke rotate back to [point A].
+
+Strategy|Point A, Courtyard Hold
+Section|Execution
+Tip|Support/Range dps can spread out amongst [Balcony], [Point A], [Bridge], and [Apartment].
+Tip|Tanks can position around [Balcony], [Point A], or behind [Pagoda].
+Tip|Tanks look to initiate in [Courtyard].
+Tip|Use crossfire to ensure there are always dangerous angles for enemy backline.
+Section|Noteworthy Picks
+Pick|Torbjorn
+Tip| Torbjorn can set up an extra crossfire angle from [bridge] without dedicating a player.
+
+Segment|Last
+Strategy|Point B, Balcony Hold
+Section|Execution
+Tip|Supports can position on [Balcony].
+Tip|Tanks/Range dps can position on [Balcony] or [Walkway].
+Tip| Maintain good angles from [Balcony] and [Walkway] to prevent the enemy from easily rushing through to overrun [Balcony].
+Section|Noteworthy Picks
+Pick|Mei
+Tip| Mei can use wall to split the enemy teams at every entrance to the point room.
+
+
+
+
+
+
+Map|Volskaya
+Tags|Open|Horizontal
+
+Side|Attack 
+
+
+
+Segment|First
+Strategy|Point A, Countering Mid Choke Hold
+Section|Execution of Garage Approach
+Tip| A flanker around [coast] side can harass the backline or [point A] to take pressure off the choke.
+Tip| Rush [garage] as a group for safety, beware of initiations from behind.
+Tip| Cross over to [comms] as a group.
+Tip| Threaten [point A] with tanks.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing over to [garage] much less dangerous.
+
+Strategy|Point A, Countering Point Hold
+Section|Execution of Ops/Comms Approach
+Tip| Push the opposite high ground of the enemy team, either [ops] or [comms].
+Tip| Threatening point will initiate the fight.
+Section|Noteworthy Picks
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Segment|Last
+Strategy|Point B, Countering Turbine Hold
+Section|Execution of Platform Approach
+Tip| Push [platform] to [catwalk] as a group to ensure safety.
+Tip| If they do not look to engage you can go through [glass] to [bridge], otherwise use [pit] to [point B].
+
+Strategy|Point B, Countering Point Hold
+Section|Execution of Turbine Approach
+Tip| A flanker from [coast] side can harass the backline.
+Tip| Push [turbine] to provide high ground for Supports/Range dps.
+Tip| Either speed boost jump to [closet] as a team or tanks look to threaten [point B].
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost lets you make the jump from [turbine] to [closet] as a team.
+
+Side|Defense
+
+
+Segment|First
+Strategy|Point A, Mid Choke Hold
+Section|Execution
+Tip| Support/Range dps can position at [bridge] or behind [forklift].
+Tip| Tanks can position at [mid] choke and use [access] for cover.
+Tip| Look to initiate if the enemy rushes [garage].
+
+Strategy|Point A, Point Hold
+Section|Execution
+Tip| Hold at either [ops] or [comms] high ground.
+Tip| Deny enemy movement through open sections of the map.
+Tip| Relies heavily on enemy rotation calls to not get surrounded or flanked. 
+Tip| Often becomes faceoff of high ground rotations.
+Section|Noteworthy Picks
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Segment|Last
+Strategy|Point B, Turbine Hold
+Section|Execution
+Tip| Controlling [Turbine] lets you cover 3 of 4 entrances to the point room.
+Tip| Supports can position in [closet] or [station].
+Tip| Tanks/Range dps can position on [turbine].
+Section|Noteworthy Picks
+Pick|Mei
+Tip| Mei wall can split teams at chokes and corridors as well as give you access to [turbine] from the defense side.
+
+Strategy|Point B, Point Hold
+Section|Execution
+Tip| Support/Range dps can position at the [bridge] or [station] area.
+Tip| Beware of [glass] or [closet] jump team rotations that look to bully your backline off high ground.
+
+

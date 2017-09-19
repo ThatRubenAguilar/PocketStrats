@@ -27,23 +27,16 @@ public class SqlDataWriter implements AutoCloseable {
     public long WriteMapSubject(MapSubjectDTO mapSubject) {
         writeableDb.beginTransaction();
         try {
-            long mapTipId = WriteMapTip(mapSubject);
-            if (mapTipId < 0)
-                return -1;
-
             ContentValues mapSubjectContent = new ContentValues();
             mapSubjectContent.put(MapSubject.MapIdColumn, mapSubject.getMapId());
-            mapSubjectContent.put(MapSubject.MapTipIdColumn, mapTipId);
+            mapSubjectContent.put(MapSubject.MapSubjectPrecedenceColumn, mapSubject.getMapSubjectPrecedence());
+            mapSubjectContent.put(MapSubject.MapSubjectDescriptionColumn, mapSubject.getMapSubjectDescription());
             mapSubjectContent.put(MapSubject.SegmentIdColumn, mapSubject.getSegmentId());
             mapSubjectContent.put(MapSubject.SpawnSideDescriptionColumn, mapSubject.getSpawnSideId().toString());
             mapSubjectContent.put(MapSubject.SpawnSideIdColumn, mapSubject.getSpawnSideId().spawnSideId);
             long mapSubjectId = writeableDb.insert(MapSubject.TableName, null, mapSubjectContent);
             if (mapSubjectId < 0)
                 return -1;
-            // TODO: Do we need backlink from MapTips to MapSubjects?
-//            ContentValues mapTipUpdate = new ContentValues();
-//            mapTipContent.put(MapTip.MapSubjectIdColumn, mapSubjectId);
-//            writeableDb.update(MapTip.TableName, mapTipUpdate, );
             writeableDb.setTransactionSuccessful();
             return mapSubjectId;
         }

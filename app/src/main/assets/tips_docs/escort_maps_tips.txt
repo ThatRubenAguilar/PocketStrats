@@ -1,0 +1,351 @@
+
+
+
+Type|Escort
+Map|Dorado
+Tags|Verticality|High Ground
+
+Side|Attack
+
+Segment|First
+Strategy|Market Section, Countering Arch Hold
+Section|Execution of Lounge Approach
+Tip| Push through [lounge] to [ledge] as a team to ensure safety.
+Tip| Use [pass] to set up crossfire.
+Tip| Tanks initiate in [market].
+Tip| A flanker over [fence] can harass the backline.
+Section|Noteworthy Picks
+Pick|Pharah
+Tip|Pharah can peek over most houses in [market] to harass from different angles.
+
+Strategy|Market Section, Countering Pass Hold
+Section|Execution of Long Ledge Approach
+Tip| Push [coast] to [long ledge] as a group to secure positioning for Support/Range dps.
+Tip| Pressure the enemy backline off of [long ledge] to push.
+Tip| If you win a fight instead of pressuring them back, leave 1 or 2 on the payload and push to [stairs] and suppress passed the [checkpoint] to prevent an easy retake.
+
+Segment|Second
+Strategy|Streets Section, Countering Chapel Hold
+Section|Execution of Coast Approach
+Tip| Push [courtyard] to top [chapel] as a group to ensure safety.
+Tip| Support/Range dps can position at [ivy] or inner [chapel].
+Tip| Tanks initiate at top [chapel].
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions make engaging Chapel Hold easier.
+Section|Execution of Museum Approach
+Tip| Push to [museum] as a group to ensure safety.
+Tip| Support/Ranged dps can position at [museum] door or [park].
+Tip| Payload can be pushed by using [chapel] overhang as cover from high ground.
+Section|Noteworthy Picks
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Strategy|Streets Section, Countering Plaza Hold
+Section|Execution of Top Ivy/Top Bank Approach
+Tip| Push to the opposite high ground of the enemy team with top [ivy] or top [bank] to secure positioning for Supports/Ranged dps.
+Tip| Use top [chapel] to set up crossfire.
+
+Segment|Last
+Strategy|Plant Section, Countering Glass Hold
+Section|Execution of Garage Approach
+Tip| Rush [garage] to [warehouse] to secure positioning for Support/Ranged dps.
+Tip| If they fall back to Ledge Hold, rotate back into [glass] to [connector] to contest [ledge] as a group.
+Tip| If they don’t engage, have a solo tank push the cart using [glass] as a cover.
+
+
+Strategy|Plant Section, Countering Ledge Hold
+Section|Execution of Connector Approach
+Tip| Push [glass] to [connector] as a group for safety.
+Tip| Use [main] to set up a crossfire.
+Tip| Push through [ledge] choke and initiate as soon as possible.
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions make engaging Ledge hold much easier.
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Side|Defense
+
+Segment|First
+Strategy|Market Section, Arch Hold
+Section|Execution
+Tip| Holds at [arch].
+Tip| Support/Range dps can position outside or inside [apartments], [tacos], or [fountain].
+Tip| Tanks can position by [arch] and use buildings as cover.
+Section|Noteworthy Picks
+Pick| Junkrat
+Tip| Junkrat can deny [arch] indirectly from [apartments].
+
+
+Strategy|Market Section, Pass Hold
+Section|Execution
+Tip| Holds at [red] corner.
+Tip| Looks to get 2 lost teamfights out of the market section.
+Tip| Support/Range dps can position at [pass] or [ledge].
+Tip| Tanks can position at [red] or [long ledge].
+Tip| Can fall back to Arch Hold.
+Tip| After a lost fight make sure to regroup before retaking [market].
+Tip| In [market] retake, Support/Range dps can position in [halls] or [stairs].
+Tip| If you win market retake, revert to Arch Hold.
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions helps get to cover on top of [red] and [yellow].
+
+Segment|Second
+Strategy|Streets Section, Chapel Hold
+Section|Execution
+Tip| Holds at [chapel] corner.
+Tip| Support/Range dps can position at top [chapel].
+Tip| Tanks initiate slightly before [chapel] corner to ensure a second fight in [plaza].
+Tip| Be greedy with ultimates as a proper hold at [plaza] loses more time for the enemy team.
+
+Strategy|Streets Section, Plaza Hold
+Section|Execution
+Tip| This hold loses the enemy team the most amount of time on the map. Overuse ultimates to secure a winning hold here.
+Tip| Support/Range dps can position on top [ivy] or top [chapel].
+
+Segment|Last
+Strategy|Plant Section, Glass Hold
+Section|Execution
+Tip| Holds in [glass].
+Tip| Support/Range dps can position in [connector].
+Tip| Tanks can position in [glass].
+Tip| Deny easy space through the [glass] choke and [main] choke.
+Tip| Makes space for the payload to roll backwards.
+Tip| Can fall back to Ledge Hold.
+
+Strategy|Plant Section, Ledge Hold
+Section|Execution
+Tip| Holds at [pass].
+Tip| Supports/Range dps/Tanks can position on [ledge] or top [pass].
+Tip| Beware of [connector] push.
+
+
+
+Map|Gibraltar
+Tags|Verticality
+Side|Attack 
+
+Segment|First
+Strategy|Comms Section, Countering Ledge Hold
+Section|Execution of Bridge Approach
+Tip| Push [comms] to [bridge] as a group to ensure safety.
+Tip| Initiate coming out of [overlook] high ground.
+Section|Execution of Short/Long Stairs Approach
+Tip| Split team push from [long] and [short].
+Tip| One split can initiate when they see an opening.
+Tip| One can sneak push the payload, forcing an initiation or retreat.
+Section|Noteworthy Picks
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Strategy|Comms Section, Countering Server Hold
+Section|Execution of Overlook Approach
+Tip| Look to control [perch].
+Tip| Push to [overlook] to secure positioning for Support/Ranged dps.
+Tip| Beware of [server] door flanks coming to [overlook].
+Tip| Look to control [server] opening.
+Tip| Only need to push payload passed the [main] corner to make [server] easier to break.
+Tip| Pressure the front line into retreating into [server].
+Tip| Keep one on payload during engagement to keep pressure on if they turtle into [server].
+
+Strategy|Comms Section, Countering Catwalk Hold
+Section|Execution of Glass Approach
+Tip| Push [glass] as a group to ensure safety.
+Tip| A ranged dps can set up crossfire at [perch].
+Section|Noteworthy Picks
+Tip| Vertical mobility makes engaging Catwalk Hold easier.
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+
+Segment|Second
+Strategy|Hangar Section, Countering Shuttle Hold
+Section|Execution of Access Approach
+Tip| Push through top right [catwalk] door to [access] as a group to ensure safety.
+Tip| Support/Ranged dps can position at both top [access] doors to set up crossfire on top [shuttle].
+Tip| If you get the payload under [shuttle] nose, you can use [shuttle] as cover from high ground.
+Section|Noteworthy Picks
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Strategy|Hangar Section, Countering Bridge Hold
+Section|Execution of Access Approach
+Tip| Push through top right [catwalk] door to [access] as a group to ensure safety.
+Tip| Support/Ranged dps can position at both top [access] doors or inner [shuttle].
+
+Strategy|Hangar Section, Countering Access Hold
+Section|Execution of Main Approach
+Tip| Push bottom right door past [turbine] as a group to ensure safety.
+Tip| Support/Ranged dps can position at [turbine], [cubby], or top [catwalk] door.
+Tip| Look to control bottom [bridge] area.
+Tip| Only need to push payload passed [bridge] to make [access] hold easier to break.
+Tip| Suppress the [access] doors.
+Tip| Keep one on the payload during engagements to keep pressure on if they turtle into [access].
+Section|Execution of Access Approach
+Tip| Split rush into [access].
+Tip| One split goes through top right [catwalk] door to [access] as a group.
+Tip| Other split goes through bottom right door to [access] as a group.
+Section|Noteworthy Picks
+Tip| Use a composition that excels at close and cramped brawls.
+
+Segment|Last
+Strategy|Launch Section, Countering Main Corner Hold
+Section|Execution of Chamber Approach
+Tip| Push through [chamber] to top [corner] to secure positioning for Supports/Ranged dps.
+Tip| Be prepared for a potential engage when crossing stairs to top [corner].
+Tip| Once top [corner] is secure. Tanks look to initiate.
+Section|Noteworthy Picks
+Tip| Vertical mobility makes engaging on top [corner] easier.
+Pick|Orisa
+Tip|Orisa pull can break up a clustered high ground advantage.
+
+Side|Defense
+
+Segment|First
+Strategy|Comms Section, Ledge Hold
+Section|Execution
+Tip| Holds at [main] first corner.
+Tip| Looks to get 2 lost teamfights out of the comms section.
+Tip| Support/Ranged dps can position at [ledge], [overlook], or [bridge].
+Tip| Tanks position on [ledge] ready to contest when the enemy team pushes around the corner.
+Tip| After a lost teamfight make sure to regroup before retaking [checkpoint].
+Tip| Use [catwalk] doors to enter the [checkpoint] area as the enemy team may hold the lower doors.
+Tip| If you win a checkpoint retake, revert to Catwalk Hold.
+
+Strategy|Comms Section, Server Hold
+Section|Execution
+Tip| Holds in [server].
+Tip| Support/Ranged dps can position in [server] or [closet].
+Tip| Call enemy rotations from [overlook], [pit] or [connector] and counter rotate accordingly.
+Tip| Beware of pushes or flanks from [connector].
+Tip| Deny control of [perch] with suppressive fire or vertical mobility.
+Tip| Once the payload passes the last [main] corner, revert to Catwalk Hold.
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|The team can utilize the mega in [server] to quickly charge Sombra’s ult.
+
+Strategy|Comms Section, Catwalk Hold
+Section|Execution
+Tip| Support/Ranged dps can position at [catwalk] or [glass].
+Tip| Use [catwalk] to create crossfire to deny enemy positioning at [perch].
+Tip| Tanks can position on [catwalk] or [perch] and look for an initiation, you want everyone able to access [catwalk] to counter potential [server] pushes.
+
+Segment|Second
+Strategy|Hangar Section, Shuttle Hold
+Section|Execution
+Tip| Requires a lot of time to get into hold positioning.
+Tip| Holds with everyone on top [shuttle].
+Tip| Deny all 4 doors, focus on upper left.
+
+
+Strategy|Hangar Section, Bridge Hold
+Section|Execution
+Tip| Holds at [bridge].
+Tip| Support/Ranged dps can position at [access] door, [box], or inner/top [shuttle].
+Tip| Tanks can position on [bridge] until initiation.
+Tip| Beware of [access] pushes without the whole team on [bridge], it can easily bully out the [bridge] position.
+
+
+Strategy|Hangar Section, Access Hold
+Section|Execution
+Tip| Holds at [bridge].
+Tip| Variant of Bridge Hold that focuses on controlling [access].
+Tip| Support can position in [access].
+Tip| Ranged dps can rotate to any of the [access] doors or [shuttle] during the fight.
+Tip| Tanks can position on [bridge] ready to drop for initiation.
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|The team can utilize the mega in [access] to quickly charge Sombra’s ult.
+Pick|Symmetra
+Tip|[Access] can become a prime location for a teleporter as it is static and cramped.
+
+Segment|Last
+Strategy|Launch Section, Main Corner Hold
+Section|Execution
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at top [bridge] or top [corner].
+Tip| Always control at least one high ground, either [bridge] or [corner].
+
+
+
+
+
+
+Map|Route66
+Tags|Open|Horizontal
+Side|Attack 
+
+Segment|First
+Strategy|Train Section, Countering Gas Hold
+Section|Execution of Mines Approach
+Tip| Push through top [mines] as a group to ensure safety.
+Tip| Support/Ranged dps can position at [horseshoe] to get angles on [gas].
+Tip| Tanks look to initiate if the enemy team drops off [gas].
+
+Strategy|Train Section, Countering Horseshoe Hold
+Section|Execution of Mines Approach
+Tip| Rush through top [mines] to [horseshoe] as a group and look to initiate.
+
+Segment|Second
+Strategy|Streets Section, Countering Bridge Hold
+Section|Execution of Garage Approach
+Tip| Push [garage] as a group to ensure safety.
+Tip| Push up to high ground behind [garage] and force an initiation.
+Tip| A flanker through [alley] to [pub] to [catwalk] can harass the backline.
+Tip| After winning a teamfight in this section of the map, push up to top [door] to hold the choke.
+
+Segment|Last
+Strategy|Warehouse Section, Countering Main Corner Hold
+Section|Execution of Storage Approach
+Tip| Push through [storage] to top [office] as a group to secure positioning for Support/Ranged dps.
+Tip| Tanks drop and look to initiate.
+
+Strategy|Warehouse Section, Countering Semi Hold
+Section|Execution of Connector Approach
+Tip| Push through bottom [office] as a group to ensure safety.
+Tip| Split push through [dock] and [connector] to control [semi].
+
+Side|Defense
+
+Segment|First
+Strategy|Train Section, Gas Hold
+Section|Execution
+Tip| Holds at [billboard].
+Tip| Support/Ranged dps can position at top [gas].
+Tip| One ranged dps can set up crossfire at [horseshoe].
+Tip| Tanks can contest from top [gas] until they are ready to initiate.
+
+Strategy|Train Section, Horseshoe Hold
+Section|Execution
+Tip| This hold has full information on enemy rotations.
+Tip| Holds in front of bottom [mines].
+Tip| Support/Ranged dps can position at [horseshoe].
+Tip| Tanks can position at [horseshoe] or top [gas].
+Tip| Beware of bottom/top [mines] rushes.
+
+Segment|Second
+Strategy|Streets Section, Bridge Hold
+Section|Execution
+Tip| Holds at [bridge].
+Tip| Support/Ranged dps can position at top [pub], top [garage] or [catwalk].
+Tip| Tanks can position at top [pub] or top [garage].
+Tip| Regroup after a lost fight and use far [door] to get back to [checkpoint] for a retake, top [door] is usually camped.
+Tip| On retake Support/Ranged dps can position in [alley] or under [perch].
+
+Segment|Last
+Strategy|Warehouse Section, Main Corner Hold
+Section|Execution
+Tip| This hold looks to get 2 lost teamfights out of the Warehouse Section.
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at top [office] or [semi].
+Tip| Tanks can position on [box].
+Tip| Can regroup and retake to hold again with Semi Hold.
+
+Strategy|Warehouse Section, Semi Hold
+Section|Execution
+Tip| Holds at [semi].
+Tip| Looks to control [semi].
+Tip| Tanks/Support/Ranged dps can position at top [semi] or [catwalk].
+Section|Noteworthy Picks
+Pick|Sombra
+Tip|Sombra can make use of the mega at [semi] to quickly charge her ult.
+

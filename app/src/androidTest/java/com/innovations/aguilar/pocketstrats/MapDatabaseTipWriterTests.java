@@ -56,4 +56,27 @@ public class MapDatabaseTipWriterTests extends MapDatabaseTestFixture {
         }
 
     }
+    @Test
+    public void Writer_Should_Write_Real_Tips() throws Exception {
+        MapTipsWriter tipsWriter = new MapTipsWriter(writer,accessor);
+
+        AssetManager assets = InstrumentationRegistry.getTargetContext().getAssets();
+
+        try (InputStream scriptTextStream = assets.open("tips_docs/map_type_tips.txt")) {
+            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+        }
+        try (InputStream scriptTextStream = assets.open("tips_docs/assault_maps_tips.txt")) {
+            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+        }
+        try (InputStream scriptTextStream = assets.open("tips_docs/control_maps_tips.txt")) {
+            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+        }
+        try (InputStream scriptTextStream = assets.open("tips_docs/escort_maps_tips.txt")) {
+            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+        }
+        try (InputStream scriptTextStream = assets.open("tips_docs/hybrid_assault_escort_maps_tips.txt")) {
+            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+        }
+
+    }
 }

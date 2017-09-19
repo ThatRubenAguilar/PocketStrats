@@ -48,7 +48,6 @@ public class MapTipsWriter implements AutoCloseable {
                 accessor.GetAllMapSegments()) {
             mapIdAndSegmentNames.put(String.format("%s_%s", segment.getMapId(), segment.getSegmentName()), segment);
         }
-        // TODO: Preface Strategy with segment name, do lookup with mapid + segment name, refactor to parse in subject node (optional)
     }
 
 
@@ -73,8 +72,14 @@ public class MapTipsWriter implements AutoCloseable {
             Integer mapId = null;
             if (mapShortNames.containsKey(subjNode.INode.MapName))
                 mapId = new Integer(mapShortNames.get(subjNode.INode.MapName).getMapId());
-            MapSubject subj = new MapSubject(0, 0, subjNode.Precedence, subjNode.Message,
-                    null, mapId, subjNode.INode.Side, subjNode.INode.Side.toString(), null);
+            Integer segmentId = null;
+            if (mapId != null && subjNode.INode.SegmentName != null) {
+                String segmentNameKey = String.format("%s_%s", mapId.intValue(), subjNode.INode.SegmentName);
+                if (mapIdAndSegmentNames.containsKey(segmentNameKey))
+                    segmentId = mapIdAndSegmentNames.get(segmentNameKey).getSegmentId();
+            }
+            MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
+                    mapId, subjNode.INode.Side, subjNode.INode.Side.toString(), segmentId);
             // Strategy -> MapSubject
             int subjectId = (int)writer.WriteMapSubject(subj);
             if (subjectId < 0) {

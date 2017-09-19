@@ -1,0 +1,444 @@
+
+Type|Hybrid
+Map|Numbani
+Tags|
+Side|Attack 
+
+Segment|First
+Strategy|Point A, Countering Top Hotel Hold
+Section|Execution of Bottom Hotel Approach
+Tip| Usually only works as a surprise tactic, crouch walk!
+Tip| Rush bottom [hotel] into [aetria] to secure positioning for Supports/Ranged dps.
+Tip| Tanks threaten [point A].
+Section|Execution of Main Approach
+Tip| Supports/Ranged dps can position in [vending] or [bus] as a staging area.
+Tip| Look to pressure the enemy off [catwalk] before approaching up [main] for top [hotel].
+Tip| A flanker around [cliff] side can harass the backline.
+Section|Noteworthy Picks
+Tip| Vertical mobility composition have an easier time engaging Top Hotel Hold.
+Pick|Pharah
+Tip|Pharah’s displacement can break up clustered high ground holds from the staging area.
+Pick|Orisa
+Tip|Orisa’s displacement can break up clustered high ground holds from the staging area.
+Section|Execution of Short Approach
+Tip| Push [short] to top [hotel].
+Tip| Tanks initiate at top [hotel].
+Tip| A flanker around [cliff] side or [main] can harass the backline.
+Section|Noteworthy Picks
+Tip| Shield compositions have an easier time engaging Top Hotel Hold through the top [hotel] choke.
+Pick|Pharah
+Tip|Pharah’s vertical mobility makes for a good flank from [cliff] or [main].
+Section|Execution of Catwalk Approach
+Tip| Team can position in [vending] or [bus] as a staging area.
+Tip| Rush [main] to [defense spawn] into [aetria].
+Tip| Reset shields and cooldowns.
+Tip| Push [aetria] toward [staircase] up to [catwalk] to secure positioning for Supports/Ranged dps.
+Tip| Tanks threaten [point A] to initiate.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost is required to rush through [main] to [defense spawn] alive.
+
+Strategy|Point A, Countering Catwalk Hold
+Section|Execution of Top Hotel Approach
+Tip| Push through [short] to top [hotel] as a group to secure positioning for Supports/Ranged dps.
+Tip| Tanks threaten [point A] to initiate.
+Section|Noteworthy Picks
+Tip| Vertical mobility composition have an easier time engaging Catwalk Hold.
+Section|Execution of Staircase Approach
+Tip| Push through [short] to top [hotel] as a group to ensure safety.
+Tip| Push through [staircase] to [catwalk] to secure positioning for Support/Ranged dps.
+
+Segment|Second
+Strategy|Streets Section, Countering Main Corner Hold
+Section|Execution of Alley Approach
+Tip| Use [statue] as cover from [perch].
+Tip| Push [alley] to top [clothes] as a group to secure positioning for Support/Ranged dps.
+Tip| A flanker through [Aetria] or [alley] can harass the enemy backline.
+
+Strategy|Streets Section, Countering Catwalk Hold
+Section|Execution of Clothes Approach
+Tip| Push [alley] to top [clothes] as a group to secure positioning for Support/Ranged dps.
+Tip| Look to control part of [catwalk].
+Section|Execution of Axiom Approach
+Tip| Push [aetria] to [ax] as a group to ensure safety.
+Tip| Utilize crossfire to pressure [catwalk].
+
+Segment|Last
+Strategy|Museum Section, Countering Culture Hold
+Section|Execution
+Tip| One split push from [halls] to [culture].
+Tip| Other split push [main].
+
+Strategy|Museum Section, Countering Main Corner Hold
+Section|Execution
+Tip| Push through [halls] to [perch] to secure positioning for Support/Ranged dps.
+Tip| Support/Ranged dps can position at [stairway], [perch] or [main].
+Tip| A flanker through [pit] can harass the enemy backline.
+
+Side|Defense
+
+
+Segment|First
+Strategy|Point A, Top Hotel Hold
+Section|Execution
+Tip| Holds at top [hotel].
+Tip| Tanks can position at top [hotel].
+Tip| Support/Ranged dps can position at top [hotel] or [staircase].
+Tip| A ranged dps can set up crossfire from [catwalk] .
+Tip| Looks to control the top [hotel] door choke.
+Tip| Beware of bottom [hotel] rushes.
+Section|Noteworthy Picks
+Pick|Torbjorn
+Tip| Torbjorn can set up an extra crossfire angle from [catwalk] or [staircase] without dedicating a player.
+
+Strategy|Point A, Catwalk Hold
+Section|Execution
+Tip| Support/Ranged dps can spread around [catwalk].
+Tip| Look to create crossfire angles.
+Section|Noteworthy Picks
+Pick|Torbjorn
+Tip| Torbjorn can set up an extra crossfire angle from [catwalk] or [staircase] without dedicating a player.
+
+Segment|Second
+Strategy|Streets Section, Main Corner Hold
+Section|Execution
+Tip| Looks to get 2 lost teamfights out of the Streets Section.
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at [bus], [clothes], [ax], or [perch].
+Tip| Tanks can position at [statue] and look to initiate.
+Tip| After a lost teamfight make sure to regroup before retaking [checkpoint].
+Tip| Approach the retake from [catwalk] as it is easier to suppress a [main] approach.
+
+Strategy|Streets Section, Catwalk Hold
+Section|Execution
+Tip| Holds at [checkpoint].
+Tip| Support/Ranged dps can position on [catwalk].
+Tip| Look to set up crossfire from [catwalk].
+Tip| Counter rotate depending on enemy team approach from [clothes] or [ax].
+
+
+
+
+Segment|Last
+Strategy|Museum Section, Culture Hold
+Section|Execution
+Tip| Holds at [main] choke.
+Tip| Looks to control [main] choke and prevent the payload from crossing the first corner.
+Tip| Support/Ranged dps can position at [culture], [pit], or [horseshoe].
+Tip| If the enemy attempts to push [halls] to [culture], engage as [culture] door is the new choke.
+
+Strategy|Museum Section, Main Corner Hold
+Section|Execution
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at front/back [info].
+Tip| Tanks can position under [perch] and look for an initiation. 
+
+
+
+
+Map|Hollywood
+Tags|
+Side|Attack 
+
+Segment|First
+Strategy|Point A, Countering Arch Hold
+Section|Execution of Point Approach
+Tip| Rush [security] to [point A] as a group to possibly catch someone isolated at [corner].
+Tip| Support/Ranged dps can position in [cafe].
+Section|Execution of Hall Approach
+Tip| Rush [security] to [hall] as a group to ensure safety.
+Tip| Push from behind [DD] into [cafe] as a group.
+Tip| Tanks threaten [point A] to initiate.
+
+Strategy|Point A, Countering Point Hold
+Section|Execution
+Tip| Push [long stairs] to [overlook] as a group to secure positioning for Supports/Ranged dps.
+Tip| Tanks threaten [point A] to initiate.
+Tip| Beware of [mid stairs] once the fight is engaged.
+Tip| A flanker through [alley] can harass the backline.
+
+Segment|Second
+Strategy|Streets Section, Countering DD Hold
+Section|Execution of Halls Approach
+Tip| Push through [halls] as a group to ensure safety.
+Tip| Split through both [halls] doors to surround and focus the enemy tanks.
+Tip| [Halls] door by [DD] can use the General Store sign as cover from top [bank].
+Tip| Once enemy tanks are down, the payload can be pushed using the awnings as cover from top [bank].
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions make engaging on top [bank] much easier.
+Pick|Widowmaker
+Tip| Widow can suppress the enemy backline on top [bank].
+Pick|Orisa
+Tip| Orisa can break up a clustered high ground advantage.
+
+
+Strategy|Streets Section, Countering Saloon Hold
+Section|Execution of Elevator Approach
+Tip| Push [halls] to [elevator] onto top [bank] to secure positioning for Supports/Ranged dps.
+Tip| Looks to pressure the enemy team off of top [saloon].
+Tip| Have one person with vertical mobility on the payload to pressure a stalemate.
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions make engaging on top [saloon] much easier.
+
+Segment|Last
+Strategy|Trailer Section, Countering Main Corner Hold
+Section|Execution of Storage Approach
+Tip| Push through [storage] to [perch] as a group to secure positioning for Supports/Ranged dps.
+Tip| Leave one player with mobility to push the payload.
+Tip| If they engage on payload, engage from [perch].
+Tip| Otherwise push to under [perch] and proceed to countering Main Door Hold.
+
+Strategy|Trailer Section, Countering Main Door Hold
+Section|Execution
+Tip| Push through [storage] to [perch] to [balcony] as a group to secure positioning for Supports/Ranged dps.
+Tip| Tanks drop and initiate.
+Tip| A flanker can drop from [perch] to [long] to harass the enemy backline.
+
+Side|Defense
+
+Segment|First
+Strategy|Point A, Arch Hold
+Section|Execution
+Tip| Holds at [arch].
+Tip| Support/Ranged dps can position at [alley] or [long stairs].
+Tip| Tanks can position at [arch].
+Tip| Beware of [security] rushes, Support/Ranged dps can counter rotate to [overlook].
+
+Strategy|Point A, Point Hold
+Section|Execution
+Tip| Holds at [point A].
+Tip| Support/Ranged dps can position at [cafe].
+Tip| Tanks can position at [corner].
+
+Segment|Second
+Strategy|Streets Section, DD Hold
+Section|Execution
+Tip| Looks to get 2 lost teamfights out of the Streets Section.
+Tip| Deny entry through [DD] choke, forcing the enemy team to use [halls].
+Tip| Holds at [DD].
+Tip| Support/Ranged dps can position at top [bank] or [haystack].
+Tip| Tanks can position at [alley].
+
+Strategy|Streets Section, Saloon Hold
+Section|Execution
+Tip| Holds in front of [saloon].
+Tip| Support/Ranged dps can position at top [saloon], [jail], or [garbage].
+Tip| Tanks can position at top [saloon] or [main] and look for an initiation. 
+Section|Noteworthy Picks
+Tip| Vertical mobility compositions are important to control high grounds in this section.
+
+Segment|Last
+Strategy|Trailer Section, Main Corner Hold
+Section|Execution
+Tip| Support/Ranged dps can position at [perch], [short], or [long].
+Tip| Tanks can position at [main].
+Tip| Ranged dps can rotate from [perch] to [overlook] to flank the backline once engaged.
+
+
+Strategy|Trailer Section, Main Door Hold
+Section|Execution
+Tip| Support/Ranged dps can position at [stage], [box], [RV] or [balcony].
+Tip| Tanks can position at [main] door or [short] door.
+Tip| Beware of [balcony] push, prefer cover from that shields from [balcony] and [main].
+
+
+
+Map|King’s Row
+Tags|
+Side|Attack 
+
+Segment|First
+Strategy|Point A, Countering Main Choke Hold
+Section|Execution of Alley Approach
+Tip| Push through [movie] into [alley] as a group to ensure safety.
+Tip| Support/Ranged dps can position at top [alley] or [statue].
+Tip| Tanks can initiate.
+
+Strategy|Point A, Countering Arch Hold
+Section|Execution of Statue Approach
+Tip| Push around [statue] towards [apartments].
+Tip| Utilize crossfire from upper [apartments] and [hotel] to pressure the enemy team off [point A].
+Tip| A flanker through [apartments] to behind [arch] can harass the enemy backline.
+Section|Execution of Hotel Approach
+Tip| Rush through [hotel] to [point A].
+Tip| If the enemy backline is in [arch], they may be awkwardly split off from their team.
+
+Segment|Second
+Strategy|Streets Section, Countering Arch Hold
+Section|Execution of Apartments Approach
+Tip| Push through [apartments] to [connector] as a group to ensure safety.
+Tip| Push [alley] to secure positioning for Support/Ranged dps.
+Tip| A flanker through [halls] to [staircase] can harass the enemy backline.
+
+Strategy|Streets Section, Countering Bookstore Hold
+Section|Execution of Halls Approach
+Tip| Push [halls] to [brew] to secure positioning for Support/Ranged dps.
+Tip| Tanks drop and initiate.
+
+Strategy|Streets Section, Countering Checkpoint Hold
+Section|Execution of Brew Approach
+Tip| Push [brew] to [catwalk] to secure positioning for Support/Ranged dps.
+Tip| Pressure the enemy off [catwalk] before initiating.
+
+Segment|Last
+Strategy|Furnace Section, Countering Storage Hold
+Section|Execution of Catwalk Approach
+Tip| Push through [brew] to [catwalk] as a group to secure positioning for Support/Ranged dps.
+Tip| Tanks drop and initiate.
+
+Strategy|Furnace Section, Countering Main Corner Hold
+Section|Execution of Main Approach.
+Tip| Utilize crossfire from [main] and [horseshoe].
+Tip| Look to control upper [horseshoe].
+Section|Noteworthy Picks
+Tip| Some vertical mobility will make controlling upper [horseshoe] easier.
+
+Side|Defense
+
+Segment|First
+Strategy|Point A, Main Choke Hold
+Section|Execution
+Tip| Holds at [main] choke.
+Tip| Support/Ranged dps can position at [statue], [hotel], or [point A].
+Tip| Tanks can position between [statue] and [hotel].
+
+Strategy|Point A, Arch Hold
+Section|Execution
+Tip| Holds at [point A].
+Tip| Supports/Ranged dps can position at [arch], [halls] or [apartment].
+Tip| Tanks can position at [hotel] to initiate on [point A].
+
+Segment|Second
+Strategy|Streets Section, Arch Hold
+Section|Execution
+Tip| Holds at [arch].
+Tip| Support/Ranged dps can position at [bookstore], [pub], or [alley].
+Tip| Tanks can position behind the wall at [arch].
+Tip| Can retreat to Bookstore Hold if too pressured.
+
+Strategy|Streets Section, Bookstore Hold
+Section|Execution
+Tip| Holds at [bookstore] corner.
+Tip| Support/Ranged dps can position at top [pub], [main], or [brew] window.
+Tip| Tanks can position at [bookstore] corner.
+Section|Noteworthy Picks
+Pick|Sombra
+Tip| Team can make good use of the mega in [pub] to quickly charge Sombra’s ultimate.
+
+Strategy|Streets Section, Checkpoint Hold
+Section|Execution
+Tip| Holds at [checkpoint].
+Tip| Support/Ranged dps can position at [storage], [connector], or [catwalk].
+Tip| Tanks can position at [catwalk] until dropping to initiate.
+
+Segment|Last
+Strategy|Furnace Section, Storage Hold
+Section|Execution
+Tip| Looks to deny entry to the choke formed by the streets [checkpoint].
+Tip| Holds at streets [checkpoint].
+Tip| Support/Ranged dps can position at [catwalk], [storage], or [main] corner.
+Tip| Tanks can position at [connector] or [storage].
+
+Strategy|Furnace Section, Main Corner Hold
+Section|Execution
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at [access], [horseshoe], or [perch].
+Tip| Tanks can position in [main] or [access].
+Section|Noteworthy Picks
+Tip| Some vertical mobility helps defend upper [horseshoe] from the enemy team.
+
+
+
+
+Map|Eichenwalde
+Tags|
+Side|Attack 
+
+Segment|First
+Strategy|Point A, Countering Bridge Choke Hold
+Section|Execution of Main Approach
+Tip| Look to set up crossfire from [main] and [music].
+Tip| Push in through [music] when enough pressure has been created from the crossfire.
+Section|Noteworthy Picks
+Tip| High mobility compositions make engaging on Bridge Choke Hold much easier.
+Pick|Pharah
+Tip|Pharah has a lot of vertical cover at the [point A] section, can displace enemies at choke, and has the option to flank [cliff] to get behind the enemy team.
+
+Strategy|Point A, Countering Point Hold
+Section|Execution of Main Approach
+Tip| Control top [ruins] to pressure top [cafe].
+Tip| Look to set up crossfire from top [ruins], [main], and [alley] onto [point A].
+
+Segment|Second
+Strategy|Streets Section, Countering Gate Hold
+Section|Execution of Halls Approach
+Tip| Rush through [cafe] to [halls] to [passage] as a group to ensure safety.
+Tip| Look to flush the enemy out of [roof] and [room].
+Tip| A mobile flanker can push payload until the engagement starts.
+
+Strategy|Streets Section, Countering Catwalk Hold
+Section|Execution of Roof Approach
+Tip| Push through [stairs] to [room].
+Tip| One split goes to [roof] by [catwalk] stairs.
+Tip| Other split goes to [roof] by [rubble] ramp.
+Tip| A mobile flanker can push payload until the engagement starts.
+
+Segment|Last
+Strategy|Throne Section, Countering Gate Hold
+Section|Execution
+Tip| Push through [far door] onto [ramp].
+Tip| Support/Ranged dps can position at [gate], [pillar] or [ramp].
+Tip| Tanks should be ready to engage immediately through the [far door].
+
+Strategy|Throne Section, Countering Main Corner Hold
+Section|Execution
+Tip| Push through [stairs] to [halls].
+Tip| Beware of flanks at each [halls] door.
+Tip| Look to clear off [overlook] to secure positioning for Support/Ranged dps.
+Tip| Tanks drop and initiate.
+
+Side|Defense
+
+
+Segment|First
+Strategy|Point A, Bridge Choke Hold
+Section|Execution
+Tip| Holds at [bridge] choke.
+Tip| Support/Ranged dps can position at [tower] or [stairs].
+Tip| Tanks can position at [main] for initiation.
+Tip| Call enemy counts at choke to beware of [cliff] flanks from behind.
+
+Strategy|Point A, Point Hold
+Section|Execution
+Tip| Holds at [point A].
+Tip| Support/Ranged dps can position at top [cafe] or [point A].
+Tip| Tanks can position at [tower], following the enemy team to the side they approach from.
+Tip| Beware of an enemy dps at top [ruins].
+
+Segment|Second
+Strategy|Streets Section, Gate Hold
+Section|Execution
+Tip| Holds at [gate] choke.
+Tip| Support/Ranged dps can position at [roof] or [room].
+Tip| Tanks can position at [room], looking to initiate.
+
+Strategy|Streets Section, Catwalk Hold
+Section|Execution
+Tip| Holds at [catwalk] choke.
+Tip| Support/Ranged dps can position at [catwalk] or [passage].
+Tip| Tanks can position at [catwalk] or [roof] until the enemy approach is determined.
+Tip| Beware of enemy rushes through [room] to [catwalk].
+
+Segment|Last
+Strategy|Throne Section, Gate Hold
+Section|Execution
+Tip| Holds at [gate] choke.
+Tip| Support/Ranged dps can position at [stairs] or [kitchen].
+Tip| Tanks can position at [pillar] or [stairs].
+
+Strategy|Throne Section, Main Corner Hold
+Section|Execution
+Tip| Holds at [main] corner.
+Tip| Support/Ranged dps can position at back [halls], [overlook], or by [defense spawn].
+Tip| Tanks can position at [rubble], looking for an initiation.
+

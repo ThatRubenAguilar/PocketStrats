@@ -2,25 +2,26 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
-import com.google.common.base.Objects;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
-public class MapSubject extends MapTip implements MapSubjectDTO {
+public class MapSubject implements MapSubjectDTO {
     public static DTOFromCursorFactory<MapSubjectDTO> Factory =
             new DTOFromCursorFactory<MapSubjectDTO>() {
                 @Override
                 public MapSubjectDTO Create(Cursor c) { return new MapSubject(c); }
             };
 
+    private final int mapSubjectPrecedence;
+    private final String mapSubjectDescription;
     private final Integer mapId;
     private final SpawnSide spawnSide;
     private final String spawnSideDescription;
     private final Integer segmentId;
 
-    public MapSubject(int mapTipId, int mapSubjectId, int orderPrecedence,
-                      String mapTipDescription, Integer parentMapTipId,
+    public MapSubject(int mapSubjectPrecedence, String mapSubjectDescription,
             Integer mapId, SpawnSide spawnSide, String spawnSideDescription,Integer segmentId) {
-        super(mapTipId, mapSubjectId, orderPrecedence, mapTipDescription, parentMapTipId);
+        this.mapSubjectPrecedence = mapSubjectPrecedence;
+        this.mapSubjectDescription = mapSubjectDescription;
         this.mapId = mapId;
         this.spawnSide = spawnSide;
         this.spawnSideDescription = spawnSideDescription;
@@ -28,8 +29,9 @@ public class MapSubject extends MapTip implements MapSubjectDTO {
     }
 
     public MapSubject(Cursor c) {
-        super(c);
         this.spawnSideDescription= c.getString(c.getColumnIndex(SpawnSideDescriptionColumn));
+        this.mapSubjectDescription= c.getString(c.getColumnIndex(MapSubjectDescriptionColumn));
+        this.mapSubjectPrecedence= c.getInt(c.getColumnIndex(MapSubjectPrecedenceColumn));
         int spawnSideIdRaw = c.getInt(c.getColumnIndex(SpawnSideIdColumn));
         this.spawnSide = SpawnSide.FromInt(spawnSideIdRaw);
         if (!c.isNull(c.getColumnIndex(MapIdColumn)))
@@ -42,6 +44,10 @@ public class MapSubject extends MapTip implements MapSubjectDTO {
             this.segmentId = null;
     }
 
+    @Override
+    public int getMapSubjectPrecedence() {
+        return mapSubjectPrecedence;
+    }
     @Override
     public Integer getMapId() {
         return mapId;
@@ -58,11 +64,16 @@ public class MapSubject extends MapTip implements MapSubjectDTO {
     public String getSpawnSideDescription() {
         return spawnSideDescription;
     }
+    @Override
+    public String getMapSubjectDescription() {
+        return mapSubjectDescription;
+    }
 
 
     public static final String MapSubjectIdColumn = "MapSubjectId";
     public static final String MapIdColumn = "MapId";
-    public static final String MapTipIdColumn = "MapTipId";
+    public static final String MapSubjectPrecedenceColumn = "MapSubjectPrecedence";
+    public static final String MapSubjectDescriptionColumn = "MapSubjectDescription";
     public static final String SpawnSideIdColumn = "SpawnSideId";
     public static final String SpawnSideDescriptionColumn = "SpawnSideDescription";
     public static final String SegmentIdColumn = "SegmentId";
@@ -74,18 +85,20 @@ public class MapSubject extends MapTip implements MapSubjectDTO {
             String.format("%s.%s", TableName, MapIdColumn),
             String.format("%s.%s", TableName, SpawnSideIdColumn),
             String.format("%s.%s", TableName, SpawnSideDescriptionColumn),
-            String.format("%s.%s", TableName, MapTipIdColumn),
+            String.format("%s.%s", TableName, MapSubjectPrecedenceColumn),
+            String.format("%s.%s", TableName, MapSubjectDescriptionColumn),
             String.format("%s.%s", TableName, SegmentIdColumn)
     };
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapSubject{");
-        sb.append("mapId=").append(mapId);
+        sb.append("mapSubjectPrecedence=").append(mapSubjectPrecedence);
+        sb.append(", mapSubjectDescription='").append(mapSubjectDescription).append('\'');
+        sb.append(", mapId=").append(mapId);
         sb.append(", spawnSide=").append(spawnSide);
         sb.append(", spawnSideDescription='").append(spawnSideDescription).append('\'');
         sb.append(", segmentId=").append(segmentId);
-        sb.append(", MapTip=").append(super.toString());
         sb.append('}');
         return sb.toString();
     }

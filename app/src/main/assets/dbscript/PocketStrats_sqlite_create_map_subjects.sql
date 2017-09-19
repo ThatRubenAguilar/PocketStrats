@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.1.1 on Mon Sep 18 15:02:29 2017
+-- File generated with SQLiteStudio v3.1.1 on Tue Sep 19 10:45:21 2017
 --
 -- Text encoding used: System
 --
@@ -10,12 +10,13 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS MapSubjects;
 
 CREATE TABLE MapSubjects (
-    MapSubjectId         INTEGER PRIMARY KEY AUTOINCREMENT,
-    MapId                INTEGER REFERENCES Maps (MapId),
-    SpawnSideId          INTEGER,
-    SpawnSideDescription VARCHAR,
-    MapTipId             INTEGER REFERENCES MapTips (MapTipId),
-    SegmentId            INTEGER REFERENCES MapSegments (SegmentId) 
+    MapSubjectId          INTEGER PRIMARY KEY AUTOINCREMENT,
+    MapId                 INTEGER REFERENCES Maps (MapId),
+    SpawnSideId           INTEGER,
+    SpawnSideDescription  VARCHAR,
+    SegmentId             INTEGER REFERENCES MapSegments (SegmentId),
+    MapSubjectPrecedence  INTEGER DEFAULT (1),
+    MapSubjectDescription TEXT
 );
 
 

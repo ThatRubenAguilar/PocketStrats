@@ -35,7 +35,6 @@ public class SqlDataAccessor implements AutoCloseable {
         this.readableDb = readableDb;
     }
 
-    // TODO: Add MapTypeTips, MapTips, MapSegmentTips, MapLocationTips to database and accessors
 
     <T> List<T> MakeListFromCursor(Cursor c, DTOFromCursorFactory<T> objectFactory) {
         List<T> list = new ArrayList<>();

@@ -11,17 +11,20 @@ public class InfoNode {
     public List<MapType> MapTypes;
     public SpawnSide Side;
     public String MapName;
+    public String SegmentName;
 
     public InfoNode() {
         MapTypes = Lists.newArrayList();
         Side = SpawnSide.Attack;
         MapName = null;
+        SegmentName = null;
     }
 
-    public InfoNode(List<MapType> mapTypes, SpawnSide side, String mapName) {
+    public InfoNode(List<MapType> mapTypes, SpawnSide side, String mapName, String segmentName) {
         MapTypes = Lists.newArrayList(mapTypes);
         Side = side;
         MapName = mapName;
+        SegmentName = segmentName;
     }
 
     @Override
@@ -31,12 +34,13 @@ public class InfoNode {
         InfoNode infoNode = (InfoNode) o;
         return Objects.equals(MapTypes, infoNode.MapTypes) &&
                 Side == infoNode.Side &&
-                Objects.equals(MapName, infoNode.MapName);
+                Objects.equals(MapName, infoNode.MapName) &&
+                Objects.equals(SegmentName, infoNode.SegmentName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(MapTypes, Side, MapName);
+        return Objects.hash(MapTypes, Side, MapName, SegmentName);
     }
 
     @Override
@@ -45,11 +49,12 @@ public class InfoNode {
         sb.append("MapTypes=").append(MapTypes);
         sb.append(", Side=").append(Side);
         sb.append(", MapName='").append(MapName).append('\'');
+        sb.append(", SegmentName='").append(SegmentName).append('\'');
         sb.append('}');
         return sb.toString();
     }
 
     public InfoNode Copy() {
-        return new InfoNode(MapTypes, Side, MapName);
+        return new InfoNode(MapTypes, Side, MapName, SegmentName);
     }
 }

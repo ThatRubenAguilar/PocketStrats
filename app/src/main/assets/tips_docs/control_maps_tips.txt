@@ -1,0 +1,248 @@
+
+Type|KoTH
+Map|Illios
+Tags|Environmental Kills|Brawl|Horizontal
+
+Side|Attack
+
+Segment|Ruins
+Strategy|Ruins, Countering Forward Hold
+Section|Execution of Main Approach
+Tip| Utilize mega health in [theatre] and [mega room] to sustain the push.
+Tip| Use crossfire from [theatre], [mega room], and [nest] to pressure past [theatre] choke.
+Tip| A flanker from [generator] can harass the enemy backline.
+
+Segment|Well
+Strategy|Well, Countering Point Hold
+Section|Execution of Gazebo/Lighthouse Approach
+Tip| Utilize crossfire to pressure the backline
+Tip| Look to control either [gazebo] or [lighthouse] for proper cover.
+
+Segment|Lighthouse
+Strategy|Lighthouse, Countering Forward Hold
+Section|Execution of Balcony Approach
+Tip| Push through [stairs] to [balcony] for positioning for your Support/Range dps.
+Tip| Look to engage in [courtyard].
+
+Side|Defense
+
+Segment|Ruins
+Strategy|Ruins, Forward Hold
+Section|Execution
+Tip| Forward hold [theatre] choke.
+Tip| Supports/Range dps can position at [granite], [generator], or [statue].
+
+Segment|Well
+Strategy|Well, Point Hold
+Section|Execution
+Tip| Control [gazebo] or [light house] for you Supports/Range dps.
+Tip| Rotate to [gazebo] or [light house] to match enemy rotations.
+
+Segment|Lighthouse
+Strategy|Lighthouse, Forward Hold
+Section|Execution
+Tip| Control [gazebo] and [bell] to hold [mid] choke.
+Tip| Support/Range dps can position at [balcony] to spot and deny high ground pushes.
+
+
+
+Map|Nepal
+Tags|Chokes|High ground|Horizontal
+
+Side|Attack
+
+
+Segment|Sanctum
+Strategy|Sanctum, Countering Forward Hold
+Section|Execution of Main Approach
+Tip| Use team rotations on the 3 entrances of [mini hall], [main], or [cliff] to get past the [main] choke.
+Tip| Use the 3 entrances of [mini hall], [main], or [cliff] to set up crossfire to get past [main] choke.
+Tip| Look to control [ledge].
+
+Segment|Shrine
+Strategy|Shrine, Countering Point Hold
+Section|Execution of Top Corner Approach
+Tip| Push [top corner] to provide positioning for Supports/Range dps.
+Tip| Tanks can initiate on [point].
+Tip| A flanker [cliff] side can harass backline.
+
+Segment|Village
+Strategy|Village, Countering Upper Point Hold
+Section|Execution of Top/Mega Cubby Approach
+Tip| Push [top] or [mega cubby] to contest upper [point].
+Tip| Support/Ranged dps can position at [top] door or [mega cubby] walls.
+Tip| Control upper [point] to flush the enemy backline from the position.
+Section|Noteworthy Picks
+Pick|Tracer
+Tip|Tracer can threaten [point] by blinking over to [stables]. This can force the enemy to give up upper [point].
+Section|Execution of Main Approach
+Tip| Rush [main] to [stables] to create positioning for Support/Range dps.
+Tip| Tanks threaten [point].
+
+Defense:
+
+Segment|Sanctum
+Strategy|Sanctum, Forward Hold
+Section|Execution
+Tip| Hold [main] choke to force enemy ultimates for pushes.
+Tip| Hold on [ledge] side so you can fall back to [ledge] if needed.
+
+Segment|Shrine
+Strategy|Shrine, Point Hold
+Section|Execution
+Tip| Hold at [point], it provides a lot of cover and high ground to most of the map.
+
+Segment|Village
+Strategy|Village, Upper Point Hold
+Section|Execution
+Tip| Hold at upper [point], it provides vision and cover to most of the map.
+Tip| Beware of backdoor capturing on this point.
+
+
+
+Map|Lijiang
+Tags|Chokes|Open|Environmental Kills
+Side|Attack
+
+Segment|Night Market
+Strategy|Lijiang, Countering Night Market Hold
+Section|Execution of Main Approach
+Tip| Utilize crossfire from [top ledge], [side ledge], or [side food] to push the [main] choke.
+Section|Execution of Mega Room Approach
+Tip| Rush [side food] to [mega room] as a team to gain free access to [courtyard].
+Tip| Support/Ranged dps can position at [mega room] or [side food].
+Tip| Look to force an engage before the enemy team falls back to [point]. They will usually split retreat via [main] and [cliff] for an awkward engage.
+
+Segment|Garden
+Strategy|Lijiang, Countering Garden Forward Hold
+Section|Execution of Loungewalk Approach
+Tip| Push upper [loungewalk] to [white room] as a team to force the enemy to rotate back to [point].
+
+Strategy|Lijiang, Countering Garden Bridge Hold
+Section|Execution of Bridge Approach
+Tip| Beware of displacements on a [bridge] approach.
+Tip| Control [house] to give positioning to your Supports/Range dps.
+Tip| Speed boost can let the entire team make the jump over the gap to [point]. It can be used as a surprise tactic.
+Section|Noteworthy Picks
+Pick|Lucio
+Tip|Lucio speed boost makes crossing [bridge] to [house] much less dangerous.
+Section|Execution of White Room Approach
+Tip| Prefers to use a flanker from [bridge] side to harass backline.
+Tip| There is no displacement danger on this approach, tanks need to initiate.
+
+Segment|Control Center
+Strategy|Lijiang, Countering Control Center Forward Hold
+Section|Execution of Lounge Approach
+Tip| Push through [lounge] to [dark room] as a team to ensure safety and take the fight closer to [point].
+Tip| Use the [lounge] entrance to set up crossfire.
+
+Strategy|Lijiang, Countering Control Center Server Hold
+Section|Execution of Cliff Approach
+Tip| Push [cliff] to [ledge] as a team to secure positioning for your Support/Range dps.
+Tip| Tanks threaten [point].
+Tip| A flanker through [dark room] after initiation can harass the backline in [server].
+
+Side|Defense
+
+Segment|Night Market
+Strategy|Lijiang, Night Market Hold
+Section|Execution
+Tip| Hold at [sign] choke with Support/Range dps positioned at [main].
+Tip| Call enemy numbers so you know when to check other entrances.
+
+Segment|Garden
+Strategy|Lijiang, Garden Forward Hold
+Section|Execution
+Tip| Holds at [arch].
+Tip| Support/Range dps can position at [bridge] wall.
+Tip| Tanks can position at [arch] wall.
+Tip| Rotate back to [point] if the enemy team takes the [loungewalk] path.
+
+Strategy|Lijiang, Garden Bridge Hold
+Section|Execution
+Tip| Holds at [bridge].
+Tip| Support/Range dps can position at [house], [pole], or [bridge] wall.
+Tip| Tanks can position at [bridge] wall.
+Tip| Rotate to [white room] bridge to match the enemy team.
+
+Segment|Control Center
+Strategy|Lijiang, Control Center Forward Hold
+Section|Execution
+Tip| Support/Range dps can position at [main] or [mini hall].
+Tip| Beware of [lounge] entrance rotation.
+
+
+Strategy|Lijiang, Control Center Server Hold
+Section|Execution
+Tip| Abuse [mini hall] sight lines while waiting for enemy approach.
+Tip| Support/Range dps can position at [server] or our [mini hall]. Beware of [dark room] flanks.
+Tip| Deny the enemy control of [server] area.
+
+
+
+Map|Oasis
+Tags|Open|Verticality
+Side|Attack
+
+Segment|University
+Strategy|Oasis, Countering University Hold
+Section|Execution of Main Approach
+Tip| Push either [lecture] or [top] side opposite of where the enemy is focused to secure positioning for Supports/Range dps.
+Tip| Alternatively, rushing [hex] and engaging on [point] can work as a surprise tactic.
+
+Segment|City Center
+Strategy|Oasis, Countering City Center Hold
+Section|Execution of Jump Pad Approach
+Tip| Push [jump pad] as a team to ensure safety.
+Tip| Clear off [top ledge] to secure positioning for Supports/Range dps.
+Tip| Engage on [point].
+
+Section|Execution of Traffic Approach
+Tip| Push [traffic] to [point] as a team to ensure safety.
+Tip| Use [gazebo] as cover from [top ledge] and focus targets on the [point].
+
+Segment|Garden
+Strategy|Oasis, Countering Garden Hold
+Section|Execution of Main Approach
+Tip| Push [mega room] as a team to secure positioning for Support/Range dps.
+Tip| Use the double entrances at [arches] to set up crossfire.
+Tip| Use [halls] to set up crossfire.
+Tip| Tanks initiate on [point].
+Section|Execution of Halls Approach
+Tip| Push to [stairs] as a team to ensure safety.
+Tip| Push to [top point] to secure positioning for Support/Range dps.
+Tip| Tanks initiate on [point].
+Tip| Use [arches] to set up crossfire.
+Tip| A flanker from [coast] can collapse on anyone in [halls]
+Section|Execution of Coast Approach
+Tip| This usually only works as a surprise tactic, everyone crouch walk after a team wipe.
+Tip| Support/Ranged dps can position in [coast] doors on both sides.
+Tip| Tanks rush onto [point] and disrupt backline on [top point] if possible.
+Tip| A flanker from [halls] can harass the backline on [top point] or collapse onto [point].
+Section|Noteworthy Picks
+Pick|Pharah
+Tip|Pharah has a lot of good vertical cover such as [coast] or [main] on this map to abuse. She can also displace the backline off of [top point].
+
+
+Side|Defense
+
+Segment|University
+Strategy|Oasis, University Hold
+Section|Execution
+Tip| Control [lecture] or [top] for Support/Range dps positioning.
+Tip| Tanks can position at right or left [main] choke to match Support positioning.
+
+Segment|City Center
+Strategy|Oasis, City Center Hold
+Section|Execution
+Tip| Support/Range dps can position on [top ledge].
+
+Segment|Garden
+Strategy|Oasis, Garden Hold
+Section|Execution
+Tip| The three entrances of [main], [coast], and [halls] to [point] is a choke. Call which one the enemy is coming from and rotate accordingly.
+Tip| Support/Range dps can position on [top point] to easily rotate to all three entrances.
+Section|Noteworthy Picks
+Pick|Pharah
+Tip|Pharah has a lot of good vertical cover such as [coast] or [main] on this map to abuse.
+
