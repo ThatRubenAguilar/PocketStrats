@@ -10,12 +10,12 @@ Section|When you die, relay important information to your team
 Section|After each teamfight, review and plan for next fight.
  Tip|Enemy ults used "They used Grav, Rez, and Barrage."
  Tip|Enemy ults may still be up "Tracer did a lot that fight, she may have bomb up again."
- Tip|Friendly ults to use next fight "We have nano, blade, and grav. Let’s try to just use nano and blade."
+ Tip|Friendly ults to use next fight "We have nano, blade, and grav. Let's try to just use nano and blade."
 Section|When focus firing, 
- Tip|Call out initiation so team commits “Going on this Zen.”
+ Tip|Call out initiation so team commits "Going on this Zen."
  Tip|Focus people who have important cooldowns down "Tracer no recall."
  Tip|Focus people with important ults up "focus Zen, he has ult."
- Tip|Call out low health targets “Ana low in the back.”
+ Tip|Call out low health targets "Ana low in the back."
 Section|Use grouping to force isolated targets off of strong positions. This can force awkward engages for the enemy team that minimize their positional advantage.
 Section|When safe and missing health, let supports heal you for ult charge instead of using health packs.
 Section|Good hold positioning has several aspects:
@@ -25,7 +25,7 @@ Section|Good hold positioning has several aspects:
  Tip|Limited cover for the enemy team.
 Section|Composition strategies:
  Tip|Look to create synergies with teammates with your picks.
- Tip|Look to counter an enemy’s strategy or player with your picks.
+ Tip|Look to counter an enemy's strategy or player with your picks.
  Tip|6 Grouped, bullies positioning for supports/range dps as a group, then looks to initiate.
  Tip|3/3 Split, one support with each group, looks to find 2 good approaches and pincer the enemy.
  Tip|1/5 or 2/4 Flanks, 1 or 2 flankers look for positioning to go in on the backline when the enemy team initiates.
@@ -63,7 +63,7 @@ Section|Team focus fire is another way to capture the last point.
 
 Category|Control
 
-Side|Defending Point
+Side|Defend
 Subject|Mode Tips
 
 Section|After a clean fight, forward hold chokes near the Attacker's spawn.
@@ -71,7 +71,7 @@ Section|When holding Control chokes, call enemy numbers so you can know how much
 Section|Do not give up positional advantages to contest the point until the Attacker's actually contest the point.
 Section|Stagger kills after a won fight. One good stagger can lower the total number of fights during a 0 to 99 possession from 4 to 3.
 
-Side|Attacking Point
+Side|Attack
 Subject|Mode Tips
 
 Section|If a fight is called lost, avoid prolonging the fight and reset quickly. You only get 3-4 fights total during a 0 to 99 round.

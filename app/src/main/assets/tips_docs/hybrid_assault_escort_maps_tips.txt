@@ -17,9 +17,9 @@ Tip| A flanker around [cliff] side can harass the backline.
 Section|Noteworthy Picks
 Tip| Vertical mobility composition have an easier time engaging Top Hotel Hold.
 Pick|Pharah
-Tip|Pharah’s displacement can break up clustered high ground holds from the staging area.
+Tip|Pharah's displacement can break up clustered high ground holds from the staging area.
 Pick|Orisa
-Tip|Orisa’s displacement can break up clustered high ground holds from the staging area.
+Tip|Orisa's displacement can break up clustered high ground holds from the staging area.
 Section|Execution of Short Approach
 Tip| Push [short] to top [hotel].
 Tip| Tanks initiate at top [hotel].
@@ -27,7 +27,7 @@ Tip| A flanker around [cliff] side or [main] can harass the backline.
 Section|Noteworthy Picks
 Tip| Shield compositions have an easier time engaging Top Hotel Hold through the top [hotel] choke.
 Pick|Pharah
-Tip|Pharah’s vertical mobility makes for a good flank from [cliff] or [main].
+Tip|Pharah's vertical mobility makes for a good flank from [cliff] or [main].
 Section|Execution of Catwalk Approach
 Tip| Team can position in [vending] or [bus] as a staging area.
 Tip| Rush [main] to [defense spawn] into [aetria].
@@ -243,7 +243,7 @@ Tip| Beware of [balcony] push, prefer cover from that shields from [balcony] and
 
 
 
-Map|King’s Row
+Map|King's Row
 Tags|
 Side|Attack 
 
@@ -323,7 +323,7 @@ Tip| Support/Ranged dps can position at top [pub], [main], or [brew] window.
 Tip| Tanks can position at [bookstore] corner.
 Section|Noteworthy Picks
 Pick|Sombra
-Tip| Team can make good use of the mega in [pub] to quickly charge Sombra’s ultimate.
+Tip| Team can make good use of the mega in [pub] to quickly charge Sombra's ultimate.
 
 Strategy|Streets Section, Checkpoint Hold
 Section|Execution

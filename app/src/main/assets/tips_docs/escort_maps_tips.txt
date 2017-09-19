@@ -50,7 +50,7 @@ Strategy|Plant Section, Countering Glass Hold
 Section|Execution of Garage Approach
 Tip| Rush [garage] to [warehouse] to secure positioning for Support/Ranged dps.
 Tip| If they fall back to Ledge Hold, rotate back into [glass] to [connector] to contest [ledge] as a group.
-Tip| If they don’t engage, have a solo tank push the cart using [glass] as a cover.
+Tip| If they don't engage, have a solo tank push the cart using [glass] as a cover.
 
 
 Strategy|Plant Section, Countering Ledge Hold
@@ -221,7 +221,7 @@ Tip| Deny control of [perch] with suppressive fire or vertical mobility.
 Tip| Once the payload passes the last [main] corner, revert to Catwalk Hold.
 Section|Noteworthy Picks
 Pick|Sombra
-Tip|The team can utilize the mega in [server] to quickly charge Sombra’s ult.
+Tip|The team can utilize the mega in [server] to quickly charge Sombra's ult.
 
 Strategy|Comms Section, Catwalk Hold
 Section|Execution
@@ -254,7 +254,7 @@ Tip| Ranged dps can rotate to any of the [access] doors or [shuttle] during the 
 Tip| Tanks can position on [bridge] ready to drop for initiation.
 Section|Noteworthy Picks
 Pick|Sombra
-Tip|The team can utilize the mega in [access] to quickly charge Sombra’s ult.
+Tip|The team can utilize the mega in [access] to quickly charge Sombra's ult.
 Pick|Symmetra
 Tip|[Access] can become a prime location for a teleporter as it is static and cramped.
 

@@ -193,7 +193,7 @@ Strategy|Point A, Point Hold
 Section|Execution
 Tip|Holds on [point A].
 Tip|Use cover on [point A] to deny line of sight from [server room] or [rafters].
-Tip|Support/Range dps can position behind [point A] walls near [Last attacker’s spawn].
+Tip|Support/Range dps can position behind [point A] walls near [Last attacker's spawn].
 Tip|Beware of pushes through [laboratory]/[server room] and rotate accordingly.
 
 Segment|Last
