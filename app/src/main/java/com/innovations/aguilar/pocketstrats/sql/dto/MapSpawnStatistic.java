@@ -3,6 +3,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 import android.database.Cursor;
 
 import com.google.common.base.Preconditions;
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +12,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MapSpawnStatistic implements MapSpawnStatisticDTO {
+    public static DTOFromCursorFactory<MapSpawnStatisticDTO> Factory =
+            new DTOFromCursorFactory<MapSpawnStatisticDTO>() {
+                @Override
+                public MapSpawnStatisticDTO Create(Cursor c) { return new MapSpawnStatistic(c); }
+            };
+
     private final int statisticId;
     private final int locationId;
     private final SpawnSide spawnSideId;
@@ -102,5 +109,18 @@ public class MapSpawnStatistic implements MapSpawnStatisticDTO {
             currentList.add(spawnStatistic);
         }
         return Collections.unmodifiableSortedMap(spawnDataMap);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapSpawnStatistic{");
+        sb.append("statisticId=").append(statisticId);
+        sb.append(", locationId=").append(locationId);
+        sb.append(", spawnSideId=").append(spawnSideId);
+        sb.append(", spawnSideDescription='").append(spawnSideDescription).append('\'');
+        sb.append(", runDescription='").append(runDescription).append('\'');
+        sb.append(", runDuration=").append(runDuration);
+        sb.append('}');
+        return sb.toString();
     }
 }

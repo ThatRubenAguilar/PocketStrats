@@ -2,10 +2,18 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 /**
  * Created by Ruben on 9/12/2017.
  */
 public class MapTypeTip extends MapTip implements MapTypeTipDTO {
+    public static DTOFromCursorFactory<MapTypeTipDTO> Factory =
+            new DTOFromCursorFactory<MapTypeTipDTO>() {
+                @Override
+                public MapTypeTipDTO Create(Cursor c) { return new MapTypeTip(c); }
+            };
+
     private final int mapTypeTipId;
     private final MapType mapType;
 
@@ -46,5 +54,13 @@ public class MapTypeTip extends MapTip implements MapTypeTipDTO {
             String.format("%s.%s", TableName, MapTipIdColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapTypeTip{");
+        sb.append("mapTypeTipId=").append(mapTypeTipId);
+        sb.append(", mapType=").append(mapType);
+        sb.append(", MapTip=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

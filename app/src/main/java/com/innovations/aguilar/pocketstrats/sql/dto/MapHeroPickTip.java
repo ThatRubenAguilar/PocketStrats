@@ -2,12 +2,20 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 /**
  * Created by Ruben on 9/11/2017.
  */
 
 
 public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
+    public static DTOFromCursorFactory<MapHeroPickTipDTO> Factory =
+            new DTOFromCursorFactory<MapHeroPickTipDTO>() {
+                @Override
+                public MapHeroPickTipDTO Create(Cursor c) { return new MapHeroPickTip(c); }
+            };
+
 
     private final int mapPickTipId;
     private final int heroId;
@@ -48,5 +56,13 @@ public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
             String.format("%s.%s", TableName, HeroIdColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapHeroPickTip{");
+        sb.append("mapPickTipId=").append(mapPickTipId);
+        sb.append(", heroId=").append(heroId);
+        sb.append(", MapTip=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

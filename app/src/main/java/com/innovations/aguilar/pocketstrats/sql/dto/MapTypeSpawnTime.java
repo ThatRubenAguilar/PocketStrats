@@ -2,7 +2,15 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
+    public static DTOFromCursorFactory<MapTypeSpawnTimeDTO> Factory =
+            new DTOFromCursorFactory<MapTypeSpawnTimeDTO>() {
+                @Override
+                public MapTypeSpawnTimeDTO Create(Cursor c) { return new MapTypeSpawnTime(c); }
+            };
+
     private final int statisticId;
     private final double minSpawnTime;
     private final double maxSpawnTime;
@@ -68,5 +76,15 @@ public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
             String.format("%s.%s", TableName, OvertimeSpawnTimeColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapTypeSpawnTime{");
+        sb.append("statisticId=").append(statisticId);
+        sb.append(", minSpawnTime=").append(minSpawnTime);
+        sb.append(", maxSpawnTime=").append(maxSpawnTime);
+        sb.append(", mapTypeId=").append(mapTypeId);
+        sb.append(", overtimeSpawnTime=").append(overtimeSpawnTime);
+        sb.append('}');
+        return sb.toString();
+    }
 }

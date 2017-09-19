@@ -23,7 +23,7 @@ import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
-import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 
 import java.util.List;
@@ -58,7 +58,7 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
 
         List<MapDataDTO> maps;
         MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
-        try (MapDataAccessor accessor = new MapDataAccessor(openHelper.getReadableDatabase())) {
+        try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
             maps = accessor.GetAllMaps();
         }
 

@@ -2,8 +2,16 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 
 public class MapData implements MapDataDTO {
+    public static DTOFromCursorFactory<MapDataDTO> Factory =
+        new DTOFromCursorFactory<MapDataDTO>() {
+            @Override
+            public MapDataDTO Create(Cursor c) { return new MapData(c); }
+        };
+
     private final int mapId;
     private final String mapName;
     private final String mapNameShort;
@@ -87,5 +95,17 @@ public class MapData implements MapDataDTO {
             String.format("%s.%s", TableName, MapTypeShortColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapData{");
+        sb.append("mapId=").append(mapId);
+        sb.append(", mapName='").append(mapName).append('\'');
+        sb.append(", mapNameShort='").append(mapNameShort).append('\'');
+        sb.append(", mapFileCompatName='").append(mapFileCompatName).append('\'');
+        sb.append(", mapTypeId=").append(mapTypeId);
+        sb.append(", mapType='").append(mapType).append('\'');
+        sb.append(", mapTypeShort='").append(mapTypeShort).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

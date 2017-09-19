@@ -8,7 +8,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSegmentDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
-import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,10 +47,10 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     static final int ExpectedMinimumMapLocations = (int)(ExpectedMapSegments * 1.5);
     static final int ExpectedMinimumMapStatistics = (int)(ExpectedMapSegments * 2.5);
 
-    MapDataAccessor accessor = null;
+    SqlDataAccessor accessor = null;
     @Before
     public void beforeTest() {
-        accessor = new MapDataAccessor(mapDatabase);
+        accessor = new SqlDataAccessor(readableMapDb);
     }
 
     @After

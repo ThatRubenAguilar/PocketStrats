@@ -16,22 +16,28 @@ import java.io.IOException;
 
 public class MapDatabaseTestFixture extends LoggingTestFixture {
     protected static SQLiteOpenHelper openHelper;
-    protected SQLiteDatabase mapDatabase;
+    protected SQLiteDatabase readableMapDb;
+    protected SQLiteDatabase writeableMapDb;
 
     @Before
     public void setupDatabaseBeforeTest(){
 
         log.get().debug("Before Begin {}", MapDatabaseTestFixture.class.toString());
-        mapDatabase = openHelper.getReadableDatabase();
+        readableMapDb = openHelper.getReadableDatabase();
+        writeableMapDb = openHelper.getWritableDatabase();
         log.get().debug("Before End {}", MapDatabaseTestFixture.class.toString());
     }
 
     @After
     public void closeDatabaseAfterTest() {
         log.get().debug("After Begin {}", MapDatabaseTestFixture.class.toString());
-        if (mapDatabase != null) {
-            mapDatabase.close();
-            mapDatabase = null;
+        if (readableMapDb != null) {
+            readableMapDb.close();
+            readableMapDb = null;
+        }
+        if (writeableMapDb != null) {
+            writeableMapDb.close();
+            writeableMapDb = null;
         }
         log.get().debug("After End {}", MapDatabaseTestFixture.class.toString());
     }

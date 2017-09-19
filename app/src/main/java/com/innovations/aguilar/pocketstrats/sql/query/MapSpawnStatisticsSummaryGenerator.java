@@ -11,9 +11,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class MapSpawnStatisticsSummaryGenerator {
-    private MapDataAccessor accessor;
+    private SqlDataAccessor accessor;
 
-    public MapSpawnStatisticsSummaryGenerator(MapDataAccessor accessor) {
+    public MapSpawnStatisticsSummaryGenerator(SqlDataAccessor accessor) {
         this.accessor = accessor;
     }
 

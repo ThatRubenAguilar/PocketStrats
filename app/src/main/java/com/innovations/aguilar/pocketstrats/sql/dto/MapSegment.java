@@ -2,8 +2,16 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 
 public class MapSegment implements MapSegmentDTO {
+    public static DTOFromCursorFactory<MapSegmentDTO> Factory =
+            new DTOFromCursorFactory<MapSegmentDTO>() {
+                @Override
+                public MapSegmentDTO Create(Cursor c) { return new MapSegment(c); }
+            };
+
     private final int segmentId;
     private final int mapId;
     private final String segmentName;
@@ -48,5 +56,13 @@ public class MapSegment implements MapSegmentDTO {
             String.format("%s.%s", TableName, SegmentNameColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapSegment{");
+        sb.append("segmentId=").append(segmentId);
+        sb.append(", mapId=").append(mapId);
+        sb.append(", segmentName='").append(segmentName).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

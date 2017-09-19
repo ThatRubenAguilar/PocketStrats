@@ -2,8 +2,16 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 
 public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
+    public static DTOFromCursorFactory<MapSpecificTipDTO> Factory =
+            new DTOFromCursorFactory<MapSpecificTipDTO>() {
+                @Override
+                public MapSpecificTipDTO Create(Cursor c) { return new MapSpecificTip(c); }
+            };
+
     private final int mapSpecificTipId;
 
     public MapSpecificTip(int mapTipId, int mapSubjectId, int orderPrecedence,
@@ -34,5 +42,12 @@ public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
             String.format("%s.%s", TableName, MapSpecificTipIdColumn)
     };
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapSpecificTip{");
+        sb.append("mapSpecificTipId=").append(mapSpecificTipId);
+        sb.append("MapTip=").append(super.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

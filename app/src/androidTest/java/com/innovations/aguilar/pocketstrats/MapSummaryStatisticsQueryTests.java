@@ -5,7 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
-import com.innovations.aguilar.pocketstrats.sql.query.MapDataAccessor;
+import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.query.MapLocationSpawnAdvantageSummary;
 import com.innovations.aguilar.pocketstrats.sql.query.MapSpawnStatisticsSummaryGenerator;
 import com.innovations.aguilar.pocketstrats.sql.query.SpawnSummaryQuery;
@@ -26,11 +26,11 @@ import static org.junit.Assert.assertTrue;
 public class MapSummaryStatisticsQueryTests extends MapDatabaseTestFixture {
 
 
-    MapDataAccessor accessor = null;
+    SqlDataAccessor accessor = null;
     MapSpawnStatisticsSummaryGenerator spawnStatGenerator = null;
     @Before
     public void beforeTest() {
-        accessor = new MapDataAccessor(mapDatabase);
+        accessor = new SqlDataAccessor(readableMapDb);
         spawnStatGenerator = new MapSpawnStatisticsSummaryGenerator(accessor);
     }
 

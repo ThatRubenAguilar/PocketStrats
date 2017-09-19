@@ -2,7 +2,15 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 public class MapLocation implements MapLocationDTO {
+    public static DTOFromCursorFactory<MapLocationDTO> Factory =
+            new DTOFromCursorFactory<MapLocationDTO>() {
+                @Override
+                public MapLocationDTO Create(Cursor c) { return new MapLocation(c); }
+            };
+
     private final int locationId;
     private final String locationDescription;
     private final MapLocationType locationTypeId;
@@ -77,5 +85,16 @@ public class MapLocation implements MapLocationDTO {
     };
 
 
-
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MapLocation{");
+        sb.append("locationId=").append(locationId);
+        sb.append(", locationDescription='").append(locationDescription).append('\'');
+        sb.append(", locationTypeId=").append(locationTypeId);
+        sb.append(", locationImageName='").append(locationImageName).append('\'');
+        sb.append(", segmentId=").append(segmentId);
+        sb.append(", mapId=").append(mapId);
+        sb.append('}');
+        return sb.toString();
+    }
 }

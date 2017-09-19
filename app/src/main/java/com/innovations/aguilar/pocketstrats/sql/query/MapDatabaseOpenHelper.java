@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     static final Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(MapDatabaseOpenHelper.class));
-    public static final int MapDatabaseVersion = 3;
+    public static final int MapDatabaseVersion = 5;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
 
@@ -34,6 +34,7 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
             CreateMapDatabase(sqLiteDatabase, context.getAssets());
+            CreateMapTipsDatabase(sqLiteDatabase, context.getAssets());
         }
         catch (IOException iex) {
             log.get().error("Exception onCreate MapDatabase: %s", iex.toString());
@@ -58,6 +59,22 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
                 "dbscript/PocketStrats_sqlite_create_map_spawn_statistics.sql");
         ReadAndExecuteQueries(writableDatabase, assets,
                 "dbscript/PocketStrats_sqlite_create_map_type_spawntimes.sql");
+
+    }
+    void CreateMapTipsDatabase(SQLiteDatabase writableDatabase, AssetManager assets)
+            throws IOException {
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_heros.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_subjects.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_tips.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_specific_tips.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_hero_pick_tips.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_type_tips.sql");
 
     }
 
