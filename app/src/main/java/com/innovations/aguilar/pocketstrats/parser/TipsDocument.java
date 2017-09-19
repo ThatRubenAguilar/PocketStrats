@@ -21,7 +21,7 @@ public class TipsDocument {
 
     List<SubjectNode> Subjects;
 
-    public TipsDocument(List<ParsedNode> rawNodes) {
+    public TipsDocument(List<TextNode> rawNodes) {
         Subjects = parseRawNodes(rawNodes);
     }
 
@@ -30,13 +30,13 @@ public class TipsDocument {
     final Set<String> sectionLevelTokens = Sets.newHashSet(Tokens.Section);
     final Set<String> pickLevelTokens = Sets.newHashSet(Tokens.Pick);
     final Set<String> tipLevelTokens = Sets.newHashSet(Tokens.Tip);
-    List<SubjectNode> parseRawNodes(List<ParsedNode> allNodes) {
+    List<SubjectNode> parseRawNodes(List<TextNode> allNodes) {
         List<SubjectNode> subjects = Lists.newArrayList();
         InfoNode currentInfo = new InfoNode();
-        PeekingIterator<ParsedNode> rawNodes = Iterators.peekingIterator(allNodes.iterator());
+        PeekingIterator<TextNode> rawNodes = Iterators.peekingIterator(allNodes.iterator());
 
         while (rawNodes.hasNext()) {
-            ParsedNode currentNode = rawNodes.peek();
+            TextNode currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
                 currentInfo = HandleInfoNode(rawNodes, currentInfo);
             else if (subjectLevelTokens.contains(currentNode.nodeType)) {
@@ -53,8 +53,8 @@ public class TipsDocument {
 
     }
 
-    SubjectNode parseSubjectNode(PeekingIterator<ParsedNode> rawNodes, InfoNode currentInfo) {
-        ParsedNode currentNode = rawNodes.next();
+    SubjectNode parseSubjectNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
+        TextNode currentNode = rawNodes.next();
         SubjectNode subjNode = new SubjectNode();
         subjNode.INode = currentInfo.Copy();
         subjNode.Message = currentNode.nodeContents.get(0);
@@ -77,8 +77,8 @@ public class TipsDocument {
         return subjNode;
     }
 
-    SectionNode parseSectionNode(PeekingIterator<ParsedNode> rawNodes,  InfoNode currentInfo) {
-        ParsedNode currentNode = rawNodes.next();
+    SectionNode parseSectionNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
+        TextNode currentNode = rawNodes.next();
         SectionNode sectNode = new SectionNode();
         sectNode.INode = currentInfo.Copy();
         sectNode.Message = currentNode.nodeContents.get(0);
@@ -106,15 +106,15 @@ public class TipsDocument {
         return sectNode;
     }
 
-    TipNode parseTipNode(PeekingIterator<ParsedNode> rawNodes, InfoNode currentInfo) {
-        ParsedNode currentNode = rawNodes.next();
+    TipNode parseTipNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
+        TextNode currentNode = rawNodes.next();
         TipNode tipNode = new TipNode();
         tipNode.INode = currentInfo.Copy();
         tipNode.Message = currentNode.nodeContents.get(0);
         return tipNode;
     }
-    PickNode parsePickNode(PeekingIterator<ParsedNode> rawNodes, InfoNode currentInfo) {
-        ParsedNode currentNode = rawNodes.next();
+    PickNode parsePickNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
+        TextNode currentNode = rawNodes.next();
         PickNode pickNode = new PickNode();
         pickNode.INode = currentInfo.Copy();
         pickNode.Message = currentNode.nodeContents.get(0);
@@ -137,8 +137,8 @@ public class TipsDocument {
         return pickNode;
     }
 
-    private InfoNode HandleInfoNode(PeekingIterator<ParsedNode> rawNodes, InfoNode currentInfo) {
-        ParsedNode node = rawNodes.next();
+    private InfoNode HandleInfoNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
+        TextNode node = rawNodes.next();
         switch(node.nodeType) {
             case Tokens.Map:
                 currentInfo.MapName = node.nodeContents.get(0);

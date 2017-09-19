@@ -5,16 +5,16 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Objects;
 
-public class ParsedNode {
+public class TextNode {
     String nodeType;
     List<String> nodeContents;
 
-    public ParsedNode(String nodeType, List<String> nodeContents) {
+    public TextNode(String nodeType, List<String> nodeContents) {
         this.nodeType = nodeType;
         this.nodeContents = nodeContents;
     }
 
-    public ParsedNode(String nodeType, String nodeContents) {
+    public TextNode(String nodeType, String nodeContents) {
         this.nodeType = nodeType;
         this.nodeContents = Lists.newArrayList(nodeContents);
     }
@@ -28,7 +28,7 @@ public class ParsedNode {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ParsedNode that = (ParsedNode) o;
+        TextNode that = (TextNode) o;
         return Objects.equals(nodeType, that.nodeType) &&
                 Objects.equals(nodeContents, that.nodeContents);
     }

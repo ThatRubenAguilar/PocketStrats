@@ -5,10 +5,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
-import com.innovations.aguilar.pocketstrats.parser.MapTipsNodeParser;
 import com.innovations.aguilar.pocketstrats.parser.MapTipsWriter;
-import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.write.SqlDataWriter;
 
@@ -17,12 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

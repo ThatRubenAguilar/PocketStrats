@@ -1,17 +1,7 @@
 package com.innovations.aguilar.pocketstrats.parser;
 
-import android.database.sqlite.SQLiteDatabase;
-
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
-import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
-import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
-
-import org.slf4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -19,22 +9,17 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Ruben on 9/4/2017.
  */
 
-public class MapTipsNodeParser implements Closeable {
+public class MapTipsTextParser implements Closeable {
     BufferedReader reader;
-    ParsedNode currentNode;
-    public MapTipsNodeParser(Reader stream) {
+    TextNode currentNode;
+    public MapTipsTextParser(Reader stream) {
         reader = new BufferedReader(stream);
     }
 
@@ -71,7 +56,7 @@ public class MapTipsNodeParser implements Closeable {
                         List<String> nodeContents = Lists.newArrayList();
                         for (int i = 1; i < tokens.length; i++)
                             nodeContents.add(tokens[i].trim());
-                        currentNode = new ParsedNode(nodeType, Collections.unmodifiableList(nodeContents));
+                        currentNode = new TextNode(nodeType, Collections.unmodifiableList(nodeContents));
                     }
                 }
             }
@@ -80,12 +65,12 @@ public class MapTipsNodeParser implements Closeable {
         return true;
     }
 
-    public ParsedNode getCurrentNode() {
+    public TextNode getCurrentNode() {
         return currentNode;
     }
 
-    public List<ParsedNode> allNodes() throws IOException {
-        ArrayList<ParsedNode> allNodes = Lists.newArrayList();
+    public List<TextNode> allNodes() throws IOException {
+        ArrayList<TextNode> allNodes = Lists.newArrayList();
         while (nextNode()) {
             allNodes.add(getCurrentNode());
         }

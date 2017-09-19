@@ -8,30 +8,30 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: Test and make diff data struct than ParsedNode
+// TODO: Test and make diff data struct than TextNode
 public class MapLocationNodeParser {
     static final Pattern braces = Pattern.compile("\\[[^\\]]*\\]");
-    public static List<ParsedNode> ParseLocations(String contents) {
+    public static List<TextNode> ParseLocations(String contents) {
         contents = contents.trim();
         Matcher matches = braces.matcher(contents);
-        ArrayList<ParsedNode> allNodes = Lists.newArrayList();
+        ArrayList<TextNode> allNodes = Lists.newArrayList();
         int segmentStartIndex = 0;
         while (matches.find()) {
             int matchStartIndex = matches.start();
             int matchEndIndex = matches.end();
 
             if (segmentStartIndex < matchStartIndex) {
-                allNodes.add(new ParsedNode("segment", contents.substring(segmentStartIndex, matchStartIndex)));
-                allNodes.add(new ParsedNode("location", contents.substring(matchStartIndex+1, matchEndIndex-1)));
+                allNodes.add(new TextNode("segment", contents.substring(segmentStartIndex, matchStartIndex)));
+                allNodes.add(new TextNode("location", contents.substring(matchStartIndex+1, matchEndIndex-1)));
                 segmentStartIndex = matchEndIndex+1;
             }
             else {
-                allNodes.add(new ParsedNode("location", contents.substring(matchStartIndex+1, matchEndIndex-1)));
+                allNodes.add(new TextNode("location", contents.substring(matchStartIndex+1, matchEndIndex-1)));
                 segmentStartIndex = matchEndIndex+1;
             }
         }
         if (segmentStartIndex < contents.length()) {
-            allNodes.add(new ParsedNode("segment", contents.substring(segmentStartIndex)));
+            allNodes.add(new TextNode("segment", contents.substring(segmentStartIndex)));
         }
         return Collections.unmodifiableList(allNodes);
     }

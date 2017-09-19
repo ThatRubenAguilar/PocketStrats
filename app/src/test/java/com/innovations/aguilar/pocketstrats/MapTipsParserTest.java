@@ -2,8 +2,8 @@ package com.innovations.aguilar.pocketstrats;
 
 import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.parser.InfoNode;
-import com.innovations.aguilar.pocketstrats.parser.MapTipsNodeParser;
-import com.innovations.aguilar.pocketstrats.parser.ParsedNode;
+import com.innovations.aguilar.pocketstrats.parser.MapTipsTextParser;
+import com.innovations.aguilar.pocketstrats.parser.TextNode;
 import com.innovations.aguilar.pocketstrats.parser.PickNode;
 import com.innovations.aguilar.pocketstrats.parser.SectionNode;
 import com.innovations.aguilar.pocketstrats.parser.SubjectNode;
@@ -33,19 +33,19 @@ public class MapTipsParserTest {
                 "Subject|Subj1\n" +
                 " Tip|TryThis \n" +
                 "";
-        List<ParsedNode> expected = Lists.newArrayList(
-                new ParsedNode(Tokens.Category.toLowerCase(), Lists.newArrayList("Assault", "Hybrid_Assault_Escort")),
-                new ParsedNode(Tokens.Subject.toLowerCase(), Lists.newArrayList("Subj1")),
-                new ParsedNode(Tokens.Tip.toLowerCase(), Lists.newArrayList("TryThis"))
+        List<TextNode> expected = Lists.newArrayList(
+                new TextNode(Tokens.Category.toLowerCase(), Lists.newArrayList("Assault", "Hybrid_Assault_Escort")),
+                new TextNode(Tokens.Subject.toLowerCase(), Lists.newArrayList("Subj1")),
+                new TextNode(Tokens.Tip.toLowerCase(), Lists.newArrayList("TryThis"))
         );
         Reader textReader = new InputStreamReader(new ByteArrayInputStream(text.getBytes()));
-        MapTipsNodeParser parser = new MapTipsNodeParser(textReader);
-        List<ParsedNode> allNodes = parser.allNodes();
+        MapTipsTextParser parser = new MapTipsTextParser(textReader);
+        List<TextNode> allNodes = parser.allNodes();
         assertEquals(expected.size(), allNodes.size());
         for (int i = 0; i < expected.size(); i++) {
-            ParsedNode expectedNode = expected.get(i);
-            ParsedNode parsedNode = allNodes.get(i);
-            assertEquals(expectedNode.toString(), parsedNode.toString());
+            TextNode expectedNode = expected.get(i);
+            TextNode textNode = allNodes.get(i);
+            assertEquals(expectedNode.toString(), textNode.toString());
         }
     }
 
@@ -76,8 +76,8 @@ public class MapTipsParserTest {
         List<SubjectNode> expected = Lists.newArrayList(subjNode);
 
         Reader textReader = new InputStreamReader(new ByteArrayInputStream(text.getBytes()));
-        MapTipsNodeParser parser = new MapTipsNodeParser(textReader);
-        List<ParsedNode> allNodes = parser.allNodes();
+        MapTipsTextParser parser = new MapTipsTextParser(textReader);
+        List<TextNode> allNodes = parser.allNodes();
         TipsDocument tDoc = new TipsDocument(allNodes);
         assertEquals(expected, tDoc.getSubjects());
     }

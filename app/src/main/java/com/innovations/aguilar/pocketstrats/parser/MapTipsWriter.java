@@ -53,7 +53,7 @@ public class MapTipsWriter implements AutoCloseable {
 
 
     public boolean WriteTips(Reader mapTipsReader) {
-        try (MapTipsNodeParser nodeParser = new MapTipsNodeParser(mapTipsReader)) {
+        try (MapTipsTextParser nodeParser = new MapTipsTextParser(mapTipsReader)) {
             TipsDocument tDoc = new TipsDocument(nodeParser.allNodes());
             writeSubjects(tDoc.getSubjects());
             return true;

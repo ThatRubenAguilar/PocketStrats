@@ -270,7 +270,7 @@ Tip| Always control at least one high ground, either [bridge] or [corner].
 
 
 
-Map|Route66
+Map|Route: 66
 Tags|Open|Horizontal
 Side|Attack 
 
