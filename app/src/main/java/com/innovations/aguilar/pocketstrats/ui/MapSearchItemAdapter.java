@@ -93,7 +93,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         textView.setItemData(map);
         textView.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         textView.setText(map.getMapName());
-        textView.setBackgroundDrawable(DrawableCompat.unwrap(getItemBackground(map)));
+        textView.setBackgroundDrawable(DrawableCompat.unwrap(getItemBackground(context, map)));
         // Using the OnItemClickListener had an odd delay on hitting back and selecting again,
         // So doing this manually here has proper UI reaction.
         textView.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         });
     }
 
-    Drawable getItemBackground(MapDataDTO map) {
+    public static Drawable getItemBackground(Context context, MapDataDTO map) {
         String drawableName = String.format("ic_%s_list_item", map.getMapFileCompatName());
         int itemResourceId = context.getResources()
                 .getIdentifier(drawableName, "drawable", context.getPackageName());

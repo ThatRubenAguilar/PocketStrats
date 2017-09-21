@@ -1,21 +1,30 @@
 package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
+import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
+import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.MapTipItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsChild;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsHeader;
@@ -25,6 +34,8 @@ import java.util.List;
 
 // TODO: Add tests for these views and how they act on deletion/restore
 public class MapTipsView extends CoordinatorLayout {
+
+    MapSpawnTabView mapSpawnTabs;
 
     RecyclerView tipsList;
     FloatingActionButton returnToTop;
@@ -74,9 +85,14 @@ public class MapTipsView extends CoordinatorLayout {
                 returnToTop.hide();
             }
         });
+
+        mapSpawnTabs = (MapSpawnTabView)findViewById(R.id.view_map_spawn_tabs);
     }
 
     public void loadTipsForMap(MapDataDTO map) {
+        mapSpawnTabs.loadMapData(map);
+
+        // ------------
         List<MapTipsHeader> groupHeaders = Lists.newArrayList();
         List<MapTipsChild> mapTypeTips = getMapTypeTips(map);
         if (mapTypeTips.size() > 0) {

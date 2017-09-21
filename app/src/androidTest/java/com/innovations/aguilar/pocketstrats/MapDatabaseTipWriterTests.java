@@ -175,7 +175,7 @@ public class MapDatabaseTipWriterTests extends MapDatabaseTestFixture {
         }
 
     }
-    @Test
+    @Test @Ignore
     public void Writer_Should_Write_Real_Tips() throws Exception {
         MapTipsWriter tipsWriter = new MapTipsWriter(writer,accessor);
 
