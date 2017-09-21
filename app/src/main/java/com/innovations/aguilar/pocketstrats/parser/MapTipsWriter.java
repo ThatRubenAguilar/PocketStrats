@@ -10,6 +10,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSegmentDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubject;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
@@ -67,112 +68,98 @@ public class MapTipsWriter implements AutoCloseable {
         return false;
     }
 
+    Integer getKnownMapIdOrNull(String mapName) {
+        if (mapShortNames.containsKey(mapName))
+            return new Integer(mapShortNames.get(mapName).getMapId());
+        return null;
+    }
+
+    Integer getKnownSegmentIdOrNull(String segmentName, Integer mapId) {
+        if (mapId != null && segmentName != null) {
+            String segmentNameKey = String.format("%s_%s", mapId.intValue(), segmentName);
+            if (mapIdAndSegmentNames.containsKey(segmentNameKey))
+                return mapIdAndSegmentNames.get(segmentNameKey).getSegmentId();
+        }
+        return null;
+    }
+
+    // Subjects can be duplicated for sides
+    // MapTips should not be duplicated more than per subject
+    // MapTypeTips can be duplicated per maptype and per subject
     private void writeSubjects(List<SubjectNode> subjects) throws SQLDataException {
         for (SubjectNode subjNode :
                 subjects) {
-            Integer mapId = null;
-            if (mapShortNames.containsKey(subjNode.INode.MapName))
-                mapId = new Integer(mapShortNames.get(subjNode.INode.MapName).getMapId());
-            Integer segmentId = null;
-            if (mapId != null && subjNode.INode.SegmentName != null) {
-                String segmentNameKey = String.format("%s_%s", mapId.intValue(), subjNode.INode.SegmentName);
-                if (mapIdAndSegmentNames.containsKey(segmentNameKey))
-                    segmentId = mapIdAndSegmentNames.get(segmentNameKey).getSegmentId();
-            }
+            Integer mapId = getKnownMapIdOrNull(subjNode.INode.MapName);
+            Integer segmentId = getKnownSegmentIdOrNull(subjNode.INode.SegmentName, mapId);
+
             if (subjNode.INode.Sides != null && !subjNode.INode.Sides.isEmpty()) {
                 for (SpawnSide spawnSide :
                         subjNode.INode.Sides) {
-                    MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
-                            mapId, spawnSide, spawnSide.toString(), segmentId);
-                    // Strategy -> MapSubject
-                    int subjectId = (int) writer.WriteMapSubject(subj);
-                    if (subjectId < 0) {
-                        throw new SQLDataException(String.format("Failed to write DTO '%s'", subj));
+                    int subjectId = writeSubjectOrThrow(subjNode, mapId, spawnSide, segmentId);
+
+                    if (mapShortNames.containsKey(subjNode.INode.MapName))
+                        writeSectionsAsSpecificTips(subjectId, subjNode.SectionNodes);
+                    else if (subjNode.INode.MapTypes != null && !subjNode.INode.MapTypes.isEmpty())
+                        writeSectionsAsTypeTips(subjectId, subjNode.SectionNodes);
+                    else
+                    {
+                        log.get().warn(String.format("Invalid subject's info node '%s'", subjNode.INode.toString()));
                     }
-                    writeSections(subjectId, subjNode.SectionNodes);
                 }
             }
         }
     }
 
-    private void writeSections(int subjectId, List<SectionNode> sections) throws SQLDataException {
+    private void writeSectionsAsSpecificTips(int subjectId, List<SectionNode> sections) throws SQLDataException {
         for (SectionNode sectNode :
                 sections) {
-            // MapName => Strategy => Section -> MapSpecificTip w/o parent tip
-            if (mapShortNames.containsKey(sectNode.INode.MapName)) {
-                MapSpecificTip sect = new MapSpecificTip(0, subjectId, sectNode.Precedence,
-                        sectNode.Message, null, 0);
-                int sectionId = (int)writer.WriteMapSpecificTip(sect);
-                if (sectionId < 0) {
-                    throw new SQLDataException(String.format("Failed to write DTO '%s'", sect));
-                }
-                writeTips(subjectId, sectNode, sectionId, sectNode.TipNodes);
-                writePicks(subjectId, sectionId, sectNode.PickNodes);
+            int sectionId = writeSpecificTipOrThrow(subjectId, sectNode, null);
+            writeTipsAsSpecificTips(subjectId, sectionId, sectNode.TipNodes);
+            writePicks(subjectId, sectionId, sectNode.PickNodes);
+
+        }
+    }
+
+
+    private void writeSectionsAsTypeTips(int subjectId, List<SectionNode> sections) throws SQLDataException {
+        for (SectionNode sectNode :
+                sections) {
+            int tipId = writeTipOrThrow(subjectId, sectNode, null);
+            for (MapType mapType :
+                    sectNode.INode.MapTypes) {
+                writeTypeTipOrThrow(subjectId, sectNode, mapType, null, tipId);
             }
-            // Category => Subject => Section -> MapTypeTip w/o parent tip
-            else if (sectNode.INode.MapTypes != null && !sectNode.INode.MapTypes.isEmpty()) {
-                for (MapType mapType :
-                        sectNode.INode.MapTypes) {
-                    MapTypeTip sect = new MapTypeTip(0, subjectId, sectNode.Precedence,
-                            sectNode.Message, null, 0, mapType);
-                    int sectionId = (int)writer.WriteMapTypeTip(sect);
-                    if (sectionId < 0) {
-                        throw new SQLDataException(String.format("Failed to write DTO '%s'", sect));
-                    }
-                    writeTips(subjectId, sectNode, sectionId, sectNode.TipNodes);
-                    writePicks(subjectId, sectionId, sectNode.PickNodes);
-                }
-            }
-            else
-            {
-                log.get().warn(String.format("Unwritten section '%s'", sectNode));
+            writeTipsAsTypeTips(subjectId, tipId, sectNode.TipNodes);
+            writePicks(subjectId, tipId, sectNode.PickNodes);
+        }
+    }
+
+    private void writeTipsAsSpecificTips(int subjectId, int parentTipId, List<TipNode> tipNodes) throws SQLDataException {
+        for (TipNode tipNode :
+                tipNodes) {
+            writeSpecificTipOrThrow(subjectId, tipNode, new Integer(parentTipId));
+        }
+    }
+    private void writeTipsAsTypeTips(int subjectId, int parentTipId, List<TipNode> tipNodes) throws SQLDataException {
+        for (TipNode tipNode :
+                tipNodes) {
+            int tipId = writeTipOrThrow(subjectId, tipNode, new Integer(parentTipId));
+            for (MapType mapType :
+                    tipNode.INode.MapTypes) {
+                writeTypeTipOrThrow(subjectId, tipNode, mapType, new Integer(parentTipId), tipId);
             }
         }
     }
 
-    private void writeTips(int subjectId, SectionNode sectNode, int parentTipId, List<TipNode> tipNodes) throws SQLDataException {
-        for (TipNode tipNode :
-                tipNodes) {
-            // MapName => Strategy => Section => Tip -> MapSpecificTip w/ parent tip
-            if (mapShortNames.containsKey(sectNode.INode.MapName)) {
-                MapSpecificTip tip = new MapSpecificTip(0, subjectId, tipNode.Precedence,
-                        tipNode.Message, parentTipId, 0);
-                int tipId = (int) writer.WriteMapSpecificTip(tip);
-                if (tipId < 0) {
-                    throw new SQLDataException(String.format("Failed to write DTO '%s'", tip));
-                }
-            }
-            // Category => Subject => Section => Tip -> MapTypeTip w/ parent tip
-            else if (sectNode.INode.MapTypes != null && !sectNode.INode.MapTypes.isEmpty()) {
-                for (MapType mapType :
-                        sectNode.INode.MapTypes) {
-                    MapTypeTip tip = new MapTypeTip(0, subjectId, tipNode.Precedence,
-                            tipNode.Message, parentTipId, 0, mapType);
-                    int tipId = (int)writer.WriteMapTypeTip(tip);
-                    if (tipId < 0) {
-                        throw new SQLDataException(String.format("Failed to write DTO '%s'", tip));
-                    }
-                }
-            } else {
-                log.get().warn(String.format("Unwritten tip '%s'", tipNode));
-            }
-        }
-    }
 
     private void writePicks(int subjectId, int parentTipId, List<PickNode> pickNodes) throws SQLDataException {
         for (PickNode pickNode :
                 pickNodes) {
             if (heroLatinNames.containsKey(pickNode.Message)) {
                 HeroDataDTO hero = heroLatinNames.get(pickNode.Message);
-                // Pick => Tip => MapHeroPickTip w/ parent tip
                 for (TipNode tipNode :
                         pickNode.TipNodes) {
-                    MapHeroPickTip tip = new MapHeroPickTip(0, subjectId, tipNode.Precedence,
-                            tipNode.Message, parentTipId, 0, hero.getHeroId());
-                    int tipId = (int) writer.WriteMapHeroPickTip(tip);
-                    if (tipId < 0) {
-                        throw new SQLDataException(String.format("Failed to write DTO '%s'", tip));
-                    }
+                    writeHeroPickTipOrThrow(subjectId, tipNode, hero.getHeroId(), parentTipId);
                 }
             }
             else {
@@ -180,6 +167,73 @@ public class MapTipsWriter implements AutoCloseable {
             }
         }
     }
+
+
+    int writeSubjectOrThrow(SubjectNode subjNode, Integer mapId, SpawnSide spawnSide, Integer segmentId) throws SQLDataException {
+        MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
+                mapId, spawnSide, spawnSide.toString(), segmentId);
+        // Strategy -> MapSubject
+        int subjectId = writer.WriteMapSubject(subj);
+        if (subjectId < 0) {
+            throw new SQLDataException(String.format("Failed to write DTO '%s'", subj));
+        }
+        return subjectId;
+    }
+    int writeSpecificTipOrThrow(int subjectId, TipNode tipNode, Integer parentTipId) throws SQLDataException {
+        return writeSpecificTipOrThrow(subjectId, tipNode, parentTipId, 0);
+    }
+    int writeSpecificTipOrThrow(int subjectId, TipNode tipNode, Integer parentTipId, int mapTipId) throws SQLDataException {
+        // MapName => Strategy => Section -> MapSpecificTip w/o parent tip
+        // MapName => Strategy => Section => Tip -> MapSpecificTip w/ parent tip
+        MapSpecificTip sect = new MapSpecificTip(mapTipId, subjectId, tipNode.Precedence,
+                tipNode.Message, parentTipId, 0);
+        int specificTipId = writer.WriteMapSpecificTip(sect);
+        if (specificTipId < 0) {
+            throw new SQLDataException(String.format("Failed to write DTO '%s'", sect));
+        }
+        return specificTipId;
+    }
+
+
+    int writeTypeTipOrThrow(int subjectId, TipNode tipNode, MapType mapType, Integer parentTipId) throws SQLDataException {
+        return writeTypeTipOrThrow(subjectId, tipNode, mapType, parentTipId, 0);
+    }
+    int writeTypeTipOrThrow(int subjectId, TipNode tipNode, MapType mapType, Integer parentTipId, int mapTipId) throws SQLDataException {
+        // Category => Subject => Section -> MapTypeTip w/o parent tip
+        // Category => Subject => Section => Tip -> MapTypeTip w/ parent tip
+        MapTypeTip sect = new MapTypeTip(mapTipId, subjectId, tipNode.Precedence,
+                tipNode.Message, parentTipId, 0, mapType);
+        int typeTipId = writer.WriteMapTypeTip(sect);
+        if (typeTipId < 0) {
+            throw new SQLDataException(String.format("Failed to write DTO '%s'", sect));
+        }
+        return typeTipId;
+    }
+
+    int writeHeroPickTipOrThrow(int subjectId, TipNode tipNode, int heroId, Integer parentTipId) throws SQLDataException {
+        return writeHeroPickTipOrThrow(subjectId, tipNode, heroId, parentTipId, 0);
+    }
+    int writeHeroPickTipOrThrow(int subjectId, TipNode tipNode, int heroId, Integer parentTipId, int mapTipId) throws SQLDataException {
+        // Pick => Tip => MapHeroPickTip w/ parent tip
+        MapHeroPickTip tip = new MapHeroPickTip(mapTipId, subjectId, tipNode.Precedence,
+                tipNode.Message, parentTipId, 0, heroId);
+        int heroPickTipId =  writer.WriteMapHeroPickTip(tip);
+        if (heroPickTipId < 0) {
+            throw new SQLDataException(String.format("Failed to write DTO '%s'", tip));
+        }
+        return heroPickTipId;
+    }
+    int writeTipOrThrow(int subjectId, TipNode tipNode, Integer parentTipId) throws SQLDataException {
+
+        MapTip tip = new MapTip(0, subjectId, tipNode.Precedence,
+                tipNode.Message, parentTipId);
+        int tipId =  writer.WriteMapTip(tip);
+        if (tipId < 0) {
+            throw new SQLDataException(String.format("Failed to write DTO '%s'", tip));
+        }
+        return tipId;
+    }
+
 
     @Override
     public void close() throws Exception {

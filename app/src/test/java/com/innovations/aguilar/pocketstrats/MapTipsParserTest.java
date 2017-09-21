@@ -30,11 +30,13 @@ public class MapTipsParserTest {
     @Test
     public void NodeParser_Should_Parse_Nodes() throws Exception {
         String text = "Category|Assault|Hybrid_Assault_Escort\n" +
+                "Side|Attack|Defend\n" +
                 "Subject|Subj1\n" +
                 " Tip|TryThis \n" +
                 "";
         List<TextNode> expected = Lists.newArrayList(
                 new TextNode(Tokens.Category.toLowerCase(), Lists.newArrayList("Assault", "Hybrid_Assault_Escort")),
+                new TextNode(Tokens.Side.toLowerCase(), Lists.newArrayList("Attack", "Defend")),
                 new TextNode(Tokens.Subject.toLowerCase(), Lists.newArrayList("Subj1")),
                 new TextNode(Tokens.Tip.toLowerCase(), Lists.newArrayList("TryThis"))
         );
@@ -52,6 +54,7 @@ public class MapTipsParserTest {
     @Test
     public void TipsDocument_Should_Parse_Document() throws Exception {
         String text = "Category|Assault|Hybrid_Assault_Escort\n" +
+                "Side|Attack|Defend\n" +
                 "Subject|Subj1\n" +
                 "Section|Sect1\n" +
                 " Tip|TryThis \n" +

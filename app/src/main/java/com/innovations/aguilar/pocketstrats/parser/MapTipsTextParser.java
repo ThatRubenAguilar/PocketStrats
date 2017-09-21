@@ -23,18 +23,6 @@ public class MapTipsTextParser implements Closeable {
         reader = new BufferedReader(stream);
     }
 
-    static final Set<String> TokenWords = Sets.newHashSet(
-            Tokens.Tip,
-            Tokens.Pick,
-            Tokens.Section,
-            Tokens.Strategy,
-            Tokens.Subject,
-            Tokens.Side,
-            Tokens.Tags,
-            Tokens.Map,
-            Tokens.Type,
-            Tokens.Category
-    );
 
     static final String Seperator = "\\|";
     boolean nextNode() throws IOException {
@@ -51,7 +39,7 @@ public class MapTipsTextParser implements Closeable {
                 if (tokens.length <= 1) foundTokens = false;
                 else {
                     String nodeType = tokens[0].trim().toLowerCase();
-                    foundTokens = TokenWords.contains(nodeType);
+                    foundTokens = Tokens.AllTokens.contains(nodeType);
                     if (foundTokens) {
                         List<String> nodeContents = Lists.newArrayList();
                         for (int i = 1; i < tokens.length; i++)

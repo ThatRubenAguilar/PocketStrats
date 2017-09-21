@@ -3,7 +3,7 @@ Type|2CP
 Map|Anubis
 Tags|High Ground|Verticality|Chokes
 
-Side|Attack|
+Side|Attack
 
 Segment|First
 Strategy|Point A, Countering Plateau Hold

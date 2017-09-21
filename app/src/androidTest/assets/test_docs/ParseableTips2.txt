@@ -1,0 +1,38 @@
+Type|2CP
+
+Map|Anubis
+Tags|High Ground|Verticality|Chokes
+
+Side|Attack
+
+Segment|First
+Strategy|AnubisAttack1
+Section|AnubisAttack1 Sect1
+Tip|AnubisAttack1 Tip1
+Section|AnubisAttack1 Picks
+Pick|Lucio
+Tip|AnubisAttack1 Pick1
+
+Strategy|AnubisAttack2
+Section|AnubisAttack2 Sect1
+Tip|AnubisAttack2 Tip1
+Section|AnubisAttack2 Picks
+Pick|Lucio
+Tip|AnubisAttack2 Pick1
+
+Side|Defend
+
+Segment|Last
+Strategy|AnubisDefend1
+Section|AnubisDefend1 Sect1
+Tip|AnubisDefend1 Tip1
+Section|AnubisDefend1 Picks
+Pick|Lucio
+Tip|AnubisDefend1 Pick1
+
+Strategy|AnubisDefend2
+Section|AnubisDefend2 Sect1
+Tip|AnubisDefend2 Tip1
+Section|AnubisDefend2 Picks
+Pick|Lucio
+Tip|AnubisDefend2 Pick1

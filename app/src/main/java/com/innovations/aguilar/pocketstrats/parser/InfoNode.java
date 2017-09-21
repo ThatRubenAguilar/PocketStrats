@@ -22,7 +22,7 @@ public class InfoNode {
 
     public InfoNode(List<MapType> mapTypes, List<SpawnSide> sides, String mapName, String segmentName) {
         MapTypes = Lists.newArrayList(mapTypes);
-        Sides = sides;
+        Sides = Lists.newArrayList(sides);
         MapName = mapName;
         SegmentName = segmentName;
     }
