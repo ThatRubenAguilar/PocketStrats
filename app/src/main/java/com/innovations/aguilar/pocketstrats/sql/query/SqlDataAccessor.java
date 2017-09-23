@@ -22,7 +22,6 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubject;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTip;
-import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTime;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTimeDTO;
@@ -219,25 +218,24 @@ public class SqlDataAccessor implements AutoCloseable {
                 Integer.toString(mapId),
                 Integer.toString(side.spawnSideId)
         };
-        String tableName = String.format("%s INNER JOIN %s ON %s.%s = %s.%s %s INNER JOIN %s ON %s.%s = %s.%s",
+        String tableName = String.format("%s INNER JOIN %s ON %s.%s = %s.%s INNER JOIN %s ON %s.%s = %s.%s",
                 // JOIN 1
                 MapSubject.Columns.TableName, MapTip.Columns.TableName,
                 MapSubject.Columns.TableName, MapSubject.Columns.MapSubjectIdColumn,
                 MapTip.Columns.TableName, MapTip.Columns.MapSubjectIdColumn,
                 // JOIN 2
-                MapTip.Columns.TableName, MapSpecificTip.Columns.TableName,
+                MapSpecificTip.Columns.TableName,
                 MapTip.Columns.TableName, MapTip.Columns.MapTipIdColumn,
                 MapSpecificTip.Columns.TableName, MapSpecificTip.Columns.MapTipIdColumn
         );
 
-        String order = String.format("%s ASC, %s ASC", MapSubject.Columns.MapSubjectIdColumn, MapTip.Columns.OrderPrecedenceColumn);
+        String order = String.format("%s ASC, %s ASC",
+                MapSubject.Columns.qualifyColumn(MapSubject.Columns.MapSubjectIdColumn),
+                MapTip.Columns.qualifyColumn(MapTip.Columns.OrderPrecedenceColumn));
 
-        String[] columns = new String[] {
-                MapSpecificTip.Columns.MapSpecificTipIdColumn,
-                MapSpecificTip.Columns.MapTipIdColumn
-        };
+        String[] columns = MapSpecificTip.Columns.joinAndQualifyColumns(MapTip.Columns);
 
-        return readableDb.query(tableName, MapSpecificTip.Columns.QualifiedColumnNames, whereClause, whereArgs,
+        return readableDb.query(tableName, columns, whereClause, whereArgs,
                 null, null, order);
     }
 

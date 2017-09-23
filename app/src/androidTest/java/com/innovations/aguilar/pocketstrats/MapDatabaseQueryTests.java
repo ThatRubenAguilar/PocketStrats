@@ -184,5 +184,5 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
         assertTrue(ExpectedMinimumTips < SubjectCount);
     }
 
-    // TODO: Test MapSubject and MapSpecificTip queries
+    // TODO: Test and query beyond map specific tips
 }

@@ -30,7 +30,7 @@ public abstract class DTOColumnInfo {
         return String.format("%s.%s", TableName, columnName);
     }
 
-    public String[] joinColumns(DTOColumnInfo otherColumnInfo) {
+    public String[] joinAndQualifyColumns(DTOColumnInfo otherColumnInfo) {
         Set<String> joinedColumns = Sets.union(ColumnNames, otherColumnInfo.ColumnNames);
         String[] qualifiedColumns = new String[joinedColumns.size()];
         int i = 0;
