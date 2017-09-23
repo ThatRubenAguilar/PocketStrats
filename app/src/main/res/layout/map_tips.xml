@@ -7,24 +7,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabView
-        android:id="@+id/view_map_spawn_tabs"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map_spawn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-        <!--android:divider="@null"-->
-        <!--android:dividerHeight="0dp"-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_tips"
-            android:groupIndicator="@drawable/tips_expandable_group"
+        <TextView
+            android:id="@+id/map_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"/>
+            android:gravity="center"
+            android:textSize="@dimen/button_text_size_large"
+            android:textColor="@color/textLight"
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/spawn_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabView>
+            <!-- rest of stuffs -->
+        </android.support.design.widget.TabLayout>
 
+
+
+    </LinearLayout>
+
+    <!--android:divider="@null"-->
+    <!--android:dividerHeight="0dp"-->
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/list_tips"
+        android:groupIndicator="@drawable/tips_expandable_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -38,4 +60,5 @@
         android:visibility="invisible"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"/>
+
 </com.innovations.aguilar.pocketstrats.ui.view.MapTipsView>

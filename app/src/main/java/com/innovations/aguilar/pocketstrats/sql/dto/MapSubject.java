@@ -11,6 +11,7 @@ public class MapSubject implements MapSubjectDTO {
                 public MapSubjectDTO Create(Cursor c) { return new MapSubject(c); }
             };
 
+    private final int mapSubjectId;
     private final int mapSubjectPrecedence;
     private final String mapSubjectDescription;
     private final Integer mapId;
@@ -18,8 +19,9 @@ public class MapSubject implements MapSubjectDTO {
     private final String spawnSideDescription;
     private final Integer segmentId;
 
-    public MapSubject(int mapSubjectPrecedence, String mapSubjectDescription,
-            Integer mapId, SpawnSide spawnSide, String spawnSideDescription,Integer segmentId) {
+    public MapSubject(int mapSubjectId, int mapSubjectPrecedence, String mapSubjectDescription,
+            Integer mapId, SpawnSide spawnSide, String spawnSideDescription, Integer segmentId) {
+        this.mapSubjectId = mapSubjectId;
         this.mapSubjectPrecedence = mapSubjectPrecedence;
         this.mapSubjectDescription = mapSubjectDescription;
         this.mapId = mapId;
@@ -29,6 +31,7 @@ public class MapSubject implements MapSubjectDTO {
     }
 
     public MapSubject(Cursor c) {
+        this.mapSubjectId= c.getInt(c.getColumnIndex(MapSubjectIdColumn));
         this.spawnSideDescription= c.getString(c.getColumnIndex(SpawnSideDescriptionColumn));
         this.mapSubjectDescription= c.getString(c.getColumnIndex(MapSubjectDescriptionColumn));
         this.mapSubjectPrecedence= c.getInt(c.getColumnIndex(MapSubjectPrecedenceColumn));
@@ -44,6 +47,10 @@ public class MapSubject implements MapSubjectDTO {
             this.segmentId = null;
     }
 
+    @Override
+    public int getMapSubjectId() {
+        return mapSubjectId;
+    }
     @Override
     public int getMapSubjectPrecedence() {
         return mapSubjectPrecedence;

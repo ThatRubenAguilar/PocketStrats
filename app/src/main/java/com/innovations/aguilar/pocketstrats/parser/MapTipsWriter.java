@@ -170,7 +170,7 @@ public class MapTipsWriter implements AutoCloseable {
 
 
     int writeSubjectOrThrow(SubjectNode subjNode, Integer mapId, SpawnSide spawnSide, Integer segmentId) throws SQLDataException {
-        MapSubject subj = new MapSubject(subjNode.Precedence, subjNode.Message,
+        MapSubject subj = new MapSubject(0, subjNode.Precedence, subjNode.Message,
                 mapId, spawnSide, spawnSide.toString(), segmentId);
         // Strategy -> MapSubject
         int subjectId = writer.WriteMapSubject(subj);

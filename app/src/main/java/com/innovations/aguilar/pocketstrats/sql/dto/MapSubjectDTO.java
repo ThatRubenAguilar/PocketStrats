@@ -7,4 +7,5 @@ public interface MapSubjectDTO {
     String getSpawnSideDescription();
     String getMapSubjectDescription();
     int getMapSubjectPrecedence();
+    int getMapSubjectId();
 }

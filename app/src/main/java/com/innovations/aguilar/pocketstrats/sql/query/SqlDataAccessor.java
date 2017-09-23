@@ -64,7 +64,9 @@ public class SqlDataAccessor implements AutoCloseable {
         String[] whereArgs = {
                 mapIdStr,
                 Integer.toString(side.spawnSideId) };
-        return readableDb.query(MapSubject.TableName, MapSubject.ColumnNames, whereClause, whereArgs, null, null, null);
+        String order = String.format("%s ASC", MapSubject.MapSubjectPrecedenceColumn);
+        return readableDb.query(MapSubject.TableName, MapSubject.ColumnNames, whereClause, whereArgs,
+                null, null, order);
     }
     public List<MapSubjectDTO> GetMapSubjectsByMap(Integer mapId, SpawnSide side) {
         try (Cursor c = GetMapSubjectsCursorByMap(mapId, side)) {
@@ -224,7 +226,10 @@ public class SqlDataAccessor implements AutoCloseable {
                 MapSpecificTip.TableName, MapSpecificTip.MapTipIdColumn
         );
 
-        return readableDb.query(tableName, MapSpecificTip.ColumnNames, whereClause, whereArgs, null, null, null);
+        String order = String.format("%s ASC, %s ASC", MapSubject.MapSubjectIdColumn, MapTip.OrderPrecedenceColumn);
+
+        return readableDb.query(tableName, MapSpecificTip.ColumnNames, whereClause, whereArgs,
+                null, null, order);
     }
 
     public List<MapSpecificTipDTO> GetMapSpecificTipsByMap(int mapId, SpawnSide side) {
