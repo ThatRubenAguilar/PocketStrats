@@ -2,12 +2,10 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
-/**
- * Created by Ruben on 9/11/2017.
- */
-
+import java.util.List;
 
 public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
     public static DTOFromCursorFactory<MapHeroPickTipDTO> Factory =
@@ -30,8 +28,8 @@ public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
 
     public MapHeroPickTip(Cursor c) {
         super(c);
-        this.mapPickTipId = c.getInt(c.getColumnIndex(MapPickTipIdColumn));
-        this.heroId = c.getInt(c.getColumnIndex(HeroIdColumn));
+        this.mapPickTipId = c.getInt(c.getColumnIndex(Columns.MapPickTipIdColumn));
+        this.heroId = c.getInt(c.getColumnIndex(Columns.HeroIdColumn));
     }
 
     @Override
@@ -43,18 +41,8 @@ public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
         return heroId;
     }
 
+    public static final MapHeroPickTipColumns Columns = new MapHeroPickTipColumns();
 
-    public static final String MapTipIdColumn = "MapTipId";
-    public static final String MapPickTipIdColumn = "MapPickTipId";
-    public static final String HeroIdColumn = "HeroId";
-
-    public static final String TableName = "MapHeroPickTips";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, MapTipIdColumn),
-            String.format("%s.%s", TableName, MapPickTipIdColumn),
-            String.format("%s.%s", TableName, HeroIdColumn)
-    };
 
     @Override
     public String toString() {

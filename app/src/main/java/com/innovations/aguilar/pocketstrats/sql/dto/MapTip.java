@@ -2,7 +2,9 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 
 /**
  * Created by Ruben on 9/12/2017.
@@ -30,12 +32,12 @@ public class MapTip implements MapTipDTO {
     }
 
     public MapTip(Cursor c) {
-        this.mapSubjectId = c.getInt(c.getColumnIndex(MapSubjectIdColumn));
-        this.mapTipId = c.getInt(c.getColumnIndex(MapTipIdColumn));
-        this.orderPrecedence = c.getInt(c.getColumnIndex(OrderPrecedenceColumn));;
-        this.mapTipDescription = c.getString(c.getColumnIndex(MapTipDescriptionColumn));
-        if (!c.isNull(c.getColumnIndex(ParentMapTipIdColumn)))
-            this.parentMapTipId = c.getInt(c.getColumnIndex(ParentMapTipIdColumn));
+        this.mapSubjectId = c.getInt(c.getColumnIndex(Columns.MapSubjectIdColumn));
+        this.mapTipId = c.getInt(c.getColumnIndex(Columns.MapTipIdColumn));
+        this.orderPrecedence = c.getInt(c.getColumnIndex(Columns.OrderPrecedenceColumn));;
+        this.mapTipDescription = c.getString(c.getColumnIndex(Columns.MapTipDescriptionColumn));
+        if (!c.isNull(c.getColumnIndex(Columns.ParentMapTipIdColumn)))
+            this.parentMapTipId = c.getInt(c.getColumnIndex(Columns.ParentMapTipIdColumn));
         else
             this.parentMapTipId = null;
     }
@@ -62,21 +64,7 @@ public class MapTip implements MapTipDTO {
     }
 
 
-    public static final String MapSubjectIdColumn = "MapSubjectId";
-    public static final String MapTipIdColumn = "MapTipId";
-    public static final String OrderPrecedenceColumn = "OrderPrecedence";
-    public static final String MapTipDescriptionColumn = "MapTipDescription";
-    public static final String ParentMapTipIdColumn = "ParentMapTipId";
-
-    public static final String TableName = "MapTips";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, MapSubjectIdColumn),
-            String.format("%s.%s", TableName, MapTipIdColumn),
-            String.format("%s.%s", TableName, OrderPrecedenceColumn),
-            String.format("%s.%s", TableName, MapTipDescriptionColumn),
-            String.format("%s.%s", TableName, ParentMapTipIdColumn)
-    };
+    public static final MapTipColumns Columns = new MapTipColumns();
 
     @Override
     public String toString() {

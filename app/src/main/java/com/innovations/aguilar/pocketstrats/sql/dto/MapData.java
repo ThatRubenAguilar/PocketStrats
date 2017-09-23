@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 
@@ -32,14 +33,14 @@ public class MapData implements MapDataDTO {
     }
 
     public MapData(Cursor c) {
-        this.mapId = c.getInt(c.getColumnIndex(MapIdColumn));
-        this.mapName = c.getString(c.getColumnIndex(MapNameColumn));
-        this.mapNameShort = c.getString(c.getColumnIndex(MapNameShortColumn));
-        this.mapFileCompatName = c.getString(c.getColumnIndex(MapFileCompatNameColumn));
-        int mapTypeIdRaw = c.getInt(c.getColumnIndex(MapTypeIdColumn));
+        this.mapId = c.getInt(c.getColumnIndex(Columns.MapIdColumn));
+        this.mapName = c.getString(c.getColumnIndex(Columns.MapNameColumn));
+        this.mapNameShort = c.getString(c.getColumnIndex(Columns.MapNameShortColumn));
+        this.mapFileCompatName = c.getString(c.getColumnIndex(Columns.MapFileCompatNameColumn));
+        int mapTypeIdRaw = c.getInt(c.getColumnIndex(Columns.MapTypeIdColumn));
         this.mapTypeId = MapType.FromInt(mapTypeIdRaw);
-        this.mapType = c.getString(c.getColumnIndex(MapTypeColumn));
-        this.mapTypeShort = c.getString(c.getColumnIndex(MapTypeShortColumn));
+        this.mapType = c.getString(c.getColumnIndex(Columns.MapTypeColumn));
+        this.mapTypeShort = c.getString(c.getColumnIndex(Columns.MapTypeShortColumn));
     }
 
     @Override
@@ -75,25 +76,8 @@ public class MapData implements MapDataDTO {
         return mapTypeShort;
     }
 
-    public static final String MapIdColumn = "MapId";
-    public static final String MapNameColumn = "MapName";
-    public static final String MapNameShortColumn = "MapNameShort";
-    public static final String MapFileCompatNameColumn = "MapFileCompatName";
-    public static final String MapTypeIdColumn = "MapTypeId";
-    public static final String MapTypeColumn = "MapType";
-    public static final String MapTypeShortColumn = "MapTypeShort";
+    public static final MapDataColumns Columns = new MapDataColumns();
 
-    public static final String TableName = "Maps";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, MapIdColumn),
-            String.format("%s.%s", TableName, MapNameColumn),
-            String.format("%s.%s", TableName, MapNameShortColumn),
-            String.format("%s.%s", TableName, MapFileCompatNameColumn),
-            String.format("%s.%s", TableName, MapTypeIdColumn),
-            String.format("%s.%s", TableName, MapTypeColumn),
-            String.format("%s.%s", TableName, MapTypeShortColumn)
-    };
 
     @Override
     public String toString() {

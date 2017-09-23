@@ -2,7 +2,9 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
 
 /**
  * Created by Ruben on 9/11/2017.
@@ -27,10 +29,10 @@ public class HeroData implements HeroDataDTO {
     }
 
     public HeroData(Cursor c) {
-        this.heroId = c.getInt(c.getColumnIndex(HeroIdColumn));
-        this.heroName = c.getString(c.getColumnIndex(HeroNameColumn));
-        this.heroNameLatin = c.getString(c.getColumnIndex(HeroNameLatinColumn));
-        this.heroIconName = c.getString(c.getColumnIndex(HeroIconNameColumn));
+        this.heroId = c.getInt(c.getColumnIndex(Columns.HeroIdColumn));
+        this.heroName = c.getString(c.getColumnIndex(Columns.HeroNameColumn));
+        this.heroNameLatin = c.getString(c.getColumnIndex(Columns.HeroNameLatinColumn));
+        this.heroIconName = c.getString(c.getColumnIndex(Columns.HeroIconNameColumn));
     }
 
 
@@ -54,19 +56,11 @@ public class HeroData implements HeroDataDTO {
         return heroIconName;
     }
 
-    public static final String HeroIdColumn = "HeroId";
-    public static final String HeroNameColumn = "HeroName";
-    public static final String HeroNameLatinColumn = "HeroNameLatin";
-    public static final String HeroIconNameColumn = "HeroIconName";
 
-    public static final String TableName = "Heros";
+    public static final HeroDataColumns Columns = new HeroDataColumns();
 
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, HeroIdColumn),
-            String.format("%s.%s", TableName, HeroNameColumn),
-            String.format("%s.%s", TableName, HeroNameLatinColumn),
-            String.format("%s.%s", TableName, HeroIconNameColumn)
-    };
+
+
 
     @Override
     public String toString() {

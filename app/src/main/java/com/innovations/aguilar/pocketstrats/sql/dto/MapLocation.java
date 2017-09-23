@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 public class MapLocation implements MapLocationDTO {
@@ -29,12 +30,12 @@ public class MapLocation implements MapLocationDTO {
     }
 
     public MapLocation(Cursor c) {
-        this.locationId = c.getInt(c.getColumnIndex(LocationIdColumn));
-        this.locationDescription = c.getString(c.getColumnIndex(LocationDescriptionColumn));
-        this.locationTypeId = MapLocationType.FromInt(c.getInt(c.getColumnIndex(LocationTypeIdColumn)));
-        this.locationImageName = c.getString(c.getColumnIndex(LocationImageNameColumn));
-        this.segmentId = c.getInt(c.getColumnIndex(SegmentIdColumn));
-        this.mapId = c.getInt(c.getColumnIndex(MapIdColumn));
+        this.locationId = c.getInt(c.getColumnIndex(Columns.LocationIdColumn));
+        this.locationDescription = c.getString(c.getColumnIndex(Columns.LocationDescriptionColumn));
+        this.locationTypeId = MapLocationType.FromInt(c.getInt(c.getColumnIndex(Columns.LocationTypeIdColumn)));
+        this.locationImageName = c.getString(c.getColumnIndex(Columns.LocationImageNameColumn));
+        this.segmentId = c.getInt(c.getColumnIndex(Columns.SegmentIdColumn));
+        this.mapId = c.getInt(c.getColumnIndex(Columns.MapIdColumn));
     }
 
     @Override
@@ -65,25 +66,7 @@ public class MapLocation implements MapLocationDTO {
         return mapId;
     }
 
-
-    public static final String LocationIdColumn = "LocationId";
-    public static final String LocationDescriptionColumn = "LocationDescription";
-    public static final String LocationTypeIdColumn = "LocationTypeId";
-    public static final String LocationImageNameColumn = "LocationImageName";
-    public static final String SegmentIdColumn = "SegmentId";
-    public static final String MapIdColumn = "MapId";
-
-    public static final String TableName = "MapLocations";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, LocationIdColumn),
-            String.format("%s.%s", TableName, LocationDescriptionColumn),
-            String.format("%s.%s", TableName, LocationTypeIdColumn),
-            String.format("%s.%s", TableName, LocationImageNameColumn),
-            String.format("%s.%s", TableName, SegmentIdColumn),
-            String.format("%s.%s", TableName, MapIdColumn)
-    };
-
+    public static final MapLocationColumns Columns = new MapLocationColumns();
 
     @Override
     public String toString() {
@@ -98,3 +81,5 @@ public class MapLocation implements MapLocationDTO {
         return sb.toString();
     }
 }
+
+

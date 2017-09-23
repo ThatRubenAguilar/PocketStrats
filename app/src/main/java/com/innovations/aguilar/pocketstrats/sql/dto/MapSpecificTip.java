@@ -23,7 +23,7 @@ public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
 
     public MapSpecificTip(Cursor c) {
         super(c);
-        this.mapSpecificTipId = c.getInt(c.getColumnIndex(MapSpecificTipIdColumn));
+        this.mapSpecificTipId = c.getInt(c.getColumnIndex(Columns.MapSpecificTipIdColumn));
     }
 
     @Override
@@ -31,16 +31,7 @@ public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
         return mapSpecificTipId;
     }
 
-
-    public static final String MapTipIdColumn = "MapTipId";
-    public static final String MapSpecificTipIdColumn = "MapSpecificTipId";
-
-    public static final String TableName = "MapSpecificTips";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, MapTipIdColumn),
-            String.format("%s.%s", TableName, MapSpecificTipIdColumn)
-    };
+    public static final MapSpecificTipColumns Columns = new MapSpecificTipColumns();
 
     @Override
     public String toString() {

@@ -7,7 +7,10 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapLocationDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSegmentDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 
 import org.junit.After;
@@ -159,4 +162,27 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
         assertTrue(ExpectedMinimumMapStatistics < StatisticsCount);
     }
+
+
+    @Test
+    public void Accessor_Should_Read_Map_Subjects_By_Map() throws Exception {
+        List<MapSubjectDTO> mapSubjects = accessor.GetMapSubjectsByMap(1 /*Anubis*/, SpawnSide.Attack);
+        final int ExpectedMinimumSubjects = 4; // Forward, Point, Forward, Point
+
+        int SubjectCount = mapSubjects.size();
+
+        assertTrue(ExpectedMinimumSubjects < SubjectCount);
+    }
+
+    @Test
+    public void Accessor_Should_Read_Map_Specific_Tips() throws Exception {
+        List<MapSpecificTipDTO> mapSpecificTips = accessor.GetMapSpecificTipsByMap(1, SpawnSide.Attack);
+        final int ExpectedMinimumTips = 1;
+
+        int SubjectCount = mapSpecificTips.size();
+
+        assertTrue(ExpectedMinimumTips < SubjectCount);
+    }
+
+    // TODO: Test MapSubject and MapSpecificTip queries
 }

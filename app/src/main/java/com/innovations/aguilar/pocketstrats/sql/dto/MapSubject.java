@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 public class MapSubject implements MapSubjectDTO {
@@ -31,18 +32,18 @@ public class MapSubject implements MapSubjectDTO {
     }
 
     public MapSubject(Cursor c) {
-        this.mapSubjectId= c.getInt(c.getColumnIndex(MapSubjectIdColumn));
-        this.spawnSideDescription= c.getString(c.getColumnIndex(SpawnSideDescriptionColumn));
-        this.mapSubjectDescription= c.getString(c.getColumnIndex(MapSubjectDescriptionColumn));
-        this.mapSubjectPrecedence= c.getInt(c.getColumnIndex(MapSubjectPrecedenceColumn));
-        int spawnSideIdRaw = c.getInt(c.getColumnIndex(SpawnSideIdColumn));
+        this.mapSubjectId= c.getInt(c.getColumnIndex(Columns.MapSubjectIdColumn));
+        this.spawnSideDescription= c.getString(c.getColumnIndex(Columns.SpawnSideDescriptionColumn));
+        this.mapSubjectDescription= c.getString(c.getColumnIndex(Columns.MapSubjectDescriptionColumn));
+        this.mapSubjectPrecedence= c.getInt(c.getColumnIndex(Columns.MapSubjectPrecedenceColumn));
+        int spawnSideIdRaw = c.getInt(c.getColumnIndex(Columns.SpawnSideIdColumn));
         this.spawnSide = SpawnSide.FromInt(spawnSideIdRaw);
-        if (!c.isNull(c.getColumnIndex(MapIdColumn)))
-            this.mapId = c.getInt(c.getColumnIndex(MapIdColumn));
+        if (!c.isNull(c.getColumnIndex(Columns.MapIdColumn)))
+            this.mapId = c.getInt(c.getColumnIndex(Columns.MapIdColumn));
         else
             this.mapId = null;
-        if (!c.isNull(c.getColumnIndex(SegmentIdColumn)))
-            this.segmentId = c.getInt(c.getColumnIndex(SegmentIdColumn));
+        if (!c.isNull(c.getColumnIndex(Columns.SegmentIdColumn)))
+            this.segmentId = c.getInt(c.getColumnIndex(Columns.SegmentIdColumn));
         else
             this.segmentId = null;
     }
@@ -77,25 +78,7 @@ public class MapSubject implements MapSubjectDTO {
     }
 
 
-    public static final String MapSubjectIdColumn = "MapSubjectId";
-    public static final String MapIdColumn = "MapId";
-    public static final String MapSubjectPrecedenceColumn = "MapSubjectPrecedence";
-    public static final String MapSubjectDescriptionColumn = "MapSubjectDescription";
-    public static final String SpawnSideIdColumn = "SpawnSideId";
-    public static final String SpawnSideDescriptionColumn = "SpawnSideDescription";
-    public static final String SegmentIdColumn = "SegmentId";
-
-    public static final String TableName = "MapSubjects";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, MapSubjectIdColumn),
-            String.format("%s.%s", TableName, MapIdColumn),
-            String.format("%s.%s", TableName, SpawnSideIdColumn),
-            String.format("%s.%s", TableName, SpawnSideDescriptionColumn),
-            String.format("%s.%s", TableName, MapSubjectPrecedenceColumn),
-            String.format("%s.%s", TableName, MapSubjectDescriptionColumn),
-            String.format("%s.%s", TableName, SegmentIdColumn)
-    };
+    public static final MapSubjectColumns Columns = new MapSubjectColumns();
 
     @Override
     public String toString() {
@@ -110,3 +93,5 @@ public class MapSubject implements MapSubjectDTO {
         return sb.toString();
     }
 }
+
+

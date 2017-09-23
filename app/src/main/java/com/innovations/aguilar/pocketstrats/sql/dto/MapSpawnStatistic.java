@@ -3,6 +3,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 import android.database.Cursor;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 import java.util.ArrayList;
@@ -35,13 +36,13 @@ public class MapSpawnStatistic implements MapSpawnStatisticDTO {
     }
 
     public MapSpawnStatistic(Cursor c) {
-        this.statisticId = c.getInt(c.getColumnIndex(StatisticIdColumn));
-        this.locationId = c.getInt(c.getColumnIndex(LocationIdColumn));
-        int spawnSideIdRaw = c.getInt(c.getColumnIndex(SpawnSideIdColumn));
+        this.statisticId = c.getInt(c.getColumnIndex(Columns.StatisticIdColumn));
+        this.locationId = c.getInt(c.getColumnIndex(Columns.LocationIdColumn));
+        int spawnSideIdRaw = c.getInt(c.getColumnIndex(Columns.SpawnSideIdColumn));
         this.spawnSideId = SpawnSide.FromInt(spawnSideIdRaw);
-        this.spawnSideDescription = c.getString(c.getColumnIndex(SpawnSideDescriptionColumn));
-        this.runDescription = c.getString(c.getColumnIndex(RunDescriptionColumn));
-        this.runDuration = c.getDouble(c.getColumnIndex(RunDurationColumn));
+        this.spawnSideDescription = c.getString(c.getColumnIndex(Columns.SpawnSideDescriptionColumn));
+        this.runDescription = c.getString(c.getColumnIndex(Columns.RunDescriptionColumn));
+        this.runDuration = c.getDouble(c.getColumnIndex(Columns.RunDurationColumn));
     }
 
     @Override
@@ -74,23 +75,8 @@ public class MapSpawnStatistic implements MapSpawnStatisticDTO {
         return runDuration;
     }
 
-    public static final String StatisticIdColumn = "StatisticId";
-    public static final String LocationIdColumn = "LocationId";
-    public static final String SpawnSideIdColumn = "SpawnSideId";
-    public static final String SpawnSideDescriptionColumn = "SpawnSideDescription";
-    public static final String RunDescriptionColumn = "RunDescription";
-    public static final String RunDurationColumn = "RunDuration";
 
-    public static final String TableName = "MapSpawnStatistics";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, StatisticIdColumn),
-            String.format("%s.%s", TableName, LocationIdColumn),
-            String.format("%s.%s", TableName, SpawnSideIdColumn),
-            String.format("%s.%s", TableName, SpawnSideDescriptionColumn),
-            String.format("%s.%s", TableName, RunDescriptionColumn),
-            String.format("%s.%s", TableName, RunDurationColumn),
-    };
+    public static final MapSpawnStatisticColumns Columns = new MapSpawnStatisticColumns();
 
 
     public static SortedMap<SpawnSide, List<MapSpawnStatisticDTO>> SplitBySpawnSide(List<MapSpawnStatisticDTO> statistics) {
@@ -124,3 +110,4 @@ public class MapSpawnStatistic implements MapSpawnStatisticDTO {
         return sb.toString();
     }
 }
+

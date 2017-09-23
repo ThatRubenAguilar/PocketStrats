@@ -2,6 +2,7 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
@@ -27,12 +28,12 @@ public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
 
 
     public MapTypeSpawnTime(Cursor c) {
-        this.statisticId = c.getInt(c.getColumnIndex(StatisticIdColumn));
-        this.minSpawnTime = c.getDouble(c.getColumnIndex(MinSpawnTimeColumn));
-        this.maxSpawnTime = c.getDouble(c.getColumnIndex(MaxSpawnTimeColumn));
-        int mapTypeIdRaw = c.getInt(c.getColumnIndex(MapTypeIdColumn));
+        this.statisticId = c.getInt(c.getColumnIndex(Columns.StatisticIdColumn));
+        this.minSpawnTime = c.getDouble(c.getColumnIndex(Columns.MinSpawnTimeColumn));
+        this.maxSpawnTime = c.getDouble(c.getColumnIndex(Columns.MaxSpawnTimeColumn));
+        int mapTypeIdRaw = c.getInt(c.getColumnIndex(Columns.MapTypeIdColumn));
         this.mapTypeId = MapType.FromInt(mapTypeIdRaw);
-        this.overtimeSpawnTime = c.getDouble(c.getColumnIndex(OvertimeSpawnTimeColumn));
+        this.overtimeSpawnTime = c.getDouble(c.getColumnIndex(Columns.OvertimeSpawnTimeColumn));
     }
 
     @Override
@@ -60,21 +61,8 @@ public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
         return overtimeSpawnTime;
     }
 
-    public static final String StatisticIdColumn = "StatisticId";
-    public static final String MinSpawnTimeColumn = "MinSpawnTime";
-    public static final String MaxSpawnTimeColumn = "MaxSpawnTime";
-    public static final String MapTypeIdColumn = "MapTypeId";
-    public static final String OvertimeSpawnTimeColumn = "OvertimeSpawnTime";
 
-    public static final String TableName = "MapTypeSpawnTimes";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, StatisticIdColumn),
-            String.format("%s.%s", TableName, MinSpawnTimeColumn),
-            String.format("%s.%s", TableName, MaxSpawnTimeColumn),
-            String.format("%s.%s", TableName, MapTypeIdColumn),
-            String.format("%s.%s", TableName, OvertimeSpawnTimeColumn)
-    };
+    public static final MapTypeSpawnTimeColumns Columns = new MapTypeSpawnTimeColumns();
 
     @Override
     public String toString() {
@@ -88,3 +76,5 @@ public class MapTypeSpawnTime implements MapTypeSpawnTimeDTO {
         return sb.toString();
     }
 }
+
+

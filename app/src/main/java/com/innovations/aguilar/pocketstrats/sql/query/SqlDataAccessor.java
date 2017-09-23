@@ -46,7 +46,7 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetAllHerosCursor() {
-        return readableDb.query(HeroData.TableName, HeroData.ColumnNames, null, null, null, null, null);
+        return readableDb.query(HeroData.Columns.TableName, HeroData.Columns.QualifiedColumnNames, null, null, null, null, null);
     }
 
     public List<HeroDataDTO> GetAllHeros() {
@@ -57,15 +57,15 @@ public class SqlDataAccessor implements AutoCloseable {
 
     public Cursor GetMapSubjectsCursorByMap(Integer mapId, SpawnSide side) {
         String whereClause = String.format("%s = ? AND %s = ?",
-                MapData.MapIdColumn, MapSubject.SpawnSideIdColumn);
+                MapData.Columns.MapIdColumn, MapSubject.Columns.SpawnSideIdColumn);
         String mapIdStr = "NULL";
         if (mapId != null)
             mapIdStr = mapId.toString();
         String[] whereArgs = {
                 mapIdStr,
                 Integer.toString(side.spawnSideId) };
-        String order = String.format("%s ASC", MapSubject.MapSubjectPrecedenceColumn);
-        return readableDb.query(MapSubject.TableName, MapSubject.ColumnNames, whereClause, whereArgs,
+        String order = String.format("%s ASC", MapSubject.Columns.MapSubjectPrecedenceColumn);
+        return readableDb.query(MapSubject.Columns.TableName, MapSubject.Columns.QualifiedColumnNames, whereClause, whereArgs,
                 null, null, order);
     }
     public List<MapSubjectDTO> GetMapSubjectsByMap(Integer mapId, SpawnSide side) {
@@ -75,7 +75,7 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetAllMapsCursor() {
-        return readableDb.query(MapData.TableName, MapData.ColumnNames, null, null, null, null, null);
+        return readableDb.query(MapData.Columns.TableName, MapData.Columns.QualifiedColumnNames, null, null, null, null, null);
     }
 
     public List<MapDataDTO> GetAllMaps() {
@@ -85,9 +85,9 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetMapsCursorById(int mapId) {
-        String whereClause = String.format("%s = ?", MapData.MapIdColumn);
+        String whereClause = String.format("%s = ?", MapData.Columns.MapIdColumn);
         String[] whereArgs = { Integer.toString(mapId) };
-        return readableDb.query(MapData.TableName, MapData.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapData.Columns.TableName, MapData.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
     public MapDataDTO GetMapById(int mapId) {
         try (Cursor c = GetMapsCursorById(mapId)) {
@@ -95,9 +95,9 @@ public class SqlDataAccessor implements AutoCloseable {
         }
     }
     public Cursor GetMapsCursorByType(MapType mapType) {
-        String whereClause = String.format("%s = ?", MapData.MapTypeIdColumn);
+        String whereClause = String.format("%s = ?", MapData.Columns.MapTypeIdColumn);
         String[] whereArgs = { Integer.toString(mapType.typeId) };
-        return readableDb.query(MapData.TableName, MapData.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapData.Columns.TableName, MapData.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
 
     public List<MapDataDTO> GetMapsByType(MapType mapType) {
@@ -108,7 +108,7 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetAllMapSegmentsCursor() {
-        return readableDb.query(MapSegment.TableName, MapSegment.ColumnNames, null, null, null, null, null);
+        return readableDb.query(MapSegment.Columns.TableName, MapSegment.Columns.QualifiedColumnNames, null, null, null, null, null);
     }
     public List<MapSegmentDTO> GetAllMapSegments() {
         try (Cursor c = GetAllMapSegmentsCursor()) {
@@ -117,9 +117,9 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetMapSegmentsCursorByMap(int mapId) {
-        String whereClause = String.format("%s = ?", MapSegment.MapIdColumn);
+        String whereClause = String.format("%s = ?", MapSegment.Columns.MapIdColumn);
         String[] whereArgs = { Integer.toString(mapId) };
-        return readableDb.query(MapSegment.TableName, MapSegment.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapSegment.Columns.TableName, MapSegment.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
 
     public List<MapSegmentDTO> GetMapSegmentsByMap(int mapId) {
@@ -130,9 +130,9 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetMapLocationsCursorByMap(int mapId) {
-        String whereClause = String.format("%s = ?", MapLocation.MapIdColumn);
+        String whereClause = String.format("%s = ?", MapLocation.Columns.MapIdColumn);
         String[] whereArgs = { Integer.toString(mapId) };
-        return readableDb.query(MapLocation.TableName, MapLocation.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapLocation.Columns.TableName, MapLocation.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
 
     public List<MapLocationDTO> GetMapLocationsByMap(int mapId) {
@@ -142,9 +142,9 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetMapLocationsCursorBySegment(int segmentId) {
-        String whereClause = String.format("%s = ?", MapLocation.SegmentIdColumn);
+        String whereClause = String.format("%s = ?", MapLocation.Columns.SegmentIdColumn);
         String[] whereArgs = { Integer.toString(segmentId) };
-        return readableDb.query(MapLocation.TableName, MapLocation.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapLocation.Columns.TableName, MapLocation.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
 
     public List<MapLocationDTO> GetMapLocationsBySegment(int segmentId) {
@@ -154,15 +154,15 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetMapSpawnStatsCursorBySegment(int segmentId) {
-        String whereClause = String.format("%s = ?", MapLocation.SegmentIdColumn);
+        String whereClause = String.format("%s = ?", MapLocation.Columns.SegmentIdColumn);
         String[] whereArgs = { Integer.toString(segmentId) };
         String tableName = String.format("%s INNER JOIN %s ON %s.%s = %s.%s",
-                MapSpawnStatistic.TableName, MapLocation.TableName,
-                MapSpawnStatistic.TableName, MapSpawnStatistic.LocationIdColumn,
-                MapLocation.TableName, MapLocation.LocationIdColumn
+                MapSpawnStatistic.Columns.TableName, MapLocation.Columns.TableName,
+                MapSpawnStatistic.Columns.TableName, MapSpawnStatistic.Columns.LocationIdColumn,
+                MapLocation.Columns.TableName, MapLocation.Columns.LocationIdColumn
                 );
 
-        return readableDb.query(tableName, MapSpawnStatistic.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(tableName, MapSpawnStatistic.Columns.QualifiedColumnNames, whereClause, whereArgs, null, null, null);
     }
 
     public List<MapSpawnStatisticDTO> GetMapSpawnStatsBySegment(int segmentId) {
@@ -173,9 +173,10 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetMapSpawnStatsCursorByLocation(int locationId) {
-        String whereClause = String.format("%s = ?", MapSpawnStatistic.LocationIdColumn);
+        String whereClause = String.format("%s = ?", MapSpawnStatistic.Columns.LocationIdColumn);
         String[] whereArgs = { Integer.toString(locationId) };
-        return readableDb.query(MapSpawnStatistic.TableName, MapSpawnStatistic.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapSpawnStatistic.Columns.TableName, MapSpawnStatistic.Columns.QualifiedColumnNames,
+                whereClause, whereArgs, null, null, null);
     }
 
     public List<MapSpawnStatisticDTO> GetMapSpawnStatsByLocation(int locationId) {
@@ -186,7 +187,8 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetAllMapTypeSpawnTimesCursor() {
-        return readableDb.query(MapTypeSpawnTime.TableName, MapTypeSpawnTime.ColumnNames, null, null, null, null, null);
+        return readableDb.query(MapTypeSpawnTime.Columns.TableName, MapTypeSpawnTime.Columns.QualifiedColumnNames,
+                null, null, null, null, null);
     }
 
     public List<MapTypeSpawnTimeDTO> GetAllMapTypeSpawnTimes() {
@@ -197,9 +199,10 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetMapTypeSpawnTimesCursorByType(MapType mapType) {
-        String whereClause = String.format("%s = ?", MapTypeSpawnTime.MapTypeIdColumn);
+        String whereClause = String.format("%s = ?", MapTypeSpawnTime.Columns.MapTypeIdColumn);
         String[] whereArgs = { Integer.toString(mapType.typeId) };
-        return readableDb.query(MapTypeSpawnTime.TableName, MapTypeSpawnTime.ColumnNames, whereClause, whereArgs, null, null, null);
+        return readableDb.query(MapTypeSpawnTime.Columns.TableName, MapTypeSpawnTime.Columns.QualifiedColumnNames,
+                whereClause, whereArgs, null, null, null);
     }
 
     public MapTypeSpawnTimeDTO GetMapTypeSpawnTimeByType(MapType mapType) {
@@ -210,25 +213,31 @@ public class SqlDataAccessor implements AutoCloseable {
 
 
     public Cursor GetMapSpecificTipsCursorByMap(int mapId, SpawnSide side) {
-        String whereClause = String.format("%s = ? AND %s = ?", MapSubject.MapIdColumn, MapSubject.SpawnSideIdColumn);
+        String whereClause = String.format("%s = ? AND %s = ?", MapSubject.Columns.MapIdColumn,
+                MapSubject.Columns.SpawnSideIdColumn);
         String[] whereArgs = {
                 Integer.toString(mapId),
                 Integer.toString(side.spawnSideId)
         };
         String tableName = String.format("%s INNER JOIN %s ON %s.%s = %s.%s %s INNER JOIN %s ON %s.%s = %s.%s",
                 // JOIN 1
-                MapSubject.TableName, MapTip.TableName,
-                MapSubject.TableName, MapSubject.MapSubjectIdColumn,
-                MapTip.TableName, MapTip.MapSubjectIdColumn,
+                MapSubject.Columns.TableName, MapTip.Columns.TableName,
+                MapSubject.Columns.TableName, MapSubject.Columns.MapSubjectIdColumn,
+                MapTip.Columns.TableName, MapTip.Columns.MapSubjectIdColumn,
                 // JOIN 2
-                MapTip.TableName, MapSpecificTip.TableName,
-                MapTip.TableName, MapTip.MapTipIdColumn,
-                MapSpecificTip.TableName, MapSpecificTip.MapTipIdColumn
+                MapTip.Columns.TableName, MapSpecificTip.Columns.TableName,
+                MapTip.Columns.TableName, MapTip.Columns.MapTipIdColumn,
+                MapSpecificTip.Columns.TableName, MapSpecificTip.Columns.MapTipIdColumn
         );
 
-        String order = String.format("%s ASC, %s ASC", MapSubject.MapSubjectIdColumn, MapTip.OrderPrecedenceColumn);
+        String order = String.format("%s ASC, %s ASC", MapSubject.Columns.MapSubjectIdColumn, MapTip.Columns.OrderPrecedenceColumn);
 
-        return readableDb.query(tableName, MapSpecificTip.ColumnNames, whereClause, whereArgs,
+        String[] columns = new String[] {
+                MapSpecificTip.Columns.MapSpecificTipIdColumn,
+                MapSpecificTip.Columns.MapTipIdColumn
+        };
+
+        return readableDb.query(tableName, MapSpecificTip.Columns.QualifiedColumnNames, whereClause, whereArgs,
                 null, null, order);
     }
 

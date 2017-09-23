@@ -2,7 +2,10 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
+import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
+
+import java.util.List;
 
 
 public class MapSegment implements MapSegmentDTO {
@@ -23,9 +26,9 @@ public class MapSegment implements MapSegmentDTO {
     }
 
     public MapSegment(Cursor c) {
-        this.segmentId = c.getInt(c.getColumnIndex(SegmentIdColumn));
-        this.mapId = c.getInt(c.getColumnIndex(MapIdColumn));
-        this.segmentName = c.getString(c.getColumnIndex(SegmentNameColumn));
+        this.segmentId = c.getInt(c.getColumnIndex(Columns.SegmentIdColumn));
+        this.mapId = c.getInt(c.getColumnIndex(Columns.MapIdColumn));
+        this.segmentName = c.getString(c.getColumnIndex(Columns.SegmentNameColumn));
     }
 
 
@@ -44,17 +47,7 @@ public class MapSegment implements MapSegmentDTO {
         return segmentName;
     }
 
-    public static final String SegmentIdColumn = "SegmentId";
-    public static final String MapIdColumn = "MapId";
-    public static final String SegmentNameColumn = "SegmentName";
-
-    public static final String TableName = "MapSegments";
-
-    public static final String[] ColumnNames = {
-            String.format("%s.%s", TableName, SegmentIdColumn),
-            String.format("%s.%s", TableName, MapIdColumn),
-            String.format("%s.%s", TableName, SegmentNameColumn)
-    };
+    public static final MapSegmentColumns Columns = new MapSegmentColumns();
 
     @Override
     public String toString() {
@@ -66,3 +59,4 @@ public class MapSegment implements MapSegmentDTO {
         return sb.toString();
     }
 }
+
