@@ -1,7 +1,6 @@
 package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,8 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.common.base.Supplier;
@@ -25,6 +22,7 @@ import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
@@ -36,7 +34,6 @@ import com.innovations.aguilar.pocketstrats.ui.MapTipItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsChild;
 import com.innovations.aguilar.pocketstrats.ui.MapTipsHeader;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -179,34 +176,46 @@ public class MapTipsView extends CoordinatorLayout {
     List<MapTipsHeader> loadTipsForTab(MapDataDTO map, SpawnSide side) {
         List<MapSubjectDTO> subjects;
         List<MapSpecificTipDTO> specificTips;
+        List<MapTypeTipDTO> typeTips;
         MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
         try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
-            subjects = accessor.GetMapSubjectsByMap(map.getMapId(), side);
+            subjects = accessor.GetMapSubjectsByMapOrSide(map.getMapId(), side);
             specificTips = accessor.GetMapSpecificTipsByMap(map.getMapId(), side);
+            typeTips = accessor.GetMapTypeTipsByMapType(map.getMapTypeId(), side);
         }
 
         Map<Integer, List<MapSpecificTipDTO>> subjectTipMap =
-                generateSubjectTipMap(subjects, specificTips);
+                generateSubjectSpecificTipMap(specificTips);
+        Map<Integer, List<MapTypeTipDTO>> typeTipMap =
+                generateSubjectTypeTipMap( typeTips);
 
         List<MapTipsHeader> groupHeaders = Lists.newArrayList();
+
+        // TODO: Cant order by precedence and go, need to differentiate Sections from Tips
+        // Just make maptip precedence global. Only reset on subject.
+        for (MapSubjectDTO subject :
+                subjects) {
+            if (typeTipMap.containsKey(subject.getMapSubjectId())) {
+                List<MapTipsChild> children = generateChildMapTypeTips(typeTipMap, subject);
+                MapTipsHeader header = new MapTipsHeader(subject, children);
+                groupHeaders.add(header);
+            }
+        }
 
         for (MapSubjectDTO subject :
                 subjects) {
             if (subjectTipMap.containsKey(subject.getMapSubjectId())) {
-                List<MapTipsChild> children = generateChildMapTips(subjectTipMap, subject);
+                List<MapTipsChild> children = generateChildMapSpecificTips(subjectTipMap, subject);
                 MapTipsHeader header = new MapTipsHeader(subject, children);
                 groupHeaders.add(header);
             }
-            else
-                Log.w(this.getClass().getName(), String.format("Missing Subject from Map '%s'", subject));
-            // TODO: standardize logging and forward log4j to android log.
         }
 
         return groupHeaders;
     }
 
     @NonNull
-    private List<MapTipsChild> generateChildMapTips(Map<Integer, List<MapSpecificTipDTO>> subjectTipMap, MapSubjectDTO subject) {
+    private List<MapTipsChild> generateChildMapSpecificTips(Map<Integer, List<MapSpecificTipDTO>> subjectTipMap, MapSubjectDTO subject) {
         List<MapSpecificTipDTO> childrenSpecificTips = subjectTipMap.get(subject.getMapSubjectId());
         List<MapTipsChild> children = Lists.newArrayList();
         for (MapSpecificTipDTO specificTip :
@@ -215,22 +224,42 @@ public class MapTipsView extends CoordinatorLayout {
         }
         return children;
     }
-
-    private Map<Integer, List<MapSpecificTipDTO>> generateSubjectTipMap(List<MapSubjectDTO> subjects,
-                                                                        List<MapSpecificTipDTO> specificTips) {
-        Map<Integer, List<MapSpecificTipDTO>> subjectTipMap = Maps.newHashMap();
-        for (MapSubjectDTO subject :
-                subjects) {
-            subjectTipMap.put(new Integer(subject.getMapSubjectId()), Lists.<MapSpecificTipDTO>newArrayList());
+    @NonNull
+    private List<MapTipsChild> generateChildMapTypeTips(Map<Integer, List<MapTypeTipDTO>> subjectTipMap, MapSubjectDTO subject) {
+        List<MapTypeTipDTO> childrenSpecificTips = subjectTipMap.get(subject.getMapSubjectId());
+        List<MapTipsChild> children = Lists.newArrayList();
+        for (MapTypeTipDTO typeTip :
+                childrenSpecificTips) {
+            children.add(new MapTipsChild(typeTip.getMapTipDescription()));
         }
+        return children;
+    }
+
+    private Map<Integer, List<MapSpecificTipDTO>> generateSubjectSpecificTipMap(List<MapSpecificTipDTO> specificTips) {
+        Map<Integer, List<MapSpecificTipDTO>> subjectTipMap = Maps.newHashMap();
 
         for (MapSpecificTipDTO specificTip :
                 specificTips) {
             if (subjectTipMap.containsKey(specificTip.getMapSubjectId()))
                 subjectTipMap.get(specificTip.getMapSubjectId()).add(specificTip);
-            else
-                Log.w(this.getClass().getName(), String.format("Orphaned SpecificTip '%s'", specificTip));
-            // TODO: standardize logging and forward log4j to android log.
+            else {
+                List<MapSpecificTipDTO> tips = Lists.newArrayList(specificTip);
+                subjectTipMap.put(new Integer(specificTip.getMapSubjectId()), tips);
+            }
+        }
+        return subjectTipMap;
+    }
+    private Map<Integer, List<MapTypeTipDTO>> generateSubjectTypeTipMap(List<MapTypeTipDTO> typeTips) {
+        Map<Integer, List<MapTypeTipDTO>> subjectTipMap = Maps.newHashMap();
+
+        for (MapTypeTipDTO typeTip :
+                typeTips) {
+            if (subjectTipMap.containsKey(typeTip.getMapSubjectId()))
+                subjectTipMap.get(typeTip.getMapSubjectId()).add(typeTip);
+            else {
+                List<MapTypeTipDTO> tips = Lists.newArrayList(typeTip);
+                subjectTipMap.put(new Integer(typeTip.getMapSubjectId()), tips);
+            }
         }
         return subjectTipMap;
     }

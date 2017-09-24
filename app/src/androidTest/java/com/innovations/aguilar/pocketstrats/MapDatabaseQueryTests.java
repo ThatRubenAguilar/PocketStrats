@@ -10,6 +10,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapSpawnStatisticDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 
@@ -165,8 +166,8 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
 
     @Test
-    public void Accessor_Should_Read_Map_Subjects_By_Map() throws Exception {
-        List<MapSubjectDTO> mapSubjects = accessor.GetMapSubjectsByMap(1 /*Anubis*/, SpawnSide.Attack);
+    public void Accessor_Should_Read_Map_Subjects_By_Map_Or_Side() throws Exception {
+        List<MapSubjectDTO> mapSubjects = accessor.GetMapSubjectsByMapOrSide(1 /*Anubis*/, SpawnSide.Attack);
         final int ExpectedMinimumSubjects = 4; // Forward, Point, Forward, Point
 
         int SubjectCount = mapSubjects.size();
@@ -179,9 +180,19 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
         List<MapSpecificTipDTO> mapSpecificTips = accessor.GetMapSpecificTipsByMap(1, SpawnSide.Attack);
         final int ExpectedMinimumTips = 1;
 
-        int SubjectCount = mapSpecificTips.size();
+        int tipCount = mapSpecificTips.size();
 
-        assertTrue(ExpectedMinimumTips < SubjectCount);
+        assertTrue(ExpectedMinimumTips < tipCount);
+    }
+
+    @Test
+    public void Accessor_Should_Read_Map_Type_Tips() throws Exception {
+        List<MapTypeTipDTO> mapTypeTips = accessor.GetMapTypeTipsByMapType(MapType.Assault, SpawnSide.Attack);
+        final int ExpectedMinimumTips = 1;
+
+        int tipCount = mapTypeTips.size();
+
+        assertTrue(ExpectedMinimumTips < tipCount);
     }
 
     // TODO: Test and query beyond map specific tips

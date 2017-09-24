@@ -23,9 +23,11 @@ Section|Good hold positioning has several aspects:
  Tip|Opportunities for to set up crossfire.
  Tip|Good cover and sightlines for support/range dps.
  Tip|Limited cover for the enemy team.
-Section|Composition strategies:
- Tip|Look to create synergies with teammates with your picks.
- Tip|Look to counter an enemy's strategy or player with your picks.
+ 
+Subject|Composition
+ Section|Look to create synergies with teammates with your picks.
+ Section|Look to counter an enemy's strategy or player with your picks.
+ Section|Strategies:
  Tip|6 Grouped, bullies positioning for supports/range dps as a group, then looks to initiate.
  Tip|3/3 Split, one support with each group, looks to find 2 good approaches and pincer the enemy.
  Tip|1/5 or 2/4 Flanks, 1 or 2 flankers look for positioning to go in on the backline when the enemy team initiates.

@@ -25,6 +25,8 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTime;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeSpawnTimeDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTip;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 
 public class SqlDataAccessor implements AutoCloseable {
@@ -55,8 +57,9 @@ public class SqlDataAccessor implements AutoCloseable {
     }
 
     public Cursor GetMapSubjectsCursorByMap(Integer mapId, SpawnSide side) {
-        String whereClause = String.format("%s = ? AND %s = ?",
-                MapData.Columns.MapIdColumn, MapSubject.Columns.SpawnSideIdColumn);
+        String whereClause = String.format("(%s = ? OR %s IS NULL) AND %s = ?",
+                MapData.Columns.MapIdColumn,MapData.Columns.MapIdColumn,
+                MapSubject.Columns.SpawnSideIdColumn);
         String mapIdStr = "NULL";
         if (mapId != null)
             mapIdStr = mapId.toString();
@@ -67,7 +70,7 @@ public class SqlDataAccessor implements AutoCloseable {
         return readableDb.query(MapSubject.Columns.TableName, MapSubject.Columns.QualifiedColumnNames, whereClause, whereArgs,
                 null, null, order);
     }
-    public List<MapSubjectDTO> GetMapSubjectsByMap(Integer mapId, SpawnSide side) {
+    public List<MapSubjectDTO> GetMapSubjectsByMapOrSide(Integer mapId, SpawnSide side) {
         try (Cursor c = GetMapSubjectsCursorByMap(mapId, side)) {
             return MakeListFromCursor(c, MapSubject.Factory);
         }
@@ -242,6 +245,42 @@ public class SqlDataAccessor implements AutoCloseable {
     public List<MapSpecificTipDTO> GetMapSpecificTipsByMap(int mapId, SpawnSide side) {
         try (Cursor c = GetMapSpecificTipsCursorByMap(mapId, side)) {
             return MakeListFromCursor(c, MapSpecificTip.Factory);
+        }
+    }
+
+
+    public Cursor GetMapTypeTipsCursorByMapType(MapType typeId, SpawnSide side) {
+        String whereClause = String.format("%s = ? AND %s = ?", MapTypeTip.Columns.MapTypeIdColumn,
+                MapSubject.Columns.SpawnSideIdColumn);
+        String[] whereArgs = {
+                Integer.toString(typeId.typeId),
+                Integer.toString(side.spawnSideId)
+        };
+        String tableName = String.format("%s INNER JOIN %s ON %s.%s = %s.%s INNER JOIN %s ON %s.%s = %s.%s",
+                // JOIN 1
+                MapSubject.Columns.TableName, MapTip.Columns.TableName,
+                MapSubject.Columns.TableName, MapSubject.Columns.MapSubjectIdColumn,
+                MapTip.Columns.TableName, MapTip.Columns.MapSubjectIdColumn,
+                // JOIN 2
+                MapTypeTip.Columns.TableName,
+                MapTip.Columns.TableName, MapTip.Columns.MapTipIdColumn,
+                MapTypeTip.Columns.TableName, MapTypeTip.Columns.MapTipIdColumn
+        );
+
+        String order = String.format("%s ASC, %s ASC",
+                MapSubject.Columns.qualifyColumn(MapSubject.Columns.MapSubjectIdColumn),
+                MapTip.Columns.qualifyColumn(MapTip.Columns.OrderPrecedenceColumn));
+
+        String[] columns = MapTypeTip.Columns.joinAndQualifyColumns(MapTip.Columns);
+
+        return readableDb.query(tableName, columns, whereClause, whereArgs,
+                null, null, order);
+    }
+
+
+    public List<MapTypeTipDTO> GetMapTypeTipsByMapType(MapType typeId, SpawnSide side) {
+        try (Cursor c = GetMapTypeTipsCursorByMapType(typeId, side)) {
+            return MakeListFromCursor(c, MapTypeTip.Factory);
         }
     }
 

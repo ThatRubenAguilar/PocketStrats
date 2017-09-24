@@ -36,17 +36,17 @@
 
 
 
+        <!--android:divider="@null"-->
+        <!--android:dividerHeight="0dp"-->
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/list_tips"
+            android:groupIndicator="@drawable/tips_expandable_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
     </LinearLayout>
 
-    <!--android:divider="@null"-->
-    <!--android:dividerHeight="0dp"-->
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/list_tips"
-        android:groupIndicator="@drawable/tips_expandable_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"/>
 
 
     <android.support.design.widget.FloatingActionButton

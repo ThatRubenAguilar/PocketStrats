@@ -21,6 +21,8 @@ public class TipsDocument {
 
     List<SubjectNode> Subjects;
 
+    int tipPrecedenceAccum = 1;
+
     public TipsDocument(List<TextNode> rawNodes) {
         Subjects = parseRawNodes(rawNodes);
     }
