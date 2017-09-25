@@ -116,8 +116,8 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
     }
     void showTipsView(MapDataDTO map) {
         mainContainer.get().removeViewToBackStack(this);
-        View rootView = View.inflate(getContext(), R.layout.map_tips, mainContainer.get());
-        MapTipsView tipsView = (MapTipsView) rootView.findViewById(R.id.layout_map_tips);
+        View rootView = View.inflate(getContext(), R.layout.map_subjects, mainContainer.get());
+        MapSubjectsView tipsView = (MapSubjectsView) rootView.findViewById(R.id.layout_map_tips);
         tipsView.loadTipsForMap(map);
     }
 

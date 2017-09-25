@@ -138,3 +138,4 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
     }
 
 }
+

@@ -21,10 +21,14 @@ public class TipsDocument {
 
     List<SubjectNode> Subjects;
 
-    int tipPrecedenceAccum = 1;
+    int tipPrecedenceAccum;
 
     public TipsDocument(List<TextNode> rawNodes) {
         Subjects = parseRawNodes(rawNodes);
+    }
+
+    void resetTipPrecedence() {
+        tipPrecedenceAccum = 1;
     }
 
     final Set<String> infoLevelTokens = Sets.newHashSet(Tokens.Map, Tokens.Side, Tokens.Tags, Tokens.Category, Tokens.Type, Tokens.MapSegment);
@@ -33,6 +37,7 @@ public class TipsDocument {
     final Set<String> pickLevelTokens = Sets.newHashSet(Tokens.Pick);
     final Set<String> tipLevelTokens = Sets.newHashSet(Tokens.Tip);
     List<SubjectNode> parseRawNodes(List<TextNode> allNodes) {
+        resetTipPrecedence();
         List<SubjectNode> subjects = Lists.newArrayList();
         InfoNode currentInfo = new InfoNode();
         PeekingIterator<TextNode> rawNodes = Iterators.peekingIterator(allNodes.iterator());
@@ -45,6 +50,7 @@ public class TipsDocument {
                 SubjectNode sNode = parseSubjectNode(rawNodes, currentInfo);
                 sNode.Precedence = subjects.size() + 1;
                 subjects.add(sNode);
+                resetTipPrecedence();
             }
             else {
                 log.get().warn(String.format("Unprocessed node in rawNodes '%s'", currentNode));
@@ -66,7 +72,6 @@ public class TipsDocument {
                 currentInfo = HandleInfoNode(rawNodes, currentInfo);
             else if (sectionLevelTokens.contains(currentNode.nodeType)) {
                 SectionNode sectNode = parseSectionNode(rawNodes, currentInfo);
-                sectNode.Precedence = subjNode.SectionNodes.size() + 1;
                 subjNode.SectionNodes.add(sectNode);
             }
             else if (Tokens.AllTokens.contains(currentNode.nodeType))
@@ -84,18 +89,17 @@ public class TipsDocument {
         SectionNode sectNode = new SectionNode();
         sectNode.INode = currentInfo.Copy();
         sectNode.Message = currentNode.nodeContents.get(0);
+        sectNode.Precedence = tipPrecedenceAccum++;
         while(rawNodes.hasNext()) {
             currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
                 currentInfo = HandleInfoNode(rawNodes, currentInfo);
             else if (tipLevelTokens.contains(currentNode.nodeType)) {
                 TipNode tipNode = parseTipNode(rawNodes, currentInfo);
-                tipNode.Precedence = sectNode.TipNodes.size() + sectNode.PickNodes.size() + 1;
                 sectNode.TipNodes.add(tipNode);
             }
             else if (pickLevelTokens.contains(currentNode.nodeType)) {
                 PickNode pickNode = parsePickNode(rawNodes, currentInfo);
-                pickNode.Precedence = sectNode.TipNodes.size() + sectNode.PickNodes.size() + 1;
                 sectNode.PickNodes.add(pickNode);
             }
             else if (Tokens.AllTokens.contains(currentNode.nodeType))
@@ -113,6 +117,7 @@ public class TipsDocument {
         TipNode tipNode = new TipNode();
         tipNode.INode = currentInfo.Copy();
         tipNode.Message = currentNode.nodeContents.get(0);
+        tipNode.Precedence = tipPrecedenceAccum++;
         return tipNode;
     }
     PickNode parsePickNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
@@ -120,13 +125,13 @@ public class TipsDocument {
         PickNode pickNode = new PickNode();
         pickNode.INode = currentInfo.Copy();
         pickNode.Message = currentNode.nodeContents.get(0);
+        pickNode.Precedence = tipPrecedenceAccum++;
         while(rawNodes.hasNext()) {
             currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
                 currentInfo = HandleInfoNode(rawNodes, currentInfo);
             else if (tipLevelTokens.contains(currentNode.nodeType)) {
                 TipNode tipNode = parseTipNode(rawNodes, currentInfo);
-                tipNode.Precedence = pickNode.TipNodes.size() + 1;
                 pickNode.TipNodes.add(tipNode);
             }
             else if (Tokens.AllTokens.contains(currentNode.nodeType))

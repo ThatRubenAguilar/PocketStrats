@@ -30,15 +30,16 @@ import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
-import com.innovations.aguilar.pocketstrats.ui.MapTipItemAdapter;
-import com.innovations.aguilar.pocketstrats.ui.MapTipsChild;
-import com.innovations.aguilar.pocketstrats.ui.MapTipsHeader;
+import com.innovations.aguilar.pocketstrats.ui.MapSubjectHeader;
+import com.innovations.aguilar.pocketstrats.ui.MapSubjectItemAdapter;
+import com.innovations.aguilar.pocketstrats.ui.MapSubjectChildInfo;
+import com.innovations.aguilar.pocketstrats.ui.TipsChild;
 
 import java.util.List;
 import java.util.Map;
 
 // TODO: Add tests for these views and how they act on deletion/restore
-public class MapTipsView extends CoordinatorLayout {
+public class MapSubjectsView extends CoordinatorLayout {
 
 
     Supplier<MainPaneContainer> mainContainer;
@@ -48,10 +49,10 @@ public class MapTipsView extends CoordinatorLayout {
     private FloatingActionButton returnToTop;
     RecyclerView tipsList;
 
-    Supplier<MapTipItemAdapter> attackSupplier;
-    Supplier<MapTipItemAdapter> defendSupplier;
+    Supplier<MapSubjectItemAdapter> attackSupplier;
+    Supplier<MapSubjectItemAdapter> defendSupplier;
 
-    public MapTipsView(Context context, @Nullable AttributeSet attrs) {
+    public MapSubjectsView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -72,7 +73,7 @@ public class MapTipsView extends CoordinatorLayout {
         returnToTop = (FloatingActionButton)findViewById(R.id.button_return_to_top);
         mapIcon = (TextView)findViewById(R.id.map_icon);
         spawnTabs = (TabLayout)findViewById(R.id.spawn_tabs);
-        tipsList = (RecyclerView)findViewById(R.id.list_tips);
+        tipsList = (RecyclerView)findViewById(R.id.list_subjects);
 
         spawnTabs.addTab(configureTab(spawnTabs.newTab(), SpawnSide.Attack));
         spawnTabs.addTab(configureTab(spawnTabs.newTab(),SpawnSide.Defend));
@@ -117,7 +118,7 @@ public class MapTipsView extends CoordinatorLayout {
         returnToTop.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MapTipItemAdapter) tipsList.getAdapter()).collapseAll();
+                ((MapSubjectItemAdapter) tipsList.getAdapter()).collapseAll();
                 returnToTop.hide();
             }
         });
@@ -137,22 +138,24 @@ public class MapTipsView extends CoordinatorLayout {
 
         configureMapIcon(map);
 
-        attackSupplier = new Supplier<MapTipItemAdapter>() {
+        attackSupplier = new Supplier<MapSubjectItemAdapter>() {
             @Override
-            public MapTipItemAdapter get() {
-                List<MapTipsHeader> groupHeaders = loadTipsForTab(map, SpawnSide.Attack);
-                return new MapTipItemAdapter(getContext(), groupHeaders);
+            public MapSubjectItemAdapter get() {
+                List<MapSubjectHeader> groupHeaders = loadTipsForTab(map, SpawnSide.Attack);
+                return new MapSubjectItemAdapter(getContext(), groupHeaders);
             }
         };
-        defendSupplier = new Supplier<MapTipItemAdapter>() {
+        defendSupplier = new Supplier<MapSubjectItemAdapter>() {
             @Override
-            public MapTipItemAdapter get() {
-                List<MapTipsHeader> groupHeaders = loadTipsForTab(map, SpawnSide.Defend);
-                return new MapTipItemAdapter(getContext(), groupHeaders);
+            public MapSubjectItemAdapter get() {
+                List<MapSubjectHeader> groupHeaders = loadTipsForTab(map, SpawnSide.Defend);
+                return new MapSubjectItemAdapter(getContext(), groupHeaders);
             }
         };
 
-        tipsList.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setAutoMeasureEnabled(true);
+        tipsList.setLayoutManager(manager);
         configureTipsForTab(SpawnSide.Attack);
     }
 
@@ -173,7 +176,7 @@ public class MapTipsView extends CoordinatorLayout {
     }
 
 
-    List<MapTipsHeader> loadTipsForTab(MapDataDTO map, SpawnSide side) {
+    List<MapSubjectHeader> loadTipsForTab(MapDataDTO map, SpawnSide side) {
         List<MapSubjectDTO> subjects;
         List<MapSpecificTipDTO> specificTips;
         List<MapTypeTipDTO> typeTips;
@@ -189,15 +192,13 @@ public class MapTipsView extends CoordinatorLayout {
         Map<Integer, List<MapTypeTipDTO>> typeTipMap =
                 generateSubjectTypeTipMap( typeTips);
 
-        List<MapTipsHeader> groupHeaders = Lists.newArrayList();
+        List<MapSubjectHeader> groupHeaders = Lists.newArrayList();
 
-        // TODO: Cant order by precedence and go, need to differentiate Sections from Tips
-        // Just make maptip precedence global. Only reset on subject.
         for (MapSubjectDTO subject :
                 subjects) {
             if (typeTipMap.containsKey(subject.getMapSubjectId())) {
-                List<MapTipsChild> children = generateChildMapTypeTips(typeTipMap, subject);
-                MapTipsHeader header = new MapTipsHeader(subject, children);
+                List<MapSubjectChildInfo> children = generateChildMapTypeTips(typeTipMap, subject);
+                MapSubjectHeader header = new MapSubjectHeader(subject, children);
                 groupHeaders.add(header);
             }
         }
@@ -205,8 +206,8 @@ public class MapTipsView extends CoordinatorLayout {
         for (MapSubjectDTO subject :
                 subjects) {
             if (subjectTipMap.containsKey(subject.getMapSubjectId())) {
-                List<MapTipsChild> children = generateChildMapSpecificTips(subjectTipMap, subject);
-                MapTipsHeader header = new MapTipsHeader(subject, children);
+                List<MapSubjectChildInfo> children = generateChildMapSpecificTips(subjectTipMap, subject);
+                MapSubjectHeader header = new MapSubjectHeader(subject, children);
                 groupHeaders.add(header);
             }
         }
@@ -215,24 +216,29 @@ public class MapTipsView extends CoordinatorLayout {
     }
 
     @NonNull
-    private List<MapTipsChild> generateChildMapSpecificTips(Map<Integer, List<MapSpecificTipDTO>> subjectTipMap, MapSubjectDTO subject) {
+    private List<MapSubjectChildInfo> generateChildMapSpecificTips(Map<Integer, List<MapSpecificTipDTO>> subjectTipMap, MapSubjectDTO subject) {
         List<MapSpecificTipDTO> childrenSpecificTips = subjectTipMap.get(subject.getMapSubjectId());
-        List<MapTipsChild> children = Lists.newArrayList();
+        MapSubjectChildInfo child = new MapSubjectChildInfo();
+
         for (MapSpecificTipDTO specificTip :
                 childrenSpecificTips) {
-            children.add(new MapTipsChild(specificTip.getMapTipDescription()));
+            boolean isSection = specificTip.getParentMapTipId() == null;
+            child.getTips().add(new TipsChild(specificTip.getMapTipDescription(),
+                    isSection));
         }
-        return children;
+        return Lists.newArrayList(child);
     }
     @NonNull
-    private List<MapTipsChild> generateChildMapTypeTips(Map<Integer, List<MapTypeTipDTO>> subjectTipMap, MapSubjectDTO subject) {
-        List<MapTypeTipDTO> childrenSpecificTips = subjectTipMap.get(subject.getMapSubjectId());
-        List<MapTipsChild> children = Lists.newArrayList();
+    private List<MapSubjectChildInfo> generateChildMapTypeTips(Map<Integer, List<MapTypeTipDTO>> subjectTipMap, MapSubjectDTO subject) {
+        List<MapTypeTipDTO> childrenTypeTips = subjectTipMap.get(subject.getMapSubjectId());
+        MapSubjectChildInfo child = new MapSubjectChildInfo();
         for (MapTypeTipDTO typeTip :
-                childrenSpecificTips) {
-            children.add(new MapTipsChild(typeTip.getMapTipDescription()));
+                childrenTypeTips) {
+            boolean isSection = typeTip.getParentMapTipId() == null;
+            child.getTips().add(new TipsChild(typeTip.getMapTipDescription(),
+                    isSection));
         }
-        return children;
+        return Lists.newArrayList(child);
     }
 
     private Map<Integer, List<MapSpecificTipDTO>> generateSubjectSpecificTipMap(List<MapSpecificTipDTO> specificTips) {
@@ -265,24 +271,24 @@ public class MapTipsView extends CoordinatorLayout {
     }
 
 
-//        List<MapTipsHeader> groupHeaders = Lists.newArrayList();
+//        List<MapSubjectHeader> groupHeaders = Lists.newArrayList();
 //        List<MapTipsChild> mapTypeTips = getMapTypeTips(map);
 //        if (mapTypeTips.size() > 0) {
-//            groupHeaders.add(new MapTipsHeader("Mode", mapTypeTips));
+//            groupHeaders.add(new MapSubjectHeader("Mode", mapTypeTips));
 //        }
 //        List<MapTipsChild> mapTips = getMapTips(map);
 //        if (mapTips.size() > 0) {
-//            groupHeaders.add(new MapTipsHeader("Map", mapTips));
+//            groupHeaders.add(new MapSubjectHeader("Map", mapTips));
 //        }
 //        List<MapTipsChild> mapSegmentTips = getMapSegmentTipsForMap(map);
 //        if (mapSegmentTips.size() > 0) {
 //            // TODO: Query segments by Id to get names
-//            groupHeaders.add(new MapTipsHeader("Segment", mapSegmentTips));
+//            groupHeaders.add(new MapSubjectHeader("Segment", mapSegmentTips));
 //        }
 //        List<MapTipsChild> mapLocationTips = getMapLocationTipsForMap(map);
 //        if (mapLocationTips.size() > 0) {
 //            // TODO: Query locations by Id to get names
-//            groupHeaders.add(new MapTipsHeader("Location", mapLocationTips));
+//            groupHeaders.add(new MapSubjectHeader("Location", mapLocationTips));
 //        }
 //
 

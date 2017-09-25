@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.innovations.aguilar.pocketstrats.ui.view.MapTipsView
+<com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_map_tips"
@@ -40,7 +40,7 @@
         <!--android:dividerHeight="0dp"-->
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/list_tips"
+            android:id="@+id/list_subjects"
             android:groupIndicator="@drawable/tips_expandable_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,4 +61,4 @@
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"/>
 
-</com.innovations.aguilar.pocketstrats.ui.view.MapTipsView>
+</com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView>

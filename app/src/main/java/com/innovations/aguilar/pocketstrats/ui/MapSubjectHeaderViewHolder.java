@@ -12,20 +12,20 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
-public class HeaderViewHolder extends GroupViewHolder {
+public class MapSubjectHeaderViewHolder extends GroupViewHolder {
 
     private final TextView header;
     private final ImageView arrow;
     private final Context context;
 
-    public HeaderViewHolder(View itemView, Context context) {
+    public MapSubjectHeaderViewHolder(View itemView, Context context) {
         super(itemView);
         header = (TextView) itemView.findViewById(R.id.text_list_map_tip_group);
         arrow = (ImageView)itemView.findViewById(R.id.arrow_map_tip_group);
         this.context = context;
     }
 
-    public void setHeaderText(ExpandableGroup group) {
+    public void configureHeaderView(ExpandableGroup group) {
         header.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         header.setText(group.getTitle());
     }
