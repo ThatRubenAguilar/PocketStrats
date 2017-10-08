@@ -42,11 +42,11 @@ public class MapSummaryStatisticsQueryTests extends MapDatabaseTestFixture {
 
     @Test
     public void Spawn_Advantage_Summary_Statistics_Should_Be_Calculated_For_Map() throws Exception {
-        MapDataDTO anubis = accessor.GetMapById(1);
+        MapDataDTO anubis = accessor.mapAccessor().GetMapById(1);
         SortedMap<MapLocationDTO, MapLocationSpawnAdvantageSummary> anubisLocationStats =
                 spawnStatGenerator.GenerateLocationSpawnAdvantageSummaries(anubis);
 
-        List<MapLocationDTO> anubisLocations = accessor.GetMapLocationsByMap(anubis.getMapId());
+        List<MapLocationDTO> anubisLocations = accessor.mapAccessor().GetMapLocationsByMap(anubis.getMapId());
         MapLocationDTO firstForwardChoke = anubisLocations.get(0);
 
         MapLocationSpawnAdvantageSummary forwardChokeSummary = anubisLocationStats.get(firstForwardChoke);

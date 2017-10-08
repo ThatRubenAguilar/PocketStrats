@@ -8,9 +8,13 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubject;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectAssociation;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectAssociationDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDescription;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDescriptionDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTip;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 
@@ -24,13 +28,30 @@ public class SqlDataWriter implements AutoCloseable {
         this.writeableDb = writeableDb;
     }
 
+    public int WriteMapSubjectAssociation(MapSubjectAssociationDTO mapSubjectAssociation) {
+        ContentValues mapSubjectAssocContent = new ContentValues();
+        mapSubjectAssocContent.put(MapSubjectAssociation.Columns.MapSubjectIdColumn,
+                mapSubjectAssociation.getMapSubjectId());
+        mapSubjectAssocContent.put(MapSubjectAssociation.Columns.AssociatedMapSubjectIdColumn,
+                mapSubjectAssociation.getAssociatedMapSubjectId());
+        return (int)writeableDb.insert(MapSubjectAssociation.Columns.TableName, null, mapSubjectAssocContent);
+    }
+
     public int WriteMapSubject(MapSubjectDTO mapSubject) {
         writeableDb.beginTransaction();
         try {
             ContentValues mapSubjectContent = new ContentValues();
+
+            int mapTipDescriptionId = mapSubject.getMapTipDescriptionId();
+            if (mapTipDescriptionId <= 0) {
+                mapTipDescriptionId = WriteMapTipDescription(mapSubject);
+                if (mapTipDescriptionId < 0)
+                    return -1;
+            }
+
             mapSubjectContent.put(MapSubject.Columns.MapIdColumn, mapSubject.getMapId());
             mapSubjectContent.put(MapSubject.Columns.MapSubjectPrecedenceColumn, mapSubject.getMapSubjectPrecedence());
-            mapSubjectContent.put(MapSubject.Columns.MapSubjectDescriptionColumn, mapSubject.getMapSubjectDescription());
+            mapSubjectContent.put(MapSubject.Columns.MapTipDescriptionIdColumn, mapTipDescriptionId);
             mapSubjectContent.put(MapSubject.Columns.SegmentIdColumn, mapSubject.getSegmentId());
             mapSubjectContent.put(MapSubject.Columns.SpawnSideDescriptionColumn, mapSubject.getSpawnSideId().toString());
             mapSubjectContent.put(MapSubject.Columns.SpawnSideIdColumn, mapSubject.getSpawnSideId().spawnSideId);
@@ -50,7 +71,7 @@ public class SqlDataWriter implements AutoCloseable {
         try {
             int mapTipId = mapSpecificTip.getMapTipId();
             if (mapTipId <= 0) {
-                mapTipId = WriteMapTip(mapSpecificTip);
+                mapTipId = writeMapTipInternal(mapSpecificTip);
                 if (mapTipId < 0)
                     return -1;
             }
@@ -72,7 +93,7 @@ public class SqlDataWriter implements AutoCloseable {
         try {
             int mapTipId = mapTypeTip.getMapTipId();
             if (mapTipId <= 0) {
-                mapTipId = WriteMapTip(mapTypeTip);
+                mapTipId = writeMapTipInternal(mapTypeTip);
                 if (mapTipId < 0)
                     return -1;
             }
@@ -96,7 +117,7 @@ public class SqlDataWriter implements AutoCloseable {
 
             int mapTipId = mapHeroPickTip.getMapTipId();
             if (mapTipId <= 0) {
-                mapTipId = WriteMapTip(mapHeroPickTip);
+                mapTipId = writeMapTipInternal(mapHeroPickTip);
                 if (mapTipId < 0)
                     return -1;
             }
@@ -116,16 +137,41 @@ public class SqlDataWriter implements AutoCloseable {
     }
 
     public int WriteMapTip(MapTipDTO mapTip) {
+        writeableDb.beginTransaction();
+        try {
+            int mapTipId = writeMapTipInternal(mapTip);
+            writeableDb.setTransactionSuccessful();
+            return mapTipId;
+        }
+        finally {
+            writeableDb.endTransaction();
+        }
+    }
+
+    private int writeMapTipInternal(MapTipDTO mapTip) {
         ContentValues mapTipContent = new ContentValues();
         if (mapTip.getMapSubjectId() <= 0)
             mapTipContent.putNull(MapTip.Columns.MapSubjectIdColumn);
         else
             mapTipContent.put(MapTip.Columns.MapSubjectIdColumn, mapTip.getMapSubjectId());
 
-        mapTipContent.put(MapTip.Columns.MapTipDescriptionColumn, mapTip.getMapTipDescription());
+        int mapTipDescriptionId = mapTip.getMapTipDescriptionId();
+        if (mapTipDescriptionId <= 0) {
+            mapTipDescriptionId = WriteMapTipDescription(mapTip);
+            if (mapTipDescriptionId < 0)
+                return -1;
+        }
+        mapTipContent.put(MapTip.Columns.MapTipDescriptionIdColumn, mapTipDescriptionId);
         mapTipContent.put(MapTip.Columns.ParentMapTipIdColumn, mapTip.getParentMapTipId());
         mapTipContent.put(MapTip.Columns.OrderPrecedenceColumn, mapTip.getOrderPrecedence());
         return (int)writeableDb.insert(MapTip.Columns.TableName, null, mapTipContent);
+    }
+
+    public int WriteMapTipDescription(MapTipDescriptionDTO mapTipDescription) {
+        ContentValues mapTipContent = new ContentValues();
+        mapTipContent.put(MapTipDescription.Columns.MapTipDescriptionHashColumn, mapTipDescription.getMapTipDescriptionHash());
+        mapTipContent.put(MapTipDescription.Columns.MapTipDescriptionColumn, mapTipDescription.getMapTipDescription());
+        return (int)writeableDb.insert(MapTipDescription.Columns.TableName, null, mapTipContent);
     }
 
     @Override

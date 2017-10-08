@@ -64,7 +64,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
     @Test
     public void Accessor_Should_Read_All_Maps() throws Exception {
-        List<MapDataDTO> maps = accessor.GetAllMaps();
+        List<MapDataDTO> maps = accessor.mapAccessor().GetAllMaps();
 
         for (MapDataDTO map :
                 maps) {
@@ -76,7 +76,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     public void Accessor_Should_Read_Map_By_Id() throws Exception {
         int expectedMapId = 1;
         String expectedShortName = "Anubis";
-        MapDataDTO map = accessor.GetMapById(expectedMapId);
+        MapDataDTO map = accessor.mapAccessor().GetMapById(expectedMapId);
 
         assertEquals(expectedMapId, map.getMapId());
         assertEquals(expectedShortName, map.getMapNameShort());
@@ -84,14 +84,14 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     @Test
     public void Accessor_Should_Read_Maps_By_Type() throws Exception {
         int expectedMaps = MapNumberByType.get(MapType.Assault);
-        List<MapDataDTO> maps = accessor.GetMapsByType(MapType.Assault);
+        List<MapDataDTO> maps = accessor.mapAccessor().GetMapsByType(MapType.Assault);
 
         assertEquals(expectedMaps, maps.size());
     }
 
     @Test
     public void Accessor_Should_Read_All_Map_Segments() throws Exception {
-        List<MapSegmentDTO> mapSegments = accessor.GetAllMapSegments();
+        List<MapSegmentDTO> mapSegments = accessor.mapAccessor().GetAllMapSegments();
 
         for (MapSegmentDTO segment :
                 mapSegments) {
@@ -103,18 +103,18 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     public void Accessor_Should_Read_Map_Segments_By_Map() throws Exception {
         int expectedMapId = 1;
         int expectedMapSegments = 2;
-        List<MapSegmentDTO> mapSegments = accessor.GetMapSegmentsByMap(expectedMapId);
+        List<MapSegmentDTO> mapSegments = accessor.mapAccessor().GetMapSegmentsByMap(expectedMapId);
 
         assertEquals(expectedMapSegments, mapSegments.size());
     }
     @Test
     public void Accessor_Should_Read_Map_Locations_By_Map() throws Exception {
-        List<MapDataDTO> maps = accessor.GetAllMaps();
+        List<MapDataDTO> maps = accessor.mapAccessor().GetAllMaps();
 
         int LocationsCount = 0;
         for (MapDataDTO map :
                 maps) {
-            List<MapLocationDTO> mapLocations = accessor.GetMapLocationsByMap(map.getMapId());
+            List<MapLocationDTO> mapLocations = accessor.mapAccessor().GetMapLocationsByMap(map.getMapId());
             LocationsCount += mapLocations.size();
         }
 
@@ -122,12 +122,12 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     }
     @Test
     public void Accessor_Should_Read_Map_Locations_By_Segment() throws Exception {
-        List<MapSegmentDTO> mapSegments = accessor.GetAllMapSegments();
+        List<MapSegmentDTO> mapSegments = accessor.mapAccessor().GetAllMapSegments();
 
         int LocationsCount = 0;
         for (MapSegmentDTO segment :
                 mapSegments) {
-            List<MapLocationDTO> mapLocations = accessor.GetMapLocationsBySegment(segment.getSegmentId());
+            List<MapLocationDTO> mapLocations = accessor.mapAccessor().GetMapLocationsBySegment(segment.getSegmentId());
             LocationsCount += mapLocations.size();
         }
 
@@ -135,7 +135,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     }
     @Test
     public void Accessor_Should_Read_Map_Spawn_Statistics_By_Map_Segment() throws Exception {
-        List<MapSegmentDTO> mapSegments = accessor.GetAllMapSegments();
+        List<MapSegmentDTO> mapSegments = accessor.mapAccessor().GetAllMapSegments();
 
         int StatisticsCount = 0;
         for (MapSegmentDTO segment :
@@ -148,12 +148,12 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
     }
     @Test
     public void Accessor_Should_Read_Map_Spawn_Statistics_By_Map_Location() throws Exception {
-        List<MapSegmentDTO> mapSegments = accessor.GetAllMapSegments();
+        List<MapSegmentDTO> mapSegments = accessor.mapAccessor().GetAllMapSegments();
 
         int StatisticsCount = 0;
         for (MapSegmentDTO segment :
                 mapSegments) {
-            List<MapLocationDTO> mapLocations = accessor.GetMapLocationsBySegment(segment.getSegmentId());
+            List<MapLocationDTO> mapLocations = accessor.mapAccessor().GetMapLocationsBySegment(segment.getSegmentId());
             for (MapLocationDTO location :
                     mapLocations) {
                 List<MapSpawnStatisticDTO> mapSpawnStats = accessor.GetMapSpawnStatsByLocation(location.getLocationId());
@@ -166,18 +166,35 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
 
     @Test
+    public void Accessor_Should_Read_All_Map_Subject_Associations() throws Exception {
+        List<MapSubjectDTO> allSubjects = accessor.mapSubjectAccessor().GetAllMapSubjects();
+        final int ExpectedMinimumSubjects = 1; // Attack or Defend
+
+        for (MapSubjectDTO subject :
+                allSubjects) {
+            List<MapSubjectDTO> associatedSubjects = accessor.mapSubjectAccessor()
+                    .GetMapSubjectsByAssociation(subject.getMapSubjectId());
+            int AssociatedSubjectCount = associatedSubjects.size();
+
+            assertTrue(String.format("Failed to find associations for subject '%s'", subject),
+                    ExpectedMinimumSubjects <= AssociatedSubjectCount);
+        }
+
+    }
+    @Test
     public void Accessor_Should_Read_Map_Subjects_By_Map_Or_Side() throws Exception {
-        List<MapSubjectDTO> mapSubjects = accessor.GetMapSubjectsByMapOrSide(1 /*Anubis*/, SpawnSide.Attack);
-        final int ExpectedMinimumSubjects = 4; // Forward, Point, Forward, Point
+        List<MapSubjectDTO> mapSubjects = accessor.mapSubjectAccessor().GetMapSubjectsByMapOrSide(1 /*Anubis*/,
+                 SpawnSide.Attack);
+        final int ExpectedMinimumSubjects = 6; // General, Assault Type, Forward, Point, Forward, Point
 
         int SubjectCount = mapSubjects.size();
 
-        assertTrue(ExpectedMinimumSubjects < SubjectCount);
+        assertTrue(ExpectedMinimumSubjects <= SubjectCount);
     }
 
     @Test
     public void Accessor_Should_Read_Map_Specific_Tips() throws Exception {
-        List<MapSpecificTipDTO> mapSpecificTips = accessor.GetMapSpecificTipsByMap(1, SpawnSide.Attack);
+        List<MapSpecificTipDTO> mapSpecificTips = accessor.mapTipAccessor().GetMapSpecificTipsByMap(1, SpawnSide.Attack);
         final int ExpectedMinimumTips = 1;
 
         int tipCount = mapSpecificTips.size();
@@ -187,7 +204,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
     @Test
     public void Accessor_Should_Read_Map_Type_Tips() throws Exception {
-        List<MapTypeTipDTO> mapTypeTips = accessor.GetMapTypeTipsByMapType(MapType.Assault, SpawnSide.Attack);
+        List<MapTypeTipDTO> mapTypeTips = accessor.mapTipAccessor().GetMapTypeTipsByMapType(MapType.Assault, SpawnSide.Attack);
         final int ExpectedMinimumTips = 1;
 
         int tipCount = mapTypeTips.size();

@@ -19,9 +19,10 @@ public class MapHeroPickTip extends MapTip implements MapHeroPickTipDTO {
     private final int heroId;
 
     public MapHeroPickTip(int mapTipId, int mapSubjectId, int orderPrecedence,
-                          String mapTipDescription, Integer parentMapTipId,
-                            int mapPickTipId, int heroId) {
-        super(mapTipId, mapSubjectId, orderPrecedence, mapTipDescription, parentMapTipId);
+                          Integer parentMapTipId, int mapPickTipId, int heroId,
+                          int mapTipDescriptionId, int mapTipDescriptionHash, String mapTipDescription) {
+        super(mapTipId, mapSubjectId, orderPrecedence, parentMapTipId,
+                mapTipDescriptionId, mapTipDescriptionHash, mapTipDescription);
         this.mapPickTipId = mapPickTipId;
         this.heroId = heroId;
     }

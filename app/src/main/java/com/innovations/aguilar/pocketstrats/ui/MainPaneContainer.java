@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.innovations.aguilar.pocketstrats.R;
@@ -14,7 +15,7 @@ import java.util.Stack;
 
 public class MainPaneContainer extends FrameLayout implements Container {
     MainScreenView mainView;
-    Stack<View> backStack = new Stack<>();
+    ViewBackStack backStack = new ViewBackStack(this);
 
     public MainPaneContainer(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -28,18 +29,12 @@ public class MainPaneContainer extends FrameLayout implements Container {
 
     @Override
     public boolean onBackPressed() {
-        if (!backStack.isEmpty()) {
-            removeViewAt(0);
-            addView(backStack.pop());
-            return true;
-        }
-        return false;
+        return backStack.onBackPressed();
     }
 
     @Override
     public void removeViewToBackStack(View view) {
-        backStack.push(view);
-        removeView(view);
+        backStack.removeViewToBackStack(view);
     }
 
 }

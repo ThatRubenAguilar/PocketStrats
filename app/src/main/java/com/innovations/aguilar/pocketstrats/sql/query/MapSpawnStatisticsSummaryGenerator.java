@@ -20,7 +20,7 @@ public class MapSpawnStatisticsSummaryGenerator {
     public SortedMap<MapLocationDTO, MapLocationSpawnAdvantageSummary> GenerateLocationSpawnAdvantageSummaries(MapDataDTO map) {
         MapTypeSpawnTimeDTO spawnTime = accessor.GetMapTypeSpawnTimeByType(map.getMapTypeId());
 
-        List<MapLocationDTO> mapLocations = accessor.GetMapLocationsByMap(map.getMapId());
+        List<MapLocationDTO> mapLocations = accessor.mapAccessor().GetMapLocationsByMap(map.getMapId());
         SortedMap<MapLocationDTO, MapLocationSpawnAdvantageSummary> locationSpawnStatsSummaryMap =
                 new TreeMap<>(MapLocationDTO.LocationIdComparer);
         for (MapLocationDTO location :

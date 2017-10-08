@@ -1,9 +1,8 @@
 package com.innovations.aguilar.pocketstrats.sql.dto;
 
-public interface MapTipDTO {
+public interface MapTipDTO extends MapTipDescriptionDTO {
     int getMapTipId();
     Integer getParentMapTipId();
-    String getMapTipDescription();
     int getOrderPrecedence();
     int getMapSubjectId();
 }

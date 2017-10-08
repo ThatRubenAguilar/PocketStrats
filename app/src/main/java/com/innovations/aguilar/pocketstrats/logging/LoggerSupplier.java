@@ -1,5 +1,7 @@
 package com.innovations.aguilar.pocketstrats.logging;
 
+import android.util.Log;
+
 import com.google.common.base.Supplier;
 
 import org.slf4j.Logger;
@@ -22,3 +24,4 @@ public class LoggerSupplier implements Supplier<Logger> {
         return LoggerFactory.getLogger(classType);
     }
 }
+

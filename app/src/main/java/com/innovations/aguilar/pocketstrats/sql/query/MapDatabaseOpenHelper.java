@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     static final Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(MapDatabaseOpenHelper.class));
-    public static final int MapDatabaseVersion = 16;
+    public static final int MapDatabaseVersion = 32;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
 
@@ -68,7 +68,11 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
         ReadAndExecuteQueries(writableDatabase, assets,
                 "dbscript/PocketStrats_sqlite_create_map_subjects.sql");
         ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_subject_associations.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
                 "dbscript/PocketStrats_sqlite_create_map_tips.sql");
+        ReadAndExecuteQueries(writableDatabase, assets,
+                "dbscript/PocketStrats_sqlite_create_map_tip_descriptions.sql");
         ReadAndExecuteQueries(writableDatabase, assets,
                 "dbscript/PocketStrats_sqlite_create_map_specific_tips.sql");
         ReadAndExecuteQueries(writableDatabase, assets,

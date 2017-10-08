@@ -40,7 +40,7 @@ Subject|Composition
 Category|Assault
 
 Side|Defend
-Subject|Mode Tips
+Subject|Assault Mode Tips
 
 Section|Don't stagger deaths to contest first point above 2/3rd captured. This can easily snowball for last point.
 Section|Winning the first fight is important to avoid snowball with ultimate advantage going into the last point.
@@ -52,7 +52,7 @@ Section|When staggering on the last point,
 Section|Try to forward hold last point when possible. This has strong positional advantages on most Assault maps and delays the start time for defensive spawn timer ramp up.
 
 Side|Attack
-Subject|Mode Tips
+Subject|Assault Mode Tips
 Section|1st Point spawn advantage is pretty weak, the spawn run is long for both sides so try not to rely on it to win points.
 Section|Do not get picked. Every death on Attack loses 30 to 40 seconds.
 Section|Tanks/Dive take the fight on last point to begin the defensive spawn timer ramp up.
@@ -66,7 +66,7 @@ Section|Team focus fire is another way to capture the last point.
 Category|Control
 
 Side|Defend
-Subject|Mode Tips
+Subject|Control Mode Tips
 
 Section|After a clean fight, forward hold chokes near the Attacker's spawn.
 Section|When holding Control chokes, call enemy numbers so you can know how much you need to watch other entrances.
@@ -74,7 +74,7 @@ Section|Do not give up positional advantages to contest the point until the Atta
 Section|Stagger kills after a won fight. One good stagger can lower the total number of fights during a 0 to 99 possession from 4 to 3.
 
 Side|Attack
-Subject|Mode Tips
+Subject|Control Mode Tips
 
 Section|If a fight is called lost, avoid prolonging the fight and reset quickly. You only get 3-4 fights total during a 0 to 99 round.
 Section|If you believe you are at an ult disadvantage, do a dry push to even it out.
@@ -83,7 +83,7 @@ Section|If above 75% possession, it is worth it to wait until overtime before ma
 Category|Escort
 
 Side|Defend
-Subject|Mode Tips
+Subject|Escort Mode Tips
 
 Section|If you don't control the cart, 
 Tip|Take fights on the cart.
@@ -92,7 +92,7 @@ Section|If you control the cart,
 Tip|Forward hold to give space for it to roll backwards.
 
 Side|Attack
-Subject|Mode Tips
+Subject|Escort Mode Tips
 
 Section|Once a fight is seen as won, 
 Tip|Prioritize clearing enemies off the cart before going for other staggers.

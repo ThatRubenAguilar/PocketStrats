@@ -2,14 +2,13 @@ package com.innovations.aguilar.pocketstrats.sql.dto;
 
 import android.database.Cursor;
 
-import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
 
 /**
  * Created by Ruben on 9/12/2017.
  */
-public class MapTip implements MapTipDTO {
+public class MapTip extends MapTipDescription implements MapTipDTO {
     public static DTOFromCursorFactory<MapTipDTO> Factory =
             new DTOFromCursorFactory<MapTipDTO>() {
                 @Override
@@ -19,23 +18,23 @@ public class MapTip implements MapTipDTO {
     private final int mapSubjectId;
     private final int mapTipId;
     private final int orderPrecedence;
-    private final String mapTipDescription;
     private final Integer parentMapTipId;
 
     public MapTip(int mapTipId, int mapSubjectId, int orderPrecedence,
-                  String mapTipDescription, Integer parentMapTipId) {
+                  Integer parentMapTipId,
+                  int mapTipDescriptionId, int mapTipDescriptionHash, String mapTipDescription) {
+        super(mapTipDescriptionId, mapTipDescriptionHash, mapTipDescription);
         this.mapSubjectId = mapSubjectId;
         this.mapTipId = mapTipId;
         this.orderPrecedence = orderPrecedence;
-        this.mapTipDescription = mapTipDescription;
         this.parentMapTipId = parentMapTipId;
     }
 
     public MapTip(Cursor c) {
+        super(c);
         this.mapSubjectId = c.getInt(c.getColumnIndex(Columns.MapSubjectIdColumn));
         this.mapTipId = c.getInt(c.getColumnIndex(Columns.MapTipIdColumn));
-        this.orderPrecedence = c.getInt(c.getColumnIndex(Columns.OrderPrecedenceColumn));;
-        this.mapTipDescription = c.getString(c.getColumnIndex(Columns.MapTipDescriptionColumn));
+        this.orderPrecedence = c.getInt(c.getColumnIndex(Columns.OrderPrecedenceColumn));
         if (!c.isNull(c.getColumnIndex(Columns.ParentMapTipIdColumn)))
             this.parentMapTipId = c.getInt(c.getColumnIndex(Columns.ParentMapTipIdColumn));
         else
@@ -58,10 +57,6 @@ public class MapTip implements MapTipDTO {
     public Integer getParentMapTipId() {
         return parentMapTipId;
     }
-    @Override
-    public String getMapTipDescription() {
-        return mapTipDescription;
-    }
 
 
     public static final MapTipColumns Columns = new MapTipColumns();
@@ -72,8 +67,8 @@ public class MapTip implements MapTipDTO {
         sb.append("mapSubjectId=").append(mapSubjectId);
         sb.append(", mapTipId=").append(mapTipId);
         sb.append(", orderPrecedence=").append(orderPrecedence);
-        sb.append(", mapTipDescription='").append(mapTipDescription).append('\'');
         sb.append(", parentMapTipId=").append(parentMapTipId);
+        sb.append(", MapTipDescription=").append(super.toString());
         sb.append('}');
         return sb.toString();
     }

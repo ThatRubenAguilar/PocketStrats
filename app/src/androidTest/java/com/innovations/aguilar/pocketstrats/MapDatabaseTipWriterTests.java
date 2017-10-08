@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
 public class MapDatabaseTipWriterTests extends MapDatabaseTestFixture {
@@ -181,21 +182,33 @@ public class MapDatabaseTipWriterTests extends MapDatabaseTestFixture {
 
         AssetManager assets = InstrumentationRegistry.getTargetContext().getAssets();
 
+        TipsDocument currentDoc;
         try (InputStream scriptTextStream = assets.open("tips_docs/map_type_tips.txt")) {
-            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
         }
+        assertNotNull(currentDoc);
         try (InputStream scriptTextStream = assets.open("tips_docs/assault_maps_tips.txt")) {
-            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                    currentDoc);
         }
+        assertNotNull(currentDoc);
         try (InputStream scriptTextStream = assets.open("tips_docs/control_maps_tips.txt")) {
-            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                    currentDoc);
         }
+        assertNotNull(currentDoc);
         try (InputStream scriptTextStream = assets.open("tips_docs/escort_maps_tips.txt")) {
-            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                    currentDoc);
         }
+        assertNotNull(currentDoc);
         try (InputStream scriptTextStream = assets.open("tips_docs/hybrid_assault_escort_maps_tips.txt")) {
-            tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                    currentDoc);
         }
+        assertNotNull(currentDoc);
+
+        tipsWriter.WriteSubjectAssociations();
 
     }
 }

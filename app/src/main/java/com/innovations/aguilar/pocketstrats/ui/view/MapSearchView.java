@@ -19,7 +19,7 @@ import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
-import com.innovations.aguilar.pocketstrats.ui.MapSearchItemAdapter;
+import com.innovations.aguilar.pocketstrats.ui.adapter.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
@@ -59,7 +59,7 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
         List<MapDataDTO> maps;
         MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
         try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
-            maps = accessor.GetAllMaps();
+            maps = accessor.mapAccessor().GetAllMaps();
         }
 
         final MapSearchItemAdapter mapAdapter = new MapSearchItemAdapter(getContext(), maps, this);
@@ -117,8 +117,8 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
     void showTipsView(MapDataDTO map) {
         mainContainer.get().removeViewToBackStack(this);
         View rootView = View.inflate(getContext(), R.layout.map_subjects, mainContainer.get());
-        MapSubjectsView tipsView = (MapSubjectsView) rootView.findViewById(R.id.layout_map_tips);
-        tipsView.loadTipsForMap(map);
+        MapSubjectsView tipsView = (MapSubjectsView) rootView.findViewById(R.id.layout_map_subjects);
+        tipsView.loadSubjectsForMap(map);
     }
 
     class ModeSelectionPresenter {

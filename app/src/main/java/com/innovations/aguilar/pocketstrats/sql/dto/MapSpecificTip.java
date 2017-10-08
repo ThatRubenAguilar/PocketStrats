@@ -15,9 +15,10 @@ public class MapSpecificTip extends MapTip implements MapSpecificTipDTO {
     private final int mapSpecificTipId;
 
     public MapSpecificTip(int mapTipId, int mapSubjectId, int orderPrecedence,
-                          String mapTipDescription, Integer parentMapTipId,
-                          int mapSpecificTipId) {
-        super(mapTipId, mapSubjectId, orderPrecedence, mapTipDescription, parentMapTipId);
+                          Integer parentMapTipId, int mapSpecificTipId,
+                          int mapTipDescriptionId, int mapTipDescriptionHash, String mapTipDescription) {
+        super(mapTipId, mapSubjectId, orderPrecedence, parentMapTipId,
+                mapTipDescriptionId, mapTipDescriptionHash, mapTipDescription);
         this.mapSpecificTipId = mapSpecificTipId;
     }
 

@@ -3,7 +3,7 @@ package com.innovations.aguilar.pocketstrats.ui;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TipsChild implements Parcelable {
+public class TipText implements Parcelable {
 
 
 
@@ -29,28 +29,28 @@ public class TipsChild implements Parcelable {
         dest.writeByte(this.isSection ? (byte) 1 : (byte) 0);
     }
 
-    public TipsChild() {
+    public TipText() {
     }
 
-    public TipsChild(String message, boolean isSection) {
+    public TipText(String message, boolean isSection) {
         this.message = message;
         this.isSection = isSection;
     }
 
-    protected TipsChild(Parcel in) {
+    protected TipText(Parcel in) {
         this.message = in.readString();
         this.isSection = in.readByte() != 0;
     }
 
-    public static final Creator<TipsChild> CREATOR = new Creator<TipsChild>() {
+    public static final Creator<TipText> CREATOR = new Creator<TipText>() {
         @Override
-        public TipsChild createFromParcel(Parcel source) {
-            return new TipsChild(source);
+        public TipText createFromParcel(Parcel source) {
+            return new TipText(source);
         }
 
         @Override
-        public TipsChild[] newArray(int size) {
-            return new TipsChild[size];
+        public TipText[] newArray(int size) {
+            return new TipText[size];
         }
     };
 }

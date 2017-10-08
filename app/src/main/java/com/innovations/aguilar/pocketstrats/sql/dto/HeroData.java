@@ -5,7 +5,6 @@ import android.database.Cursor;
 import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.sql.query.DTOFromCursorFactory;
 
-
 /**
  * Created by Ruben on 9/11/2017.
  */

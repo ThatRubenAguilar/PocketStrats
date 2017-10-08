@@ -2,38 +2,18 @@
 <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_map_tips"
+    android:id="@+id/layout_map_subjects"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map_spawn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/map_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/button_text_size_large"
-            android:textColor="@color/textLight"
-            android:shadowColor="@color/textDark"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="20"
-            />
-        <android.support.design.widget.TabLayout
-            android:id="@+id/spawn_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- rest of stuffs -->
-        </android.support.design.widget.TabLayout>
-
 
 
         <!--android:divider="@null"-->
@@ -43,22 +23,13 @@
             android:id="@+id/list_subjects"
             android:groupIndicator="@drawable/tips_expandable_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"/>
 
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_return_to_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back_to_top"
-        android:backgroundTint="@color/primaryDarkBlue"
-        android:layout_gravity="bottom|end"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView
+            android:id="@+id/view_subject_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView>
+    </com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout>
 
 </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView>

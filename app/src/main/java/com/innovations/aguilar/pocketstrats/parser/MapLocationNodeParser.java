@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: Test and make diff data struct than TextNode
 public class MapLocationNodeParser {
     static final Pattern braces = Pattern.compile("\\[[^\\]]*\\]");
     public static List<TextNode> ParseLocations(String contents) {

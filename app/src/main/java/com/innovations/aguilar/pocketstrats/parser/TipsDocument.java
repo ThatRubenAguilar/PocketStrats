@@ -23,12 +23,70 @@ public class TipsDocument {
 
     int tipPrecedenceAccum;
 
+    int attackSubjectPrecedenceAccum;
+    int defendSubjectPrecedenceAccum;
+    private final int subjectPrecedenceOffset;
+
     public TipsDocument(List<TextNode> rawNodes) {
+        this.subjectPrecedenceOffset = 0;
+        Subjects = parseRawNodes(rawNodes);
+    }
+    public TipsDocument(List<TextNode> rawNodes, TipsDocument continueDoc) {
+        this.subjectPrecedenceOffset = continueDoc == null ? 0 : continueDoc.getMaxSubjectPrecedence();
         Subjects = parseRawNodes(rawNodes);
     }
 
+    public int getMaxSubjectPrecedence() {
+        int maxPrecedence = 0;
+        for (SubjectNode subject :
+                Subjects) {
+            if (maxPrecedence < subject.Precedence)
+                maxPrecedence = subject.Precedence;
+        }
+        return maxPrecedence;
+    }
+
     void resetTipPrecedence() {
-        tipPrecedenceAccum = 1;
+        tipPrecedenceAccum = 0;
+    }
+    void resetSubjectPrecedence() {
+        attackSubjectPrecedenceAccum = subjectPrecedenceOffset;
+        defendSubjectPrecedenceAccum = subjectPrecedenceOffset;
+    }
+
+    int getNextTipPrecedence() {
+        return ++tipPrecedenceAccum;
+    }
+    int getNextSubjectPrecedence(List<SpawnSide> sides) {
+        int maxPrecedence = 0;
+        for (SpawnSide side :
+                sides) {
+            int currentPrecedence = getNextSubjectPrecedence(side);
+            if (maxPrecedence < currentPrecedence)
+                maxPrecedence = currentPrecedence;
+        }
+        for (SpawnSide side :
+                sides) {
+            setSubjectPrecedence(side, maxPrecedence);
+        }
+        return maxPrecedence;
+    }
+
+    private int getNextSubjectPrecedence(SpawnSide side) {
+        if (side == SpawnSide.Attack) {
+            return ++attackSubjectPrecedenceAccum;
+        }
+        else if (side == SpawnSide.Defend) {
+            return ++defendSubjectPrecedenceAccum;
+        }
+        return 0;
+    }
+
+    private void setSubjectPrecedence(SpawnSide side, int precedence) {
+        if (side == SpawnSide.Attack)
+            attackSubjectPrecedenceAccum = precedence;
+        else if (side == SpawnSide.Defend)
+            defendSubjectPrecedenceAccum = precedence;
     }
 
     final Set<String> infoLevelTokens = Sets.newHashSet(Tokens.Map, Tokens.Side, Tokens.Tags, Tokens.Category, Tokens.Type, Tokens.MapSegment);
@@ -38,6 +96,7 @@ public class TipsDocument {
     final Set<String> tipLevelTokens = Sets.newHashSet(Tokens.Tip);
     List<SubjectNode> parseRawNodes(List<TextNode> allNodes) {
         resetTipPrecedence();
+        resetSubjectPrecedence();
         List<SubjectNode> subjects = Lists.newArrayList();
         InfoNode currentInfo = new InfoNode();
         PeekingIterator<TextNode> rawNodes = Iterators.peekingIterator(allNodes.iterator());
@@ -48,7 +107,6 @@ public class TipsDocument {
                 currentInfo = HandleInfoNode(rawNodes, currentInfo);
             else if (subjectLevelTokens.contains(currentNode.nodeType)) {
                 SubjectNode sNode = parseSubjectNode(rawNodes, currentInfo);
-                sNode.Precedence = subjects.size() + 1;
                 subjects.add(sNode);
                 resetTipPrecedence();
             }
@@ -66,6 +124,7 @@ public class TipsDocument {
         SubjectNode subjNode = new SubjectNode();
         subjNode.INode = currentInfo.Copy();
         subjNode.Message = currentNode.nodeContents.get(0);
+        subjNode.Precedence = getNextSubjectPrecedence(subjNode.INode.Sides);
         while(rawNodes.hasNext()) {
             currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
@@ -89,7 +148,7 @@ public class TipsDocument {
         SectionNode sectNode = new SectionNode();
         sectNode.INode = currentInfo.Copy();
         sectNode.Message = currentNode.nodeContents.get(0);
-        sectNode.Precedence = tipPrecedenceAccum++;
+        sectNode.Precedence = getNextTipPrecedence();
         while(rawNodes.hasNext()) {
             currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
@@ -117,7 +176,7 @@ public class TipsDocument {
         TipNode tipNode = new TipNode();
         tipNode.INode = currentInfo.Copy();
         tipNode.Message = currentNode.nodeContents.get(0);
-        tipNode.Precedence = tipPrecedenceAccum++;
+        tipNode.Precedence = getNextTipPrecedence();
         return tipNode;
     }
     PickNode parsePickNode(PeekingIterator<TextNode> rawNodes, InfoNode currentInfo) {
@@ -125,7 +184,7 @@ public class TipsDocument {
         PickNode pickNode = new PickNode();
         pickNode.INode = currentInfo.Copy();
         pickNode.Message = currentNode.nodeContents.get(0);
-        pickNode.Precedence = tipPrecedenceAccum++;
+        pickNode.Precedence = getNextTipPrecedence();
         while(rawNodes.hasNext()) {
             currentNode = rawNodes.peek();
             if (infoLevelTokens.contains(currentNode.nodeType))
@@ -149,6 +208,7 @@ public class TipsDocument {
         switch(node.nodeType) {
             case Tokens.Map:
                 currentInfo.MapName = node.nodeContents.get(0);
+                resetSubjectPrecedence();
                 break;
             case Tokens.Tags:
                 break;
