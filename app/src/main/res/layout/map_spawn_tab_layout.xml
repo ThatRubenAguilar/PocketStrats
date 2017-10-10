@@ -18,7 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabGravity="fill"
-        app:tabMode="fixed">
+        app:tabMode="fixed"
+        app:tabPadding="0dp"
+        app:tabPaddingTop="0dp"
+        app:tabPaddingBottom="0dp"
+        app:tabPaddingStart="0dp"
+        app:tabPaddingEnd="0dp"
+        app:tabIndicatorHeight="0dp"
+        >
     </android.support.design.widget.TabLayout>
+
+
+    <!--app:tabBackground="@drawable/tab_toggle"-->
 
 </merge>
