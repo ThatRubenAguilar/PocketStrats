@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_tips"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_details_tip">
+        <LinearLayout
+            android:id="@+id/layout_subject_details_scrollable"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        android:background="@drawable/bg_item_grid_repeat"
-        android:paddingTop="@dimen/padding_medium"
-        />
-    <!--android:background="@drawable/bg_item_dropdown"-->
-    <!--pick widget list thing per detail item, switch based on type-->
-
+        </LinearLayout>
+    </ScrollView>
 </merge>

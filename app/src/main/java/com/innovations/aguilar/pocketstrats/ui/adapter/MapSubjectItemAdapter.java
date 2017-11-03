@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
+import com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView;
 import com.innovations.aguilar.pocketstrats.ui.viewholder.MapSubjectItemViewHolder;
 import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class MapSubjectItemAdapter extends RecyclerView.Adapter<MapSubjectItemViewHolder> {
 
     private Context context;
+
     private List<MapSubjectDTO> subjects;
     private OnDataClickListener<MapSubjectDTO> listener = null;
 
@@ -27,8 +30,7 @@ public class MapSubjectItemAdapter extends RecyclerView.Adapter<MapSubjectItemVi
 
     @Override
     public MapSubjectItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.map_subject_list_item, parent, false);
         return new MapSubjectItemViewHolder(view, context);

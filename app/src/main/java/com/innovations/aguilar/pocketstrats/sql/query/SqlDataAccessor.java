@@ -406,6 +406,30 @@ public class SqlDataAccessor implements AutoCloseable {
                 return MakeListFromCursor(c, MapHeroPickTip.Factory).get(0);
             }
         }
+        public Cursor GetMapHeroPickTipCursorBySubject(int mapSubjectId) {
+            String whereClause = String.format("%s = ?",
+                    MapTip.Columns.qualifyColumn(MapTip.Columns.MapSubjectIdColumn));
+            String[] whereArgs = {
+                    Integer.toString(mapSubjectId)
+            };
+            String tableName = mapHeroPickTipJoin();
+
+            String order = String.format("%s ASC, %s ASC",
+                    MapTip.Columns.qualifyColumn(MapTip.Columns.OrderPrecedenceColumn),
+                    MapHeroPickTip.Columns.qualifyColumn(MapHeroPickTip.Columns.HeroIdColumn)
+                    );
+
+            String[] columns = MapHeroPickTip.Columns.joinAndQualifyColumns(
+                    MapTip.Columns, MapTipDescription.Columns);
+
+            return readableDb.query(tableName, columns, whereClause, whereArgs,
+                    null, null, order);
+        }
+        public List<MapHeroPickTipDTO> GetMapHeroPickTipBySubject(int mapSubjectId) {
+            try (Cursor c = GetMapHeroPickTipCursorBySubject(mapSubjectId)) {
+                return MakeListFromCursor(c, MapHeroPickTip.Factory);
+            }
+        }
 
         public Cursor GetMapTipDescriptionCursorByHash(int mapTipDescriptionHash) {
             String whereClause = String.format("%s = ?", MapTipDescription.Columns.MapTipDescriptionHashColumn);
@@ -476,8 +500,7 @@ public class SqlDataAccessor implements AutoCloseable {
             };
             String tableName = mapSpecificTipJoin();
 
-            String order = String.format("%s ASC, %s ASC",
-                    MapTip.Columns.qualifyColumn(MapTip.Columns.MapSubjectIdColumn),
+            String order = String.format("%s ASC",
                     MapTip.Columns.qualifyColumn(MapTip.Columns.OrderPrecedenceColumn));
 
             String[] columns = MapSpecificTip.Columns.joinAndQualifyColumns(MapTip.Columns, MapTipDescription.Columns);

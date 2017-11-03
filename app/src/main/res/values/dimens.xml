@@ -4,15 +4,21 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_elevation_on">5dp</dimen>
     <dimen name="button_elevation_off">20dp</dimen>
+
     <dimen name="button_text_size_small">15dp</dimen>
     <dimen name="button_text_size_medium">25dp</dimen>
     <dimen name="button_text_size_large">35dp</dimen>
 
-    <dimen name="tip_text_indent_section">5dp</dimen>
-    <dimen name="tip_text_indent_tip">20dp</dimen>
-    <dimen name="tip_text_indent_offset">15dp</dimen>
+    <dimen name="paragraph_text_size_small">18dp</dimen>
+    <dimen name="paragraph_text_size_medium">25dp</dimen>
+    <dimen name="paragraph_text_size_large">32dp</dimen>
+
+    <dimen name="tip_text_indent_section">0dp</dimen>
+    <dimen name="tip_text_indent_tip">15dp</dimen>
+    <dimen name="tip_text_indent_offset">10dp</dimen>
 
     <dimen name="button_padding">5dp</dimen>
+    <dimen name="list_margin">2dp</dimen>
 
     <dimen name="padding_small">5dp</dimen>
     <dimen name="padding_medium">10dp</dimen>

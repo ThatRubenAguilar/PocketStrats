@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/btn_left_scroll"
+        android:background="@drawable/btn_dropdown_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        />
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/text_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_vertical"
+
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/btn_right_scroll"
+        android:layout_toRightOf="@id/btn_left_scroll"
+
+        android:gravity="center|center_vertical"
+        android:textAlignment="gravity"
+
+        android:textSize="@dimen/button_text_size_large"
+        android:textColor="@color/textLight"
+
+        android:shadowColor="@color/textDark"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="20"
+        />
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@id/btn_right_scroll"
+        android:background="@drawable/btn_dropdown_blank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+</merge>

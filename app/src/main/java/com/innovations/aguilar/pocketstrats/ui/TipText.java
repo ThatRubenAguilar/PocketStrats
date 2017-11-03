@@ -4,9 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class TipText implements Parcelable {
-
-
-
     private String message;
     private boolean isSection;
 

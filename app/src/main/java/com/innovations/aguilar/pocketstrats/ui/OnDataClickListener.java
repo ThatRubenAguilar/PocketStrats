@@ -5,3 +5,4 @@ import android.view.View;
 public interface OnDataClickListener<TData> {
     void onClick(View v, TData data);
 }
+

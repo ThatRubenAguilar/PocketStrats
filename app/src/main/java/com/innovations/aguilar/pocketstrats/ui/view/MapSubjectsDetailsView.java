@@ -1,44 +1,57 @@
 package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.innovations.aguilar.pocketstrats.R;
-import com.innovations.aguilar.pocketstrats.sql.dto.MapSpecificTipDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.HeroDataDTO;
+import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDTO;
-import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
+import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
-import com.innovations.aguilar.pocketstrats.ui.TipText;
-import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDetailsTipItemAdapter;
+import com.innovations.aguilar.pocketstrats.ui.SpanBuilder;
+import com.innovations.aguilar.pocketstrats.ui.dataholder.DataHolderAccessor;
+import com.innovations.aguilar.pocketstrats.ui.dataholder.MapHeroPickTipDataHolder;
+import com.innovations.aguilar.pocketstrats.ui.dataholder.MapSectionTipDataHolder;
+import com.innovations.aguilar.pocketstrats.ui.dataholder.MapSubjectTipDataHolder;
+import com.innovations.aguilar.pocketstrats.ui.dataholder.MapTipDataHolder;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class MapSubjectsDetailsView extends LinearLayout {
 
     Supplier<MainPaneContainer> mainContainer;
 
-    RecyclerView detailsView;
+    LinearLayout detailsLayout;
 
-    Supplier<MapSubjectDetailsTipItemAdapter> attackSupplier;
-    Supplier<MapSubjectDetailsTipItemAdapter> defendSupplier;
+    Supplier<List<View>> attackView;
+    Supplier<List<View>> defendView;
+    Supplier<MapSubjectTipDataHolder> attackSupplier;
+    Supplier<MapSubjectTipDataHolder> defendSupplier;
+
+    SpanBuilder.SpanConfigurator<MapTipDTO> tipSpanConfigurator = new TipSpanConfigurator();
+    SpanBuilder.SpanConfigurator<MapTipDTO> sectionSpanConfigurator = new SectionSpanConfigurator();
 
     public MapSubjectsDetailsView(Context context) {
         super(context);
@@ -55,10 +68,9 @@ public class MapSubjectsDetailsView extends LinearLayout {
         inflateLayout();
     }
 
-
     private void inflateLayout() {
         inflate(getContext(), R.layout.map_subject_details, this);
-        detailsView = (RecyclerView)findViewById(R.id.list_tips);
+        detailsLayout = (LinearLayout)findViewById(R.id.layout_subject_details_scrollable);
     }
 
     @Override
@@ -71,30 +83,112 @@ public class MapSubjectsDetailsView extends LinearLayout {
                 return (MainPaneContainer) ((MainActivity) getContext()).findViewById(R.id.layout_main_container);
             }
         });
-
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setAutoMeasureEnabled(true);
-        detailsView.setLayoutManager(manager);
-
     }
+
+    private TextView createAndConfigureTextView() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        TextView text = (TextView) inflater.inflate(R.layout.map_subject_details_text, detailsLayout, false);
+        return text;
+    }
+
+    private HeroDetailsGrid createAndConfigureHeroDetails() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        HeroDetailsGrid grid = (HeroDetailsGrid) inflater.inflate(R.layout.map_subject_details_hero_grid, detailsLayout, false);
+        return grid;
+    }
+
+    private Supplier<List<View>> createAndConfigureViewsForSide(final Supplier<MapSubjectTipDataHolder> subjectSupplier) {
+        Supplier<List<View>> viewListSupplier = Suppliers.memoize(new Supplier<List<View>>() {
+            @Override
+            public List<View> get() {
+                List<View> views = Lists.newArrayList();
+                TextView runningTextView = createAndConfigureTextView();
+                SpanBuilder builder = new SpanBuilder(true);
+
+                for (MapSectionTipDataHolder section:
+                     subjectSupplier.get().getMapSectionTips()) {
+                    if (runningTextView == null) {
+                        runningTextView = createAndConfigureTextView();
+                    }
+
+                    builder.appendSpanData(section.getSectionTip(), sectionSpanConfigurator);
+                    for (MapTipDataHolder tip :
+                            section.getMapTips()) {
+                        builder.appendSpanData(tip.getMapTip(), tipSpanConfigurator);
+                    }
+
+                    if (!section.getMapHeroPickTips().isEmpty()) {
+                        runningTextView.setText(builder.getSpan());
+                        views.add(runningTextView);
+                        runningTextView = null;
+                        builder.reset();
+
+                        HeroDetailsGrid heroDetails = createAndConfigureHeroDetails();
+
+                        Map<HeroDataDTO, List<MapHeroPickTipDTO>> heroToTipMap = buildHeroToTipMap(section.getMapHeroPickTips());
+                        heroDetails.setHeroPickTips(heroToTipMap);
+
+                        views.add(heroDetails);
+                    }
+                }
+
+                if (runningTextView != null) {
+                    runningTextView.setText(builder.getSpan());
+                    views.add(runningTextView);
+                }
+
+                return Collections.unmodifiableList(views);
+            }
+        });
+
+        return viewListSupplier;
+    }
+
+    private Map<HeroDataDTO, List<MapHeroPickTipDTO>> buildHeroToTipMap(List<MapHeroPickTipDataHolder> mapHeroPickTips) {
+        Map<HeroDataDTO, List<MapHeroPickTipDTO>> heroToTipMap = Maps.newHashMap();
+        for (MapHeroPickTipDataHolder heroPickTipDataHolder :
+                mapHeroPickTips) {
+            HeroDataDTO heroData = heroPickTipDataHolder.getHeroData();
+            if (!heroToTipMap.containsKey(heroData))
+                heroToTipMap.put(heroData, Lists.<MapHeroPickTipDTO>newArrayList());
+
+            heroToTipMap.get(heroData).add(heroPickTipDataHolder.getMapHeroPickTip());
+        }
+
+        return heroToTipMap;
+    }
+
 
     public void loadSubjectDetailsForSide(SpawnSide side) {
         if (side == SpawnSide.Attack) {
-            detailsView.setAdapter(attackSupplier.get());
+            detailsLayout.removeAllViews();
+            for (View v :
+                    attackView.get()) {
+                detailsLayout.addView(v);
+            }
         } else if (side == SpawnSide.Defend) {
-            detailsView.setAdapter(defendSupplier.get());
+            detailsLayout.removeAllViews();
+            for (View v :
+                    defendView.get()) {
+                detailsLayout.addView(v);
+            }
         } else {
             Log.w(this.getClass().toString(), "loadSubjectDetailsForSide with unknown SpawnSide");
         }
     }
 
+    // TODO: AdapterMap that manages type -> adapater relations ?
     public void loadSubjectDetails(MapSubjectDTO subject) {
         if (subject.getSpawnSideId() == SpawnSide.Attack) {
             attackSupplier = createSupplierForSubject(subject);
             defendSupplier = createSupplierForAssociatedSubject(subject);
+            attackView = createAndConfigureViewsForSide(attackSupplier);
+            defendView = createAndConfigureViewsForSide(defendSupplier);
         } else if (subject.getSpawnSideId() == SpawnSide.Defend) {
             defendSupplier = createSupplierForSubject(subject);
             attackSupplier = createSupplierForAssociatedSubject(subject);
+            attackView = createAndConfigureViewsForSide(attackSupplier);
+            defendView = createAndConfigureViewsForSide(defendSupplier);
         } else {
             Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectDetails");
         }
@@ -102,43 +196,21 @@ public class MapSubjectsDetailsView extends LinearLayout {
         loadSubjectDetailsForSide(subject.getSpawnSideId());
     }
 
-    private boolean isSection(MapTipDTO tip){
-        return tip.getParentMapTipId() == null;
-    }
-
-    private Supplier<MapSubjectDetailsTipItemAdapter> createSupplierForSubject(final MapSubjectDTO subject) {
-        return new Supplier<MapSubjectDetailsTipItemAdapter>() {
+    private Supplier<MapSubjectTipDataHolder> createSupplierForSubject(final MapSubjectDTO subject) {
+        return Suppliers.memoize(new Supplier<MapSubjectTipDataHolder>() {
             @Override
-            public MapSubjectDetailsTipItemAdapter get() {
-                List<MapSpecificTipDTO> specificTips;
-                List<MapTypeTipDTO> typeTips;
-                MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
-                try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
-                    specificTips = accessor.mapTipAccessor().GetMapSpecificTipsByMapSubject(subject.getMapSubjectId());
-                    typeTips = accessor.mapTipAccessor().GetMapTypeTipsByMapSubject(subject.getMapSubjectId());
-                }
+            public MapSubjectTipDataHolder get() {
+                MapSubjectTipDataHolder subjectDataHolder = new DataHolderAccessor(getContext()).queryDataHolderFromSubject(subject);
 
-                List<TipText> tips = Lists.newArrayList();
-                for (MapSpecificTipDTO specificTip :
-                        specificTips) {
-                    tips.add(new TipText(specificTip.getMapTipDescription(), isSection(specificTip)));
-                }
-                for (MapTypeTipDTO typeTip :
-                        typeTips) {
-                    tips.add(new TipText(typeTip.getMapTipDescription(), isSection(typeTip)));
-                }
-
-                return new MapSubjectDetailsTipItemAdapter(getContext(), tips);
+                return subjectDataHolder;
             }
-        };
+        });
     }
 
-    private Supplier<MapSubjectDetailsTipItemAdapter> createSupplierForAssociatedSubject(final MapSubjectDTO subject) {
-        return new Supplier<MapSubjectDetailsTipItemAdapter>() {
+    private Supplier<MapSubjectTipDataHolder> createSupplierForAssociatedSubject(final MapSubjectDTO subject) {
+        return Suppliers.memoize(new Supplier<MapSubjectTipDataHolder>() {
             @Override
-            public MapSubjectDetailsTipItemAdapter get() {
-                List<MapSpecificTipDTO> specificTips;
-                List<MapTypeTipDTO> typeTips;
+            public MapSubjectTipDataHolder get() {
                 MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
                 try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
                     List<MapSubjectDTO> associatedSubjects = accessor.mapSubjectAccessor()
@@ -151,46 +223,68 @@ public class MapSubjectsDetailsView extends LinearLayout {
                             break;
                         }
                     }
-                    specificTips = accessor.mapTipAccessor()
-                            .GetMapSpecificTipsByMapSubject(differentAssociatedSubject.getMapSubjectId());
-                    typeTips = accessor.mapTipAccessor()
-                            .GetMapTypeTipsByMapSubject(differentAssociatedSubject.getMapSubjectId());
-                }
 
-                List<TipText> tips = Lists.newArrayList();
-                for (MapSpecificTipDTO specificTip :
-                        specificTips) {
-                    tips.add(new TipText(specificTip.getMapTipDescription(), isSection(specificTip)));
-                }
-                for (MapTypeTipDTO typeTip :
-                        typeTips) {
-                    tips.add(new TipText(typeTip.getMapTipDescription(), isSection(typeTip)));
-                }
+                    MapSubjectTipDataHolder subjectDataHolder = new DataHolderAccessor(accessor)
+                            .queryDataHolderFromSubject(differentAssociatedSubject);
 
-                return new MapSubjectDetailsTipItemAdapter(getContext(), tips);
+                    return subjectDataHolder;
+                }
             }
-        };
+        });
     }
 
-//        List<MapSubjectHeader> groupHeaders = Lists.newArrayList();
-//        List<MapTipsChild> mapTypeTips = getMapTypeTips(map);
-//        if (mapTypeTips.size() > 0) {
-//            groupHeaders.add(new MapSubjectHeader("Mode", mapTypeTips));
-//        }
-//        List<MapTipsChild> mapTips = getMapTips(map);
-//        if (mapTips.size() > 0) {
-//            groupHeaders.add(new MapSubjectHeader("Map", mapTips));
-//        }
-//        List<MapTipsChild> mapSegmentTips = getMapSegmentTipsForMap(map);
-//        if (mapSegmentTips.size() > 0) {
-//            // TODO: Query segments by Id to get names
-//            groupHeaders.add(new MapSubjectHeader("Segment", mapSegmentTips));
-//        }
-//        List<MapTipsChild> mapLocationTips = getMapLocationTipsForMap(map);
-//        if (mapLocationTips.size() > 0) {
-//            // TODO: Query locations by Id to get names
-//            groupHeaders.add(new MapSubjectHeader("Location", mapLocationTips));
-//        }
-//
 
+    class TipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+
+        @Override
+        public int configure(SpannableStringBuilder builder, MapTipDTO spanData, int runningOffset) {
+            String tipDetail = spanData.getMapTipDescription();
+            Context context = getContext();
+
+            int spanDeltaOffset = tipDetail.length()+2;
+
+            builder.append("• ");
+            builder.append(tipDetail);
+            builder.setSpan(new AbsoluteSizeSpan(
+                            context.getResources().getDimensionPixelSize(R.dimen.paragraph_text_size_medium)),
+                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            builder.setSpan(new CustomTypefaceSpan(
+                            CustomTypeFaces.Futura(context.getAssets())),
+                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            int leading = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_tip);
+            int offset = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_offset);
+            LeadingMarginSpan adjustSpan = new LeadingMarginSpan.Standard(leading, leading + offset);
+            builder.setSpan(adjustSpan, runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            return spanDeltaOffset;
+        }
+    }
+    class SectionSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+
+        @Override
+        public int configure(SpannableStringBuilder builder, MapTipDTO spanData, int runningOffset) {
+            String tipDetail = spanData.getMapTipDescription();
+            Context context = getContext();
+
+            int spanDeltaOffset = tipDetail.length()+2;
+
+            builder.append("- ");
+            builder.append(tipDetail);
+
+            builder.setSpan(new AbsoluteSizeSpan(
+                            context.getResources().getDimensionPixelSize(R.dimen.paragraph_text_size_medium)),
+                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            builder.setSpan(new CustomTypefaceSpan(
+                            CustomTypeFaces.Futura(context.getAssets())),
+                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+            int leading = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_section);
+            int offset = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_offset);
+            LeadingMarginSpan adjustSpan = new LeadingMarginSpan.Standard(leading, leading + offset);
+            builder.setSpan(adjustSpan, runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            return spanDeltaOffset;
+        }
+    }
 }

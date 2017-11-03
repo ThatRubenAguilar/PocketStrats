@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -21,6 +22,8 @@ import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
+import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
+import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDisplayItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
 
@@ -33,12 +36,19 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
     RecyclerView subjectsList;
     MapSpawnTabLayout tabLayout;
+
+    LinearLayout subjectDetailsLayout;
+    SwipeListDisplayView subjectListDisplay;
     MapSubjectsDetailsView subjectDetails;
 
     boolean detailsView = false;
 
-    Supplier<MapSubjectItemAdapter> attackSupplier;
-    Supplier<MapSubjectItemAdapter> defendSupplier;
+    Supplier<List<MapSubjectDTO>> attackDataSupplier;
+    Supplier<List<MapSubjectDTO>> defendDataSupplier;
+    Supplier<MapSubjectItemAdapter> attackItemAdapterSupplier;
+    Supplier<MapSubjectItemAdapter> defendItemAdapterSupplier;
+    Supplier<MapSubjectDisplayItemAdapter> attackDisplayAdapterSupplier;
+    Supplier<MapSubjectDisplayItemAdapter> defendDisplayAdapterSupplier;
 
     public MapSubjectsView(Context context) {
         super(context);
@@ -67,6 +77,8 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
         tabLayout = (MapSpawnTabLayout)findViewById(R.id.map_spawn_layout);
         subjectsList = (RecyclerView)findViewById(R.id.list_subjects);
         subjectDetails = (MapSubjectsDetailsView) findViewById(R.id.view_subject_details);
+        subjectListDisplay = (SwipeListDisplayView) findViewById(R.id.list_subjects_display);
+        subjectDetailsLayout = (LinearLayout) findViewById(R.id.layout_view_subject_details);
         tabLayout.removeView(subjectsList);
         setDetailsView(false);
 
@@ -75,6 +87,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
             public void onTabSelected(TabLayout.Tab tab, SpawnSide sideSelected) {
                 if (detailsView) {
                     subjectDetails.loadSubjectDetailsForSide(sideSelected);
+                    loadSwipeListForSide(sideSelected);
                 }
                 else {
                     configureSubjectsForTab(sideSelected);
@@ -97,32 +110,26 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
         tabLayout.setMapIcon(map);
 
-        final OnDataClickListener<MapSubjectDTO> itemClicked = new OnDataClickListener<MapSubjectDTO>() {
-            @Override
-            public void onClick(View v, MapSubjectDTO data) {
-                setDetailsView(true);
-                subjectDetails.loadSubjectDetails(data);
-            }
-        };
+        createDataSuppliers(map);
 
-        attackSupplier = new Supplier<MapSubjectItemAdapter>() {
+        OnIndexClickListener clickListener = new OnIndexClickListener() {
             @Override
-            public MapSubjectItemAdapter get() {
-                List<MapSubjectDTO> groupSubjects = loadSubjectsForTab(map, SpawnSide.Attack);
-                MapSubjectItemAdapter adapter = new MapSubjectItemAdapter(getContext(), groupSubjects);
-                adapter.setOnItemClickListener(itemClicked);
-                return adapter;
+            public void onIndexClick(View v, int index) {
+                if (tabLayout.getSelectedSpawnSide() == SpawnSide.Attack) {
+                    MapSubjectDTO subject = attackDataSupplier.get().get(index);
+                    subjectDetails.loadSubjectDetails(subject);
+                } else if (tabLayout.getSelectedSpawnSide() == SpawnSide.Defend) {
+                    MapSubjectDTO subject = defendDataSupplier.get().get(index);
+                    subjectDetails.loadSubjectDetails(subject);
+                } else {
+                    Log.w(this.getClass().toString(), "SpawnSide unknown in onIndexClick");
+                }
             }
         };
-        defendSupplier = new Supplier<MapSubjectItemAdapter>() {
-            @Override
-            public MapSubjectItemAdapter get() {
-                List<MapSubjectDTO> groupSubjects = loadSubjectsForTab(map, SpawnSide.Defend);
-                MapSubjectItemAdapter adapter =  new MapSubjectItemAdapter(getContext(), groupSubjects);
-                adapter.setOnItemClickListener(itemClicked);
-                return adapter;
-            }
-        };
+        subjectListDisplay.setOnNextClickListener(clickListener);
+        subjectListDisplay.setOnPrevClickListener(clickListener);
+
+        // TODO: Add left/right swipe for subject details
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setAutoMeasureEnabled(true);
@@ -130,11 +137,97 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
         configureSubjectsForTab(SpawnSide.Attack);
     }
 
+    private void createDataSuppliers(final MapDataDTO map) {
+        final OnDataClickListener<MapSubjectDTO> itemClicked = new OnDataClickListener<MapSubjectDTO>() {
+            @Override
+            public void onClick(View v, MapSubjectDTO data) {
+                setDetailsView(true);
+                subjectDetails.loadSubjectDetails(data);
+                loadSubjectSwipeList(data);
+            }
+        };
+
+        attackDataSupplier = Suppliers.memoize(new Supplier<List<MapSubjectDTO>>() {
+            @Override
+            public List<MapSubjectDTO> get() {
+                return loadSubjectsForTab(map, SpawnSide.Attack);
+            }
+        });
+        defendDataSupplier = Suppliers.memoize(new Supplier<List<MapSubjectDTO>>() {
+            @Override
+            public List<MapSubjectDTO> get() {
+                return loadSubjectsForTab(map, SpawnSide.Defend);
+            }
+        });
+
+        attackItemAdapterSupplier = Suppliers.memoize(new Supplier<MapSubjectItemAdapter>() {
+            @Override
+            public MapSubjectItemAdapter get() {
+                List<MapSubjectDTO> groupSubjects = attackDataSupplier.get();
+                MapSubjectItemAdapter adapter = new MapSubjectItemAdapter(getContext(), groupSubjects);
+                adapter.setOnItemClickListener(itemClicked);
+                return adapter;
+            }
+        });
+        defendItemAdapterSupplier = Suppliers.memoize(new Supplier<MapSubjectItemAdapter>() {
+            @Override
+            public MapSubjectItemAdapter get() {
+                List<MapSubjectDTO> groupSubjects = defendDataSupplier.get();
+                MapSubjectItemAdapter adapter =  new MapSubjectItemAdapter(getContext(), groupSubjects);
+                adapter.setOnItemClickListener(itemClicked);
+                return adapter;
+            }
+        });
+
+
+        attackDisplayAdapterSupplier = Suppliers.memoize(new Supplier<MapSubjectDisplayItemAdapter>() {
+            @Override
+            public MapSubjectDisplayItemAdapter get() {
+                List<MapSubjectDTO> groupSubjects = attackDataSupplier.get();
+                MapSubjectDisplayItemAdapter adapter = new MapSubjectDisplayItemAdapter(getContext(), groupSubjects);
+                return adapter;
+            }
+        });
+        defendDisplayAdapterSupplier = Suppliers.memoize(new Supplier<MapSubjectDisplayItemAdapter>() {
+            @Override
+            public MapSubjectDisplayItemAdapter get() {
+                List<MapSubjectDTO> groupSubjects = defendDataSupplier.get();
+                MapSubjectDisplayItemAdapter adapter =  new MapSubjectDisplayItemAdapter(getContext(), groupSubjects);
+                return adapter;
+            }
+        });
+    }
+
+    // TODO: Extract to view configurator when you have a generic widget vs specific setup
+    private void loadSubjectSwipeList(MapSubjectDTO data) {
+        if (data.getSpawnSideId() == SpawnSide.Attack) {
+            int selectedIndex = attackDataSupplier.get().indexOf(data);
+            subjectListDisplay.setDataAdapter(attackDisplayAdapterSupplier.get(), selectedIndex);
+        } else if (data.getSpawnSideId() == SpawnSide.Defend) {
+            int selectedIndex = defendDataSupplier.get().indexOf(data);
+            subjectListDisplay.setDataAdapter(defendDisplayAdapterSupplier.get(), selectedIndex);
+        } else {
+            Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectSwipeList");
+        }
+    }
+
+    // TODO: Extract to view configurator when you have a generic widget vs specific setup
+    private void loadSwipeListForSide(SpawnSide side) {
+        int currentSelectedIndex = subjectListDisplay.getSelectedIndex();
+        if (side == SpawnSide.Attack) {
+            subjectListDisplay.setDataAdapter(attackDisplayAdapterSupplier.get(), currentSelectedIndex);
+        } else if (side == SpawnSide.Defend) {
+            subjectListDisplay.setDataAdapter(defendDisplayAdapterSupplier.get(), currentSelectedIndex);
+        } else {
+            Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectSwipeList");
+        }
+    }
+
     private void configureSubjectsForTab(SpawnSide side) {
         if (side == SpawnSide.Attack)
-            subjectsList.setAdapter(attackSupplier.get());
+            subjectsList.setAdapter(attackItemAdapterSupplier.get());
         else if (side == SpawnSide.Defend)
-            subjectsList.setAdapter(defendSupplier.get());
+            subjectsList.setAdapter(defendItemAdapterSupplier.get());
         else
             Log.w(this.getClass().toString(), "None SpawnSide Configuration Attempt");
     }
@@ -154,9 +247,9 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     void setDetailsView(boolean enabled) {
         if (enabled) {
             tabLayout.removeView(subjectsList);
-            tabLayout.addView(subjectDetails);
+            tabLayout.addView(subjectDetailsLayout);
         } else {
-            tabLayout.removeView(subjectDetails);
+            tabLayout.removeView(subjectDetailsLayout);
             tabLayout.addView(subjectsList);
         }
         detailsView = enabled;

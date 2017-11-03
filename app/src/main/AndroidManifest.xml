@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoTitle">
-        <activity android:name="com.innovations.aguilar.pocketstrats.ui.MainActivity">
+        <activity android:name="com.innovations.aguilar.pocketstrats.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

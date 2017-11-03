@@ -59,8 +59,6 @@ public class HeroData implements HeroDataDTO {
     public static final HeroDataColumns Columns = new HeroDataColumns();
 
 
-
-
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("HeroData{");

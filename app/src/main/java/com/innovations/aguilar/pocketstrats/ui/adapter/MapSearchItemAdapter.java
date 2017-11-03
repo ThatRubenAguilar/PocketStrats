@@ -19,6 +19,8 @@ import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
+import com.innovations.aguilar.pocketstrats.ui.ImageEffects;
+import com.innovations.aguilar.pocketstrats.ui.ImageResources;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 import com.innovations.aguilar.pocketstrats.ui.view.ListViewItem;
 import com.innovations.aguilar.pocketstrats.ui.view.ViewDisplayer;
@@ -74,8 +76,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
 
         View rowView;
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(context);
             rowView = inflater.inflate(R.layout.map_list_item, parent, false);
         }
         else {
@@ -94,7 +95,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         textView.setItemData(map);
         textView.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         textView.setText(map.getMapName());
-        textView.setBackgroundDrawable(DrawableCompat.unwrap(getItemBackground(context, map)));
+        textView.setBackgroundDrawable(DrawableCompat.unwrap(ImageResources.getMapBanner(context, map)));
         // Using the OnItemClickListener had an odd delay on hitting back and selecting again,
         // So doing this manually here has proper UI reaction.
         textView.setOnClickListener(new View.OnClickListener() {
@@ -109,33 +110,21 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
                 Log.d("OnTouch", String.format("Touch Event: %s", event.getAction()));
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
-                        int highlightColor = ContextCompat.getColor(context, R.color.accentToggleOff);
-                        Drawable wrappedDrawable = DrawableCompat.wrap(textView.getBackground());
-                        DrawableCompat.setTint(wrappedDrawable, highlightColor);
-                        DrawableCompat.setTintMode(wrappedDrawable, PorterDuff.Mode.SCREEN);
-                        textView.setBackgroundDrawable(DrawableCompat.unwrap(wrappedDrawable));
+                        Drawable tintedDrawable = ImageEffects.tint(context, textView.getBackground(), R.color.accentToggleOff);
+                        textView.setBackgroundDrawable(tintedDrawable);
                         return false;
                     }
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_SCROLL:
                     case MotionEvent.ACTION_MOVE:
                     case MotionEvent.ACTION_CANCEL: {
-                        Drawable wrappedDrawable = DrawableCompat.wrap(textView.getBackground());
-                        DrawableCompat.setTintMode(wrappedDrawable, null);
-                        textView.setBackgroundDrawable(DrawableCompat.unwrap(wrappedDrawable));
+                        textView.setBackgroundDrawable(ImageEffects.removeTint(textView.getBackground()));
                         return false;
                     }
                 }
                 return false;
             }
         });
-    }
-
-    public static Drawable getItemBackground(Context context, MapDataDTO map) {
-        String drawableName = String.format("ic_%s_list_item", map.getMapFileCompatName());
-        int itemResourceId = context.getResources()
-                .getIdentifier(drawableName, "drawable", context.getPackageName());
-        return ContextCompat.getDrawable(context, itemResourceId);
     }
 
 }

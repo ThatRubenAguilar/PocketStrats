@@ -7,7 +7,7 @@
         android:bottomRightRadius="0dp"
         />
     <solid
-        android:color="@color/primaryBackgroundBlue"
+        android:color="@color/accent"
         />
     <padding
         android:left="0dp"

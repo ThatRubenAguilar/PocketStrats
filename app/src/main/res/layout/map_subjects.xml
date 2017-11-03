@@ -21,15 +21,31 @@
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_subjects"
-            android:groupIndicator="@drawable/tips_expandable_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
 
-        <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView
-            android:id="@+id/view_subject_details"
+        <LinearLayout
+            android:id="@+id/layout_view_subject_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView
+                android:id="@+id/list_subjects_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/btn_dropdown_blank"
+                >
+
+            </com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView>
+
+            <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView
+                android:id="@+id/view_subject_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView>
+        </LinearLayout>
     </com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout>
 
 </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView>

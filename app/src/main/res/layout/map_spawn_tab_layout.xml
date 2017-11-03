@@ -29,6 +29,4 @@
     </android.support.design.widget.TabLayout>
 
 
-    <!--app:tabBackground="@drawable/tab_toggle"-->
-
 </merge>

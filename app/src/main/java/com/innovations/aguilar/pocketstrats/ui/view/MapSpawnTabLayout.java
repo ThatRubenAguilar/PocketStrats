@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -17,9 +16,7 @@ import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
-import com.innovations.aguilar.pocketstrats.ui.adapter.MapSearchItemAdapter;
-
-import org.w3c.dom.Text;
+import com.innovations.aguilar.pocketstrats.ui.ImageResources;
 
 /**
  * Created by Ruben on 9/30/2017.
@@ -69,7 +66,6 @@ public class MapSpawnTabLayout extends LinearLayout {
         TextView tabButton = (TextView)inflate(context, R.layout.tab_button_layout, null);
         tabButton.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
 
-        // TODO: wtf with the tab background, make grid bg for tips, added app ns to tab layout,
         ViewGroup.LayoutParams layoutParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         tabButton.setLayoutParams(layoutParams);
 
@@ -98,7 +94,7 @@ public class MapSpawnTabLayout extends LinearLayout {
         Context context = getContext();
         mapIcon.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         mapIcon.setText(map.getMapName());
-        mapIcon.setBackground(DrawableCompat.unwrap(MapSearchItemAdapter.getItemBackground(context, map)));
+        mapIcon.setBackground(DrawableCompat.unwrap(ImageResources.getMapBanner(context, map)));
     }
 
     public TabLayout.OnTabSelectedListener addOnTabSelectedListener(final OnTabSelectedListener listener) {
