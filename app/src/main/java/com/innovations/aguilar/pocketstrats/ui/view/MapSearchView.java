@@ -26,9 +26,13 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class MapSearchView extends LinearLayout implements ViewDisplayer<MapDataDTO> {
+    protected static Logger log = LoggerFactory.getLogger(MapSearchView.class);
 
     Button buttonAssault;
     Button buttonControl;
@@ -98,7 +102,7 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
                 MapItemFilterData filterData = mapAdapter.getMapFilter().getFilterData();
                 filterData.setMapNameFilter(editable);
                 mapAdapter.getMapFilter().filter(filterData);
-                Log.d("Filter List", String.format("Filtering '%s'", editable));
+                log.debug("Filtering '{}'", editable);
             }
         });
 

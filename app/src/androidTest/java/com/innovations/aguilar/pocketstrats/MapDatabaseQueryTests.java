@@ -68,7 +68,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
         for (MapDataDTO map :
                 maps) {
-            log.get().debug(map.getMapName());
+            log.debug(map.getMapName());
         }
         assertEquals(ExpectedMaps, maps.size());
     }
@@ -95,7 +95,7 @@ public class MapDatabaseQueryTests extends MapDatabaseTestFixture {
 
         for (MapSegmentDTO segment :
                 mapSegments) {
-            log.get().debug(segment.getSegmentName());
+            log.debug(segment.getSegmentName());
         }
         assertEquals(ExpectedMapSegments, mapSegments.size());
     }

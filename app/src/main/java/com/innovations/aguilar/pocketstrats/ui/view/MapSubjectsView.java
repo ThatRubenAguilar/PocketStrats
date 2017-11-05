@@ -27,10 +27,14 @@ import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDisplayItemAdap
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 // TODO: Add tests for these views and how they act on deletion/restore
 public class MapSubjectsView extends CoordinatorLayout implements Container {
+    protected static Logger log = LoggerFactory.getLogger(MapSubjectsView.class);
 
     Supplier<MainPaneContainer> mainContainer;
 
@@ -122,7 +126,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
                     MapSubjectDTO subject = defendDataSupplier.get().get(index);
                     subjectDetails.loadSubjectDetails(subject);
                 } else {
-                    Log.w(this.getClass().toString(), "SpawnSide unknown in onIndexClick");
+                    log.warn("SpawnSide unknown in onIndexClick");
                 }
             }
         };
@@ -207,7 +211,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
             int selectedIndex = defendDataSupplier.get().indexOf(data);
             subjectListDisplay.setDataAdapter(defendDisplayAdapterSupplier.get(), selectedIndex);
         } else {
-            Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectSwipeList");
+            log.warn("SpawnSide unknown in loadSubjectSwipeList");
         }
     }
 
@@ -219,7 +223,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
         } else if (side == SpawnSide.Defend) {
             subjectListDisplay.setDataAdapter(defendDisplayAdapterSupplier.get(), currentSelectedIndex);
         } else {
-            Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectSwipeList");
+            log.warn("SpawnSide unknown in loadSubjectSwipeList");
         }
     }
 
@@ -229,7 +233,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
         else if (side == SpawnSide.Defend)
             subjectsList.setAdapter(defendItemAdapterSupplier.get());
         else
-            Log.w(this.getClass().toString(), "None SpawnSide Configuration Attempt");
+            log.warn("None SpawnSide Configuration Attempt");
     }
 
 

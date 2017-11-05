@@ -1,23 +1,21 @@
 package com.innovations.aguilar.pocketstrats.parser;
 
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.PeekingIterator;
 import com.google.common.collect.Sets;
-import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapType;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class TipsDocument {
-    protected Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(this.getClass()));
+    protected Logger log = LoggerFactory.getLogger(this.getClass());
 
     List<SubjectNode> Subjects;
 
@@ -111,7 +109,7 @@ public class TipsDocument {
                 resetTipPrecedence();
             }
             else {
-                log.get().warn(String.format("Unprocessed node in rawNodes '%s'", currentNode));
+                log.warn(String.format("Unprocessed node in rawNodes '%s'", currentNode));
                 rawNodes.next();
             }
         }
@@ -136,7 +134,7 @@ public class TipsDocument {
             else if (Tokens.AllTokens.contains(currentNode.nodeType))
                 return subjNode;
             else {
-                log.get().warn(String.format("Unprocessed node in subjectNodes '%s'", currentNode));
+                log.warn(String.format("Unprocessed node in subjectNodes '%s'", currentNode));
                 rawNodes.next();
             }
         }
@@ -164,7 +162,7 @@ public class TipsDocument {
             else if (Tokens.AllTokens.contains(currentNode.nodeType))
                 return sectNode;
             else {
-                log.get().warn(String.format("Unprocessed node in sectionNodes '%s'", currentNode));
+                log.warn(String.format("Unprocessed node in sectionNodes '%s'", currentNode));
                 rawNodes.next();
             }
         }
@@ -196,7 +194,7 @@ public class TipsDocument {
             else if (Tokens.AllTokens.contains(currentNode.nodeType))
                 return pickNode;
             else {
-                log.get().warn(String.format("Unprocessed node in pickNodes '%s'", currentNode));
+                log.warn(String.format("Unprocessed node in pickNodes '%s'", currentNode));
                 rawNodes.next();
             }
         }

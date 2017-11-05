@@ -14,6 +14,9 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapTypeTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.query.OwnedSqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,8 @@ import java.util.Map;
  * Created by Ruben on 10/19/2017.
  */
 public class DataHolderAccessor {
+    protected static Logger log = LoggerFactory.getLogger(DataHolderAccessor.class);
+
     private final OwnedSqlDataAccessor ownedAccessor;
 
     public DataHolderAccessor(Context context) {
@@ -118,7 +123,7 @@ public class DataHolderAccessor {
                 mapTips) {
             if (!isSection(mapTip)) {
                 if (!tipIdToSectionMap.containsKey(mapTip.getParentMapTipId()))
-                    Log.w(MapSubjectTipDataHolder.class.toString(), String.format("Child tip without parent in query '%s'", mapTip));
+                    log.warn("Child tip without parent in query '{}'", mapTip);
                 else {
                     MapTipDTO parent = tipIdToSectionMap.get(mapTip.getParentMapTipId());
                     List<TOutTipType> tips = sectionToTipsMap.get(parent);

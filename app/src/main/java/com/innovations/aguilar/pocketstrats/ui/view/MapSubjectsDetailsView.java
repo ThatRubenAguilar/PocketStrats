@@ -35,11 +35,15 @@ import com.innovations.aguilar.pocketstrats.ui.dataholder.MapSectionTipDataHolde
 import com.innovations.aguilar.pocketstrats.ui.dataholder.MapSubjectTipDataHolder;
 import com.innovations.aguilar.pocketstrats.ui.dataholder.MapTipDataHolder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class MapSubjectsDetailsView extends LinearLayout {
+    protected static Logger log = LoggerFactory.getLogger(MapSubjectsDetailsView.class);
 
     Supplier<MainPaneContainer> mainContainer;
 
@@ -173,7 +177,7 @@ public class MapSubjectsDetailsView extends LinearLayout {
                 detailsLayout.addView(v);
             }
         } else {
-            Log.w(this.getClass().toString(), "loadSubjectDetailsForSide with unknown SpawnSide");
+            log.warn("loadSubjectDetailsForSide with unknown SpawnSide");
         }
     }
 
@@ -190,7 +194,7 @@ public class MapSubjectsDetailsView extends LinearLayout {
             attackView = createAndConfigureViewsForSide(attackSupplier);
             defendView = createAndConfigureViewsForSide(defendSupplier);
         } else {
-            Log.w(this.getClass().toString(), "SpawnSide unknown in loadSubjectDetails");
+            log.warn("SpawnSide unknown in loadSubjectDetails");
         }
 
         loadSubjectDetailsForSide(subject.getSpawnSideId());

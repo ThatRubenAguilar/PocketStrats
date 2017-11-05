@@ -22,15 +22,15 @@ public class MapDatabaseTestFixture extends LoggingTestFixture {
     @Before
     public void setupDatabaseBeforeTest(){
 
-        log.get().debug("Before Begin {}", MapDatabaseTestFixture.class.toString());
+        log.debug("Before Begin {}", MapDatabaseTestFixture.class.toString());
         readableMapDb = openHelper.getReadableDatabase();
         writeableMapDb = openHelper.getWritableDatabase();
-        log.get().debug("Before End {}", MapDatabaseTestFixture.class.toString());
+        log.debug("Before End {}", MapDatabaseTestFixture.class.toString());
     }
 
     @After
     public void closeDatabaseAfterTest() {
-        log.get().debug("After Begin {}", MapDatabaseTestFixture.class.toString());
+        log.debug("After Begin {}", MapDatabaseTestFixture.class.toString());
         if (readableMapDb != null) {
             readableMapDb.close();
             readableMapDb = null;
@@ -39,26 +39,26 @@ public class MapDatabaseTestFixture extends LoggingTestFixture {
             writeableMapDb.close();
             writeableMapDb = null;
         }
-        log.get().debug("After End {}", MapDatabaseTestFixture.class.toString());
+        log.debug("After End {}", MapDatabaseTestFixture.class.toString());
     }
 
     @BeforeClass
     public static void setupDatabaseHelperBeforeAllTest()
             throws IOException {
-        staticLog.get().debug("Before All Begin {}", MapDatabaseTestFixture.class.toString());
+        staticLog.debug("Before All Begin {}", MapDatabaseTestFixture.class.toString());
         Context targetContext = InstrumentationRegistry.getTargetContext();
         openHelper = new MapDatabaseOpenHelper(targetContext);
-        staticLog.get().debug("Before All End {}", MapDatabaseTestFixture.class.toString());
+        staticLog.debug("Before All End {}", MapDatabaseTestFixture.class.toString());
     }
 
     @AfterClass
     public static void closeDatabaseHelperAfterAllTest() {
-        staticLog.get().debug("After All Begin {}", MapDatabaseTestFixture.class.toString());
+        staticLog.debug("After All Begin {}", MapDatabaseTestFixture.class.toString());
         if (openHelper != null) {
             openHelper.close();
             openHelper = null;
         }
-        staticLog.get().debug("After All End {}", MapDatabaseTestFixture.class.toString());
+        staticLog.debug("After All End {}", MapDatabaseTestFixture.class.toString());
     }
 
 }

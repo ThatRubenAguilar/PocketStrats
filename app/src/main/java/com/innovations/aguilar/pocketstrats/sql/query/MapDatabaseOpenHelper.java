@@ -6,12 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.io.CharStreams;
-import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
-    static final Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(MapDatabaseOpenHelper.class));
+    static final Logger log = LoggerFactory.getLogger(MapDatabaseOpenHelper.class);
     public static final int MapDatabaseVersion = 32;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
@@ -37,7 +35,7 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
             CreateMapTipsDatabase(sqLiteDatabase, context.getAssets());
         }
         catch (IOException iex) {
-            log.get().error("Exception onCreate MapDatabase: %s", iex.toString());
+            log.error("Exception onCreate MapDatabase: %s", iex.toString());
         }
     }
 
@@ -98,10 +96,10 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     void FilterOrExecuteQuery(SQLiteDatabase writableDatabase, String query) {
         Matcher matches = AllWhitespaceRegex.matcher(query);
         if (matches.matches() && matches.group().contentEquals(query)){
-            log.get().debug("Filtered Empty SQL '{}'", query);
+            log.debug("Filtered Empty SQL '{}'", query);
         }
         else {
-            log.get().debug("Running SQL '{}'", query);
+            log.debug("Running SQL '{}'", query);
             writableDatabase.execSQL(query);
         }
     }

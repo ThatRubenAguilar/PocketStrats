@@ -25,12 +25,17 @@ import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilter;
 import com.innovations.aguilar.pocketstrats.ui.view.ListViewItem;
 import com.innovations.aguilar.pocketstrats.ui.view.ViewDisplayer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
  * Created by Ruben on 7/26/2017.
  */
 public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
+    protected static Logger log = LoggerFactory.getLogger(MapSearchItemAdapter.class);
+
     final Context context;
     final MapItemFilter filter;
     final ViewDisplayer viewDisplay;
@@ -107,7 +112,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
         textView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("OnTouch", String.format("Touch Event: %s", event.getAction()));
+                log.debug("Touch Event: {}", event.getAction());
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
                         Drawable tintedDrawable = ImageEffects.tint(context, textView.getBackground(), R.color.accentToggleOff);

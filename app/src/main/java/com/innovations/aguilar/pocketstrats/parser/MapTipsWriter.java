@@ -1,13 +1,8 @@
 package com.innovations.aguilar.pocketstrats.parser;
 
-import android.util.Log;
-
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.innovations.aguilar.pocketstrats.logging.LoggerSupplier;
 import com.innovations.aguilar.pocketstrats.sql.dto.HeroDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTip;
@@ -30,6 +25,7 @@ import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.sql.write.SqlDataWriter;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -40,7 +36,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class MapTipsWriter implements AutoCloseable {
-    protected Supplier<Logger> log = Suppliers.memoize(new LoggerSupplier(this.getClass()));
+    protected static Logger log = LoggerFactory.getLogger(MapTipsWriter.class);
     SqlDataWriter writer;
     SqlDataAccessor accessor;
 
@@ -82,10 +78,10 @@ public class MapTipsWriter implements AutoCloseable {
             return tDoc;
         }
         catch (IOException iex) {
-            log.get().error(iex.toString());
+            log.error(iex.toString());
         }
         catch (SQLDataException sdex) {
-            log.get().error(sdex.toString());
+            log.error(sdex.toString());
         }
         return null;
     }
@@ -96,7 +92,7 @@ public class MapTipsWriter implements AutoCloseable {
             return true;
         }
         catch (SQLDataException sdex) {
-            log.get().error(sdex.toString());
+            log.error(sdex.toString());
         }
         return false;
     }
@@ -206,7 +202,7 @@ public class MapTipsWriter implements AutoCloseable {
                 subjects) {
             List<MapDataDTO> maps = getKnownMaps(subjNode.INode);
             if (maps == null) {
-                Log.e(this.getClass().toString(), String.format("Null maps for subject '%s'", subjNode));
+                log.error("Null maps for subject '{}'", subjNode);
             }
 
             for (MapDataDTO map :
@@ -223,7 +219,7 @@ public class MapTipsWriter implements AutoCloseable {
                         else if (subjNode.INode.MapTypes != null && !subjNode.INode.MapTypes.isEmpty())
                             writeSectionsAsTypeTips(subject, map, subjNode.SectionNodes);
                         else {
-                            log.get().warn(String.format("Invalid subject's info node '%s'", subjNode.INode.toString()));
+                            log.warn(String.format("Invalid subject's info node '%s'", subjNode.INode.toString()));
                         }
                     }
                 }
@@ -284,7 +280,7 @@ public class MapTipsWriter implements AutoCloseable {
                 }
             }
             else {
-                log.get().warn(String.format("Unwritten tip '%s'", pickNode));
+                log.warn(String.format("Unwritten tip '%s'", pickNode));
             }
         }
     }

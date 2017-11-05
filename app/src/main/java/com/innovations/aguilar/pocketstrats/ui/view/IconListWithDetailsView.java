@@ -13,9 +13,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.innovations.aguilar.pocketstrats.R;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 public class IconListWithDetailsView extends LinearLayout {
+    protected static Logger log = LoggerFactory.getLogger(IconListWithDetailsView.class);
 
     private RecyclerView.Adapter iconAdapter;
     private DetailsDataAdapter detailsAdapter;
@@ -71,7 +75,7 @@ public class IconListWithDetailsView extends LinearLayout {
                 this.removeView(existingDetailsView);
             this.addView(detailsView);
         } else {
-            Log.e(this.getClass().toString(), "No position in recyclerView");
+            log.error("No position in recyclerView");
         }
     }
 
@@ -122,7 +126,7 @@ public class IconListWithDetailsView extends LinearLayout {
 
         private void configureView(View itemView) {
             if (itemView.hasOnClickListeners())
-                Log.w(this.getClass().toString(), "IconViewHolder is overwriting an existing OnClickListener, use addOnClickListener to avoid this.");
+                log.warn("IconViewHolder is overwriting an existing OnClickListener, use addOnClickListener to avoid this.");
 
             itemView.setOnClickListener(new OnClickListener() {
                 @Override

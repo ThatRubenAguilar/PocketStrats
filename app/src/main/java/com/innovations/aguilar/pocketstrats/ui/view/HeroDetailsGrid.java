@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +25,11 @@ import com.innovations.aguilar.pocketstrats.sql.dto.HeroDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTipDTO;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
-import com.innovations.aguilar.pocketstrats.ui.ImageEffects;
 import com.innovations.aguilar.pocketstrats.ui.ImageResources;
 import com.innovations.aguilar.pocketstrats.ui.SpanBuilder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class HeroDetailsGrid extends IconListWithDetailsView {
+    protected static Logger log = LoggerFactory.getLogger(HeroDetailsGrid.class);
 
     private Map<HeroDataDTO, List<MapHeroPickTipDTO>> heroToTipMap;
     SpanBuilder.SpanConfigurator<MapHeroPickTipDTO> heroPickConfigurator = new HeroPickTipSpanConfigurator();
@@ -93,7 +94,7 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
         List<MapHeroPickTipDTO> heroPickTips;
         if (!heroToTipMap.containsKey(hero)) {
             heroPickTips = Lists.newArrayList();
-            Log.w(this.getClass().toString(), String.format("Hero '%s' is missing tips from tip map", hero));
+            log.warn("Hero '{}' is missing tips from tip map", hero);
         }
         else
             heroPickTips = heroToTipMap.get(hero);
