@@ -6,9 +6,10 @@ import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.SpanBuilder;
+import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 import com.innovations.aguilar.pocketstrats.ui.dataholder.DataHolderAccessor;
 import com.innovations.aguilar.pocketstrats.ui.dataholder.MapHeroPickTipDataHolder;
 import com.innovations.aguilar.pocketstrats.ui.dataholder.MapSectionTipDataHolder;
@@ -42,12 +44,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class MapSubjectsDetailsView extends LinearLayout {
+public class MapSubjectsDetailsView extends FrameLayout {
     protected static Logger log = LoggerFactory.getLogger(MapSubjectsDetailsView.class);
 
     Supplier<MainPaneContainer> mainContainer;
 
     LinearLayout detailsLayout;
+    LinearLayout transitionDetailsLayout;
+    VerticalScrollView detailsScrollableView;
 
     Supplier<List<View>> attackView;
     Supplier<List<View>> defendView;
@@ -74,7 +78,9 @@ public class MapSubjectsDetailsView extends LinearLayout {
 
     private void inflateLayout() {
         inflate(getContext(), R.layout.map_subject_details, this);
-        detailsLayout = (LinearLayout)findViewById(R.id.layout_subject_details_scrollable);
+        detailsLayout = (LinearLayout)findViewById(R.id.layout_subject_details_tips);
+        detailsScrollableView = (VerticalScrollView) findViewById(R.id.layout_subject_details_scrollable);
+        transitionDetailsLayout = (LinearLayout)findViewById(R.id.layout_subject_details_tips_transition);
     }
 
     @Override
@@ -163,43 +169,97 @@ public class MapSubjectsDetailsView extends LinearLayout {
     }
 
 
-    public void loadSubjectDetailsForSide(SpawnSide side) {
+    private void clearAndAddViewsToLayout(LinearLayout destLayout, Iterable<View> views) {
+        destLayout.removeAllViews();
+        for (View v :
+                views) {
+            destLayout.addView(v);
+        }
+    }
+
+    private void clearAndAddViewsToLayout(LinearLayout destLayout, View ... views) {
+        destLayout.removeAllViews();
+        for (View v :
+                views) {
+            destLayout.addView(v);
+        }
+    }
+
+    private void loadSubjectDetailsForSide(LinearLayout destLayout, SpawnSide side) {
         if (side == SpawnSide.Attack) {
-            detailsLayout.removeAllViews();
-            for (View v :
-                    attackView.get()) {
-                detailsLayout.addView(v);
-            }
+            clearAndAddViewsToLayout(destLayout, attackView.get());
         } else if (side == SpawnSide.Defend) {
-            detailsLayout.removeAllViews();
-            for (View v :
-                    defendView.get()) {
-                detailsLayout.addView(v);
-            }
+            clearAndAddViewsToLayout(destLayout, defendView.get());
         } else {
             log.warn("loadSubjectDetailsForSide with unknown SpawnSide");
         }
     }
+    public void loadSubjectDetailsForSide(SpawnSide side) {
+        loadSubjectDetailsForSide(detailsLayout, side);
+    }
 
     // TODO: AdapterMap that manages type -> adapater relations ?
     public void loadSubjectDetails(MapSubjectDTO subject) {
+        loadSubjectDetails(subject, null);
+    }
+    public void loadSubjectDetails(MapSubjectDTO subject, SwipeAnimation swipeTransition) {
         if (subject.getSpawnSideId() == SpawnSide.Attack) {
+            Supplier<List<View>> oldViews = attackView;
             attackSupplier = createSupplierForSubject(subject);
             defendSupplier = createSupplierForAssociatedSubject(subject);
             attackView = createAndConfigureViewsForSide(attackSupplier);
             defendView = createAndConfigureViewsForSide(defendSupplier);
+            loadSubjectDetailsForSide(subject.getSpawnSideId());
+            if (swipeTransition != null && oldViews != null)
+                animateSwipeTransition(oldViews.get(), swipeTransition);
         } else if (subject.getSpawnSideId() == SpawnSide.Defend) {
+            Supplier<List<View>> oldViews = defendView;
             defendSupplier = createSupplierForSubject(subject);
             attackSupplier = createSupplierForAssociatedSubject(subject);
             attackView = createAndConfigureViewsForSide(attackSupplier);
             defendView = createAndConfigureViewsForSide(defendSupplier);
+            loadSubjectDetailsForSide(subject.getSpawnSideId());
+            if (swipeTransition != null && oldViews != null)
+                animateSwipeTransition(oldViews.get(), swipeTransition);
         } else {
             log.warn("SpawnSide unknown in loadSubjectDetails");
         }
 
-        loadSubjectDetailsForSide(subject.getSpawnSideId());
     }
 
+    private void animateSwipeTransition(List<View> oldViews, SwipeAnimation swipeAnimation) {
+        if (swipeAnimation != null) {
+            clearAndAddViewsToLayout(transitionDetailsLayout, oldViews);
+            transitionDetailsLayout.setVisibility(VISIBLE);
+            swipeAnimation.getOutAnimation().setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    transitionDetailsLayout.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            transitionDetailsLayout.startAnimation(swipeAnimation.getOutAnimation());
+            detailsScrollableView.startAnimation(swipeAnimation.getInAnimation());
+        }
+        else {
+            log.warn("Requested swipe transition without in and out swipe animations.");
+        }
+    }
+
+    private Supplier<MapSubjectTipDataHolder> createSupplierForSubject(final MapSubjectDTO subject, boolean useAssociatedSubject) {
+        if (!useAssociatedSubject)
+            return createSupplierForSubject(subject);
+        return createSupplierForAssociatedSubject(subject);
+    }
     private Supplier<MapSubjectTipDataHolder> createSupplierForSubject(final MapSubjectDTO subject) {
         return Suppliers.memoize(new Supplier<MapSubjectTipDataHolder>() {
             @Override

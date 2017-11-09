@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_map_tip_group"
     android:background="@drawable/btn_dropdown_blank"
     android:layout_width="match_parent"
@@ -8,13 +8,6 @@
     android:paddingBottom="@dimen/button_padding"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/arrow_map_tip_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|center_vertical"
-        android:layout_marginLeft="@dimen/button_padding"
-        android:background="@drawable/btn_forward" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/text_list_map_tip_group"
@@ -29,13 +22,28 @@
         android:textAlignment="gravity"
         android:layout_gravity="center|center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+
+        android:layout_toLeftOf="@+id/arrow_map_tip_group"
+        >
 
     </TextView>
 
-    <!--<Space-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
 
-</LinearLayout>
+    <ImageView
+        android:id="@id/arrow_map_tip_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_vertical"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:background="@drawable/ic_chevron_right"
+
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+
+        />
+
+</RelativeLayout>

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
-    <ScrollView
+    <com.innovations.aguilar.pocketstrats.ui.view.VerticalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_subject_details_scrollable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_details_tip">
         <LinearLayout
-            android:id="@+id/layout_subject_details_scrollable"
+            android:id="@+id/layout_subject_details_tips"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </LinearLayout>
-    </ScrollView>
+    </com.innovations.aguilar.pocketstrats.ui.view.VerticalScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/layout_subject_details_tips_transition"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/bg_details_tip"
+        android:visibility="gone">
+
+    </LinearLayout>
 </merge>

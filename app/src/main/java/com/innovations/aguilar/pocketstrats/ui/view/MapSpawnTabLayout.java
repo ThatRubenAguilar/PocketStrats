@@ -2,11 +2,13 @@ package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -16,6 +18,7 @@ import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
+import com.innovations.aguilar.pocketstrats.ui.ImageEffects;
 import com.innovations.aguilar.pocketstrats.ui.ImageResources;
 
 /**
@@ -90,11 +93,15 @@ public class MapSpawnTabLayout extends LinearLayout {
     }
 
 
+    // TODO: Decouple from tab layout, add back button overlay that is optional trigger, make custom widget button that is used in search and here.
     private void configureMapIcon(MapDataDTO map) {
         Context context = getContext();
         mapIcon.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
         mapIcon.setText(map.getMapName());
-        mapIcon.setBackground(DrawableCompat.unwrap(ImageResources.getMapBanner(context, map)));
+
+        // TODO: Add onclick for framelayout that takes you to map search and clears backstack
+        Drawable mapBanner = ImageResources.getMapBanner(context, map);
+        mapIcon.setBackground(mapBanner);
     }
 
     public TabLayout.OnTabSelectedListener addOnTabSelectedListener(final OnTabSelectedListener listener) {

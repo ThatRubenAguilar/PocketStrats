@@ -16,6 +16,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.common.collect.Lists;
@@ -25,6 +26,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.HeroDataDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapHeroPickTipDTO;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
+import com.innovations.aguilar.pocketstrats.ui.ImageEffects;
 import com.innovations.aguilar.pocketstrats.ui.ImageResources;
 import com.innovations.aguilar.pocketstrats.ui.SpanBuilder;
 
@@ -188,10 +190,7 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
                 Drawable currentBackground = DrawableCompat.wrap(iconView.getBackground());
                 Drawable highlight = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.bg_icon_highlight));
                 highlight.setAlpha(128);
-                Drawable[] layerList = new Drawable[] {
-                        currentBackground, highlight
-                };
-                LayerDrawable selectedLayering = new LayerDrawable(layerList);
+                LayerDrawable selectedLayering = ImageEffects.layerDrawables(context, currentBackground, highlight);
                 newBackground = selectedLayering;
             }
             else{

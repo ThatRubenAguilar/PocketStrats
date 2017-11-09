@@ -7,9 +7,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -23,6 +23,7 @@ import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
+import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDisplayItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
@@ -41,7 +42,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     RecyclerView subjectsList;
     MapSpawnTabLayout tabLayout;
 
-    LinearLayout subjectDetailsLayout;
+    SwipeableLayout subjectDetailsLayout;
     SwipeListDisplayView subjectListDisplay;
     MapSubjectsDetailsView subjectDetails;
 
@@ -53,6 +54,9 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     Supplier<MapSubjectItemAdapter> defendItemAdapterSupplier;
     Supplier<MapSubjectDisplayItemAdapter> attackDisplayAdapterSupplier;
     Supplier<MapSubjectDisplayItemAdapter> defendDisplayAdapterSupplier;
+
+    SwipeAnimation listDisplayNextSwipe;
+    SwipeAnimation listDisplayPrevSwipe;
 
     public MapSubjectsView(Context context) {
         super(context);
@@ -82,7 +86,9 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
         subjectsList = (RecyclerView)findViewById(R.id.list_subjects);
         subjectDetails = (MapSubjectsDetailsView) findViewById(R.id.view_subject_details);
         subjectListDisplay = (SwipeListDisplayView) findViewById(R.id.list_subjects_display);
-        subjectDetailsLayout = (LinearLayout) findViewById(R.id.layout_view_subject_details);
+        subjectDetailsLayout = (SwipeableLayout) findViewById(R.id.layout_view_subject_details);
+        subjectDetailsLayout.setSwipeListener(new SwipeListDisplayView.SwipeListGestureListener(subjectListDisplay));
+
         tabLayout.removeView(subjectsList);
         setDetailsView(false);
 
@@ -108,6 +114,21 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
             }
         });
+
+        listDisplayNextSwipe = new SwipeAnimation(getContext(), R.anim.right_swipe_on, R.anim.right_swipe_off);
+        listDisplayPrevSwipe = new SwipeAnimation(getContext(), R.anim.left_swipe_on, R.anim.left_swipe_off);
+    }
+
+    private void onListDisplayClick(int index, SwipeAnimation swipe) {
+        if (tabLayout.getSelectedSpawnSide() == SpawnSide.Attack) {
+            MapSubjectDTO subject = attackDataSupplier.get().get(index);
+            subjectDetails.loadSubjectDetails(subject, swipe);
+        } else if (tabLayout.getSelectedSpawnSide() == SpawnSide.Defend) {
+            MapSubjectDTO subject = defendDataSupplier.get().get(index);
+            subjectDetails.loadSubjectDetails(subject, swipe);
+        } else {
+            log.warn("SpawnSide unknown in onIndexClick");
+        }
     }
 
     public void loadSubjectsForMap(final MapDataDTO map) {
@@ -116,24 +137,21 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
         createDataSuppliers(map);
 
-        OnIndexClickListener clickListener = new OnIndexClickListener() {
+        final OnIndexClickListener prevClickListener = new OnIndexClickListener() {
             @Override
             public void onIndexClick(View v, int index) {
-                if (tabLayout.getSelectedSpawnSide() == SpawnSide.Attack) {
-                    MapSubjectDTO subject = attackDataSupplier.get().get(index);
-                    subjectDetails.loadSubjectDetails(subject);
-                } else if (tabLayout.getSelectedSpawnSide() == SpawnSide.Defend) {
-                    MapSubjectDTO subject = defendDataSupplier.get().get(index);
-                    subjectDetails.loadSubjectDetails(subject);
-                } else {
-                    log.warn("SpawnSide unknown in onIndexClick");
-                }
+                onListDisplayClick(index, listDisplayPrevSwipe);
             }
         };
-        subjectListDisplay.setOnNextClickListener(clickListener);
-        subjectListDisplay.setOnPrevClickListener(clickListener);
+        final OnIndexClickListener nextClickListener = new OnIndexClickListener() {
+            @Override
+            public void onIndexClick(View v, int index) {
+                onListDisplayClick(index, listDisplayNextSwipe);
+            }
+        };
 
-        // TODO: Add left/right swipe for subject details
+        subjectListDisplay.setOnNextClickListener(nextClickListener);
+        subjectListDisplay.setOnPrevClickListener(prevClickListener);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setAutoMeasureEnabled(true);

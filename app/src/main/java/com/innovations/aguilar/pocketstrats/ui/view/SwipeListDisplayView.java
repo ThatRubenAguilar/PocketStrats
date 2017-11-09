@@ -4,13 +4,14 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.text.Spannable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,11 +19,20 @@ import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
+import com.innovations.aguilar.pocketstrats.ui.OnSwipeListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SwipeListDisplayView extends RelativeLayout {
+    protected static Logger log = LoggerFactory.getLogger(SwipeListDisplayView.class);
+
     private ImageView leftScroll;
     private ImageView rightScroll;
     private TextView textDisplay;
+
+    private OnIndexClickListener nextListener;
+    private OnIndexClickListener prevListener;
 
     public DataAdapter getDataAdapter() {
         return adapter;
@@ -57,9 +67,9 @@ public class SwipeListDisplayView extends RelativeLayout {
         rightScroll = (ImageView)findViewById(R.id.btn_right_scroll);
         textDisplay = (TextView)findViewById(R.id.text_display);
 
-        Drawable rightArrow = ContextCompat.getDrawable(getContext(), R.drawable.btn_forward);
+        Drawable rightArrow = ContextCompat.getDrawable(getContext(), R.drawable.ic_chevron_right);
         rightScroll.setBackground(rightArrow);
-        Drawable leftArrow = ContextCompat.getDrawable(getContext(), R.drawable.btn_backward);
+        Drawable leftArrow = ContextCompat.getDrawable(getContext(), R.drawable.ic_chevron_left);
         leftScroll.setBackground(leftArrow);
 
         Animation rightArrowAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.right_bob);
@@ -82,7 +92,9 @@ public class SwipeListDisplayView extends RelativeLayout {
                 selectNext();
             }
         });
+
     }
+
 
     @Override
     protected void onFinishInflate() {
@@ -101,22 +113,10 @@ public class SwipeListDisplayView extends RelativeLayout {
     }
 
     public void setOnNextClickListener(final OnIndexClickListener listener) {
-        rightScroll.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectNext();
-                listener.onIndexClick(v, selectedIndex);
-            }
-        });
+        nextListener = listener;
     }
     public void setOnPrevClickListener(final OnIndexClickListener listener) {
-        leftScroll.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectPrev();
-                listener.onIndexClick(v, selectedIndex);
-            }
-        });
+        prevListener = listener;
     }
 
 
@@ -129,11 +129,15 @@ public class SwipeListDisplayView extends RelativeLayout {
     public void selectNext() {
         Preconditions.checkNotNull(adapter, "adapter must not be null");
         setSelectedIndexUnchecked((selectedIndex + 1) % adapter.getItemCount());
+        if (nextListener != null)
+            nextListener.onIndexClick(this, selectedIndex);
     }
     public void selectPrev() {
         Preconditions.checkNotNull(adapter, "adapter must not be null");
         int mod = (selectedIndex - 1) % adapter.getItemCount();
         setSelectedIndexUnchecked(mod >= 0 ? mod : mod + adapter.getItemCount());
+        if (prevListener != null)
+            prevListener.onIndexClick(this, selectedIndex);
     }
 
     private void setSelectedIndexUnchecked(int index) {
@@ -152,6 +156,27 @@ public class SwipeListDisplayView extends RelativeLayout {
         abstract public int getItemCount();
 
         abstract public void onBindData(SwipeListDisplayView view, int position);
+    }
+
+    public static class SwipeListGestureListener extends OnSwipeListener {
+        private SwipeListDisplayView view;
+
+        public SwipeListGestureListener(SwipeListDisplayView view) {
+            this.view = view;
+        }
+
+        @Override
+        public boolean onSwipe(Direction direction) {
+            if (direction == Direction.left) {
+                view.selectPrev();
+                return true;
+            }
+            else if (direction == Direction.right) {
+                view.selectNext();
+                return true;
+            }
+            return super.onSwipe(direction);
+        }
     }
 
 }
