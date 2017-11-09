@@ -230,25 +230,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
     private void animateSwipeTransition(List<View> oldViews, SwipeAnimation swipeAnimation) {
         if (swipeAnimation != null) {
             clearAndAddViewsToLayout(transitionDetailsLayout, oldViews);
-            transitionDetailsLayout.setVisibility(VISIBLE);
-            swipeAnimation.getOutAnimation().setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    transitionDetailsLayout.setVisibility(GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            transitionDetailsLayout.startAnimation(swipeAnimation.getOutAnimation());
-            detailsScrollableView.startAnimation(swipeAnimation.getInAnimation());
+            swipeAnimation.swapTransition(detailsScrollableView, transitionDetailsLayout);
         }
         else {
             log.warn("Requested swipe transition without in and out swipe animations.");

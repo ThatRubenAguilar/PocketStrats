@@ -60,16 +60,22 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
     public MapSubjectsView(Context context) {
         super(context);
+        initLayout();
     }
     public MapSubjectsView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        initLayout();
     }
 
     public MapSubjectsView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initLayout();
     }
 
-
+    private void initLayout() {
+        listDisplayNextSwipe = new SwipeAnimation(getContext(), R.anim.right_swipe_on, R.anim.right_swipe_off);
+        listDisplayPrevSwipe = new SwipeAnimation(getContext(), R.anim.left_swipe_on, R.anim.left_swipe_off);
+    }
 
     @Override
     protected void onFinishInflate() {
@@ -115,8 +121,6 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
             }
         });
 
-        listDisplayNextSwipe = new SwipeAnimation(getContext(), R.anim.right_swipe_on, R.anim.right_swipe_off);
-        listDisplayPrevSwipe = new SwipeAnimation(getContext(), R.anim.left_swipe_on, R.anim.left_swipe_off);
     }
 
     private void onListDisplayClick(int index, SwipeAnimation swipe) {

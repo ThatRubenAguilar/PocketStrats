@@ -20,6 +20,7 @@ import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
 import com.innovations.aguilar.pocketstrats.ui.OnSwipeListener;
+import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +31,14 @@ public class SwipeListDisplayView extends RelativeLayout {
     private ImageView leftScroll;
     private ImageView rightScroll;
     private TextView textDisplay;
+    private TextView textDisplayTransition;
 
     private OnIndexClickListener nextListener;
     private OnIndexClickListener prevListener;
+
+    private SwipeAnimation nextSwipeTransition;
+    private SwipeAnimation prevSwipeTransition;
+    private SwipeAnimation fadeSwipeTransition;
 
     public DataAdapter getDataAdapter() {
         return adapter;
@@ -66,11 +72,7 @@ public class SwipeListDisplayView extends RelativeLayout {
         leftScroll = (ImageView)findViewById(R.id.btn_left_scroll);
         rightScroll = (ImageView)findViewById(R.id.btn_right_scroll);
         textDisplay = (TextView)findViewById(R.id.text_display);
-
-        Drawable rightArrow = ContextCompat.getDrawable(getContext(), R.drawable.ic_chevron_right);
-        rightScroll.setBackground(rightArrow);
-        Drawable leftArrow = ContextCompat.getDrawable(getContext(), R.drawable.ic_chevron_left);
-        leftScroll.setBackground(leftArrow);
+        textDisplayTransition = (TextView)findViewById(R.id.text_display_transition);
 
         Animation rightArrowAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.right_bob);
         rightScroll.startAnimation(rightArrowAnimation);
@@ -78,6 +80,7 @@ public class SwipeListDisplayView extends RelativeLayout {
         leftScroll.startAnimation(leftArrowAnimation);
 
         textDisplay.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(getContext().getAssets()));
+        textDisplayTransition.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(getContext().getAssets()));
 
         leftScroll.setOnClickListener(new OnClickListener() {
             @Override
@@ -93,6 +96,9 @@ public class SwipeListDisplayView extends RelativeLayout {
             }
         });
 
+        nextSwipeTransition = new SwipeAnimation(getContext(), R.anim.right_swipe_fade_on, R.anim.right_swipe_fade_off);
+        prevSwipeTransition = new SwipeAnimation(getContext(), R.anim.left_swipe_fade_on, R.anim.left_swipe_fade_off);
+        fadeSwipeTransition = new SwipeAnimation(getContext(), R.anim.fade_in, R.anim.fade_out);
     }
 
 
@@ -123,17 +129,20 @@ public class SwipeListDisplayView extends RelativeLayout {
     public void setSelectedIndex(int index) {
         Preconditions.checkNotNull(adapter, "adapter must not be null");
         Preconditions.checkArgument(index < adapter.getItemCount() && index >= 0, "Selected Index '%s' out of range of list size '%s'", index, adapter.getItemCount());
+        animationSwipeTransition(fadeSwipeTransition);
         setSelectedIndexUnchecked(index);
     }
 
     public void selectNext() {
         Preconditions.checkNotNull(adapter, "adapter must not be null");
+        animationSwipeTransition(nextSwipeTransition);
         setSelectedIndexUnchecked((selectedIndex + 1) % adapter.getItemCount());
         if (nextListener != null)
             nextListener.onIndexClick(this, selectedIndex);
     }
     public void selectPrev() {
         Preconditions.checkNotNull(adapter, "adapter must not be null");
+        animationSwipeTransition(prevSwipeTransition);
         int mod = (selectedIndex - 1) % adapter.getItemCount();
         setSelectedIndexUnchecked(mod >= 0 ? mod : mod + adapter.getItemCount());
         if (prevListener != null)
@@ -143,6 +152,11 @@ public class SwipeListDisplayView extends RelativeLayout {
     private void setSelectedIndexUnchecked(int index) {
         selectedIndex = index;
         adapter.onBindData(this, selectedIndex);
+    }
+
+    private void animationSwipeTransition(SwipeAnimation swipeAnimation) {
+        textDisplayTransition.setText(textDisplay.getText());
+        swipeAnimation.swapTransition(textDisplay, textDisplayTransition);
     }
 
     public void setText(Spannable span) {

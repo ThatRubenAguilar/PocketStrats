@@ -94,6 +94,7 @@ public class MapSpawnTabLayout extends LinearLayout {
 
 
     // TODO: Decouple from tab layout, add back button overlay that is optional trigger, make custom widget button that is used in search and here.
+    // TODO: After decouple, link back to map search on click
     private void configureMapIcon(MapDataDTO map) {
         Context context = getContext();
         mapIcon.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));

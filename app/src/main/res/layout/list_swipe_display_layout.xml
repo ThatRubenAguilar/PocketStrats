@@ -10,28 +10,55 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         />
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/text_display"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|center_vertical"
+        android:gravity="center|center_vertical"
 
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/btn_right_scroll"
         android:layout_toRightOf="@id/btn_left_scroll"
+        >
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/text_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
 
-        android:gravity="center|center_vertical"
-        android:textAlignment="gravity"
+            android:gravity="center|center_vertical"
+            android:textAlignment="gravity"
 
-        android:textSize="@dimen/button_text_size_large"
-        android:textColor="@color/textLight"
+            android:textSize="@dimen/button_text_size_large"
+            android:textColor="@color/textLight"
 
-        android:shadowColor="@color/textDark"
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="20"
-        />
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+            />
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/text_display_transition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+
+            android:gravity="center|center_vertical"
+            android:textAlignment="gravity"
+
+            android:textSize="@dimen/button_text_size_large"
+            android:textColor="@color/textLight"
+
+            android:shadowColor="@color/textDark"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="20"
+
+            android:visibility="gone"
+            />
+    </FrameLayout>
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@id/btn_right_scroll"
         android:background="@drawable/ic_chevron_right"
