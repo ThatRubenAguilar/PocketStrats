@@ -5,19 +5,18 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
+import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
-import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSearchItemAdapter;
 import com.innovations.aguilar.pocketstrats.R;
@@ -33,6 +32,7 @@ import java.util.List;
 
 public class MapSearchView extends LinearLayout implements ViewDisplayer<MapDataDTO> {
     protected static Logger log = LoggerFactory.getLogger(MapSearchView.class);
+    public static final String MapSearchViewRootTag = "MAP_SEARCH_ROOT";
 
     Button buttonAssault;
     Button buttonControl;
@@ -40,25 +40,18 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
     Button buttonHybrid_AE;
     AutoCompleteTextView textMapSearch;
     ListView viewMapsList;
-    ModeSelectionPresenter presenter;
 
-    Supplier<MainPaneContainer> mainContainer;
+    Supplier<Container> mainContainer;
 
     public MapSearchView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        presenter = new ModeSelectionPresenter();
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
-            @Override
-            public MainPaneContainer get() {
-                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.layout_main_container);
-            }
-        });
+        mainContainer = MainActivity.generateContainerRef(this);
 
         List<MapDataDTO> maps;
         MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
@@ -119,17 +112,30 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
         showTipsView(map);
     }
     void showTipsView(MapDataDTO map) {
-        mainContainer.get().removeViewToBackStack(this);
-        View rootView = View.inflate(getContext(), R.layout.map_subjects, mainContainer.get());
+        mainContainer.get().getBackStackManager().removeViewToBackStack(this, MapSearchViewRootTag);
+        View rootView = View.inflate(getContext(), R.layout.map_subjects, mainContainer.get().getViewGroup());
         MapSubjectsView tipsView = (MapSubjectsView) rootView.findViewById(R.id.layout_map_subjects);
         tipsView.loadSubjectsForMap(map);
     }
 
-    class ModeSelectionPresenter {
+    public static class MapSearchPresenter {
+        private Container container;
+        private View fromView;
 
-        public ModeSelectionPresenter() {
+        public MapSearchPresenter(Container container, View fromView) {
+            Preconditions.checkNotNull(container, "container cannot be null");
+            Preconditions.checkNotNull(fromView, "fromView cannot be null");
+            this.container = container;
+            this.fromView = fromView;
+        }
 
+        public void presentMapSearch() {
+            presentMapSearch(true);
+        }
+        public void presentMapSearch(boolean fromToBackStack) {
+            if (fromToBackStack)
+                container.getBackStackManager().removeViewToBackStack(fromView);
+            View.inflate(container.getViewGroup().getContext(), R.layout.map_search, container.getViewGroup());
         }
     }
-
 }

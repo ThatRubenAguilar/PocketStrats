@@ -25,6 +25,7 @@ import com.innovations.aguilar.pocketstrats.sql.dto.MapTipDTO;
 import com.innovations.aguilar.pocketstrats.sql.dto.SpawnSide;
 import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
+import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
@@ -47,7 +48,7 @@ import java.util.Map;
 public class MapSubjectsDetailsView extends FrameLayout {
     protected static Logger log = LoggerFactory.getLogger(MapSubjectsDetailsView.class);
 
-    Supplier<MainPaneContainer> mainContainer;
+    Supplier<Container> mainContainer;
 
     LinearLayout detailsLayout;
     LinearLayout transitionDetailsLayout;
@@ -87,12 +88,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
-            @Override
-            public MainPaneContainer get() {
-                return (MainPaneContainer) ((MainActivity) getContext()).findViewById(R.id.layout_main_container);
-            }
-        });
+        mainContainer = MainActivity.generateContainerRef(this);
     }
 
     private TextView createAndConfigureTextView() {

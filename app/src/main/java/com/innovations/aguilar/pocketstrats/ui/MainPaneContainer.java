@@ -28,13 +28,18 @@ public class MainPaneContainer extends FrameLayout implements Container {
     }
 
     @Override
+    public ViewGroup getViewGroup() {
+        return this;
+    }
+
+    @Override
     public boolean onBackPressed() {
         return backStack.onBackPressed();
     }
 
     @Override
-    public void removeViewToBackStack(View view) {
-        backStack.removeViewToBackStack(view);
+    public ViewBackStackManager getBackStackManager() {
+        return backStack;
     }
 
 }

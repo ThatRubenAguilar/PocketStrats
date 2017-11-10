@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -24,9 +25,12 @@ import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
 import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
+import com.innovations.aguilar.pocketstrats.ui.ViewBackStack;
+import com.innovations.aguilar.pocketstrats.ui.ViewBackStackManager;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDisplayItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
+import com.innovations.aguilar.pocketstrats.ui.view.configurator.BannerConfigurator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +41,12 @@ import java.util.List;
 public class MapSubjectsView extends CoordinatorLayout implements Container {
     protected static Logger log = LoggerFactory.getLogger(MapSubjectsView.class);
 
-    Supplier<MainPaneContainer> mainContainer;
+    Supplier<Container> mainContainer;
+    MapSearchView.MapSearchPresenter searchPresenter;
 
     RecyclerView subjectsList;
     MapSpawnTabLayout tabLayout;
+    BannerBackButton mapBanner;
 
     SwipeableLayout subjectDetailsLayout;
     SwipeListDisplayView subjectListDisplay;
@@ -81,14 +87,11 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        mainContainer = Suppliers.memoize(new Supplier<MainPaneContainer>() {
-            @Override
-            public MainPaneContainer get() {
-                return (MainPaneContainer)((MainActivity)getContext()).findViewById(R.id.layout_main_container);
-            }
-        });
+        mainContainer = MainActivity.generateContainerRef(this);
+        searchPresenter = new MapSearchView.MapSearchPresenter(mainContainer.get(), this);
 
         tabLayout = (MapSpawnTabLayout)findViewById(R.id.map_spawn_layout);
+        mapBanner = (BannerBackButton)findViewById(R.id.map_banner);
         subjectsList = (RecyclerView)findViewById(R.id.list_subjects);
         subjectDetails = (MapSubjectsDetailsView) findViewById(R.id.view_subject_details);
         subjectListDisplay = (SwipeListDisplayView) findViewById(R.id.list_subjects_display);
@@ -121,6 +124,16 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
             }
         });
 
+        mapBanner.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewBackStackManager stackManager = mainContainer.get().getBackStackManager();
+                if (stackManager.clearBackStackToTag(MapSearchView.MapSearchViewRootTag))
+                    stackManager.makeTopOfBackStackCurrentView();
+                else
+                    searchPresenter.presentMapSearch(false);
+            }
+        });
     }
 
     private void onListDisplayClick(int index, SwipeAnimation swipe) {
@@ -137,7 +150,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
     public void loadSubjectsForMap(final MapDataDTO map) {
 
-        tabLayout.setMapIcon(map);
+        BannerConfigurator.configureForMap(mapBanner, map);
 
         createDataSuppliers(map);
 
@@ -282,6 +295,11 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     }
 
     @Override
+    public ViewGroup getViewGroup() {
+        return this;
+    }
+
+    @Override
     public boolean onBackPressed() {
         if (detailsView) {
             setDetailsView(false);
@@ -292,8 +310,8 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
     }
 
     @Override
-    public void removeViewToBackStack(View view) {
-
+    public ViewBackStackManager getBackStackManager() {
+        return ViewBackStack.DoNothingViewBackStack;
     }
 
 }

@@ -3,6 +3,8 @@ package com.innovations.aguilar.pocketstrats.ui.view;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +12,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -25,7 +28,6 @@ import com.innovations.aguilar.pocketstrats.ui.ImageResources;
  * Created by Ruben on 9/30/2017.
  */
 public class MapSpawnTabLayout extends LinearLayout {
-    private TextView mapIcon;
     private TabLayout spawnTabs;
 
     public MapSpawnTabLayout(Context context) {
@@ -45,7 +47,6 @@ public class MapSpawnTabLayout extends LinearLayout {
 
     private void inflateLayout() {
         inflate(getContext(), R.layout.map_spawn_tab_layout, this);
-        mapIcon = (TextView)findViewById(R.id.map_icon);
         spawnTabs = (TabLayout)findViewById(R.id.spawn_tabs);
     }
 
@@ -88,22 +89,6 @@ public class MapSpawnTabLayout extends LinearLayout {
         tabButton.setBackground(DrawableCompat.unwrap(wrappedDrawable));
     }
 
-    public void setMapIcon(MapDataDTO map) {
-        configureMapIcon(map);
-    }
-
-
-    // TODO: Decouple from tab layout, add back button overlay that is optional trigger, make custom widget button that is used in search and here.
-    // TODO: After decouple, link back to map search on click
-    private void configureMapIcon(MapDataDTO map) {
-        Context context = getContext();
-        mapIcon.setTypeface(CustomTypeFaces.BigNoodleTitlingOblique(context.getAssets()));
-        mapIcon.setText(map.getMapName());
-
-        // TODO: Add onclick for framelayout that takes you to map search and clears backstack
-        Drawable mapBanner = ImageResources.getMapBanner(context, map);
-        mapIcon.setBackground(mapBanner);
-    }
 
     public TabLayout.OnTabSelectedListener addOnTabSelectedListener(final OnTabSelectedListener listener) {
         TabLayout.OnTabSelectedListener tabListener = new TabLayout.OnTabSelectedListener() {

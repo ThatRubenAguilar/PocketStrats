@@ -3,49 +3,59 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_map_subjects"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/map_spawn_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-        <!--android:divider="@null"-->
-        <!--android:dividerHeight="0dp"-->
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/list_subjects"
+        <com.innovations.aguilar.pocketstrats.ui.view.BannerBackButton
+            android:id="@+id/map_banner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content">
 
-        <com.innovations.aguilar.pocketstrats.ui.view.SwipeableLayout
-            android:id="@+id/layout_view_subject_details"
+        </com.innovations.aguilar.pocketstrats.ui.view.BannerBackButton>
+
+        <com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/map_spawn_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView
-                android:id="@+id/list_subjects_display"
+
+
+            <!--android:divider="@null"-->
+            <!--android:dividerHeight="0dp"-->
+            <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/list_subjects"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/btn_dropdown_blank"
-                >
+                />
 
-            </com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView>
-
-            <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView
-                android:id="@+id/view_subject_details"
+            <com.innovations.aguilar.pocketstrats.ui.view.SwipeableLayout
+                android:id="@+id/layout_view_subject_details"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView>
-        </com.innovations.aguilar.pocketstrats.ui.view.SwipeableLayout>
-    </com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView
+                    android:id="@+id/list_subjects_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/btn_dropdown_blank"
+                    >
 
+                </com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView>
+
+                <com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView
+                    android:id="@+id/view_subject_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsDetailsView>
+            </com.innovations.aguilar.pocketstrats.ui.view.SwipeableLayout>
+        </com.innovations.aguilar.pocketstrats.ui.view.MapSpawnTabLayout>
+    </LinearLayout>
 </com.innovations.aguilar.pocketstrats.ui.view.MapSubjectsView>

@@ -116,14 +116,12 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
                         Drawable tintedDrawable = ImageEffects.tint(context, textView.getBackground(), R.color.accentToggleOff);
-                        textView.setBackgroundDrawable(tintedDrawable);
+                        textView.setBackground(tintedDrawable);
                         return false;
                     }
                     case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_SCROLL:
-                    case MotionEvent.ACTION_MOVE:
                     case MotionEvent.ACTION_CANCEL: {
-                        textView.setBackgroundDrawable(ImageEffects.removeTint(textView.getBackground()));
+                        textView.setBackground(ImageEffects.removeTint(textView.getBackground()));
                         return false;
                     }
                 }
