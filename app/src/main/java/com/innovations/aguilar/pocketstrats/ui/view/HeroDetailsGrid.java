@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.LeadingMarginSpan;
@@ -223,6 +224,8 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
             else {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 View detailsView = inflater.inflate(R.layout.grid_hero_details_text, parent, false);
+                TextView tipTextView = (TextView) detailsView.findViewById(R.id.text_hero_details);
+                tipTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 return detailsView;
             }
@@ -260,7 +263,7 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
             ClickableSpan linkSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                    log.debug("Clicked {}", mapCalloutLink);
                 }
             };
             builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

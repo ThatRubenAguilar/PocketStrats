@@ -3,6 +3,7 @@ package com.innovations.aguilar.pocketstrats.ui.view;
 import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.LeadingMarginSpan;
@@ -94,6 +95,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
     private TextView createAndConfigureTextView() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         TextView text = (TextView) inflater.inflate(R.layout.map_subject_details_text, detailsLayout, false);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
         return text;
     }
 
@@ -298,7 +300,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
             ClickableSpan linkSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                    log.debug("Clicked {}", mapCalloutLink);
                 }
             };
             builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -343,7 +345,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
             ClickableSpan linkSpan = new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                    log.debug("Clicked {}", mapCalloutLink);
                 }
             };
             builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
