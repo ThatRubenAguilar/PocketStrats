@@ -54,7 +54,7 @@ public class MapSearchView extends LinearLayout implements ViewDisplayer<MapData
         mainContainer = MainActivity.generateContainerRef(this);
 
         List<MapDataDTO> maps;
-        MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
+        MapDatabaseOpenHelper openHelper = MapDatabaseOpenHelper.getHelper(getContext());
         try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
             maps = accessor.mapAccessor().GetAllMaps();
         }

@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
+import com.innovations.aguilar.pocketstrats.parser.MapTipsWriter;
+import com.innovations.aguilar.pocketstrats.parser.TipsDocument;
+import com.innovations.aguilar.pocketstrats.sql.write.SqlDataWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +22,23 @@ import java.util.regex.Pattern;
 
 public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
     static final Logger log = LoggerFactory.getLogger(MapDatabaseOpenHelper.class);
-    public static final int MapDatabaseVersion = 32;
+    public static final int MapDatabaseVersion = 34;
     public static final String MapDatabaseName = "MapDatabase";
     private Context context;
 
+    private static MapDatabaseOpenHelper instance;
+
+    // SQLITE NOTE: Going with singleton help as described here: http://touchlabblog.tumblr.com/post/24474750219/single-sqlite-connection
+    // Should SQLite ever become non-file, all close resources are merely commented out.
+    public static synchronized MapDatabaseOpenHelper getHelper(Context context)
+    {
+        if (instance == null)
+            instance = new MapDatabaseOpenHelper(context);
+
+        return instance;
+    }
+
+    // TODO: decouple all getDatabase calls and add loading widget with transition callback.
     public MapDatabaseOpenHelper(Context context) {
         super(context, MapDatabaseName, null, MapDatabaseVersion);
         this.context = context;
@@ -35,7 +51,43 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
             CreateMapTipsDatabase(sqLiteDatabase, context.getAssets());
         }
         catch (IOException iex) {
-            log.error("Exception onCreate MapDatabase: %s", iex.toString());
+            log.error("Exception onCreate MapDatabase: {}", iex);
+            return;
+        }
+        try {
+            SqlDataAccessor accessor = new SqlDataAccessor(sqLiteDatabase);
+            SqlDataWriter writer = new SqlDataWriter(sqLiteDatabase);
+
+            MapTipsWriter tipsWriter = new MapTipsWriter(writer, accessor);
+
+            AssetManager assets = context.getAssets();
+
+            TipsDocument currentDoc;
+            try (InputStream scriptTextStream = assets.open("tips_docs/map_type_tips.txt")) {
+                currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8));
+            }
+            try (InputStream scriptTextStream = assets.open("tips_docs/assault_maps_tips.txt")) {
+                currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                        currentDoc);
+            }
+            try (InputStream scriptTextStream = assets.open("tips_docs/control_maps_tips.txt")) {
+                currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                        currentDoc);
+            }
+            try (InputStream scriptTextStream = assets.open("tips_docs/escort_maps_tips.txt")) {
+                currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                        currentDoc);
+            }
+            try (InputStream scriptTextStream = assets.open("tips_docs/hybrid_assault_escort_maps_tips.txt")) {
+                currentDoc = tipsWriter.WriteTips(new InputStreamReader(scriptTextStream, Charsets.UTF_8),
+                        currentDoc);
+            }
+
+            tipsWriter.WriteSubjectAssociations();
+        }
+        catch (IOException iex) {
+            log.error("Exception writing tips to MapDatabase: {}", iex);
+            return;
         }
     }
 

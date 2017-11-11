@@ -574,7 +574,8 @@ public class SqlDataAccessor implements AutoCloseable {
 
     @Override
     public void close() {
-        if (readableDb != null) readableDb.close();
+        // See SQLITE NOTE
+//        if (readableDb != null) readableDb.close();
     }
 
     // TODO: Common query cache mechanisms

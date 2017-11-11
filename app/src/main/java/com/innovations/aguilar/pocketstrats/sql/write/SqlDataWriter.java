@@ -175,7 +175,8 @@ public class SqlDataWriter implements AutoCloseable {
     }
 
     @Override
-    public void close() throws Exception {
-        if (writeableDb != null) writeableDb.close();
+    public void close() {
+        // See SQLITE NOTE
+//        if (writeableDb != null) writeableDb.close();
     }
 }

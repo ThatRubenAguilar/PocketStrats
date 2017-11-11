@@ -272,7 +272,7 @@ public class MapSubjectsView extends CoordinatorLayout implements Container {
 
     List<MapSubjectDTO> loadSubjectsForTab(MapDataDTO map, SpawnSide side) {
         List<MapSubjectDTO> subjects;
-        MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
+        MapDatabaseOpenHelper openHelper = MapDatabaseOpenHelper.getHelper(getContext());
         try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
             subjects = accessor.mapSubjectAccessor().GetMapSubjectsByMapOrSide(map.getMapId(), side);
         }

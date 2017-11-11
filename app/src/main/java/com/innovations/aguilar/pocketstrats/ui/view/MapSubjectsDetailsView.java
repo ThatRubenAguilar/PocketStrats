@@ -255,7 +255,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
         return Suppliers.memoize(new Supplier<MapSubjectTipDataHolder>() {
             @Override
             public MapSubjectTipDataHolder get() {
-                MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(getContext());
+                MapDatabaseOpenHelper openHelper = MapDatabaseOpenHelper.getHelper(getContext());
                 try (SqlDataAccessor accessor = new SqlDataAccessor(openHelper.getReadableDatabase())) {
                     List<MapSubjectDTO> associatedSubjects = accessor.mapSubjectAccessor()
                             .GetMapSubjectsByAssociation(subject.getMapSubjectId());

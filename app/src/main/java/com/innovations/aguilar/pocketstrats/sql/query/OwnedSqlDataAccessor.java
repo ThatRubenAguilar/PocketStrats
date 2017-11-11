@@ -18,7 +18,7 @@ public class OwnedSqlDataAccessor implements Closeable {
 
     public OwnedSqlDataAccessor(Context context) {
         this.ownAccessor = true;
-        MapDatabaseOpenHelper openHelper = new MapDatabaseOpenHelper(context);
+        MapDatabaseOpenHelper openHelper = MapDatabaseOpenHelper.getHelper(context);
         this.accessor = new SqlDataAccessor(openHelper.getReadableDatabase());
 
     }
@@ -30,7 +30,8 @@ public class OwnedSqlDataAccessor implements Closeable {
 
     @Override
     public void close() throws IOException {
-        if (ownAccessor && accessor != null)
-            accessor.close();
+        // See SQLITE NOTE
+//        if (ownAccessor && accessor != null)
+//            accessor.close();
     }
 }
