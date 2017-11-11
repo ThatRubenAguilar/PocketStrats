@@ -1,13 +1,9 @@
 package com.innovations.aguilar.pocketstrats.ui.view;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GestureDetectorCompat;
 import android.text.Spannable;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,8 +14,8 @@ import android.widget.TextView;
 import com.google.common.base.Preconditions;
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
-import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
-import com.innovations.aguilar.pocketstrats.ui.OnSwipeListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnIndexClickListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnSwipeListener;
 import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 
 import org.slf4j.Logger;

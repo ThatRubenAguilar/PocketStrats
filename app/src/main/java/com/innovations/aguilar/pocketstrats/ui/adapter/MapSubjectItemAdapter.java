@@ -5,13 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
-import com.innovations.aguilar.pocketstrats.ui.view.SwipeListDisplayView;
 import com.innovations.aguilar.pocketstrats.ui.viewholder.MapSubjectItemViewHolder;
-import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnDataClickListener;
 
 import java.util.List;
 

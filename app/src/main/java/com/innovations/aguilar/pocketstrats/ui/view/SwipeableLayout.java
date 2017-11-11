@@ -6,9 +6,8 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
-import com.innovations.aguilar.pocketstrats.ui.OnSwipeListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnSwipeListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

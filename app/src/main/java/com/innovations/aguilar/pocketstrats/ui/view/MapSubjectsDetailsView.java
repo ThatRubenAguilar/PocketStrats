@@ -4,14 +4,15 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -29,7 +30,6 @@ import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypefaceSpan;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
-import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
 import com.innovations.aguilar.pocketstrats.ui.SpanBuilder;
 import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 import com.innovations.aguilar.pocketstrats.ui.dataholder.DataHolderAccessor;
@@ -59,8 +59,8 @@ public class MapSubjectsDetailsView extends FrameLayout {
     Supplier<MapSubjectTipDataHolder> attackSupplier;
     Supplier<MapSubjectTipDataHolder> defendSupplier;
 
-    SpanBuilder.SpanConfigurator<MapTipDTO> tipSpanConfigurator = new TipSpanConfigurator();
-    SpanBuilder.SpanConfigurator<MapTipDTO> sectionSpanConfigurator = new SectionSpanConfigurator();
+    SpanBuilder.SpanConfigurator<MapTipDTO> tipSpanConfigurator = new TipSpanConfigurator(getContext());
+    SpanBuilder.SpanConfigurator<MapTipDTO> sectionSpanConfigurator = new SectionSpanConfigurator(getContext());
 
     public MapSubjectsDetailsView(Context context) {
         super(context);
@@ -276,57 +276,93 @@ public class MapSubjectsDetailsView extends FrameLayout {
     }
 
 
-    class TipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+    static class TipSpanConfigurator extends ChunkedTipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+
+        static final String Prefix = "• ";
+        private Context context;
+
+        public TipSpanConfigurator(Context context) {
+            this.context = context;
+        }
 
         @Override
         public int configure(SpannableStringBuilder builder, MapTipDTO spanData, int runningOffset) {
             String tipDetail = spanData.getMapTipDescription();
-            Context context = getContext();
 
-            int spanDeltaOffset = tipDetail.length()+2;
+            return configureChunkedTip(builder, Prefix, tipDetail, runningOffset);
+        }
 
-            builder.append("• ");
-            builder.append(tipDetail);
+
+        @Override
+        protected void styleLinkSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset, final String mapCalloutLink) {
+            ClickableSpan linkSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                }
+            };
+            builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styleTextSpan(builder, startSegmentOffset, endSegmentOffset);
+        }
+        @Override
+        protected void styleTextSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset) {
+
             builder.setSpan(new AbsoluteSizeSpan(
                             context.getResources().getDimensionPixelSize(R.dimen.paragraph_text_size_medium)),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new CustomTypefaceSpan(
                             CustomTypeFaces.Futura(context.getAssets())),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             int leading = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_tip);
             int offset = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_offset);
             LeadingMarginSpan adjustSpan = new LeadingMarginSpan.Standard(leading, leading + offset);
-            builder.setSpan(adjustSpan, runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            return spanDeltaOffset;
+            builder.setSpan(adjustSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
     }
-    class SectionSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+
+    static class SectionSpanConfigurator extends ChunkedTipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapTipDTO> {
+
+        static final String Prefix = "- ";
+        private Context context;
+
+        public SectionSpanConfigurator(Context context) {
+            this.context = context;
+        }
 
         @Override
         public int configure(SpannableStringBuilder builder, MapTipDTO spanData, int runningOffset) {
             String tipDetail = spanData.getMapTipDescription();
-            Context context = getContext();
 
-            int spanDeltaOffset = tipDetail.length()+2;
+            return configureChunkedTip(builder, Prefix, tipDetail, runningOffset);
+        }
 
-            builder.append("- ");
-            builder.append(tipDetail);
+        @Override
+        protected void styleLinkSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset, final String mapCalloutLink) {
+            ClickableSpan linkSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                }
+            };
+            builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styleTextSpan(builder, startSegmentOffset, endSegmentOffset);
+        }
 
+        @Override
+        protected void styleTextSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset) {
             builder.setSpan(new AbsoluteSizeSpan(
                             context.getResources().getDimensionPixelSize(R.dimen.paragraph_text_size_medium)),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new CustomTypefaceSpan(
                             CustomTypeFaces.Futura(context.getAssets())),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             int leading = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_section);
             int offset = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_offset);
             LeadingMarginSpan adjustSpan = new LeadingMarginSpan.Standard(leading, leading + offset);
-            builder.setSpan(adjustSpan, runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            return spanDeltaOffset;
+            builder.setSpan(adjustSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 }

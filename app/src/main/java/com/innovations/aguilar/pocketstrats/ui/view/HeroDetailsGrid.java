@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -43,7 +45,7 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
     protected static Logger log = LoggerFactory.getLogger(HeroDetailsGrid.class);
 
     private Map<HeroDataDTO, List<MapHeroPickTipDTO>> heroToTipMap;
-    SpanBuilder.SpanConfigurator<MapHeroPickTipDTO> heroPickConfigurator = new HeroPickTipSpanConfigurator();
+    SpanBuilder.SpanConfigurator<MapHeroPickTipDTO> heroPickConfigurator = new HeroPickTipSpanConfigurator(getContext());
 
     public HeroDetailsGrid(Context context) {
         super(context);
@@ -235,32 +237,51 @@ public class HeroDetailsGrid extends IconListWithDetailsView {
         }
     }
 
-    class HeroPickTipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapHeroPickTipDTO> {
+    static class HeroPickTipSpanConfigurator extends ChunkedTipSpanConfigurator implements SpanBuilder.SpanConfigurator<MapHeroPickTipDTO> {
+
+        static final String Prefix = "• ";
+        private Context context;
+
+        public HeroPickTipSpanConfigurator(Context context) {
+            this.context = context;
+        }
 
         @Override
         public int configure(SpannableStringBuilder builder, MapHeroPickTipDTO spanData, int runningOffset) {
             String tipDetail = spanData.getMapTipDescription();
-            Context context = getContext();
 
-            builder.append("• ");
-            builder.append(tipDetail);
+            return configureChunkedTip(builder, Prefix, tipDetail, runningOffset);
+        }
 
-            int spanDeltaOffset = tipDetail.length()+2;
+
+
+        @Override
+        protected void styleLinkSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset, final String mapCalloutLink) {
+            ClickableSpan linkSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    Toast.makeText(context, mapCalloutLink, Toast.LENGTH_SHORT).show();
+                }
+            };
+            builder.setSpan(linkSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            styleTextSpan(builder, startSegmentOffset, endSegmentOffset);
+        }
+        @Override
+        protected void styleTextSpan(SpannableStringBuilder builder, int startSegmentOffset, int endSegmentOffset) {
 
             builder.setSpan(new AbsoluteSizeSpan(
                             context.getResources().getDimensionPixelSize(R.dimen.paragraph_text_size_medium)),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             builder.setSpan(new CustomTypefaceSpan(
                             CustomTypeFaces.Futura(context.getAssets())),
-                    runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                    startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             int leading = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_tip);
             int offset = context.getResources().getDimensionPixelSize(R.dimen.tip_text_indent_offset);
             LeadingMarginSpan adjustSpan = new LeadingMarginSpan.Standard(leading, leading + offset);
-            builder.setSpan(adjustSpan, runningOffset, runningOffset+spanDeltaOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            return spanDeltaOffset;
+            builder.setSpan(adjustSpan, startSegmentOffset, endSegmentOffset, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
+
     }
 }
 

@@ -1,4 +1,4 @@
-package com.innovations.aguilar.pocketstrats.ui;
+package com.innovations.aguilar.pocketstrats.ui.listener;
 
 import android.view.View;
 import android.widget.Checkable;

@@ -3,18 +3,13 @@ package com.innovations.aguilar.pocketstrats.ui.viewholder;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.innovations.aguilar.pocketstrats.R;
 import com.innovations.aguilar.pocketstrats.sql.dto.MapSubjectDTO;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
-import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
-import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
-
-import static android.view.animation.Animation.RELATIVE_TO_SELF;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnDataClickListener;
 
 public class MapSubjectItemViewHolder extends RecyclerView.ViewHolder {
 

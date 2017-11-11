@@ -15,7 +15,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Supplier;
 import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.CustomTypeFaces;
-import com.innovations.aguilar.pocketstrats.ui.EnumSetToggleFilterClickListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.EnumSetToggleFilterClickListener;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
 import com.innovations.aguilar.pocketstrats.ui.filter.MapItemFilterData;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSearchItemAdapter;

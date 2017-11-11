@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
@@ -22,14 +20,13 @@ import com.innovations.aguilar.pocketstrats.sql.query.MapDatabaseOpenHelper;
 import com.innovations.aguilar.pocketstrats.sql.query.SqlDataAccessor;
 import com.innovations.aguilar.pocketstrats.ui.Container;
 import com.innovations.aguilar.pocketstrats.ui.MainActivity;
-import com.innovations.aguilar.pocketstrats.ui.MainPaneContainer;
-import com.innovations.aguilar.pocketstrats.ui.OnIndexClickListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnIndexClickListener;
 import com.innovations.aguilar.pocketstrats.ui.SwipeAnimation;
 import com.innovations.aguilar.pocketstrats.ui.ViewBackStack;
 import com.innovations.aguilar.pocketstrats.ui.ViewBackStackManager;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectDisplayItemAdapter;
 import com.innovations.aguilar.pocketstrats.ui.adapter.MapSubjectItemAdapter;
-import com.innovations.aguilar.pocketstrats.ui.OnDataClickListener;
+import com.innovations.aguilar.pocketstrats.ui.listener.OnDataClickListener;
 import com.innovations.aguilar.pocketstrats.ui.view.configurator.BannerConfigurator;
 
 import org.slf4j.Logger;
