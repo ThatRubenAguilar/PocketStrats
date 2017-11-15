@@ -349,3 +349,9 @@ Section|Noteworthy Picks
 Pick|Sombra
 Tip|Sombra can make use of the mega at [semi] to quickly charge her ult.
 
+
+Map|Junkertown
+Tags|Open|Vertical
+Side|Attack
+
+Side|Defend

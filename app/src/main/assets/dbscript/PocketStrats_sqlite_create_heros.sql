@@ -41,6 +41,7 @@ INSERT INTO Heros (HeroId, HeroName, HeroIconName, HeroNameLatin) VALUES (22, 'W
 INSERT INTO Heros (HeroId, HeroName, HeroIconName, HeroNameLatin) VALUES (23, 'Winston', 'ic_winston.png', 'Winston');
 INSERT INTO Heros (HeroId, HeroName, HeroIconName, HeroNameLatin) VALUES (24, 'Zarya', 'ic_zarya.png', 'Zarya');
 INSERT INTO Heros (HeroId, HeroName, HeroIconName, HeroNameLatin) VALUES (25, 'Zenyatta', 'ic_zenyatta.png', 'Zenyatta');
+INSERT INTO Heros (HeroId, HeroName, HeroIconName, HeroNameLatin) VALUES (26, 'Moira', 'ic_moira.png', 'Moira');
 
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;

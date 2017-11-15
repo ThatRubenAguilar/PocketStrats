@@ -63,6 +63,7 @@ public class MapSubjectsDetailsView extends FrameLayout {
     SpanBuilder.SpanConfigurator<MapTipDTO> tipSpanConfigurator = new TipSpanConfigurator(getContext());
     SpanBuilder.SpanConfigurator<MapTipDTO> sectionSpanConfigurator = new SectionSpanConfigurator(getContext());
 
+    // TODO: Text for tips becomes scrunched in smaller viewports, consider changing text size
     public MapSubjectsDetailsView(Context context) {
         super(context);
         inflateLayout();

@@ -113,6 +113,7 @@ public class MapSearchItemAdapter extends BaseAdapter implements Filterable {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 log.debug("Touch Event: {}", event.getAction());
+                // TODO: tint never removed on API 19
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
                         Drawable tintedDrawable = ImageEffects.tint(context, textView.getBackground(), R.color.accentToggleOff);

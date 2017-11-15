@@ -2,7 +2,22 @@ Category|Assault|Control|Escort|Hybrid_Assault_Escort
 Side|Attack|Defend
 Subject|General
 
-
+Section|Good hold positioning has several aspects:
+ Tip|Vision on most entrances to the area.
+ Tip|Opportunities for to set up crossfire.
+ Tip|Good cover and sightlines for support/range dps.
+ Tip|Limited cover for the enemy team.
+Section|On Ult Charge Efficiency
+ Tip|If you have ult, avoid poke damage on the enemy team until your team is ready to use poke pressure for positioning.
+ Tip|When safe and missing health, let supports heal you for ult charge instead of using health packs.
+Section|During pre-fight positioning,
+ Tip|Mind sightlines for supports.
+ Tip|Use grouping to force isolated targets off of strong positions. This can force awkward engages for the enemy team that minimize their positional advantage.
+Section|When focus firing,
+ Tip|Call out initiation so team commits "Going on this Zen."
+ Tip|Focus people who have important cooldowns down "Tracer no recall."
+ Tip|Focus people with important ults up "focus Zen, he has ult."
+ Tip|Call out low health targets "Ana low in the back."
 Section|When you die, relay important information to your team
  Tip|Enemy ults "their Rein has ult."
  Tip|Enemy positions "their Soldier behind."
@@ -11,18 +26,7 @@ Section|After each teamfight, review and plan for next fight.
  Tip|Enemy ults used "They used Grav, Rez, and Barrage."
  Tip|Enemy ults may still be up "Tracer did a lot that fight, she may have bomb up again."
  Tip|Friendly ults to use next fight "We have nano, blade, and grav. Let's try to just use nano and blade."
-Section|When focus firing, 
- Tip|Call out initiation so team commits "Going on this Zen."
- Tip|Focus people who have important cooldowns down "Tracer no recall."
- Tip|Focus people with important ults up "focus Zen, he has ult."
- Tip|Call out low health targets "Ana low in the back."
-Section|Use grouping to force isolated targets off of strong positions. This can force awkward engages for the enemy team that minimize their positional advantage.
-Section|When safe and missing health, let supports heal you for ult charge instead of using health packs.
-Section|Good hold positioning has several aspects:
- Tip|Vision on most entrances to the area.
- Tip|Opportunities for to set up crossfire.
- Tip|Good cover and sightlines for support/range dps.
- Tip|Limited cover for the enemy team.
+
  
 Subject|Composition
  Section|Look to create synergies with teammates with your picks.
@@ -71,12 +75,12 @@ Subject|Control Mode Tips
 Section|After a clean fight, forward hold chokes near the Attacker's spawn.
 Section|When holding Control chokes, call enemy numbers so you can know how much you need to watch other entrances.
 Section|Do not give up positional advantages to contest the point until the Attacker's actually contest the point.
-Section|Stagger kills after a won fight. One good stagger can lower the total number of fights during a 0 to 99 possession from 4 to 3.
+Section|Stagger kills after a won fight. One good stagger can lower the total number of fights during a 0 to 99 possession from 5 to 4.
 
 Side|Attack
 Subject|Control Mode Tips
 
-Section|If a fight is called lost, avoid prolonging the fight and reset quickly. You only get 3-4 fights total during a 0 to 99 round.
+Section|If a fight is called lost, avoid prolonging the fight and reset quickly. You only get 4-5 fights total during a 0 to 99 round.
 Section|If you believe you are at an ult disadvantage, do a dry push to even it out.
 Section|If above 75% possession, it is worth it to wait until overtime before making a proper push. The overtime push is the strongest push Attack has.
 

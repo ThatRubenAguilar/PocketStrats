@@ -86,6 +86,9 @@ Strategy|Sanctum, Forward Hold
 Section|Execution
 Tip| Hold [main] choke to force enemy ultimates for pushes.
 Tip| Hold on [ledge] side so you can fall back to [ledge] if needed.
+Section|Noteworthy Picks
+Pick|Junkrat
+Tip|Junkrat can deny [main] choke and is strong against pushes on the narrow [ledge] side.
 
 Segment|Shrine
 Strategy|Shrine, Point Hold
@@ -168,14 +171,14 @@ Tip| Rotate to [white room] bridge to match the enemy team.
 Segment|Control Center
 Strategy|Lijiang, Control Center Forward Hold
 Section|Execution
-Tip| Support/Range dps can position at [main] or [mini hall].
+Tip| Support/Range dps can position at [main] or [connector].
 Tip| Beware of [lounge] entrance rotation.
 
 
 Strategy|Lijiang, Control Center Server Hold
 Section|Execution
-Tip| Abuse [mini hall] sight lines while waiting for enemy approach.
-Tip| Support/Range dps can position at [server] or our [mini hall]. Beware of [dark room] flanks.
+Tip| Abuse [connector] sight lines while waiting for enemy approach.
+Tip| Support/Range dps can position at [server], our [connector], or [ledge]. Beware of [dark room] flanks.
 Tip| Deny the enemy control of [server] area.
 
 

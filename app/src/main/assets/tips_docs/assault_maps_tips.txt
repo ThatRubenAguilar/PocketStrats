@@ -76,13 +76,17 @@ Side|Defend
 Segment|First
 Strategy|Point A, Plateau Hold
 Section|Execution
-Tip|Holds on [plateau]. 
+Tip|Holds on [plateau].
 Tip|Support/range dps can position on [plateau], in [lower ivy room] door, or on [tower bridge].  
 Tip|Use [plateau] walls as cover.
-Tip|Deny entry to [arch] choke. 
+Tip|Deny entry to [arch] choke.
+Tip|Rotate between [plateau] and [lower ivy room] depending on which approach the enemy takes.
 Tip|Deny enemy [open ivy] rush to high ground by engaging from behind when they run by.
 Tip|Deny enemy [plateau] mega health push by holding [plateau] choke and flanking [market alley] to harass backline or stragglers.
 Tip|Can fall back to Point Hold.
+Pick|Junkrat
+Tip|Junkrat can deny pushes through [arch] or [market alley] chokes.
+Tip|Junkrat can disrupt [open ivy] rushes.
 
 Strategy|Point A, Point Hold
 Section|Execution

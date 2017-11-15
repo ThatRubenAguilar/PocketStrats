@@ -233,12 +233,14 @@ Section|Execution
 Tip| Support/Ranged dps can position at [perch], [short], or [long].
 Tip| Tanks can position at [main].
 Tip| Ranged dps can rotate from [perch] to [overlook] to flank the backline once engaged.
+Tip| Avoid letting the enemy take [mega box] as it allows access to full [perch] and [balcony] pushes.
 
 
 Strategy|Trailer Section, Main Door Hold
 Section|Execution
 Tip| Support/Ranged dps can position at [stage], [box], [RV] or [balcony].
 Tip| Tanks can position at [main] door or [short] door.
+Tip| Have one ranged dps scout [balcony] to call pushes.
 Tip| Beware of [balcony] push, prefer cover from that shields from [balcony] and [main].
 
 
@@ -256,10 +258,12 @@ Tip| Tanks can initiate.
 
 Strategy|Point A, Countering Arch Hold
 Section|Execution of Statue Approach
+Tip| Prefer this approach if the enemy is mainly near [hotel] and [arch].
 Tip| Push around [statue] towards [apartments].
 Tip| Utilize crossfire from upper [apartments] and [hotel] to pressure the enemy team off [point A].
 Tip| A flanker through [apartments] to behind [arch] can harass the enemy backline.
 Section|Execution of Hotel Approach
+Tip| Prefer this approach if the enemy is mainly near [point A] and [apartments]
 Tip| Rush through [hotel] to [point A].
 Tip| If the enemy backline is in [arch], they may be awkwardly split off from their team.
 
@@ -338,6 +342,7 @@ Tip| Looks to deny entry to the choke formed by the streets [checkpoint].
 Tip| Holds at streets [checkpoint].
 Tip| Support/Ranged dps can position at [catwalk], [storage], or [main] corner.
 Tip| Tanks can position at [connector] or [storage].
+Tip| Aggressively push to engage on man advantage as there is little enemy cover back to enemy spawn.
 
 Strategy|Furnace Section, Main Corner Hold
 Section|Execution
@@ -442,3 +447,8 @@ Tip| Holds at [main] corner.
 Tip| Support/Ranged dps can position at back [halls], [overlook], or by [defense spawn].
 Tip| Tanks can position at [rubble], looking for an initiation.
 
+Map|Blizzard World
+Tags|
+Side|Attack
+
+Side|Defend

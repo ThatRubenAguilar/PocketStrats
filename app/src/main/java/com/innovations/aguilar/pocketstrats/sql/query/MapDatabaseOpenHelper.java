@@ -55,6 +55,7 @@ public class MapDatabaseOpenHelper extends SQLiteOpenHelper {
             return;
         }
         try {
+            // Don't close db in onCreate
             SqlDataAccessor accessor = new SqlDataAccessor(sqLiteDatabase);
             SqlDataWriter writer = new SqlDataWriter(sqLiteDatabase);
 
